@@ -1,0 +1,17 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# production
+/Server/bin/
+/Server/bin/Debug/
+/Server/bin/Release/
+
+# misc
+/Server/*.csproj.user
+/Server/*.user
+/Server/obj/
+obj
+bin
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
