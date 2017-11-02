@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using HouseMoneyAPI.Repositories;
 
-namespace HouseMoneyAPI {
+namespace HouseMoneyAPI.Controllers {
     [Route ("api/[controller]")]
     public class UserController : Controller {
         private readonly UserRepository usersRepository;

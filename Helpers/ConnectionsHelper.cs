@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 
-namespace HouseMoneyAPI {
+namespace HouseMoneyAPI.Helpers {
     public class ConnectionHelper {
         private string connectionString;
         public ConnectionHelper () {
