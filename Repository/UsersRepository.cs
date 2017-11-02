@@ -3,6 +3,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using HouseMoneyAPI.Helpers;
+using HouseMoneyAPI.Model;
 
 namespace HouseMoneyAPI.Repositories {
     public class UserRepository {
