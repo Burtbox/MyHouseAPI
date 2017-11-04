@@ -3,46 +3,45 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 using HouseMoneyAPI.Helpers;
 using HouseMoneyAPI.Model;
 
 namespace HouseMoneyAPI.Repositories
 {
-    public class UsersRepository
+    public class UsersRepository : Repository
     {
-        private readonly ConnectionHelper dbConnection;
-        public UsersRepository(ConnectionHelper connection) => this.dbConnection = connection;
+        public UsersRepository(ConnectionHelper connection) : base(connection) { }
 
-        public void Add(User prod)
+        // public async Task<User> AddUser(User parameters)
+        // {
+        //     string sqlString = "EXEC Houses.Users_Insert" +
+        //             "  @UserId = @UserId" +
+        //             ", @DisplayName = @DisplayName" +
+        //             ", @HouseholdId = @HouseHoldId";
+        //     // return await asyncConnection(async db =>
+        //     // {
+        //     //     return await db.QueryAsync<User>(
+        //     //         sql: sqlString,
+        //     //         param: parameters,
+        //     //         commandType: CommandType.StoredProcedure
+        //     //     );
+        //     // });
+        // }
+
+        public async Task<IEnumerable<User>> GetAll()
         {
-            dbConnection.Open();
-            try
+            string sqlString = "SELECT * FROM Houses.Users";
+            return await asyncConnection(async db =>
             {
-                string sqlString = "EXEC Houses.Users_Insert" +
-                    "  @UserId = @UserId" +
-                    ", @DisplayName = @DisplayName" +
-                    ", @HouseholdId = @HouseHoldId";
-                dbConnection.Execute(sql: sqlString, param: prod);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-            finally
-            {
-                dbConnection.Close();
-            }
+                return await db.QueryAsync<User>(
+                    sql: sqlString,
+                    commandType: CommandType.Text
+                );
+            });
         }
-
-        public IEnumerable<User> GetAll()
-        {
-            using (dbConnection)
-            {
-                return dbConnection.Query<User>("SELECT * FROM Houses.Users");
-            }
-        }
-
+        /*
         public User GetById(int id)
         {
             using (dbConnection)
@@ -76,5 +75,6 @@ namespace HouseMoneyAPI.Repositories
                 dbConnection.Query(sQuery, prod);
             }
         }
+        */
     }
 }

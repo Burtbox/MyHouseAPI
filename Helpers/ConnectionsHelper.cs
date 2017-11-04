@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace HouseMoneyAPI.Helpers
 {
@@ -8,10 +9,7 @@ namespace HouseMoneyAPI.Helpers
     {
         private SqlConnection dBConnection { get; }
 
-        public ConnectionHelper(string connectionString)
-        {
-            dBConnection = new SqlConnection(connectionString);
-        }
+        public ConnectionHelper(string connectionString) => dBConnection = new SqlConnection(connectionString);
 
         public int ConnectionTimeout => ((IDbConnection)dBConnection).ConnectionTimeout;
 
@@ -19,7 +17,7 @@ namespace HouseMoneyAPI.Helpers
 
         public ConnectionState State => ((IDbConnection)dBConnection).State;
 
-        string IDbConnection.ConnectionString { get => dBConnection.ConnectionString; set => dBConnection.ConnectionString = value; }
+        public string ConnectionString { get => ((IDbConnection)this.dBConnection).ConnectionString; set => ((IDbConnection)this.dBConnection).ConnectionString = value; }
 
         public IDbTransaction BeginTransaction()
         {
@@ -51,9 +49,8 @@ namespace HouseMoneyAPI.Helpers
             dBConnection.Dispose();
         }
 
-        public void Open()
-        {
-            ((IDbConnection)dBConnection).Open();
-        }
+        public void Open() => throw new NotImplementedException();
+
+        public async Task OpenAsync() => await dBConnection.OpenAsync();
     }
 }
