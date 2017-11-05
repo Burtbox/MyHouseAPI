@@ -14,7 +14,7 @@ namespace HouseMoneyAPI.Repositories
     {
         public UsersRepository(ConnectionHelper connection) : base(connection) { }
 
-        public async Task<IEnumerable<User>> AddUser(User user)
+        public async Task<IEnumerable<User>> Add(User user)
         {
             return await asyncConnection(async db =>
             {

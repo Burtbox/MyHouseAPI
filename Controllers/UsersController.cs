@@ -30,7 +30,7 @@ namespace HouseMoneyAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await usersRepository.AddUser(user);
+                await usersRepository.Add(user);
             }
         }
 
