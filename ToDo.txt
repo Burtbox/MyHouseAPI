@@ -27,4 +27,7 @@ ED! Need to make the connection string pick up from settings
 
 Script out DB into sql scripts so can rebuild DB from those alone
 C# linter
-get connection string from settings!
+
+POST and PUT user returns 500 - need to ret success properly!!
+
+

@@ -16,42 +16,39 @@ namespace HouseMoneyAPI.Controllers
         {
             this.usersRepository = usersRepository;
         }
+
         // GET: api/values
-        [HttpGet]
-        public async Task<IEnumerable<User>> Get()
+        [HttpGet("{householdId}")]
+        public async Task<IEnumerable<User>> Get(int householdId)
         {
-            return await usersRepository.GetAll();
+            return await usersRepository.GetAll(householdId);
         }
 
-        // // GET api/values/5
-        // [HttpGet("{id}")]
-        // public User Get(int id)
-        // {
-        //     return usersRepository.GetById(id);
-        // }
-
         // POST api/values
-        // [HttpPost]
-        // public void Post([FromBody] User user)
-        // {
-        //     if (ModelState.IsValid)
-        //         usersRepository.AddAsync(user);
-        // }
+        [HttpPost]
+        public async Task Post([FromBody] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                await usersRepository.AddUser(user);
+            }
+        }
 
-        // // PUT api/values/5
-        // [HttpPut("{id}")]
-        // public void Put(string id, [FromBody] User user)
-        // {
-        //     user.UserId = id;
-        //     if (ModelState.IsValid)
-        //         usersRepository.Update(user);
-        // }
+        // PUT api/values/5
+        [HttpPut("{user}")]
+        public async Task Put([FromBody] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                await usersRepository.Update(user);
+            }
+        }
 
-        // // DELETE api/values/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        //     usersRepository.Delete(id);
-        // }
+        // DELETE api/values/5
+        [HttpDelete("{userId}")]
+        public async Task Delete(string userId)
+        {
+            await usersRepository.Delete(userId);
+        }
     }
 }

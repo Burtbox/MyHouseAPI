@@ -14,67 +14,61 @@ namespace HouseMoneyAPI.Repositories
     {
         public UsersRepository(ConnectionHelper connection) : base(connection) { }
 
-        // public async Task<User> AddUser(User parameters)
-        // {
-        //     string sqlString = "EXEC Houses.Users_Insert" +
-        //             "  @UserId = @UserId" +
-        //             ", @DisplayName = @DisplayName" +
-        //             ", @HouseholdId = @HouseHoldId";
-        //     // return await asyncConnection(async db =>
-        //     // {
-        //     //     return await db.QueryAsync<User>(
-        //     //         sql: sqlString,
-        //     //         param: parameters,
-        //     //         commandType: CommandType.StoredProcedure
-        //     //     );
-        //     // });
-        // }
-
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> AddUser(User user)
         {
-            string sqlString = "SELECT * FROM Houses.Users";
+            return await asyncConnection(async db =>
+            {
+                return await db.QueryAsync<User>(
+                    sql: "Houses.Users_Insert",
+                    param: user,
+                    commandType: CommandType.StoredProcedure
+                );
+            });
+        }
+
+        public async Task<IEnumerable<User>> GetAll(int householdId)
+        {
+            string sqlString = "SELECT * FROM Houses.Users WHERE HouseholdId = @householdId";
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@householdId", householdId);
+
             return await asyncConnection(async db =>
             {
                 return await db.QueryAsync<User>(
                     sql: sqlString,
+                    param: parameters,
                     commandType: CommandType.Text
                 );
             });
         }
-        /*
-        public User GetById(int id)
-        {
-            using (dbConnection)
-            {
-                string sQuery = "SELECT * FROM Houses.Users" +
-                    " WHERE UserId = @UserId";
 
-                return dbConnection.Query<User>(sQuery, new { Id = id }).FirstOrDefault();
-            }
+        public async Task<IEnumerable<int>> Delete(string userId)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@userId", userId);
+
+            return await asyncConnection(async db =>
+            {
+                return await db.QueryAsync<int>(
+                    sql: "DELETE FROM Houses.Users WHERE UserId = @userId",
+                    param: parameters,
+                    commandType: CommandType.Text
+                );
+            });
         }
 
-        public void Delete(int id)
+        public async Task<IEnumerable<User>> Update(User user)
         {
-            using (dbConnection)
-            {
-                string sQuery = "DELETE FROM Houses.Users" +
-                    " WHERE UserId = @UserId";
-
-                dbConnection.Execute(sQuery, new { Id = id });
-            }
+            return await asyncConnection(async db =>
+             {
+                 return await db.QueryAsync<User>(
+                 sql: "UPDATE Houses.Users" +
+                     " SET DisplayName = @DisplayName" +
+                     " WHERE UserId = @UserId",
+                 param: user,
+                 commandType: CommandType.Text
+                 );
+             });
         }
-
-        public void Update(User prod)
-        {
-            using (dbConnection)
-            {
-                string sQuery = "UPDATE Houses.Users" +
-                    " SET DisplayName = @DisplayName" +
-                    " WHERE UserId = @UserId";
-
-                dbConnection.Query(sQuery, prod);
-            }
-        }
-        */
     }
 }
