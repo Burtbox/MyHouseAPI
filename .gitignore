@@ -11,8 +11,9 @@
 /Server/obj/
 obj
 bin
+.vs
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.vs/HouseMoneyAPI/v15/.suo
