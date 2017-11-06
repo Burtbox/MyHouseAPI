@@ -16,21 +16,20 @@ namespace HouseMoneyAPI.Repositories
 
         public async Task<IEnumerable<Occupant>> GetAll(int householdId)
         {
-            string sqlString = "SELECT * FROM Houses.Occupants WHERE HouseholdId = @householdId";
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@householdId", householdId);
 
             return await asyncConnection(async db =>
             {
                 return await db.QueryAsync<Occupant>(
-                    sql: sqlString,
+                    sql: "[Houses].[Occupants_Of_Household]",
                     param: parameters,
-                    commandType: CommandType.Text
+                    commandType: CommandType.StoredProcedure
                 );
             });
         }
 
-        public async Task<int> Add(Occupant occupant)
+        public async Task<int> Insert(Occupant occupant)
         {
             return await asyncConnection(async db =>
             {
@@ -44,14 +43,16 @@ namespace HouseMoneyAPI.Repositories
 
         public async Task<int> Update(Occupant occupant)
         {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@UserId", occupant.UserId);
+            parameters.Add("@DisplayName", occupant.DisplayName);
+
             return await asyncConnection(async db =>
              {
                  return await db.ExecuteAsync(
-                 sql: "UPDATE Houses.Occupants" +
-                     " SET DisplayName = @DisplayName" +
-                     " WHERE OccupantId = @OccupantId",
-                 param: occupant,
-                 commandType: CommandType.Text
+                 sql: "[Houses].[Occupants_Update]",
+                 param: parameters,
+                 commandType: CommandType.StoredProcedure
                  );
              });
         }
@@ -59,14 +60,14 @@ namespace HouseMoneyAPI.Repositories
         public async Task<IEnumerable<int>> Delete(string occupantId)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@occupantId", occupantId);
+            parameters.Add("@OccupantId", occupantId);
 
             return await asyncConnection(async db =>
             {
                 return await db.QueryAsync<int>(
-                    sql: "DELETE FROM Houses.Occupants WHERE OccupantId = @occupantId",
+                    sql: "[Houses].[Occupants_Delete]",
                     param: parameters,
-                    commandType: CommandType.Text
+                    commandType: CommandType.StoredProcedure
                 );
             });
         }

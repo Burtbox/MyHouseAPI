@@ -3,6 +3,6 @@ BEGIN
 	ALTER TABLE [Money].[Transactions]  WITH CHECK 
 	ADD CONSTRAINT [FK__Money__Transactions__Creditor] 
 	FOREIGN KEY([Creditor]) 
-	REFERENCES [Houses].[Users] ([UserId]) 
+	REFERENCES [Houses].[Occupants] ([OccupantId])
 END
 GO

@@ -1,0 +1,18 @@
+IF OBJECT_ID(N'[Money].[Transactions]', N'U') IS NULL
+BEGIN
+	CREATE TABLE [Money].[Transactions](
+		[TransactionId] [int] IDENTITY(1,1) NOT NULL,
+		[Creditor] [int] NOT NULL,
+		[Debtor] [int] NOT NULL,
+		[Gross] [decimal](18, 2) NOT NULL,
+		[Reference] [nvarchar](200) NULL,
+		[Date] [date] NULL,
+		[EnteredBy] [int] NOT NULL,
+		[EnteredDate] [timestamp] NOT NULL,
+	 CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
+	(
+		[TransactionId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO

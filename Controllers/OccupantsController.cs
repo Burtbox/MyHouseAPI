@@ -31,8 +31,8 @@ namespace HouseMoneyAPI.Controllers
             IActionResult response;
             if (ModelState.IsValid)
             {
-                await occupantsRepository.Add(occupant);
-                response = NoContent();
+                await occupantsRepository.Insert(occupant);
+                response = NoContent(); //ED! Should probably ret occupantId here!
             }
             else
             {
