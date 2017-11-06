@@ -1,0 +1,6 @@
+Need to make priority order:
+1. Run_SQLScripts.ps1 
+For Perf:
+2. GetGitDiff_SQLScripts.ps1
+3. Compile_SQLScripts.ps1
+4. Patch_SQLScripts.ps1 (runs the above in order 2,3,1)
