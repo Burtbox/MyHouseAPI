@@ -6,7 +6,7 @@ namespace HouseMoneyAPI.Services {
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<UsersRepository>();
+            services.AddScoped<OccupantsRepository>();
 
             return services;
         }

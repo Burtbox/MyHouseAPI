@@ -6,11 +6,11 @@ using HouseMoneyAPI.Helpers;
 
 namespace HouseMoneyAPI.Repositories
 {
-    public abstract class Repository
+    public abstract class BaseRepository
     {
         private readonly ConnectionHelper dbConnection;
 
-        protected Repository(ConnectionHelper connection) => this.dbConnection = connection;
+        protected BaseRepository(ConnectionHelper connection) => this.dbConnection = connection;
 
         protected async Task<T> asyncConnection<T>(Func<IDbConnection, Task<T>> getData)
         {
@@ -28,7 +28,11 @@ namespace HouseMoneyAPI.Repositories
             }
             catch (SqlException exception)
             {
-                throw new Exception(String.Format("{0}.asyncConnection() experienced a SQL exception (not a timeout)", GetType().FullName), exception);
+                throw new Exception(String.Format("{0}.asyncConnection() experienced a SQL exception", GetType().FullName), exception);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(String.Format("{0}.asyncConnection() experienced exception (not a timeout or SQL)", GetType().FullName), exception);
             }
         }
     }

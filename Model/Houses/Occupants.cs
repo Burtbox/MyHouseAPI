@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace HouseMoneyAPI.Model {
-    public class User {
+    public class Occupant {
         [Key]
+        [Required (ErrorMessage = "Occupant Id is required.")]
+        public int OccupantId { get; set; }
+
         [Required (ErrorMessage = "User Id is required.")]
         [StringLength (36, ErrorMessage = "The User Id can't exceed 36 characters.")]
         public string UserId { get; set; }
