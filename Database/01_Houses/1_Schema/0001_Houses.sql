@@ -1,4 +1,4 @@
-IF NOT EXISTS (SELECT name FROM sys.schemas WHERE name = N'Houses')
+IF SCHEMA_ID(N'[Houses]') IS NOT NULL
 BEGIN
 	EXEC sys.sp_executesql N'CREATE SCHEMA [Houses]'
 END

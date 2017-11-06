@@ -28,6 +28,7 @@ ED! Need to make the connection string pick up from settings
 Script out DB into sql scripts so can rebuild DB from those alone
 C# linter
 
-POST and PUT user returns 500 - need to ret success properly!!
+Note - renamed Houses.Users to Houses.Occupants and Food.People to Food.Attendees
 
-
+put in SeriLog for logging can go to DB or txt (probably just txt is fine)
+FluentValidation for validation
