@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using Dapper;
 using HouseMoneyAPI.Helpers;
 using HouseMoneyAPI.Model;
+using Microsoft.Extensions.Logging;
 
 namespace HouseMoneyAPI.Repositories
 {
     public class OccupantsRepository : BaseRepository
     {
-        public OccupantsRepository(ConnectionHelper connection) : base(connection) { }
+        public OccupantsRepository(ConnectionHelper connection, ILogger<OccupantsRepository> logger) : base(connection, logger) { }
 
         public async Task<IEnumerable<Occupant>> GetAll(int householdId)
         {
@@ -34,7 +35,7 @@ namespace HouseMoneyAPI.Repositories
             return await asyncConnection(async db =>
             {
                 return await db.ExecuteAsync(
-                    sql: "Houses.Occupants_Insert",
+                    sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
                 );

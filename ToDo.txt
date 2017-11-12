@@ -32,3 +32,6 @@ Note - renamed Houses.Users to Houses.Occupants and Food.People to Food.Attendee
 
 put in SeriLog for logging can go to DB or txt (probably just txt is fine)
 FluentValidation for validation
+
+remove all timestamp cols (using these incorrectly ed!)
+add modified date and modified by cols everywhere for audit

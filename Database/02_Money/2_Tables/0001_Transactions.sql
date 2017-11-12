@@ -16,3 +16,12 @@ BEGIN
 	) ON [PRIMARY]
 END
 GO
+
+IF OBJECT_ID(N'[Money].[DF__Money__Transactions__EnteredDate]', N'D') IS NULL
+BEGIN
+	ALTER TABLE [Money].[Transactions]  
+	ADD CONSTRAINT DF__Money__Transactions__EnteredDate 
+	DEFAULT GETUTCDATE() 
+	FOR EnteredDate
+END
+GO
