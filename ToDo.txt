@@ -35,3 +35,4 @@ FluentValidation for validation
 
 remove all timestamp cols (using these incorrectly ed!)
 add modified date and modified by cols everywhere for audit
+add more logging around start up and such 

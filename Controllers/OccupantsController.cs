@@ -25,7 +25,7 @@ namespace HouseMoneyAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost]
+        [HttpPost("{occupant}")]
         public async Task<IActionResult> Post([FromBody] Occupant occupant)
         {
             IActionResult response;
