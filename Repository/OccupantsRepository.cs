@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using Dapper;
 using HouseMoneyAPI.Helpers;
 using HouseMoneyAPI.Model;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace HouseMoneyAPI.Repositories
 {
     public class OccupantsRepository : BaseRepository
     {
-        public OccupantsRepository(ConnectionHelper connection, ILogger<OccupantsRepository> logger) : base(connection, logger) { }
+        public OccupantsRepository(ConnectionHelper connection, ILogger logger) : base(connection, logger) { }
 
         public async Task<IEnumerable<Occupant>> GetAll(int householdId)
         {

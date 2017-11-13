@@ -34,6 +34,7 @@ namespace HouseMoneyAPI
             {
                 c.SwaggerDoc("v3", new Info { Title = "House Money API", Version = "v3" });
             });
+            services.AddSerilog(configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using HouseMoneyAPI.Helpers;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace HouseMoneyAPI.Repositories
 {
@@ -14,7 +14,7 @@ namespace HouseMoneyAPI.Repositories
         private readonly ILogger logger;
         private enum ExceptionTypes { Timeout, SQLError, Unknown }
 
-        protected BaseRepository(ConnectionHelper connection, ILogger<BaseRepository> logger) {
+        protected BaseRepository(ConnectionHelper connection, ILogger logger) {
             this.dbConnection = connection;
             this.logger = logger;
         }
@@ -30,17 +30,17 @@ namespace HouseMoneyAPI.Repositories
             }
             catch (TimeoutException exception)
             {
-                this.logger.LogError(ExceptionTypes.Timeout.ToString(), exception, formattedErrorMessage(ExceptionTypes.Timeout));
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Timeout), ExceptionTypes.Timeout.ToString());
                 throw new Exception(formattedErrorMessage(ExceptionTypes.Timeout), exception);
             }
             catch (SqlException exception)
             {
-                this.logger.LogError(ExceptionTypes.SQLError.ToString(), exception, formattedErrorMessage(ExceptionTypes.SQLError));
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.SQLError), ExceptionTypes.SQLError.ToString());
                 throw new Exception(formattedErrorMessage(ExceptionTypes.SQLError), exception);
             }
             catch (Exception exception)
             {
-                this.logger.LogError(ExceptionTypes.Unknown.ToString(), exception, formattedErrorMessage(ExceptionTypes.Unknown));
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Unknown), ExceptionTypes.Unknown.ToString());
                 throw new Exception(formattedErrorMessage(ExceptionTypes.Unknown), exception);
             }
         }

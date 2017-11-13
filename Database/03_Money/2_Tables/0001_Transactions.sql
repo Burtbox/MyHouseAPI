@@ -8,7 +8,7 @@ BEGIN
 		[Reference] [nvarchar](200) NULL,
 		[Date] [date] NULL,
 		[EnteredBy] [int] NOT NULL,
-		[EnteredDate] [timestamp] NOT NULL,
+		[EnteredDate] [datetime] NOT NULL,
 	 CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
 	(
 		[TransactionId] ASC

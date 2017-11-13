@@ -9,11 +9,13 @@ namespace HouseMoneyAPI.Services
 {
     public static class DatabaseConfiguration
     {
-        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) {
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped((IServiceProvider scoped) =>
                 new ConnectionHelper(configuration.GetConnectionString(name: "DefaultConnection"))
             );
+
             return services;
         }
     }
