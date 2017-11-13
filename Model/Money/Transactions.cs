@@ -27,6 +27,6 @@ namespace HouseMoneyAPI.Model {
       [Required (ErrorMessage = "The user id that entered this transaction is required.")]
       public string EnteredBy { get; set; }
 
-      public TimestampAttribute EnteredDate { get; set; }
+      public DateTime EnteredDate { get; set; }
   }
 }
