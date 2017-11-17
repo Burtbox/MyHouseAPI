@@ -30,25 +30,25 @@ namespace HouseMoneyAPI.Repositories
             }
             catch (TimeoutException exception)
             {
-                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Timeout), ExceptionTypes.Timeout.ToString());
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Timeout), exception.Message);
                 throw new Exception(formattedErrorMessage(ExceptionTypes.Timeout), exception);
             }
             catch (SqlException exception)
             {
-                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.SQLError), ExceptionTypes.SQLError.ToString());
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.SQLError), exception.Message);
                 throw new Exception(formattedErrorMessage(ExceptionTypes.SQLError), exception);
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Unknown), ExceptionTypes.Unknown.ToString());
+                this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Unknown), exception.Message);
                 throw new Exception(formattedErrorMessage(ExceptionTypes.Unknown), exception);
             }
         }
         private string formattedErrorMessage(ExceptionTypes origin) {
             Dictionary<ExceptionTypes, string> APICallErrors = new Dictionary<ExceptionTypes, string>();
-            APICallErrors.Add(ExceptionTypes.Timeout, "experienced a SQL timeout");
-            APICallErrors.Add(ExceptionTypes.SQLError, "experienced a SQL exception");
-            APICallErrors.Add(ExceptionTypes.Unknown, "experienced exception (not a timeout or SQL)");
+            APICallErrors.Add(ExceptionTypes.Timeout, "experienced a SQL timeout: Details {0}");
+            APICallErrors.Add(ExceptionTypes.SQLError, "experienced a SQL exception: Details {0}");
+            APICallErrors.Add(ExceptionTypes.Unknown, "experienced exception (not a timeout or SQL): Details {0}");
 
             return String.Format("{0} {1}", GetType().FullName, APICallErrors[origin]);
         }
