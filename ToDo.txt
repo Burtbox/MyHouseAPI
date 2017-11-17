@@ -39,3 +39,5 @@ move model validation to FluentValidation (remember to add to services registry)
 add multitenancy cols for Food tables
 
 look into chrome web store
+
+tweak dark theme on HouseMoney and HouseFood to use white and a lighter blue so can be read easier
