@@ -30,7 +30,7 @@ namespace HouseMoneyAPI.Repositories
             });
         }
 
-        public async Task<int> Insert(Occupant occupant)
+        public async Task<int> Insert(OccupantInsert occupant)
         {
             return await asyncConnection(async db =>
             {

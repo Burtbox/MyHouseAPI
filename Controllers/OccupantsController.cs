@@ -25,8 +25,8 @@ namespace HouseMoneyAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost("{occupant}")]
-        public async Task<IActionResult> Post([FromBody] Occupant occupant)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] OccupantInsert occupant)
         {
             IActionResult response;
             if (ModelState.IsValid)
