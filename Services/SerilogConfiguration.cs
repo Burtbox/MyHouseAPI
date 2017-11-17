@@ -10,8 +10,9 @@ namespace HouseMoneyAPI.Services {
             LoggerConfiguration logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .Enrich.FromLogContext();
-
-            services.AddSingleton<ILogger>(logger.CreateLogger());
+            ILogger log = logger.CreateLogger();
+            services.AddSingleton<ILogger>(log);
+            log.Information("Logging initialised");
 
             return services;
         }
