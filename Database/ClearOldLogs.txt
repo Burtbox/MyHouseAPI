@@ -1,0 +1,2 @@
+select * from [Diagnostics].[Logs] 
+WHERE [timestamp] < DATEADD(day, -30, GETDATE())
