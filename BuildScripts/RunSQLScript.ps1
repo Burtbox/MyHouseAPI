@@ -1,1 +1,1 @@
-﻿Invoke-Sqlcmd -ServerInstance "localhost\SQL2016" -Database "MyHouse_Dev_V2" -InputFile ".\MyHouseDB.sql"
+﻿Invoke-Sqlcmd -ServerInstance "localhost\SQL2016" -Database "MyHouse_Dev_V2" -InputFile ".\build\MyHouseDB.sql"

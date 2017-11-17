@@ -1,6 +1,6 @@
 ﻿param(
     # The path (relative or absolute) of the output file
-    [string]$output = "C:\WebProjects\MyHouseAPI\BuildScripts\MyHouseDB.sql", 
+    [string]$output = "C:\WebProjects\MyHouseAPI\BuildScripts\build\MyHouseDB.sql", 
     
     # The path (relative or absolute) of the source file or files
     [string]$source = "C:\WebProjects\MyHouseAPI\Database", 
