@@ -1,10 +1,4 @@
-IF OBJECT_ID(N'[Money].[Transactions_Insert]', 'P') IS NOT NULL
-BEGIN
-	DROP PROCEDURE [Money].[Transactions_Insert]
-END
-GO 
-
-CREATE PROCEDURE [Money].[Transactions_Insert] 
+CREATE OR ALTER PROCEDURE [Money].[Transactions_Insert] 
 @Creditor AS INT
 , @Debtor AS INT
 , @Gross AS DECIMAL(18,2)

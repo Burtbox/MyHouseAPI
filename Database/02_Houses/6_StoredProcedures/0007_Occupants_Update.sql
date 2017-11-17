@@ -1,10 +1,4 @@
-IF OBJECT_ID(N'[Houses].[Occupants_Update]', 'P') IS NOT NULL
-BEGIN
-	DROP PROCEDURE [Houses].[Occupants_Update] 
-END
-GO 
-
-CREATE PROCEDURE [Houses].[Occupants_Update]
+CREATE OR ALTER PROCEDURE [Houses].[Occupants_Update]
 @UserId AS NVARCHAR(36)
 , @DisplayName AS VARCHAR(100)
 
