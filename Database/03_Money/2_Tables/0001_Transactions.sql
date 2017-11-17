@@ -9,6 +9,8 @@ BEGIN
 		[Date] [date] NULL,
 		[EnteredBy] [int] NOT NULL,
 		[EnteredDate] [datetime] NOT NULL,
+		[ModifiedBy] [nvarchar](36) NOT NULL,
+		[ModifiedDate] [datetime] NOT NULL
 	 CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
 	(
 		[TransactionId] ASC
@@ -23,5 +25,14 @@ BEGIN
 	ADD CONSTRAINT DF__Money__Transactions__EnteredDate 
 	DEFAULT GETUTCDATE() 
 	FOR EnteredDate
+END
+GO
+
+IF OBJECT_ID(N'[Money].[DF__Money__Transactions__ModifiedDate]', N'D') IS NULL
+BEGIN
+	ALTER TABLE [Money].[Transactions]  
+	ADD CONSTRAINT DF__Money__Transactions__ModifiedDate 
+	DEFAULT GETUTCDATE() 
+	FOR ModifiedDate
 END
 GO
