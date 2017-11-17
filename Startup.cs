@@ -1,4 +1,5 @@
-﻿using HouseMoneyAPI.Services;
+﻿using FluentValidation.AspNetCore;
+using HouseMoneyAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +26,9 @@ namespace HouseMoneyAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation();
             services.AddRepositories();
+            services.AddValidation();
             services.AddDatabase(configuration);
             services.AddSwagger();
             services.AddSerilog(configuration);
