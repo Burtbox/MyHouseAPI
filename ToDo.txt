@@ -30,11 +30,12 @@ C# linter
 
 Note - renamed Houses.Users to Houses.Occupants and Food.People to Food.Attendees
 
-put in SeriLog for logging can go to DB or txt (probably just txt is fine)
-FluentValidation for validation
-
 remove all timestamp cols (using these incorrectly ed!)
 add modified date and modified by cols everywhere for audit
 add more logging around start up and such 
 
 move model validation to FluentValidation (remember to add to services registry)
+
+add multitenancy cols for Food tables
+
+look into chrome web store
