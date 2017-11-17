@@ -16,6 +16,15 @@ BEGIN
 END
 GO
 
+IF OBJECT_ID(N'[Houses].[DF__Money__Households__EnteredDate]', N'D') IS NULL
+BEGIN
+	ALTER TABLE [Houses].[Households]  
+	ADD CONSTRAINT DF__Money__Households__EnteredDate 
+	DEFAULT GETUTCDATE() 
+	FOR EnteredDate
+END
+GO
+
 IF OBJECT_ID(N'[Houses].[DF__Money__Households__ModifiedDate]', N'D') IS NULL
 BEGIN
 	ALTER TABLE [Houses].[Households]  
