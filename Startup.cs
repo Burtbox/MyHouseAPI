@@ -28,12 +28,7 @@ namespace HouseMoneyAPI
             services.AddMvc();
             services.AddRepositories();
             services.AddDatabase(configuration);
-
-            // Register the Swagger generator, defining one or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v3", new Info { Title = "House Money API", Version = "v3" });
-            });
+            services.AddSwagger();
             services.AddSerilog(configuration);
         }
 
@@ -47,7 +42,6 @@ namespace HouseMoneyAPI
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
