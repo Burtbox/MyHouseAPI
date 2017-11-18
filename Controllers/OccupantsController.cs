@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HouseMoneyAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiVersion("1.0")]
+    [ApiVersion("3.0")]
     public class OccupantController : Controller
     {
         private readonly OccupantsRepository occupantsRepository;
@@ -31,8 +31,8 @@ namespace HouseMoneyAPI.Controllers
             IActionResult response;
             if (ModelState.IsValid)
             {
-                await occupantsRepository.Insert(occupant);
-                response = NoContent(); //ED! Should probably ret occupantId here!
+                var addedOccupant = await occupantsRepository.Insert(occupant);
+                response = Ok(addedOccupant); //ED! Should probably ret occupantId here!
             }
             else
             {

@@ -5,6 +5,7 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupants_Insert]
 
 AS
 	INSERT INTO Houses.Occupants (UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
+	OUTPUT INSERTED.OccupantId, INSERTED.UserId, INSERTED.DisplayName, INSERTED.HouseholdId
 	VALUES (@UserId, @DisplayName, @HouseholdId, @UserId, @UserId)
 
 GO

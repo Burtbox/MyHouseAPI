@@ -30,11 +30,11 @@ namespace HouseMoneyAPI.Repositories
             });
         }
 
-        public async Task<int> Insert(OccupantInsert occupant)
+        public async Task<IEnumerable<Occupant>> Insert(OccupantInsert occupant)
         {
             return await asyncConnection(async db =>
             {
-                return await db.ExecuteAsync(
+                return await db.QueryAsync<Occupant>(
                     sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
