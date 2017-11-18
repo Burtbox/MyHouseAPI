@@ -32,7 +32,7 @@ namespace HouseMoneyAPI.Controllers
             if (ModelState.IsValid)
             {
                 var addedOccupant = await occupantsRepository.Insert(occupant);
-                response = Ok(addedOccupant); //ED! Should probably ret occupantId here!
+                response = Ok(addedOccupant);
             }
             else
             {
