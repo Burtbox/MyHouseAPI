@@ -23,18 +23,13 @@ internal server error when deleting user with transactions?
 API changes for users: 
 /getUserTransactionHistory?userID=
 
-ED! Need to make the connection string pick up from settings
-
-Script out DB into sql scripts so can rebuild DB from those alone
+Finish scripting out DB into sql scripts so can rebuild DB from those alone
 C# linter
 
-Note - renamed Houses.Users to Houses.Occupants and Food.People to Food.Attendees
-
-remove all timestamp cols (using these incorrectly ed!)
 add modified date and modified by cols everywhere for audit
 add more logging around start up and such 
 
-move model validation to FluentValidation (remember to add to services registry)
+move rest of models validation to FluentValidation (remember to add to services registry)
 
 add multitenancy cols for Food tables
 
