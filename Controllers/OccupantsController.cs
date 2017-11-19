@@ -10,7 +10,7 @@ namespace HouseMoneyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiVersion("3.0")]
-    [Authorize("isUser")]
+    [Authorize]
     public class OccupantController : Controller
     {
         private readonly OccupantsRepository occupantsRepository;
