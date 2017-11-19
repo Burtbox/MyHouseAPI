@@ -2,6 +2,7 @@
 using HouseMoneyAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,12 +27,15 @@ namespace HouseMoneyAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddFluentValidation();
+            services.AddMvcConfiguration();
+            services.AddAuthenticationConfiguration(configuration);
+            services.AddAuthorizationPolicies();
             services.AddRepositories();
             services.AddValidation();
             services.AddDatabase(configuration);
             services.AddSwagger();
             services.AddSerilog(configuration);
+            services.AddVersioning();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +44,15 @@ namespace HouseMoneyAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseStaticFiles();
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
@@ -49,8 +60,17 @@ namespace HouseMoneyAPI
             {
                 c.SwaggerEndpoint("/swagger/v3/swagger.json", "House Money API V3");
             });
-
-            app.UseMvc();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using HouseMoneyAPI.Repositories;
 using HouseMoneyAPI.Model;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HouseMoneyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiVersion("3.0")]
+    [Authorize("isUser")]
     public class OccupantController : Controller
     {
         private readonly OccupantsRepository occupantsRepository;
