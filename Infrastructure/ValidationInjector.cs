@@ -11,7 +11,6 @@ namespace HouseMoneyAPI.Services {
         {
             services.AddTransient<IValidator<Household>, HouseholdsValidator>();
             services.AddTransient<IValidator<Occupant>, OccupantsValidator>();
-            services.AddTransient<IValidator<OccupantInsert>, OccupantsInsertValidator>();
 
             return services;
         }

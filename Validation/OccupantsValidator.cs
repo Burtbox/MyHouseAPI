@@ -3,12 +3,23 @@ using HouseMoneyAPI.Model;
 
 namespace HouseMoneyAPI.Validation
 {
-    public class OccupantsValidator: AbstractValidator<Occupant>
+    public class OccupantsValidator : OccupantsValidatorBase
     {
-        public OccupantsValidator() {
+
+    }
+    public class OccupantsInsertValidator : OccupantsValidatorBase
+    {
+        public OccupantsInsertValidator()
+        {
             RuleFor(x => x.OccupantId).NotNull();
             RuleFor(x => x.OccupantId).GreaterThan(0);
-            //ED! These should come from the insert validator - need to think about how these should work 
+        }
+    }
+
+    public abstract class OccupantsValidatorBase : AbstractValidator<Occupant>
+    {
+        public OccupantsValidatorBase()
+        {
             RuleFor(x => x.UserId).NotNull();
             RuleFor(x => x.UserId).MaximumLength(36);
             RuleFor(x => x.DisplayName).NotNull();
