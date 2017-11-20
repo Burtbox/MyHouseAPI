@@ -14,10 +14,7 @@ EDLAPTOPPROD Backups - make script pick up from repo - use MyHouse repo for scri
 set up static API for dev
 
 Missing Error Messages: 
-sign up - EMAILADDRESS already exists
-login - Invalid user name or password
 change password - confirm doesn't match
-internal server error when deleting user with transactions? 
 
 API changes for users: 
 /getUserTransactionHistory?userID=
@@ -35,3 +32,5 @@ add multitenancy cols for Food tables
 look into chrome web store
 
 tweak dark theme on HouseMoney and HouseFood to use white and a lighter blue so can be read easier
+
+-- Think we are ready to start building the myHouse platform react app 
