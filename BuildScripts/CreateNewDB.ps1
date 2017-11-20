@@ -6,13 +6,7 @@
     [string]$server = "localhost\SQL2016",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev_V4",
-
-     # The sql server user name
-    [string]$username = "HMApp",
-
-     # The  sql server password
-    [string]$password = "dickbutt"
+    [string]$db = "MyHouse_Dev_V3"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"
@@ -21,7 +15,6 @@ $buildScriptsDir = $repoDir + "\BuildScripts"
 $buildOutputDir = $buildScriptsDir + "\build"
 $buildOutputScript = $buildOutputDir + "\MyHouseDB.sql"
 $databaseScriptsDir = $repoDir + "\Database"
-$createDbFile = $buildScriptsDir + "\CreateDb.sql"
 
 Write-Host "Completed set up of local vars"
 
