@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE [Houses].[Households_Of_Occupant] 
-@UserId AS INT
+@UserId AS VARCHAR(36)
 AS
 	SELECT 
 		Households.HouseholdId

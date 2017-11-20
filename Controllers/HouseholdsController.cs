@@ -20,10 +20,10 @@ namespace HouseMoneyAPI.Controllers
         }
 
         // GET: api/values
-        [HttpGet("{householdId}")]
-        public async Task<IEnumerable<Household>> Get(int householdId)
+        [HttpGet("{userId}")]
+        public async Task<IEnumerable<Household>> Get(string userId)
         {
-            return await householdsRepository.GetAll(householdId);
+            return await householdsRepository.GetAll(userId);
         }
 
         // POST api/values

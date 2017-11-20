@@ -15,15 +15,15 @@ namespace HouseMoneyAPI.Repositories
     {
         public HouseholdsRepository(ConnectionHelper connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Household>> GetAll(int householdId)
+        public async Task<IEnumerable<Household>> GetAll(string userId)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@householdId", householdId);
+            parameters.Add("@userId", userId);
 
             return await asyncConnection(async db =>
             {
                 return await db.QueryAsync<Household>(
-                    sql: "[Houses].[Households_Of_Household]",
+                    sql: "[Houses].[Households_Of_Occupant]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure
                 );
