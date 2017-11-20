@@ -18,6 +18,8 @@ $databaseScriptsDir = $repoDir + "\Database"
 
 Write-Host "Completed set up of local vars"
 
+##ED! Eventually want to just pick the scripts from that version to combine and run - use git get from tag
+
 ## Create single sql script from all in repo
 Write-Host "Beginning combining of sql scripts"
 Invoke-Expression -Command "$($buildScriptsDir)\CombineSQLScripts.ps1 -source $($databaseScriptsDir) -output $($buildOutputScript)"
