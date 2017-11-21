@@ -12,6 +12,7 @@ namespace HouseMoneyAPI.Services {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v3", new Info { Title = "House Money API", Version = "v3" });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme() { In = "header", Description = "Please insert: Bearer JWT", Name = "Authorization", Type = "apiKey" });
             });
 
             return services;
