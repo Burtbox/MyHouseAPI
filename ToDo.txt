@@ -31,6 +31,6 @@ add multitenancy cols for Food tables
 
 look into chrome web store
 
-tweak dark theme on HouseMoney and HouseFood to use white and a lighter blue so can be read easier
+tweak dark theme on MyHouse and HouseFood to use white and a lighter blue so can be read easier
 
 make correct security restrictions on API for logged in user getting households and users data

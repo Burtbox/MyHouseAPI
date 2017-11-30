@@ -1,7 +1,7 @@
 using FluentValidation;
-using HouseMoneyAPI.Model;
+using MyHouseAPI.Model;
 
-namespace HouseMoneyAPI.Validation
+namespace MyHouseAPI.Validation
 {
     public class HouseholdsValidator: AbstractValidator<Household>
     {

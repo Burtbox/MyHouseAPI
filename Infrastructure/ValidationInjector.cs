@@ -1,10 +1,10 @@
 using FluentValidation;
-using HouseMoneyAPI.Model;
-using HouseMoneyAPI.Repositories;
-using HouseMoneyAPI.Validation;
+using MyHouseAPI.Model;
+using MyHouseAPI.Repositories;
+using MyHouseAPI.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HouseMoneyAPI.Services {
+namespace MyHouseAPI.Services {
     public static class ValidatoinInjector
     {
         public static IServiceCollection AddValidation(this IServiceCollection services)

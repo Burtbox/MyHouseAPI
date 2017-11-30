@@ -2,7 +2,7 @@ using Serilog;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
-namespace HouseMoneyAPI.Services {
+namespace MyHouseAPI.Services {
     public static class SerilogConfiguration
     {
         public static IServiceCollection AddSerilog(this IServiceCollection services, IConfiguration configuration)

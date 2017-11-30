@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HouseMoneyAPI.Model {
+namespace MyHouseAPI.Model {
     public class Lists {
         [Key]
         [Required (ErrorMessage = "List id is required.")]

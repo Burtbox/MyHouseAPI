@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HouseMoneyAPI.Model {
+namespace MyHouseAPI.Model {
     public class Days {
         [Key]
         [Required (ErrorMessage = "Date is required.")]

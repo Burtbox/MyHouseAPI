@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using FluentValidation.AspNetCore;
 
-namespace HouseMoneyAPI.Services
+namespace MyHouseAPI.Services
 {
     public static class MvcConfiguration
     {

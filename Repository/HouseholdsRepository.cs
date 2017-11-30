@@ -5,11 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using HouseMoneyAPI.Helpers;
-using HouseMoneyAPI.Model;
+using MyHouseAPI.Helpers;
+using MyHouseAPI.Model;
 using Serilog;
 
-namespace HouseMoneyAPI.Repositories
+namespace MyHouseAPI.Repositories
 {
     public class HouseholdsRepository : BaseRepository
     {

@@ -1,7 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace HouseMoneyAPI.Model {
+namespace MyHouseAPI.Model {
     public class Ingredients {
         [Key]
         [Required (ErrorMessage = "Ingredient id is required.")]

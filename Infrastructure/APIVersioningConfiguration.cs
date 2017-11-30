@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseMoneyAPI.Services {
+namespace MyHouseAPI.Services {
     public static class APIVersioningConfiguration
     {
         public static IServiceCollection AddVersioning(this IServiceCollection services)

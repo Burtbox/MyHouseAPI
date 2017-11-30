@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "HouseMoneyAPI": {
+    "MyHouseAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

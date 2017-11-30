@@ -1,11 +1,11 @@
 using System.Text;
-using HouseMoneyAPI.Repositories;
+using MyHouseAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HouseMoneyAPI.Services
+namespace MyHouseAPI.Services
 {
     public static class AuthenticationConfiguration
     {

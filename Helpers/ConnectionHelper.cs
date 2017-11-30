@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace HouseMoneyAPI.Helpers
+namespace MyHouseAPI.Helpers
 {
     public class ConnectionHelper : IDbConnection
     {

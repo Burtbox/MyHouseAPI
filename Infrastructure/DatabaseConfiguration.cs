@@ -2,10 +2,10 @@ using System;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HouseMoneyAPI.Helpers;
+using MyHouseAPI.Helpers;
 using Microsoft.AspNetCore.Http;
 
-namespace HouseMoneyAPI.Services
+namespace MyHouseAPI.Services
 {
     public static class DatabaseConfiguration
     {

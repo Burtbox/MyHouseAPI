@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using HouseMoneyAPI.Helpers;
+using MyHouseAPI.Helpers;
 using Serilog;
 
-namespace HouseMoneyAPI.Repositories
+namespace MyHouseAPI.Repositories
 {
     public abstract class BaseRepository
     {

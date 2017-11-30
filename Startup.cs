@@ -1,5 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
-using HouseMoneyAPI.Services;
+using MyHouseAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace HouseMoneyAPI
+namespace MyHouseAPI
 {
     public class Startup
     {

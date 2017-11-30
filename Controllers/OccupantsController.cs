@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using HouseMoneyAPI.Repositories;
-using HouseMoneyAPI.Model;
+using MyHouseAPI.Repositories;
+using MyHouseAPI.Model;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace HouseMoneyAPI.Controllers
+namespace MyHouseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiVersion("3.0")]
