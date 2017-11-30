@@ -15,3 +15,4 @@ dotnet new xunit
 dotnet add reference ..\{apiName}_API\{apiName}.csproj
 
 dotnet run
+dotnet test {apiName}_xUnit\{apiName}.csproj e.g. dotnet test myhouse_xUnit\MyHouse_xUnit.csproj
