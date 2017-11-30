@@ -34,3 +34,5 @@ look into chrome web store
 tweak dark theme on MyHouse and HouseFood to use white and a lighter blue so can be read easier
 
 make correct security restrictions on API for logged in user getting households and users data
+
+Read this and implement: https://docs.microsoft.com/en-gb/aspnet/core/mvc/controllers/testing 
