@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using MyHouseAPI.Validation;
 using FluentValidation.TestHelper;
+using MyHouseXunit.ValidationHelpers;
 
 namespace MyHouseXunit.ValidationTests
 {
@@ -13,6 +14,7 @@ namespace MyHouseXunit.ValidationTests
             HouseholdsValidator sut = new HouseholdsValidator();
             sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 1);
             sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 9999);
+            sut.ShouldNotHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(100));
         }
 
         [Fact]
@@ -21,6 +23,8 @@ namespace MyHouseXunit.ValidationTests
             HouseholdsValidator sut = new HouseholdsValidator();
             sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, 0);
             sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, -1);
+            sut.ShouldHaveValidationErrorFor(t => t.Name, null as string);
+            sut.ShouldHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(101));
         }
     }
 }
