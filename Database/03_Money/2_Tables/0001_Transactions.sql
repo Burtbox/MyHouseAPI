@@ -1,6 +1,7 @@
 IF OBJECT_ID(N'[Money].[Transactions]', N'U') IS NULL
 BEGIN
-	CREATE TABLE [Money].[Transactions](
+	CREATE TABLE [Money].[Transactions]
+	(
 		[TransactionId] [int] IDENTITY(1,1) NOT NULL,
 		[Creditor] [int] NOT NULL,
 		[Debtor] [int] NOT NULL,
@@ -11,7 +12,7 @@ BEGIN
 		[EnteredDate] [datetime] NOT NULL,
 		[ModifiedBy] [nvarchar](36) NOT NULL,
 		[ModifiedDate] [datetime] NOT NULL
-	 CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
+			CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
 	(
 		[TransactionId] ASC
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

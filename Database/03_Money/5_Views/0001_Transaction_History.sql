@@ -1,13 +1,13 @@
 IF OBJECT_ID(N'[Money].[TransactionHistory]', N'V') IS NOT NULL 
 BEGIN
-	DROP VIEW [Money].[TransactionHistory] 
+	DROP VIEW [Money].[TransactionHistory]
 END
 GO
 
-CREATE VIEW [Money].[TransactionHistory] 
+CREATE VIEW [Money].[TransactionHistory]
 AS
 
-SELECT 'credit' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS [PRIMARYKEY]
+			SELECT 'credit' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS [PRIMARYKEY]
      , Creditor
 	 , Debtor
 	 , Gross 
@@ -15,11 +15,11 @@ SELECT 'credit' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS
 	 , [Date] 
 	 , EnteredBy
 	 , EnteredDate
-FROM [Money].[Transactions] 
+		FROM [Money].[Transactions]
 
-UNION ALL
+	UNION ALL
 
-SELECT 'debt' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS [PRIMARYKEY] 
+		SELECT 'debt' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS [PRIMARYKEY] 
      , Debtor
 	 , Creditor
 	 , -Gross AS Gross
@@ -27,6 +27,6 @@ SELECT 'debt' + CAST(ROW_NUMBER() OVER (ORDER BY [DATE]) AS NVARCHAR(1000)) AS [
 	 , [Date] 
 	 , EnteredBy
 	 , EnteredDate
-FROM [Money].[Transactions]
+		FROM [Money].[Transactions]
 
 GO

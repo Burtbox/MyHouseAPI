@@ -1,7 +1,7 @@
-CREATE OR ALTER PROCEDURE [Houses].[Occupants_Delete] 
-@OccupantId AS INT
+CREATE OR ALTER PROCEDURE [Houses].[Occupants_Delete]
+	@OccupantId AS INT
 AS
-	DELETE FROM Houses.Occupants 
+DELETE FROM Houses.Occupants 
 	WHERE OccupantId = @OccupantId
 
 GO
