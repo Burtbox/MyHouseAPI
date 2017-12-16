@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using MyHouseAPI.Validation;
 using FluentValidation.TestHelper;
