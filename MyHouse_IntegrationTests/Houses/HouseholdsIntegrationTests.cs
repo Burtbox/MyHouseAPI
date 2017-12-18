@@ -2,9 +2,9 @@ using System;
 using Xunit;
 using FluentAssertions;
 
-namespace MyHouse.IntegrationTests
+namespace MyHouseIntegrationTests.Houses
 {
-    public class UnitTest1
+    public class HouseholdsIntegrationTests : BaseIntegrationTest
     {
         [Fact]
         public void Test1()
