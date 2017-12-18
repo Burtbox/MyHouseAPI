@@ -9,10 +9,10 @@ dotnet build
 open in visual stuido 2017 (fixes not finding assemblies... why?? )
 
 cd ..\
-mkdir {apiName}_xUnit
-cd {apiName}_xUnit
+mkdir {apiName}_UnitTests
+cd .\{apiName}_UnitTests
 dotnet new xunit
 dotnet add reference ..\{apiName}_API\{apiName}.csproj
 
 dotnet run
-dotnet test {apiName}_xUnit\{apiName}.csproj e.g. dotnet test myhouse_xUnit\MyHouseUnitTests.csproj
+dotnet test .\{apiName}.csproj e.g. dotnet test .\MyHouse_UnitTests\MyHouseUnitTests.csproj
