@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace MyHouseXunit.ValidationHelpers
+namespace MyHouseUnitTests.ValidationHelpers
 {
     public class StringGenerator
     {

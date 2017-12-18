@@ -1,9 +1,9 @@
 using Xunit;
 using MyHouseAPI.Validation;
 using FluentValidation.TestHelper;
-using MyHouseXunit.ValidationHelpers;
+using MyHouseUnitTests.ValidationHelpers;
 
-namespace MyHouseXunit.ValidationTests
+namespace MyHouseUnitTests.ValidationTests
 {
     public class OccupantsValidatorTests
     {
