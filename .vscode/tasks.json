@@ -21,5 +21,14 @@
             "showOutput": "always",
             "problemMatcher": "$msCompile"
         }
+        // ,{
+        //     "taskName": "test",
+        //     "args": [
+        //         "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
+        //     ],
+        //     "isTestCommand": true,
+        //     "showOutput": "always",
+        //     "problemMatcher": "$msCompile"
+        // }
     ]
 }
