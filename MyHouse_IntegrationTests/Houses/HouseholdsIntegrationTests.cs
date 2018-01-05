@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using FluentAssertions;
+using MyHouseIntegrationTests.Shared;
 
 namespace MyHouseIntegrationTests.Houses
 {
@@ -9,9 +10,8 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void Test1()
         {
-            object bob = new { thing = "test" };
-
-            bob.ShouldBeEquivalentTo(new { thing = "test" });
+            var bob = apiCall();
+            bob.ShouldBeEquivalentTo("");
         }   
     }
 }

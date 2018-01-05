@@ -12,23 +12,23 @@
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         },
+        // {
+        //     "taskName": "test",
+        //     "args": [
+        //         "${workspaceRoot}/MyHouse_UnitTests/MyHouseUnitTests.csproj"
+        //     ],
+        //     "isTestCommand": true,
+        //     "showOutput": "always",
+        //     "problemMatcher": "$msCompile"
+        // },
         {
             "taskName": "test",
             "args": [
-                "${workspaceRoot}/MyHouse_UnitTests/MyHouseUnitTests.csproj"
+                "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
             ],
             "isTestCommand": true,
             "showOutput": "always",
             "problemMatcher": "$msCompile"
         }
-        // ,{
-        //     "taskName": "test",
-        //     "args": [
-        //         "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
-        //     ],
-        //     "isTestCommand": true,
-        //     "showOutput": "always",
-        //     "problemMatcher": "$msCompile"
-        // }
     ]
 }
