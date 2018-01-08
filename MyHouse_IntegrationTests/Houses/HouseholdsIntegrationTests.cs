@@ -2,6 +2,8 @@ using System;
 using Xunit;
 using FluentAssertions;
 using MyHouseIntegrationTests.Shared;
+using RestSharp;
+using MyHouseAPI.Model;
 
 namespace MyHouseIntegrationTests.Houses
 {
@@ -10,8 +12,11 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void Test1()
         {
-            var bob = apiCall();
-            bob.ShouldBeEquivalentTo("");
-        }   
+            RestClient client = GetClient();
+            RestRequest apiTestCall = apiCall("Occupants/2", Method.GET);
+            IRestResponse response = client.Execute<Household>(apiTestCall);
+            string content = response.Content;
+            content.ShouldBeEquivalentTo(""); //TODO Need to set up data and set the expected reponse here
+        }
     }
 }

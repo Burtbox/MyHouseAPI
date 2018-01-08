@@ -1,4 +1,5 @@
 ﻿{
   "ConnectionString": "server=EDLAPTOP\\EDLAPTOPSQL; Database=MyHouse_Dev_Tests; User Id=HMApp; Password=dickbutt11!",
-  "BaseURL":  "http://localhost:5000/api/"
+  "BaseURL": "http://localhost:5000/api/",
+  "Client_Email": "dickbutt@gmail.com"
 }

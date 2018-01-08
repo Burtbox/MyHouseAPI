@@ -1,0 +1,5 @@
+Spicy Sauce: https://github.com/TypeStrong/ts-node/blob/master/README.md
+npm install -g ts-node
+
+# Install a TypeScript compiler (requires `typescript` by default).
+npm install -g typescript

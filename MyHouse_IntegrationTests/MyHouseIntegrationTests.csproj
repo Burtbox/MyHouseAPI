@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseTokenGenerator" Version="2.0.0.0" />
     <PackageReference Include="fluentassertions" Version="4.19.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="restsharp" Version="106.1.0" />

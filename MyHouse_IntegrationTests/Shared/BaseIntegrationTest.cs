@@ -1,36 +1,67 @@
 using System;
-using Xunit;
 using RestSharp;
 using Newtonsoft.Json;
-using MyHouseAPI.Model;
 using System.IO;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MyHouseIntegrationTests.Shared
 {
     public abstract class BaseIntegrationTest
     {
-        public RestRequest apiCall()
+        private TestSettings testSettings = JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
+
+        public RestClient GetClient()
         {
-            string baseUrl = JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json")).BaseUrl;
-
-            var client = new RestClient(baseUrl);
-            // client.Authenticator = new HttpBasicAuthenticator(username, password);
-
-            var request = new RestRequest("Occupants/2", Method.GET);
+            string baseUrl = testSettings.BaseUrl;
+            RestClient client = new RestClient(baseUrl);
+            return client;
+        }
+        public RestRequest apiCall(string endpoint, Method method)
+        {
+            string token = generateToken();
+            RestRequest request = new RestRequest(endpoint, method);
 
             // add HTTP Headers
             request.AddHeader("Content-Type", "application/json;charset=UTF-8");
-            //TODO Actually generate valid auth token here with request to firebase 
-            request.AddHeader("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjhmOWI0YzJhZDNjNDU0NjRjMDhlN2Y4N2M0ODY1MzlmZTkzZDI5YjkifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbXlob3VzZS1hMDFjNyIsIm5hbWUiOiJEaWNrQnV0dCIsImF1ZCI6Im15aG91c2UtYTAxYzciLCJhdXRoX3RpbWUiOjE1MTUxNzg5OTEsInVzZXJfaWQiOiI3MGFqeFdtclM2WElVNTNHTDZiajFWY2pDc20xIiwic3ViIjoiNzBhanhXbXJTNlhJVTUzR0w2YmoxVmNqQ3NtMSIsImlhdCI6MTUxNTE3ODk5MSwiZXhwIjoxNTE1MTgyNTkxLCJlbWFpbCI6ImRpY2tidXR0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJkaWNrYnV0dEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.neNDupz2YcGRlbA-ho0kDT4pi6hDsB48V4ioI8KimO_eHADBHmbbxFQgKBD2-C7wXMdK3tzeXyDY7EwAeQPrdpXICBlyIz2iBVfdmtp1r0ExS-xCxI3aFlvwEKcLOaaXt7HQvi3lc2Uqv3gCwOAjz-SoZiV3yFeNhUuYxJbLCegjEAC_nv5To8MKL4sC5dZ6NbK605iHDY7dFIcevS6iCZzkkxIozplWK8mCt3OzQVdx4zLRDHvdiM097Y6xwSyr-liSRLgswqUTwUWwIQmZa5cnwiTpIAkI-7svbmQ-zld_bgcyvI7Qip8NU_3GUgCSCKxE9RqiY6gaUunJzWCqgw");
-
-            // async support
-            RestRequestAsyncHandle sentRequest = client.ExecuteAsync<Household>(request, response =>
-            {
-                Console.WriteLine(response.Content);
-            });
+            request.AddHeader("Authorization", string.Concat("Bearer ", token));
 
             return request;
         }
+
+        private string generateToken()
+        {
+            //TODO - can't get valid token yet!!
+            TestSettings firebaseInf = testSettings;
+
+            // NOTE: Replace this with your actual RSA public/private keypair!
+            RSACryptoServiceProvider provider = new RSACryptoServiceProvider(2048);
+            RSAParameters parameters = provider.ExportParameters(true);
+
+            // Build the credentials used to sign the JWT
+            RsaSecurityKey signingKey = new RsaSecurityKey(parameters);
+            SigningCredentials signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.RsaSha256);
+
+            // Create a collection of optional claims
+            DateTimeOffset now = DateTimeOffset.UtcNow;
+            Claim[] claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, firebaseInf.Client_Email),
+                new Claim(JwtRegisteredClaimNames.Iat, now.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                new Claim("uid", "70ajxWmrS6XIU53GL6bj1VcjCsm1", ClaimValueTypes.String)
+            };
+
+            // Create and sign the JWT, and write it to a string
+            JwtSecurityToken jwt = new JwtSecurityToken(
+                issuer: firebaseInf.Client_Email,
+                audience: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
+                claims: claims,
+                expires: now.AddMinutes(60).DateTime,
+                signingCredentials: signingCredentials);
+            return new JwtSecurityTokenHandler().WriteToken(jwt);
+        }
     }
+
 }
