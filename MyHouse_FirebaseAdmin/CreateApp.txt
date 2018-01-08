@@ -3,3 +3,21 @@ npm install -g ts-node
 
 # Install a TypeScript compiler (requires `typescript` by default).
 npm install -g typescript
+
+(added these to package.json)
+Steps:
+npm init (answer q's)
+npm install ts-node
+npm install typescript
+create index.ts contents:
+
+    #!/usr/bin/env node
+
+    console.log("hey there!");
+
+change package.json - add "start": "ts-node index.ts"
+
+
+This prints out hey there! to the console
+
+npm install firebase-admin-node
