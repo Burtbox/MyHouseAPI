@@ -6,18 +6,18 @@ npm install -g typescript
 
 (added these to package.json)
 Steps:
-npm init (answer q's)
-npm install ts-node
-npm install typescript
-create index.ts contents:
+git clone https://github.com/jsynowiec/node-typescript-boilerplate
+cd node-typescript-boilerplate
+npm install
 
-    #!/usr/bin/env node
+npm run watch 
+cd C:\WebProjects\MyHouseAPI\MyHouse_FirebaseAdmin\build\src
+node main.js
 
-    console.log("hey there!");
-
-change package.json - add "start": "ts-node index.ts"
+edit main.ts to log something to the console - seen when running node main.js 
 
 
-This prints out hey there! to the console
-
+TODO:
 npm install firebase-admin-node
+setup proper builds - maybe use webpack or something? 
+equally - for now a single file may do (as not really going to do much!)
