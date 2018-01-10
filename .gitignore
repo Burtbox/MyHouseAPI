@@ -20,3 +20,4 @@ yarn-error.log*
 
 /BuildScripts/build/*
 node_modules
+/MyHouse_FirebaseAdmin/build
