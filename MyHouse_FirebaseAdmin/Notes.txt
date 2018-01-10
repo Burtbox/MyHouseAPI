@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/42927643/firebase-rest-auth-when-creating-token-with-node-js-admin-sdk
