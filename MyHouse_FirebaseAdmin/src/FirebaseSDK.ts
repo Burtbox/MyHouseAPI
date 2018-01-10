@@ -15,6 +15,11 @@ class FirebaseSDK {
 
         return customToken;
     }
+
+    verifyUserToken(idToken: string): Promise<admin.auth.DecodedIdToken> {
+        const ver = admin.auth().verifyIdToken(idToken)
+        return ver;
+    }
 }
 
 export default FirebaseSDK;

@@ -58,7 +58,7 @@ namespace MyHouseIntegrationTests.Shared
                 issuer: firebaseInf.Client_Email,
                 audience: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
                 claims: claims,
-                expires: now.AddMinutes(60).DateTime,
+                expires: now.AddMinutes(50).DateTime,
                 signingCredentials: signingCredentials);
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
