@@ -6,7 +6,7 @@ namespace MyHouseIntegrationTests.Shared
     {
         public string ConnectionString;
         public string BaseUrl;
-        public string Client_Email;
+        public string UserId;
+        public string NodeJsExe;
     }
-
 }

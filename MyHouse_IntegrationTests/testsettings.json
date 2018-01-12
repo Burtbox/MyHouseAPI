@@ -1,5 +1,6 @@
 ﻿{
   "ConnectionString": "server=EDLAPTOP\\EDLAPTOPSQL; Database=MyHouse_Dev_Tests; User Id=HMApp; Password=dickbutt11!",
   "BaseURL": "http://localhost:5000/api/",
-  "Client_Email": "myhouse-a01c7@appspot.gserviceaccount.com"
+  "UserId": "70ajxWmrS6XIU53GL6bj1VcjCsm1",
+  "NodeJsExe": "C:\\Program Files\\nodejs\\node.exe"
 }

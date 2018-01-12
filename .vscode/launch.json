@@ -8,7 +8,10 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/MyHouse_FirebaseAdmin/build/index.js"
+            "program": "${workspaceFolder}/MyHouse_FirebaseAdmin/build/index.js",
+            "args": [
+                "generateCustomToken 70ajxWmrS6XIU53GL6bj1VcjCsm1"
+            ]
         },
         {
             "name": ".NET Core Launch (web)",

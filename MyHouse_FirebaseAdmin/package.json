@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.3.0",
+    "command-promise": "^2.0.1",
     "commander": "^2.12.2",
     "core-js": "^2.5.3",
     "firebase-admin": "^5.7.0",
