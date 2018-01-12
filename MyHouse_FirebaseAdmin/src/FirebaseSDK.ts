@@ -1,9 +1,10 @@
 import * as admin from "firebase-admin";
 import { ServiceAccount } from "firebase-admin";
+import * as privateKey from "../privateKey/MyHouse-b4e6d91df05d.json";
 
 class FirebaseSDK {
     constructor() {
-        const serviceAccount: ServiceAccount = require("../privateKey/myhouse-a01c7-firebase-adminsdk-sinok-bbb40a4f11.json");
+        const serviceAccount: any = privateKey;
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
             databaseURL: "https://myhouse-a01c7.firebaseio.com"

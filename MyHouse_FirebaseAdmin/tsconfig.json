@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
-   "target": "es5",
-   "lib": [
-     "es2017","es2015","dom","es6"
+    "target": "es5",
+    "lib": [
+      "es2017",
+      "es2015",
+      "dom",
+      "es6"
     ],
-   "module": "commonjs",
-   "outDir": "./build",
-   "sourceMap": true,
-   "strict": true
+    "module": "commonjs",
+    "outDir": "./build",
+    "sourceMap": true,
+    "strict": true
   },
   "include": [
-    "./src/**.ts"
-   ],
+    "./src/**.ts",
+    "./src/**.json"
+  ],
   "exclude": [
     "node_modules",
     "firefunctions"
-   ]
-  }
+  ]
+}
