@@ -6,7 +6,7 @@
     [string]$server = "EDLAPTOP\EDLAPTOPSQL",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev_Tests"
+    [string]$db = "MyHouse_Dev"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"
