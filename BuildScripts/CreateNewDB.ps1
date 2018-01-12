@@ -3,10 +3,10 @@
     [string]$repoDir = "C:\WebProjects\MyHouseAPI",
 
     # The name of the sql server instance to run the script on
-    [string]$server = "localhost\SQL2016",
+    [string]$server = "EDLAPTOP\EDLAPTOPSQL",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev_V3"
+    [string]$db = "MyHouse_Dev_Tests"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"
@@ -23,7 +23,7 @@ Write-Host "Beginning creating new database from $($repoDir) on $($server) as $(
 
 try 
 {
-    Invoke-Sqlcmd -ServerInstance $server -Database "master" -Query "CREATE DATABASE $($db)" -Verbose
+    Invoke-Sqlcmd -ServerInstance $server -Database "master" -Query "CREATE DATABASE $($db)" -Verbose -Username "HMApp" -Password "dickbutt11!"
 } 
 catch 
 {
