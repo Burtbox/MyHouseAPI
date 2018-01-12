@@ -18,7 +18,7 @@ namespace MyHouseAPI.Repositories
         public async Task<IEnumerable<Occupant>> GetAll(int householdId)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@householdId", householdId);
+            parameters.Add("@HouseholdId", householdId);
 
             return await asyncConnection(async db =>
             {

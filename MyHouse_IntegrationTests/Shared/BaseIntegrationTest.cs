@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Diagnostics;
 using System.Net;
+using Newtonsoft.Json.Serialization;
 
 namespace MyHouseIntegrationTests.Shared
 {
@@ -15,6 +16,16 @@ namespace MyHouseIntegrationTests.Shared
     {
         private TestSettings testSettings = JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
 
+        public string serialize(object obj)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+            string serializedObject = JsonConvert.SerializeObject(obj, settings);
+
+            return serializedObject;
+        }
         public RestClient GetClient()
         {
             string baseUrl = testSettings.BaseUrl;
