@@ -1,5 +1,8 @@
 using MyHouseAPI.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using MyHouseAPI.Authorization.Handlers;
+using MyHouseAPI.Authorization.Policies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyHouseAPI.Services
 {
@@ -13,7 +16,13 @@ namespace MyHouseAPI.Services
                 {
                     policy.RequireRole("User");
                 });
+                configuration.AddPolicy("HouseholdMember", policy =>
+                {
+                    //TODO don't hardcode this ED!
+                    policy.Requirements.Add(new HouseholdMemberRequirement(1));
+                });
             });
+            services.AddScoped<IAuthorizationHandler, HouseholdMemberHandler>();
 
             return services;
         }

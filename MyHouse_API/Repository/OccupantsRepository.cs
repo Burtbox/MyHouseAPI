@@ -30,11 +30,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<IEnumerable<Occupant>> Insert(OccupantInsert occupant)
+        public async Task<Occupant> Insert(OccupantInsert occupant)
         {
             return await asyncConnection(async db =>
             {
-                return await db.QueryAsync<Occupant>(
+                return await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
@@ -58,16 +58,25 @@ namespace MyHouseAPI.Repositories
              });
         }
 
-        public async Task<IEnumerable<int>> Delete(string occupantId)
+        public async Task<int> Delete(string occupantId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@OccupantId", occupantId);
-
             return await asyncConnection(async db =>
             {
-                return await db.QueryAsync<int>(
+                return await db.QueryFirstAsync<int>(
                     sql: "[Houses].[Occupants_Delete]",
-                    param: parameters,
+                    param: new { OccupantId = occupantId } ,
+                    commandType: CommandType.StoredProcedure
+                );
+            });
+        }
+
+        public async Task<int> OccupantExists(int householdId, int occupantId)
+        {
+            return await asyncConnection(async db =>
+            {
+                return await db.QueryFirstAsync<int>(
+                    sql: "[Houses].[Occupant_Exists]",
+                    param: new { HouseholdId = householdId, OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );
             });

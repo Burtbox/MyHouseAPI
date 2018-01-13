@@ -14,8 +14,9 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void GetOccupantsOfHousehold()
         {
+            int householdId = 1;
             RestClient client = GetClient();
-            RestRequest apiTestCall = apiCall("Occupants/1", Method.GET);
+            RestRequest apiTestCall = apiCall(string.Concat("Occupants/", householdId), Method.GET);
             IRestResponse response = client.Execute<Household>(apiTestCall);
             string content = response.Content;
 

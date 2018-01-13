@@ -21,6 +21,7 @@ namespace MyHouseAPI.Controllers
 
         // GET: api/values
         [HttpGet("{userId}")]
+        [Authorize(Policy = "HouseholdMember")]
         public async Task<IEnumerable<Household>> Get(string userId)
         {
             return await householdsRepository.GetAll(userId);
@@ -46,6 +47,7 @@ namespace MyHouseAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{household}")]
+        [Authorize(Policy = "HouseholdMember")]
         public async Task<IActionResult> Put([FromBody] HouseholdUpdate household)
         {
             IActionResult response;
@@ -64,6 +66,7 @@ namespace MyHouseAPI.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{householdId}")]
+        [Authorize(Policy = "HouseholdMember")]
         public async Task<IActionResult> Delete(string householdId)
         {
             await householdsRepository.Delete(householdId);
