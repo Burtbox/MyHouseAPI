@@ -15,7 +15,7 @@ namespace MyHouseAPI.Authorization.Handlers
         )
         {
             if (!context.User.HasClaim(c =>
-                c.Type == "uid" &&
+                c.Type == "user_id" &&
                 c.Issuer == "https://securetoken.google.com/myhouse-a01c7" //TODO move this into config
             ))
             {
@@ -24,7 +24,7 @@ namespace MyHouseAPI.Authorization.Handlers
 
             string userId =
                 context.User.FindFirst(c =>
-                    c.Type == "uid" &&
+                    c.Type == "user_id" &&
                     c.Issuer == "https://securetoken.google.com/myhouse-a01c7"
                 ).Value;
 

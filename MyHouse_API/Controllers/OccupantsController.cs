@@ -21,7 +21,7 @@ namespace MyHouseAPI.Controllers
 
         // GET: api/values
         [HttpGet("{householdId}")]
-        [Authorize(Policy = "HouseholdMember")]
+        [Authorize(Policy = "OwnUserId")]
         public async Task<IEnumerable<Occupant>> Get(int householdId)
         {
             return await occupantsRepository.GetAll(householdId);
