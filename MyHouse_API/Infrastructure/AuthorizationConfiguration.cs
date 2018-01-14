@@ -19,10 +19,10 @@ namespace MyHouseAPI.Services
                 configuration.AddPolicy("OwnUserId", policy =>
                 {
                     //TODO don't hardcode this ED!
-                    policy.Requirements.Add(new OwnUserIdRequirement("70ajxWmrS6XIU53GL6bj1VcjCsm1"));
+                    policy.Requirements.Add(new OwnUserIdRequirement());
                 });
             });
-            services.AddScoped<IAuthorizationHandler, OwnUserIdHandler>();
+            services.AddSingleton<IAuthorizationHandler, OwnUserIdHandler>();
 
             return services;
         }

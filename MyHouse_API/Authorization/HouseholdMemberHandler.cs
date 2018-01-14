@@ -7,11 +7,12 @@ using MyHouseAPI.Repositories;
 
 namespace MyHouseAPI.Authorization.Handlers
 {
-    public class OwnUserIdHandler : AuthorizationHandler<OwnUserIdRequirement>
+    public class OwnUserIdHandler : AuthorizationHandler<OwnUserIdRequirement, string>
     {
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
-            OwnUserIdRequirement requirement
+            OwnUserIdRequirement requirement,
+            string userId
         )
         {
             if (!context.User.HasClaim(c =>
@@ -22,13 +23,13 @@ namespace MyHouseAPI.Authorization.Handlers
                 return Task.CompletedTask;
             }
 
-            string userId =
+            string claimsUserId =
                 context.User.FindFirst(c =>
                     c.Type == "user_id" &&
                     c.Issuer == "https://securetoken.google.com/myhouse-a01c7"
                 ).Value;
 
-            if (userId == requirement.UserId)
+            if (claimsUserId == userId)
             {
                 context.Succeed(requirement);
             }

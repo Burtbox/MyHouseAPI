@@ -14,9 +14,15 @@ namespace MyHouseAPI.Controllers
     public class OccupantsController : Controller
     {
         private readonly OccupantsRepository occupantsRepository;
-        public OccupantsController(OccupantsRepository occupantsRepository)
+        private readonly IAuthorizationService authorizationService;
+
+        public OccupantsController(
+            IAuthorizationService authorizationService,
+            OccupantsRepository occupantsRepository
+        )
         {
             this.occupantsRepository = occupantsRepository;
+            this.authorizationService = authorizationService;
         }
 
         // GET: api/values
@@ -47,14 +53,23 @@ namespace MyHouseAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{occupant}")]
-        [Authorize(Policy = "OwnUserId")] // TODO - should probably secure on being that user here
+        //[Authorize(Policy = "OwnUserId")] 
         public async Task<IActionResult> Put([FromBody] Occupant occupant)
         {
             IActionResult response;
             if (ModelState.IsValid)
             {
-                await occupantsRepository.Update(occupant);
-                response = NoContent();
+                AuthorizationResult authorizationResult = await authorizationService
+                    .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here
+                if (authorizationResult.Succeeded)
+                {
+                    await occupantsRepository.Update(occupant);
+                    response = NoContent();
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
             }
             else
             {
