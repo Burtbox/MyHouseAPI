@@ -37,3 +37,6 @@ make correct security restrictions on API for logged in user getting households 
 
 Read this and implement: https://docs.microsoft.com/en-gb/aspnet/core/mvc/controllers/testing 
 Look into ts-option - good for optional params?
+
+
+!! Add occupant + household verification into ALL relevant sprocs!!

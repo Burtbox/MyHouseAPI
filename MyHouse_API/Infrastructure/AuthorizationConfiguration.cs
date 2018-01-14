@@ -18,7 +18,6 @@ namespace MyHouseAPI.Services
                 });
                 configuration.AddPolicy("OwnUserId", policy =>
                 {
-                    //TODO don't hardcode this ED!
                     policy.Requirements.Add(new OwnUserIdRequirement());
                 });
             });

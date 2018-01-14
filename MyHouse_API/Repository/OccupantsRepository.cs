@@ -15,12 +15,12 @@ namespace MyHouseAPI.Repositories
     {
         public OccupantsRepository(ConnectionHelper connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Occupant>> GetAll(int householdId)
+        public async Task<IEnumerable<Occupant>> GetAll(string userId, int householdId)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@HouseholdId", householdId);
 
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, householdId, async db =>
             {
                 return await db.QueryAsync<Occupant>(
                     sql: "[Houses].[Occupants_Of_Household]",
@@ -64,7 +64,7 @@ namespace MyHouseAPI.Repositories
             {
                 return await db.QueryFirstAsync<int>(
                     sql: "[Houses].[Occupants_Delete]",
-                    param: new { OccupantId = occupantId } ,
+                    param: new { OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );
             });

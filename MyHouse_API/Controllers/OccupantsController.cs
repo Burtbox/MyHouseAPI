@@ -5,6 +5,8 @@ using MyHouseAPI.Repositories;
 using MyHouseAPI.Model;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace MyHouseAPI.Controllers
 {
@@ -26,11 +28,30 @@ namespace MyHouseAPI.Controllers
         }
 
         // GET: api/values
-        [HttpGet("{householdId}")]
-        [Authorize(Policy = "OwnUserId")]
-        public async Task<IEnumerable<Occupant>> Get(int householdId)
+        [HttpGet("{userId},{householdId}")]
+        public async Task<IActionResult> Get(string userId, int householdId)
         {
-            return await occupantsRepository.GetAll(householdId);
+            try
+            {
+                AuthorizationResult authorizationResult = await authorizationService
+                    .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
+                if (authorizationResult.Succeeded)
+                {
+                    return Ok(await occupantsRepository.GetAll(userId, householdId));
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
+            }
+            catch (InvalidOccupantException exception)
+            {
+                return Forbid();
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
+            }
         }
 
         // POST api/values
