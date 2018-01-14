@@ -47,7 +47,7 @@ namespace MyHouseAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{occupant}")]
-        [Authorize(Policy = "OwnAccount")] // TODO - should probably secure on being that user here
+        [Authorize(Policy = "OwnUserId")] // TODO - should probably secure on being that user here
         public async Task<IActionResult> Put([FromBody] Occupant occupant)
         {
             IActionResult response;
@@ -66,7 +66,7 @@ namespace MyHouseAPI.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{occupantId}")]
-        [Authorize(Policy = "OwnAccount")] // TODO - should probably secure on being that user here
+        [Authorize(Policy = "OwnUserId")] // TODO - should probably secure on being that user here
         public async Task<IActionResult> Delete(string occupantId)
         {
             await occupantsRepository.Delete(occupantId);

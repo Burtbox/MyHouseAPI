@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MyHouseAPI.Authorization.Policies
 {
-    public class HouseholdMemberRequirement : IAuthorizationRequirement
+    public class OwnUserIdRequirement : IAuthorizationRequirement
     {
-        public int HouseholdId { get; private set; }
+        public string UserId { get; private set; }
 
-        public HouseholdMemberRequirement(int householdId)
+        public OwnUserIdRequirement(string userId)
         {
-            HouseholdId = householdId;
+            UserId = userId;
         }
     }
 }

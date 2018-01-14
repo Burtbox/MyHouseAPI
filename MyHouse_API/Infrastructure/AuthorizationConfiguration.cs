@@ -16,13 +16,13 @@ namespace MyHouseAPI.Services
                 {
                     policy.RequireRole("User");
                 });
-                configuration.AddPolicy("HouseholdMember", policy =>
+                configuration.AddPolicy("OwnUserId", policy =>
                 {
                     //TODO don't hardcode this ED!
-                    policy.Requirements.Add(new HouseholdMemberRequirement(1));
+                    policy.Requirements.Add(new OwnUserIdRequirement("70ajxWmrS6XIU53GL6bj1VcjCsm1"));
                 });
             });
-            services.AddScoped<IAuthorizationHandler, HouseholdMemberHandler>();
+            services.AddScoped<IAuthorizationHandler, OwnUserIdHandler>();
 
             return services;
         }

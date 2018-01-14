@@ -7,53 +7,33 @@ using MyHouseAPI.Repositories;
 
 namespace MyHouseAPI.Authorization.Handlers
 {
-    public class HouseholdMemberHandler : AuthorizationHandler<HouseholdMemberRequirement>
+    public class OwnUserIdHandler : AuthorizationHandler<OwnUserIdRequirement>
     {
-        private readonly OccupantsRepository occupantsRepository;
-        public HouseholdMemberHandler(OccupantsRepository occupantsRepository)
-        {
-            this.occupantsRepository = occupantsRepository;
-        }
-        protected async override Task HandleRequirementAsync(
+        protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
-            HouseholdMemberRequirement requirement
+            OwnUserIdRequirement requirement
         )
         {
             if (!context.User.HasClaim(c =>
-                c.Type == "HouseholdId" &&
+                c.Type == "uid" &&
                 c.Issuer == "https://securetoken.google.com/myhouse-a01c7" //TODO move this into config
             ))
             {
-                return;
+                return Task.CompletedTask;
             }
 
-            if (!context.User.HasClaim(c =>
-                c.Type == "OccupantId" &&
-                c.Issuer == "https://securetoken.google.com/myhouse-a01c7" //TODO move this into config
-            ))
-            {
-                return;
-            }
-
-            int householdId = Convert.ToInt32(
+            string userId =
                 context.User.FindFirst(c =>
-                    c.Type == "HouseholdId" && //TODO add the HouseholdId and OccupantId to the firebase claims!
-                    c.Issuer == "https://securetoken.google.com/myhouse-a01c7").Value
-            );
+                    c.Type == "uid" &&
+                    c.Issuer == "https://securetoken.google.com/myhouse-a01c7"
+                ).Value;
 
-            int occupantId = Convert.ToInt32(
-                context.User.FindFirst(c =>
-                    c.Type == "OccupantId" &&
-                    c.Issuer == "https://securetoken.google.com/myhouse-a01c7").Value
-            );
-
-            int verifiedHouseholdId = await occupantsRepository.OccupantExists(householdId, occupantId);
-            if (verifiedHouseholdId == requirement.HouseholdId)
+            if (userId == requirement.UserId)
             {
                 context.Succeed(requirement);
             }
 
-            return;
+            return Task.CompletedTask;
         }
     }
 }
