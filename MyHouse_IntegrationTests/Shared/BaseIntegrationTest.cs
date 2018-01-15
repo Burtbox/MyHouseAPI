@@ -43,6 +43,19 @@ namespace MyHouseIntegrationTests.Shared
 
             return request;
         }
+
+        public RestRequest apiCall<T>(string endpoint, Method method, T body)
+        {
+            string token = generateToken();
+            RestRequest request = new RestRequest(endpoint, method);
+
+            // add HTTP Headers
+            request.AddHeader("Content-Type", "application/json;charset=UTF-8");
+            request.AddHeader("Authorization", string.Concat("Bearer ", token));
+            request.AddJsonBody(body);
+
+            return request;
+        }
         private string generateToken()
         {
             string customToken = getCustomToken();

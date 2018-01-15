@@ -15,7 +15,7 @@ namespace MyHouseAPI.Repositories
     {
         public OccupantsRepository(ConnectionHelper connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Occupant>> GetAll(string userId, int householdId)
+        public async Task<IEnumerable<Occupant>> GetOccupantsOfHousehold(string userId, int householdId)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@HouseholdId", householdId);
@@ -30,7 +30,7 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> Insert(OccupantInsert occupant)
+        public async Task<Occupant> InsertOccupant(OccupantInsert occupant)
         {
             return await asyncConnection(async db =>
             {
@@ -42,7 +42,7 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<int> Update(Occupant occupant)
+        public async Task<int> UpdateOccupant(Occupant occupant)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@UserId", occupant.UserId);
@@ -58,25 +58,13 @@ namespace MyHouseAPI.Repositories
              });
         }
 
-        public async Task<int> Delete(string occupantId)
+        public async Task<int> DeleteOccupant(string occupantId)
         {
             return await asyncConnection(async db =>
             {
                 return await db.QueryFirstAsync<int>(
                     sql: "[Houses].[Occupants_Delete]",
                     param: new { OccupantId = occupantId },
-                    commandType: CommandType.StoredProcedure
-                );
-            });
-        }
-
-        public async Task<int> OccupantExists(int householdId, int occupantId)
-        {
-            return await asyncConnection(async db =>
-            {
-                return await db.QueryFirstAsync<int>(
-                    sql: "[Houses].[Occupant_Exists]",
-                    param: new { HouseholdId = householdId, OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );
             });

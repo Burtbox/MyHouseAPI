@@ -29,7 +29,7 @@ namespace MyHouseAPI.Controllers
 
         // GET: api/values
         [HttpGet("{userId},{householdId}")]
-        public async Task<IActionResult> Get(string userId, int householdId)
+        public async Task<IActionResult> GetOccupantsOfHousehold(string userId, int householdId)
         {
             try
             {
@@ -37,18 +37,18 @@ namespace MyHouseAPI.Controllers
                     .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
                 if (authorizationResult.Succeeded)
                 {
-                    return Ok(await occupantsRepository.GetAll(userId, householdId));
+                    return Ok(await occupantsRepository.GetOccupantsOfHousehold(userId, householdId));
                 }
                 else
                 {
                     return new ForbidResult();
                 }
             }
-            catch (InvalidOccupantException exception)
+            catch (InvalidOccupantException)
             {
                 return Forbid();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
             }
@@ -56,12 +56,12 @@ namespace MyHouseAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] OccupantInsert occupant)
+        public async Task<IActionResult> InsertOccupant([FromBody] OccupantInsert occupant)
         {
             IActionResult response;
             if (ModelState.IsValid)
             {
-                var addedOccupant = await occupantsRepository.Insert(occupant);
+                var addedOccupant = await occupantsRepository.InsertOccupant(occupant);
                 response = Ok(addedOccupant);
             }
             else
@@ -75,7 +75,7 @@ namespace MyHouseAPI.Controllers
         // PUT api/values/5
         [HttpPut("{occupant}")]
         //[Authorize(Policy = "OwnUserId")] 
-        public async Task<IActionResult> Put([FromBody] Occupant occupant)
+        public async Task<IActionResult> UpdateOccupant([FromBody] Occupant occupant)
         {
             IActionResult response;
             if (ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace MyHouseAPI.Controllers
                     .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here
                 if (authorizationResult.Succeeded)
                 {
-                    await occupantsRepository.Update(occupant);
+                    await occupantsRepository.UpdateOccupant(occupant);
                     response = NoContent();
                 }
                 else
@@ -103,9 +103,9 @@ namespace MyHouseAPI.Controllers
         // DELETE api/values/5
         [HttpDelete("{occupantId}")]
         [Authorize(Policy = "OwnUserId")] // TODO - should probably secure on being that user here
-        public async Task<IActionResult> Delete(string occupantId)
+        public async Task<IActionResult> DeleteOccupant(string occupantId)
         {
-            await occupantsRepository.Delete(occupantId);
+            await occupantsRepository.DeleteOccupant(occupantId);
             return NoContent();
         }
     }
