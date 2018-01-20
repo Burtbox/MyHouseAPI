@@ -13,7 +13,7 @@ Write-Host "Running file $($inputFile) on $($server) $($db)"
 
 try 
 {
-    Invoke-Sqlcmd -ServerInstance $server -Database $db -InputFile $inputFile -Verbose
+    Invoke-Sqlcmd -InputFile $inputFile -ServerInstance $server -Database $db -Username "HMApp" -Password "dickbutt11!"
 } 
 catch 
 {

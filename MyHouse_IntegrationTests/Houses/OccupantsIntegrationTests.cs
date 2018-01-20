@@ -67,13 +67,6 @@ namespace MyHouseIntegrationTests.Houses
             );
 
             content.ShouldBeEquivalentTo(expectedContent);
-
-            // Cleanup: 
-            /* 
-            delete from houses.Occupants where OccupantId in (5,6) 
-            DBCC CHECKIDENT ('houses.Occupants', RESEED, 4);
-            GO
-            */
         }
     }
 }
