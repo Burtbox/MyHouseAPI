@@ -13,7 +13,7 @@ namespace MyHouseAPI.Controllers
     [Route("api/[controller]")]
     [ApiVersion("3.0")]
     [Authorize]
-    public class OccupantsController : Controller
+    public class OccupantsController : BaseController
     {
         private readonly OccupantsRepository occupantsRepository;
         private readonly IAuthorizationService authorizationService;
@@ -21,37 +21,17 @@ namespace MyHouseAPI.Controllers
         public OccupantsController(
             IAuthorizationService authorizationService,
             OccupantsRepository occupantsRepository
-        )
+        ) : base(authorizationService)
         {
             this.occupantsRepository = occupantsRepository;
-            this.authorizationService = authorizationService;
         }
 
         // GET: api/values
         [HttpGet("{userId},{householdId}")]
         public async Task<IActionResult> GetOccupantsOfHousehold(string userId, int householdId)
         {
-            try
-            {
-                AuthorizationResult authorizationResult = await authorizationService
-                    .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
-                if (authorizationResult.Succeeded)
-                {
-                    return Ok(await occupantsRepository.GetOccupantsOfHousehold(userId, householdId));
-                }
-                else
-                {
-                    return new ForbidResult();
-                }
-            }
-            catch (InvalidOccupantException)
-            {
-                return Forbid();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
-            }
+            IEnumerable<Occupant> occupants = await occupantsRepository.GetOccupantsOfHousehold(userId, householdId);
+            return Ok(occupants);
         }
 
         // POST api/values

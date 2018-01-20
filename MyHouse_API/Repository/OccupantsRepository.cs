@@ -22,11 +22,12 @@ namespace MyHouseAPI.Repositories
 
             return await asyncConnection(userId, householdId, async db =>
             {
-                return await db.QueryAsync<Occupant>(
+                IEnumerable<Occupant> occupants = await db.QueryAsync<Occupant>(
                     sql: "[Houses].[Occupants_Of_Household]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure
                 );
+                return occupants;
             });
         }
 
@@ -34,11 +35,12 @@ namespace MyHouseAPI.Repositories
         {
             return await asyncConnection(async db =>
             {
-                return await db.QueryFirstAsync<Occupant>(
+                Occupant insertedOccupant = await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
                 );
+                return insertedOccupant;
             });
         }
 
@@ -50,11 +52,12 @@ namespace MyHouseAPI.Repositories
 
             return await asyncConnection(async db =>
              {
-                 return await db.ExecuteAsync(
-                 sql: "[Houses].[Occupants_Update]",
-                 param: parameters,
-                 commandType: CommandType.StoredProcedure
+                 int rowsUpdated = await db.ExecuteAsync(
+                    sql: "[Houses].[Occupants_Update]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure
                  );
+                 return rowsUpdated;
              });
         }
 
@@ -62,11 +65,12 @@ namespace MyHouseAPI.Repositories
         {
             return await asyncConnection(async db =>
             {
-                return await db.QueryFirstAsync<int>(
+                int rowsDeleted = await db.QueryFirstAsync<int>(
                     sql: "[Houses].[Occupants_Delete]",
                     param: new { OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );
+                return rowsDeleted;
             });
         }
     }

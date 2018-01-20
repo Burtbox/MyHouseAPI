@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using FluentValidation.AspNetCore;
+using MyHouseAPI.Helpers;
 
 namespace MyHouseAPI.Services
 {
@@ -15,6 +16,7 @@ namespace MyHouseAPI.Services
             {
                 AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 configuration.Filters.Add(new AuthorizeFilter(policy));
+                configuration.Filters.Add(typeof(ModelStateValidationActionFilterAttribute));
             })
             .AddFluentValidation();
 

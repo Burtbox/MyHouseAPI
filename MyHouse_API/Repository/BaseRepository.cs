@@ -21,6 +21,11 @@ namespace MyHouseAPI.Repositories
             this.dbConnection = connection;
             this.logger = logger;
         }
+        /// <summary>
+        /// An unrestricted async connection - this should only be used when the user does not need to belong to a household
+        /// </summary>
+        /// <param name="getData"></param>
+        /// <returns></returns>
         protected async Task<T> asyncConnection<T>(Func<IDbConnection, Task<T>> getData)
         {
             try
@@ -53,6 +58,14 @@ namespace MyHouseAPI.Repositories
                 throw new InvalidOccupantException();
             }
         }
+
+        /// <summary>
+        /// An async connection that validates the user belongs to the household
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="householdId"></param>
+        /// <param name="getData"></param>
+        /// <returns></returns>
         protected async Task<T> asyncConnection<T>(string userId, int householdId, Func<IDbConnection, Task<T>> getData)
         {
             try

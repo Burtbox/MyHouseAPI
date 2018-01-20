@@ -17,16 +17,14 @@ namespace MyHouseAPI.Repositories
 
         public async Task<IEnumerable<Household>> GetAll(string userId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@userId", userId);
-
             return await asyncConnection(async db =>
             {
-                return await db.QueryAsync<Household>(
+                IEnumerable<Household> usersHouseholds = await db.QueryAsync<Household>(
                     sql: "[Houses].[Households_Of_Occupant]",
-                    param: parameters,
+                    param: new { UserId = userId },
                     commandType: CommandType.StoredProcedure
                 );
+                return usersHouseholds;
             });
         }
 
@@ -35,13 +33,15 @@ namespace MyHouseAPI.Repositories
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@Name", household.Name);
             parameters.Add("@EnteredBy", household.EnteredBy);
+
             return await asyncConnection(async db =>
             {
-                return await db.QueryAsync<Household>(
+                IEnumerable<Household> insertedHousehold = await db.QueryAsync<Household>(
                     sql: "[Houses].[Households_Insert]",
                     param: household,
                     commandType: CommandType.StoredProcedure
                 );
+                return insertedHousehold;
             });
         }
 
@@ -54,26 +54,25 @@ namespace MyHouseAPI.Repositories
 
             return await asyncConnection(async db =>
              {
-                 return await db.ExecuteAsync(
-                 sql: "[Houses].[Households_Update]",
-                 param: parameters,
-                 commandType: CommandType.StoredProcedure
+                 int rowsUpdated = await db.ExecuteAsync(
+                    sql: "[Houses].[Households_Update]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure
                  );
+                 return rowsUpdated;
              });
         }
 
         public async Task<IEnumerable<int>> Delete(string householdId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@HouseholdId", householdId);
-
             return await asyncConnection(async db =>
             {
-                return await db.QueryAsync<int>(
+                IEnumerable<int> rowsDeleted = await db.QueryAsync<int>(
                     sql: "[Houses].[Households_Delete]",
-                    param: parameters,
+                    param: new { HouseholdId = householdId },
                     commandType: CommandType.StoredProcedure
                 );
+                return rowsDeleted;
             });
         }
     }
