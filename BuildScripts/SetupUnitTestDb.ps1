@@ -16,6 +16,7 @@ $buildOutputDir = $buildScriptsDir + "\build"
 $buildOutputScript = $buildOutputDir + "\MyHouseDB.sql"
 $integrationTestOutputScript = $buildOutputDir + "\IntegrationTestSetup.sql"
 $databaseScriptsDir = $repoDir + "\Database"
+$integrationTestScriptsDir = $repoDir + "\MyHouse_IntegrationTests\TestData"
 $dropAndCreateDbQuery = "ALTER DATABASE $($db) SET SINGLE_USER WITH ROLLBACK IMMEDIATE
                          GO
                          IF EXISTS(SELECT name FROM sys.databases WHERE name = '$($db)') 
@@ -53,7 +54,7 @@ Write-Host "Completed run of myHouseDb sql"
 
 ## Create single sql script from integration test setup scripts
 Write-Host "Beginning combining of integration test sql scripts"
-Invoke-Expression -Command "$($buildScriptsDir)\CombineSQLScripts.ps1 -source $($databaseScriptsDir) -output $($integrationTestOutputScript)"
+Invoke-Expression -Command "$($buildScriptsDir)\CombineSQLScripts.ps1 -source $($integrationTestScriptsDir) -output $($integrationTestOutputScript)"
 Write-Host "Completed combining of integration test sql scripts"
 
 ## Run single script on new database

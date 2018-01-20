@@ -16,6 +16,7 @@ namespace MyHouseIntegrationTests.Shared
     {
         private TestSettings testSettings = JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
 
+        internal string userId => testSettings.UserId;
         public string serialize(object obj)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
@@ -26,12 +27,14 @@ namespace MyHouseIntegrationTests.Shared
 
             return serializedObject;
         }
+
         public RestClient GetClient()
         {
             string baseUrl = testSettings.BaseUrl;
             RestClient client = new RestClient(baseUrl);
             return client;
         }
+
         public RestRequest apiCall(string endpoint, Method method)
         {
             string token = generateToken();
@@ -56,6 +59,7 @@ namespace MyHouseIntegrationTests.Shared
 
             return request;
         }
+
         private string generateToken()
         {
             string customToken = getCustomToken();

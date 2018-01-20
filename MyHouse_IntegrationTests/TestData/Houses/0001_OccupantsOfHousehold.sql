@@ -7,7 +7,7 @@ exec houses.Households_Insert
 	, @EnteredBy = 'IntegrationTest'
 
 exec houses.Occupants_Insert 
-      @UserId = 'O1userId'
+      @UserId = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
     , @DisplayName = 'O1DispName'
     , @HouseholdId = 1
                 

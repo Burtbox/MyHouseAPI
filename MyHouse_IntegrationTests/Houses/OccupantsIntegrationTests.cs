@@ -16,7 +16,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             int householdId = 1;
             RestClient client = GetClient();
-            RestRequest request = apiCall(string.Concat("Occupants/", householdId), Method.GET);
+            RestRequest request = apiCall(string.Concat("Occupants/", userId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
             string content = response.Content;
 
@@ -25,7 +25,7 @@ namespace MyHouseIntegrationTests.Houses
                 new Occupant
                 {
                     OccupantId = 1,
-                    UserId = "O1userId",
+                    UserId = userId,
                     DisplayName = "O1DispName",
                     HouseholdId = 1
                 },
