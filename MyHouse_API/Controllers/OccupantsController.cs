@@ -16,7 +16,6 @@ namespace MyHouseAPI.Controllers
     public class OccupantsController : BaseController
     {
         private readonly OccupantsRepository occupantsRepository;
-        private readonly IAuthorizationService authorizationService;
 
         public OccupantsController(
             IAuthorizationService authorizationService,

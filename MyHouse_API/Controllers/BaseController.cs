@@ -12,7 +12,7 @@ namespace MyHouseAPI.Controllers
 {
     public abstract class BaseController : Controller
     {
-        private readonly IAuthorizationService authorizationService;
+        protected readonly IAuthorizationService authorizationService;
 
         protected BaseController(
             IAuthorizationService authorizationService
@@ -31,27 +31,27 @@ namespace MyHouseAPI.Controllers
         {
             IActionResult response = NotFound();
 
-            try
-            {
-                AuthorizationResult authorizationResult = await authorizationService
-                    .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
-                if (authorizationResult.Succeeded)
-                {
-                    response = Ok(await processRequest());
-                }
-                else
-                {
-                    response = new ForbidResult();
-                }
-            }
-            catch (InvalidOccupantException)
-            {
-                response = Forbid();
-            }
-            catch (Exception)
-            {
-                response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
-            }
+            // try
+            // {
+            //     AuthorizationResult authorizationResult = await authorizationService
+            //         .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
+            //     if (authorizationResult.Succeeded)
+            //     {
+            //         response = Ok(await processRequest());
+            //     }
+            //     else
+            //     {
+            //         response = new ForbidResult();
+            //     }
+            // }
+            // catch (InvalidOccupantException)
+            // {
+            //     response = Forbid();
+            // }
+            // catch (Exception)
+            // {
+            //     response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
+            // }
 
             return response;
         }

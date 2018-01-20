@@ -16,7 +16,7 @@ namespace MyHouseAPI.Services
             {
                 AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 configuration.Filters.Add(new AuthorizeFilter(policy));
-                configuration.Filters.Add(typeof(OwnUserIdFilterAttribute));
+                configuration.Filters.Add(typeof(ModelStateValidationActionFilterAttribute));
             })
             .AddFluentValidation();
 
