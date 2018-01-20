@@ -29,9 +29,15 @@ namespace MyHouseAPI.Controllers
         [HttpGet("{userId},{householdId}")]
         public async Task<IActionResult> GetOccupantsOfHousehold(string userId, int householdId)
         {
+            return await RequestHandler<IActionResult>(userId, async () => await getOH(userId, householdId));
+        }
+
+        private async Task<IActionResult> getOH(string userId, int householdId)
+        {
             IEnumerable<Occupant> occupants = await occupantsRepository.GetOccupantsOfHousehold(userId, householdId);
             return Ok(occupants);
         }
+
 
         // POST api/values
         [HttpPost]
