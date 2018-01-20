@@ -1,0 +1,8 @@
+1. Run the setup command: 
+(this creates a new integration test db on EDLAPTOP\EDLAPTOPSQL as MyHouse_Dev_Tests 
+with the data setup in ./MyHouse_IntegrationTests/TestData)
+
+.\BuildScripts\SetupUnitTestDb.ps1
+
+2. Run the web api (F5)
+3. Debug a specific test
