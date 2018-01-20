@@ -29,7 +29,7 @@ namespace MyHouseAPI.Controllers
         /// <returns></returns>
         protected async Task<IActionResult> RequestHandler<T>(string userId, Func<Task<T>> processRequest)
         {
-            IActionResult response = NotFound();
+            IActionResult response;
 
             try
             {
@@ -54,7 +54,6 @@ namespace MyHouseAPI.Controllers
             }
 
             return response;
-
         }
     }
 }
