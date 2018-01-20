@@ -2,7 +2,7 @@ using System;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyHouseAPI.Helpers;
+using MyHouseAPI.Handlers;
 using Microsoft.AspNetCore.Http;
 
 namespace MyHouseAPI.Services
@@ -13,7 +13,7 @@ namespace MyHouseAPI.Services
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped((IServiceProvider scoped) =>
-                new ConnectionHelper(configuration.GetConnectionString(name: "DefaultConnection"))
+                new ConnectionHandler(configuration.GetConnectionString(name: "DefaultConnection"))
             );
 
             return services;

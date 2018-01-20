@@ -39,15 +39,9 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> InsertOccupant([FromBody] OccupantInsert occupant)
         {
             IActionResult response;
-            if (ModelState.IsValid)
-            {
-                var addedOccupant = await occupantsRepository.InsertOccupant(occupant);
-                response = Ok(addedOccupant);
-            }
-            else
-            {
-                response = BadRequest(ModelState);
-            }
+
+            var addedOccupant = await occupantsRepository.InsertOccupant(occupant);
+            response = Ok(addedOccupant);
 
             return response;
         }
@@ -58,23 +52,17 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> UpdateOccupant([FromBody] Occupant occupant)
         {
             IActionResult response;
-            if (ModelState.IsValid)
+
+            AuthorizationResult authorizationResult = await authorizationService
+                .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here
+            if (authorizationResult.Succeeded)
             {
-                AuthorizationResult authorizationResult = await authorizationService
-                    .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here
-                if (authorizationResult.Succeeded)
-                {
-                    await occupantsRepository.UpdateOccupant(occupant);
-                    response = NoContent();
-                }
-                else
-                {
-                    return new ForbidResult();
-                }
+                await occupantsRepository.UpdateOccupant(occupant);
+                response = NoContent();
             }
             else
             {
-                response = BadRequest(ModelState);
+                return new ForbidResult();
             }
 
             return response;

@@ -30,34 +30,29 @@ namespace MyHouseAPI.Controllers
         protected async Task<IActionResult> RequestHandler<U, V, T>(string userId, Func<U, V, Task<T>> processRequest)
         {
             IActionResult response = NotFound();
-            // if (ModelState.IsValid)
-            // {
-            //     try
-            //     {
-            //         AuthorizationResult authorizationResult = await authorizationService
-            //             .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
-            //         if (authorizationResult.Succeeded)
-            //         {
-            //             response = Ok(await processRequest());
-            //         }
-            //         else
-            //         {
-            //             response = new ForbidResult();
-            //         }
-            //     }
-            //     catch (InvalidOccupantException)
-            //     {
-            //         response = Forbid();
-            //     }
-            //     catch (Exception)
-            //     {
-            //         response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
-            //     }
-            // }
-            // else
-            // {
-            //     response = BadRequest(ModelState);
-            // }
+
+            try
+            {
+                AuthorizationResult authorizationResult = await authorizationService
+                    .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
+                if (authorizationResult.Succeeded)
+                {
+                    response = Ok(await processRequest());
+                }
+                else
+                {
+                    response = new ForbidResult();
+                }
+            }
+            catch (InvalidOccupantException)
+            {
+                response = Forbid();
+            }
+            catch (Exception)
+            {
+                response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
+            }
+
             return response;
         }
     }

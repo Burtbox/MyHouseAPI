@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using MyHouseAPI.Helpers;
+using MyHouseAPI.Handlers;
 using Serilog;
 using Dapper;
 using MyHouseAPI.Model;
@@ -12,11 +12,11 @@ namespace MyHouseAPI.Repositories
 {
     public abstract class BaseRepository
     {
-        private readonly ConnectionHelper dbConnection;
+        private readonly ConnectionHandler dbConnection;
         private readonly ILogger logger;
         private enum ExceptionTypes { Timeout, SQLError, Unknown, InvalidOccupant }
 
-        protected BaseRepository(ConnectionHelper connection, ILogger logger)
+        protected BaseRepository(ConnectionHandler connection, ILogger logger)
         {
             this.dbConnection = connection;
             this.logger = logger;

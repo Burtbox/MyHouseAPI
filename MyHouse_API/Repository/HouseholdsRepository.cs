@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using MyHouseAPI.Helpers;
+using MyHouseAPI.Handlers;
 using MyHouseAPI.Model;
 using Serilog;
 
@@ -13,7 +13,7 @@ namespace MyHouseAPI.Repositories
 {
     public class HouseholdsRepository : BaseRepository
     {
-        public HouseholdsRepository(ConnectionHelper connection, ILogger logger) : base(connection, logger) { }
+        public HouseholdsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
         public async Task<IEnumerable<Household>> GetAll(string userId)
         {

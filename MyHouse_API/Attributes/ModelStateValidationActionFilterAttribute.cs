@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MyHouseAPI.Helpers
+namespace MyHouseAPI.FilterAttributes
 {
     public class ModelStateValidationActionFilterAttribute : ActionFilterAttribute
     {

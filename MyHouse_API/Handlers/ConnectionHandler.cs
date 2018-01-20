@@ -3,13 +3,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace MyHouseAPI.Helpers
+namespace MyHouseAPI.Handlers
 {
-    public class ConnectionHelper : IDbConnection
+    public class ConnectionHandler : IDbConnection
     {
         private SqlConnection dBConnection { get; }
 
-        public ConnectionHelper(string connectionString) => dBConnection = new SqlConnection(connectionString);
+        public ConnectionHandler(string connectionString) => dBConnection = new SqlConnection(connectionString);
 
         public int ConnectionTimeout => dBConnection.ConnectionTimeout;
 
