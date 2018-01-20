@@ -1,8 +1,18 @@
+Clean down the test db:
 1. Run the setup command: 
 (this creates a new integration test db on EDLAPTOP\EDLAPTOPSQL as MyHouse_Dev_Tests 
 with the data setup in ./MyHouse_IntegrationTests/TestData)
 
 .\BuildScripts\SetupUnitTestDb.ps1
 
+Debug a specific test:
+1. switch testsettings.json to your local api (commented in file)
 2. Run the web api (F5)
-3. Debug a specific test
+3. Debug a specific test (above the method name in vscode)
+
+Deploy static test api:
+1. dotnet publish ./MyHouse_API -c Release -o "\\edlaptop\wwwroot\MyHouseTestAPI" (may need to stop app pool MyHouseTestAPI)
+
+Run all tests: 
+1. switch testsettings.json to use test api on edpaptop (commented in file)
+2. Use .netTestExplorer plugin to run all tests
