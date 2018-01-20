@@ -31,16 +31,8 @@ namespace MyHouseAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] HouseholdInsert household)
         {
-            IActionResult response;
-            if (ModelState.IsValid)
-            {
-                var addedHousehold = await householdsRepository.Insert(household);
-                response = Ok(addedHousehold);
-            }
-            else
-            {
-                response = BadRequest(ModelState);
-            }
+            IEnumerable<Household> addedHousehold = await householdsRepository.Insert(household);
+            IActionResult response = Ok(addedHousehold);
 
             return response;
         }
@@ -50,16 +42,8 @@ namespace MyHouseAPI.Controllers
 
         public async Task<IActionResult> Put([FromBody] HouseholdUpdate household)
         {
-            IActionResult response;
-            if (ModelState.IsValid)
-            {
-                await householdsRepository.Update(household);
-                response = NoContent();
-            }
-            else
-            {
-                response = BadRequest(ModelState);
-            }
+            await householdsRepository.Update(household);
+            IActionResult response = NoContent();
 
             return response;
         }
