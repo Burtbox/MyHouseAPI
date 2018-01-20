@@ -59,7 +59,7 @@ namespace MyHouseIntegrationTests.Houses
             string expectedContent = serialize(
                 new Occupant
                 {
-                    OccupantId = 5, //TODO - figure out how best to handle cleanup to id incremention here
+                    OccupantId = 5,
                     UserId = "O5userId",
                     DisplayName = "O5DispName",
                     HouseholdId = 2
