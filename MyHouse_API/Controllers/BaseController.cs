@@ -41,7 +41,7 @@ namespace MyHouseAPI.Controllers
                 }
                 else
                 {
-                    response = new ForbidResult();
+                    response = Forbid();
                 }
             }
             catch (InvalidOccupantException)
