@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyHouse_API\MyHouseAPI.csproj" />
+    <ProjectReference Include="..\MyHouse_UnitTests\MyHouseUnitTests.csproj" />
   </ItemGroup>
 
 </Project>

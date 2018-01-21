@@ -38,13 +38,8 @@ namespace MyHouseAPI.Controllers
         [HttpPost("{userId}")]
         public async Task<IActionResult> RequestOccupantInsert(string userId, [FromBody] OccupantInsert occupant)
         {
-            return await RequestHandler<IActionResult>(userId, async () => await InsertOccupant(userId, occupant));
-        }
-
-        private async Task<IActionResult> InsertOccupant(string userId, OccupantInsert occupant)
-        {
-            Occupant addedOccupant = await occupantsRepository.InsertOccupant(userId, occupant);
-            return Created("Occupant", addedOccupant);
+            return await RequestHandler<Occupant>(userId, async () => await occupantsRepository.InsertOccupant(userId, occupant));
+            //This should return created! Need to think about request handler for this!
         }
 
         // PUT api/values/5

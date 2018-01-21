@@ -12,13 +12,13 @@ exec houses.Occupants_Insert
     , @HouseholdId = 1
                 
 exec houses.Occupants_Insert 
-      @UserId = 'O2userId'
+      @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
     , @DisplayName = 'O2DispName'
     , @HouseholdId = 1
                 
 -- Add user outside of queried household
 exec houses.Occupants_Insert 
-	  @UserId = 'O3userId'
+	  @UserId = 'zHhRt5d5N7jED5yzSYZAbFYXpRHI'
     , @DisplayName = 'O3DispName'
     , @HouseholdId = 2
                 

@@ -1,7 +1,7 @@
 using Xunit;
 using MyHouseAPI.Validation;
 using FluentValidation.TestHelper;
-using MyHouseUnitTests.ValidationHelpers;
+using MyHouseUnitTests.Helpers;
 
 namespace MyHouseUnitTests.ValidationTests
 {
