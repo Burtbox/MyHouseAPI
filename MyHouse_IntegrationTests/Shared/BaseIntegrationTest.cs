@@ -23,6 +23,7 @@ namespace MyHouseIntegrationTests.Shared
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
+            
             string serializedObject = JsonConvert.SerializeObject(obj, settings);
 
             return serializedObject;

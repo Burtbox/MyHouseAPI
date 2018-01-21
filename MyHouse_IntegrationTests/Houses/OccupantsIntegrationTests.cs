@@ -6,6 +6,8 @@ using RestSharp;
 using MyHouseAPI.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Net;
+using MyHouseIntegrationTests.Models;
 
 namespace MyHouseIntegrationTests.Houses
 {
@@ -18,27 +20,34 @@ namespace MyHouseIntegrationTests.Houses
             RestClient client = GetClient();
             RestRequest request = apiCall(string.Concat("Occupants/", userId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
-            string content = response.Content;
 
-            string expectedContent = serialize(new Occupant[]
+            string expectedContent = serialize(new GetResponse<Occupant[]>
             {
-                new Occupant
+                Value = new Occupant[]
                 {
-                    OccupantId = 1,
-                    UserId = userId,
-                    DisplayName = "O1DispName",
-                    HouseholdId = 1
+                    new Occupant
+                    {
+                        OccupantId = 1,
+                        UserId = userId,
+                        DisplayName = "O1DispName",
+                        HouseholdId = 1
+                    },
+                    new Occupant
+                    {
+                        OccupantId = 2,
+                        UserId = "O2userId",
+                        DisplayName = "O2DispName",
+                        HouseholdId = 1
+                    }
                 },
-                new Occupant
-                {
-                    OccupantId = 2,
-                    UserId = "O2userId",
-                    DisplayName = "O2DispName",
-                    HouseholdId = 1
-                }
+                StatusCode = 200,
+                Formatters = new string[] { },
+                ContentTypes = new string[] { },
+                DeclaredType = null
             });
 
-            content.ShouldBeEquivalentTo(expectedContent);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
         [Fact]
@@ -48,25 +57,31 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = "O5userId",
                 DisplayName = "O5DispName",
-                HouseholdId = 2
+                HouseholdId = 1
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(string.Concat("Occupants/"), Method.POST, occupantToInsert);
+            RestRequest request = apiCall<OccupantInsert>(string.Concat("Occupants/", userId), Method.POST, occupantToInsert);
             IRestResponse response = client.Execute<Occupant>(request);
-            string content = response.Content;
 
-            string expectedContent = serialize(
-                new Occupant
+            string expectedContent = serialize(new PostResponse<Occupant>
+            {
+                Location = "Occupant",
+                Value = new Occupant
                 {
-                    OccupantId = 5,
+                    OccupantId = 4,
                     UserId = "O5userId",
                     DisplayName = "O5DispName",
-                    HouseholdId = 2
-                }
-            );
+                    HouseholdId = 1
+                },
+                StatusCode = 201,
+                Formatters = new string[] { },
+                ContentTypes = new string[] { },
+                DeclaredType = null
+            });
 
-            content.ShouldBeEquivalentTo(expectedContent);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
         }
     }
 }

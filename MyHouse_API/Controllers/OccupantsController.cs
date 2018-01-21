@@ -27,27 +27,28 @@ namespace MyHouseAPI.Controllers
 
         // GET: api/values
         [HttpGet("{userId},{householdId}")]
-        public async Task<IActionResult> GetOccupantsOfHousehold(string userId, int householdId)
+        public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int householdId)
         {
-            return await RequestHandler<IActionResult>(userId, async () => await requestOccupantsOfHousehold(userId, householdId));
+            return await RequestHandler<IActionResult>(userId, async () => await GetOccupantsOfHousehold(userId, householdId));
         }
 
-        private async Task<IActionResult> requestOccupantsOfHousehold(string userId, int householdId)
+        private async Task<IActionResult> GetOccupantsOfHousehold(string userId, int householdId)
         {
             IEnumerable<Occupant> occupants = await occupantsRepository.GetOccupantsOfHousehold(userId, householdId);
             return Ok(occupants);
         }
 
         // POST api/values
-        [HttpPost]
-        public async Task<IActionResult> InsertOccupant([FromBody] OccupantInsert occupant)
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> RequestOccupantInsert(string userId, [FromBody] OccupantInsert occupant)
         {
-            IActionResult response;
+            return await RequestHandler<IActionResult>(userId, async () => await InsertOccupant(userId, occupant));
+        }
 
-            var addedOccupant = await occupantsRepository.InsertOccupant(occupant);
-            response = Ok(addedOccupant);
-
-            return response;
+        private async Task<IActionResult> InsertOccupant(string userId, OccupantInsert occupant)
+        {
+            Occupant addedOccupant = await occupantsRepository.InsertOccupant(userId, occupant);
+            return Created("Occupant", addedOccupant);
         }
 
         // PUT api/values/5

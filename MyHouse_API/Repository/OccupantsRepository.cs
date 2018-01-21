@@ -31,9 +31,9 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> InsertOccupant(OccupantInsert occupant)
+        public async Task<Occupant> InsertOccupant(string userId, OccupantInsert occupant)
         {
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, occupant.HouseholdId, async db =>
             {
                 Occupant insertedOccupant = await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Insert]",
