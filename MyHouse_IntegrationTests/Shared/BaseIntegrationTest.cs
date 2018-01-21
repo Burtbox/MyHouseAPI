@@ -16,14 +16,15 @@ namespace MyHouseIntegrationTests.Shared
     {
         private TestSettings testSettings = JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
 
-        internal string userId => testSettings.UserId;
+        internal string H1UserId => testSettings.H1UserId;
+        internal string H2UserId => testSettings.H2UserId;
         public string serialize(object obj)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
-            
+
             string serializedObject = JsonConvert.SerializeObject(obj, settings);
 
             return serializedObject;
@@ -36,9 +37,9 @@ namespace MyHouseIntegrationTests.Shared
             return client;
         }
 
-        public RestRequest apiCall(string endpoint, Method method)
+        public RestRequest apiCall(string userId, string endpoint, Method method)
         {
-            string token = generateToken();
+            string token = generateToken(userId);
             RestRequest request = new RestRequest(endpoint, method);
 
             // add HTTP Headers
@@ -48,9 +49,9 @@ namespace MyHouseIntegrationTests.Shared
             return request;
         }
 
-        public RestRequest apiCall<T>(string endpoint, Method method, T body)
+        public RestRequest apiCall<T>(string userId, string endpoint, Method method, T body)
         {
-            string token = generateToken();
+            string token = generateToken(userId);
             RestRequest request = new RestRequest(endpoint, method);
 
             // add HTTP Headers
@@ -61,9 +62,9 @@ namespace MyHouseIntegrationTests.Shared
             return request;
         }
 
-        private string generateToken()
+        private string generateToken(string userId)
         {
-            string customToken = getCustomToken();
+            string customToken = getCustomToken(userId);
             //using an undocumented endpoint to turn our custom token into a live user token
             RestClient client = new RestClient("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyA27cRAIaX6NqiLQ4_AHNB91MlHajiTplA");
             RestRequest request = new RestRequest(Method.POST);
@@ -96,13 +97,13 @@ namespace MyHouseIntegrationTests.Shared
             return token;
         }
 
-        private string getCustomToken()
+        private string getCustomToken(string userId)
         {
             // get the node js index file
             DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
             string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
             string commandName = "generateCustomToken";
-            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", testSettings.UserId);
+            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 
             //Run the command
             Process process = new Process()

@@ -5,7 +5,8 @@ namespace MyHouseIntegrationTests.Shared
     public class TestSettings
     {
         public string BaseUrl;
-        public string UserId;
+        public string H1UserId;
+        public string H2UserId;
         public string NodeJsExe;
     }
 }

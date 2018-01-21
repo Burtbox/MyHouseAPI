@@ -18,7 +18,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             int householdId = 1;
             RestClient client = GetClient();
-            RestRequest request = apiCall(string.Concat("Occupants/", userId, ",", householdId), Method.GET);
+            RestRequest request = apiCall(H1UserId, string.Concat("Occupants/", H1UserId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
 
             string expectedContent = serialize(new Occupant[]
@@ -26,8 +26,8 @@ namespace MyHouseIntegrationTests.Houses
                 new Occupant
                 {
                     OccupantId = 1,
-                    UserId = userId,
-                    DisplayName = "O1DispName",
+                    UserId = H1UserId,
+                    DisplayName = "Household 1 owner dickbutt",
                     HouseholdId = 1
                 },
                 new Occupant
@@ -42,6 +42,7 @@ namespace MyHouseIntegrationTests.Houses
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
+        //TODO: Add cross household test that should 403 and notlogged in test that should 403
 
         [Fact]
         public void InsertOccupantTest()
@@ -52,11 +53,11 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 1
+                HouseholdId = 2
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(string.Concat("Occupants/", userId), Method.POST, occupantToInsert);
+            RestRequest request = apiCall<OccupantInsert>(H2UserId, string.Concat("Occupants/", H2UserId), Method.POST, occupantToInsert);
             IRestResponse response = client.Execute<Occupant>(request);
 
             string expectedContent = serialize(new Occupant
@@ -64,7 +65,7 @@ namespace MyHouseIntegrationTests.Houses
                 OccupantId = 4,
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 1
+                HouseholdId = 2
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
