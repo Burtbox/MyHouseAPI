@@ -47,7 +47,7 @@ namespace MyHouseAPI.Controllers
         //[Authorize(Policy = "OwnUserId")] 
         public async Task<IActionResult> UpdateOccupant([FromBody] Occupant occupant)
         {
-            IActionResult response;
+            IActionResult response; //TODO: ED! before you refactor this one - write the integration test -  lets do some TDD! :)
 
             AuthorizationResult authorizationResult = await authorizationService
                 .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here

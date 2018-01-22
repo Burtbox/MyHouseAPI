@@ -8,17 +8,24 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net;
 using MyHouseUnitTests.Helpers;
+using MyHouseIntegrationTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
     public class OccupantsIntegrationTests : BaseIntegrationTest // Should probably have get token stuff as a global setup once!
     {
+        private FirebaseFixture firebaseFixture;
+        public OccupantsIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { 
+            this.firebaseFixture = firebaseFixture;
+        }
+
         [Fact]
         public void GetOccupantsOfHouseholdTest()
         {
             int householdId = 1;
+
             RestClient client = GetClient();
-            RestRequest request = apiCall(H1UserId, string.Concat("Occupants/", H1UserId, ",", householdId), Method.GET);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
 
             string expectedContent = serialize(new Occupant[]
@@ -26,7 +33,7 @@ namespace MyHouseIntegrationTests.Houses
                 new Occupant
                 {
                     OccupantId = 1,
-                    UserId = H1UserId,
+                    UserId = firebaseFixture.H1UserId,
                     DisplayName = "Household 1 owner dickbutt",
                     HouseholdId = 1
                 },
@@ -57,7 +64,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(H2UserId, string.Concat("Occupants/", H2UserId), Method.POST, occupantToInsert);
+            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.POST, occupantToInsert);
             IRestResponse response = client.Execute<Occupant>(request);
 
             string expectedContent = serialize(new Occupant
