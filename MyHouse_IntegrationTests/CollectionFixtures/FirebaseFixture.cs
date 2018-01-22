@@ -12,7 +12,7 @@ public class FirebaseFixture : IDisposable
         this.H1UserId = settings.H1UserId;
         this.H1Token = TokenHelper.generateToken(settings.NodeJsExe, settings.H1UserId);
         this.H2UserId = settings.H2UserId;
-        this.H2Token = TokenHelper.generateToken(settings.NodeJsExe, settings.H1UserId);
+        this.H2Token = TokenHelper.generateToken(settings.NodeJsExe, settings.H2UserId);
 
         // ... initialize data in the test database ...
     }
