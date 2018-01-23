@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 namespace MyHouseAPI.Controllers
 {
@@ -29,17 +30,16 @@ namespace MyHouseAPI.Controllers
         [HttpGet("{userId},{householdId}")]
         public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int householdId)
         {
-            return await RequestHandler<IEnumerable<Occupant>>(
-                userId, async () => await occupantsRepository.GetOccupantsOfHousehold(userId, householdId)
-            );
+            return await RequestHandler<IEnumerable<Occupant>>(HttpVerbs.Get, userId, async () =>
+                await occupantsRepository.GetOccupantsOfHousehold(userId, householdId));
         }
 
         // POST api/values
         [HttpPost("{userId}")]
         public async Task<IActionResult> RequestOccupantInsert(string userId, [FromBody] OccupantInsert occupant)
         {
-            return await RequestHandler<Occupant>(userId, async () => await occupantsRepository.InsertOccupant(userId, occupant));
-            //This should return created! Need to think about request handler for this!
+            return await RequestHandler<Occupant>(HttpVerbs.Post, userId, async () => 
+                await occupantsRepository.InsertOccupant(userId, occupant));
         }
 
         // PUT api/values/5

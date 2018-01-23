@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 namespace MyHouseAPI.Controllers
 {
     public abstract class BaseController : Controller
     {
         protected readonly IAuthorizationService authorizationService;
+        public enum HttpVerbs { Get, Put, Post, Delete };
 
         protected BaseController(
             IAuthorizationService authorizationService
@@ -27,7 +29,7 @@ namespace MyHouseAPI.Controllers
         /// <param name="userId">the request's user id to match to its claims</param>
         /// <param name="handleRequest">the function to run if valid request</param>
         /// <returns></returns>
-        protected async Task<IActionResult> RequestHandler<T>(string userId, Func<Task<T>> processRequest)
+        protected async Task<IActionResult> RequestHandler<T>(HttpVerbs method, string userId, Func<Task<T>> processRequest)
         {
             IActionResult response;
 
@@ -37,7 +39,27 @@ namespace MyHouseAPI.Controllers
                     .AuthorizeAsync(User, userId, "OwnUserId"); // secure on being that user here
                 if (authorizationResult.Succeeded)
                 {
-                    response = Ok(await processRequest());
+                    switch (method)
+                    {
+                        case HttpVerbs.Get:
+                        case HttpVerbs.Put:
+                        case HttpVerbs.Post:
+                            {
+                                response = Ok(await processRequest());
+                                break;
+                            }
+                        case HttpVerbs.Delete:
+                            {
+                                await processRequest();
+                                response = NoContent();
+                                break;
+                            }
+                        default:
+                            {
+                                response = BadRequest();
+                                break;
+                            }
+                    }
                 }
                 else
                 {
@@ -47,6 +69,10 @@ namespace MyHouseAPI.Controllers
             catch (InvalidOccupantException)
             {
                 response = Forbid();
+            }
+            catch (TimeoutException)
+            {
+                response = StatusCode(StatusCodes.Status408RequestTimeout, "The request has timed out, please try again");
             }
             catch (Exception)
             {
