@@ -23,7 +23,8 @@ namespace MyHouseAPI.Validation
         {
             RuleFor(x => x.UserId)
                 .NotEmpty()
-                .Length(36);
+                .MinimumLength(28) //Firebase userIds are currently 28 but may increase to 36
+                .MaximumLength(36);
 
             RuleFor(x => x.DisplayName)
                 .NotEmpty()

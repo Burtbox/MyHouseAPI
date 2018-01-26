@@ -44,11 +44,11 @@ namespace MyHouseAPI.Controllers
                     response = Forbid();
                 }
             }
-            catch (InvalidOccupantException)
+            catch (InvalidOccupantException ex)
             {
                 response = Forbid();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
             }

@@ -5,10 +5,12 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupants_Update]
 	@HouseholdId AS INT
 
 AS
-UPDATE Houses.Occupants 
+	UPDATE Houses.Occupants 
 	SET DisplayName = @DisplayName
 	, ModifiedBy = @OccupantId
 	, ModifiedDate = GETUTCDATE()
 	WHERE UserId = @UserId -- This will update their display name for all households
-	
+
+	SELECT OccupantId, UserId, DisplayName, HouseholdId 
+	FROM Houses.Occupants WHERE OccupantId = @OccupantId
 GO

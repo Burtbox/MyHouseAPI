@@ -12,10 +12,11 @@ using MyHouseIntegrationTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class OccupantsIntegrationTests : BaseIntegrationTest // Should probably have get token stuff as a global setup once!
+    public class OccupantsIntegrationTests : BaseIntegrationTest
     {
         private FirebaseFixture firebaseFixture;
-        public OccupantsIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { 
+        public OccupantsIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
+        {
             this.firebaseFixture = firebaseFixture;
         }
 
@@ -49,7 +50,6 @@ namespace MyHouseIntegrationTests.Houses
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
-        //TODO: Add cross household test that should 403 and notlogged in test that should 403
 
         [Fact]
         public void InsertOccupantTest()
@@ -76,6 +76,77 @@ namespace MyHouseIntegrationTests.Houses
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
+        public void UpdateOccupantTest()
+        {
+            string currentUserId = "INPZD3OF1O47G19BUL1LwYAEx6JU";
+            string O4DisplayName = StringGenerator.RandomString(100);
+            Occupant occupantToUpdate = new Occupant
+            {
+                OccupantId = 5,
+                UserId = currentUserId,
+                DisplayName = O4DisplayName,
+                HouseholdId = 2
+            };
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.PUT, occupantToUpdate);
+            IRestResponse response = client.Execute<Occupant>(request);
+
+            string expectedContent = serialize(new Occupant
+            {
+                OccupantId = 5,
+                UserId = currentUserId,
+                DisplayName = O4DisplayName,
+                HouseholdId = 2
+            });
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
+        public void InvalidOccupantOfHouseholdTest()
+        {
+            int householdId = 1;
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", householdId), Method.GET);
+            IRestResponse response = client.Execute<Occupant>(request);
+
+            string expectedContent = "";
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
+        public void InvalidHouseholdIdTest()
+        {
+            int householdId = 2;
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
+            IRestResponse response = client.Execute<Occupant>(request);
+
+            string expectedContent = "";
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
+        public void InvalidTokenTest()
+        {
+            int householdId = 1;
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
+            IRestResponse response = client.Execute<Occupant>(request);
+
+            string expectedContent = "";
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
     }

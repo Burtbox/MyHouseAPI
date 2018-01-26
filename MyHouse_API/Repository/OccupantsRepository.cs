@@ -24,7 +24,7 @@ namespace MyHouseAPI.Repositories
             {
                 IEnumerable<Occupant> occupants = await db.QueryAsync<Occupant>(
                     sql: "[Houses].[Occupants_Of_Household]",
-                    param: parameters,
+                    param: new { HouseholdId = householdId },
                     commandType: CommandType.StoredProcedure
                 );
                 return occupants;
@@ -44,20 +44,16 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<int> UpdateOccupant(Occupant occupant)
+        public async Task<Occupant> UpdateOccupant(string userId, Occupant occupant)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@UserId", occupant.UserId);
-            parameters.Add("@DisplayName", occupant.DisplayName);
-
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, occupant.HouseholdId, async db =>
              {
-                 int rowsUpdated = await db.ExecuteAsync(
+                 Occupant updatedOccupant = await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Update]",
-                    param: parameters,
+                    param: occupant,
                     commandType: CommandType.StoredProcedure
                  );
-                 return rowsUpdated;
+                 return updatedOccupant;
              });
         }
 

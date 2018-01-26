@@ -39,29 +39,13 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> RequestOccupantInsert(string userId, [FromBody] OccupantInsert occupant)
         {
             return await RequestHandler<Occupant>(userId, async () => await occupantsRepository.InsertOccupant(userId, occupant));
-            //This should return created! Need to think about request handler for this!
         }
 
         // PUT api/values/5
-        [HttpPut("{occupant}")]
-        //[Authorize(Policy = "OwnUserId")] 
-        public async Task<IActionResult> UpdateOccupant([FromBody] Occupant occupant)
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> RequestUpdateOccupant(string userId, [FromBody] Occupant occupant)
         {
-            IActionResult response; //TODO: ED! before you refactor this one - write the integration test -  lets do some TDD! :)
-
-            AuthorizationResult authorizationResult = await authorizationService
-                .AuthorizeAsync(User, occupant.UserId, "OwnUserId"); // secure on being that user here
-            if (authorizationResult.Succeeded)
-            {
-                await occupantsRepository.UpdateOccupant(occupant);
-                response = NoContent();
-            }
-            else
-            {
-                return new ForbidResult();
-            }
-
-            return response;
+            return await RequestHandler<Occupant>(userId, async () => await occupantsRepository.UpdateOccupant(userId, occupant));
         }
 
         // DELETE api/values/5
