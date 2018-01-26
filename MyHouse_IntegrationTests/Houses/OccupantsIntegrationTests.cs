@@ -109,6 +109,35 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
+        public void DeleteOccupantTest()
+        {
+            string currentUserId = "8R3C8etyv31TYKpggafz45WQjg63";
+            string O4DisplayName = StringGenerator.RandomString(100);
+            Occupant occupantToUpdate = new Occupant
+            {
+                OccupantId = 6,
+                UserId = currentUserId,
+                DisplayName = O4DisplayName,
+                HouseholdId = 2
+            };
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE, occupantToUpdate);
+            IRestResponse response = client.Execute<Occupant>(request);
+
+            string expectedContent = serialize(new Occupant
+            {
+                OccupantId = 6,
+                UserId = currentUserId,
+                DisplayName = O4DisplayName,
+                HouseholdId = 2
+            });
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
         public void InvalidOccupantOfHouseholdTest()
         {
             int householdId = 1;

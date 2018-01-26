@@ -51,12 +51,11 @@ namespace MyHouseAPI.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{occupantId}")]
-        [Authorize(Policy = "OwnUserId")] // TODO - should probably secure on being that user here
-        public async Task<IActionResult> DeleteOccupant(string occupantId)
+        [HttpDelete("{userId},{householdId},{occupantId}")]
+        public async Task<IActionResult> DeleteOccupant(string userId, int householdId, int occupantId)
         {
-            await occupantsRepository.DeleteOccupant(occupantId);
-            return NoContent();
+            return await RequestHandler<int>(HttpVerbs.Delete, userId, async () =>
+                await occupantsRepository.DeleteOccupant(userId, householdId, occupantId));
         }
     }
 }

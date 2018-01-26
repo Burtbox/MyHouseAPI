@@ -57,9 +57,9 @@ namespace MyHouseAPI.Repositories
              });
         }
 
-        public async Task<int> DeleteOccupant(string occupantId)
+        public async Task<int> DeleteOccupant(string userId, int householdId, int occupantId)
         {
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, householdId, async db =>
             {
                 int rowsDeleted = await db.QueryFirstAsync<int>(
                     sql: "[Houses].[Occupants_Delete]",
