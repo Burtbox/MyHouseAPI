@@ -72,8 +72,9 @@ Debug a specific test:
 3. Debug a specific test (above the method name in vscode)
 
 Deploy static test api:
+Stop app pool MyHouseTestAPI on edLaptop
 ```
-1. dotnet publish ./MyHouse_API -c Release -o "\\edlaptop\wwwroot\MyHouseTestAPI" (need to stop app pool MyHouseTestAPI)
+dotnet publish ./MyHouse_API -c Release -o "\\edlaptop\wwwroot\MyHouseTestAPI"
 ```
 
 Run all tests: 
@@ -87,15 +88,16 @@ Not implemented
 ## Deployment
 
 Integration Test API: 
-    Stop the app pool MyHouseTestAPI on edLaptop
-    Run the command 
+    1. Stop the app pool MyHouseTestAPI on edLaptop
+    2. Run the command 
+
     ```
     dotnet publish ./MyHouse_API -c Release -o "\\edlaptop\wwwroot\MyHouseTestAPI" 
     ```
 ## Built With
 
-* [.NetCore] 
-* [SQLServer]
+* [dotnet/core](https://github.com/dotnet/core)
+* [SQLServer](https://www.microsoft.com/en-gb/sql-server/sql-server-2016)
 
 ## Contributing
 
@@ -107,10 +109,10 @@ We use git for versioning. For the versions available, see the [tags on this rep
 
 ## Authors
 
-* **Ed Burt** - *Developer* - (https://github.com/Burtbox/MyHouseAPI.git)
-* **Chris Field** - *Developer* - (https://github.com/Burtbox/MyHouseAPI.git)
+* **Ed Burt** - *Developer* - (https://github.com/Burtbox)
+* **Chris Field** - *Developer* - (https://github.com/chrisjfield)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Burtbox/MyHouseAPI/graphs/contributors) who participated in this project.
 
 ## License
 
@@ -118,6 +120,6 @@ This project is unlicensed
 
 ## Acknowledgments
 
-* The Access Group
-* Microsoft
+* The Access Group (https://www.theaccessgroup.com/)
+* Microsoft (https://www.microsoft.com/en-gb/)
 
