@@ -6,6 +6,6 @@ namespace MyHouseIntegrationTests.Helpers
 {
     public static class TestSettingsHelper
     {
-        public static TestSettings testSettings => JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
+        public static TestSettings TestSettings => JsonConvert.DeserializeObject<TestSettings>(File.ReadAllText(@"..//..//..//testsettings.json"));
     }
 }

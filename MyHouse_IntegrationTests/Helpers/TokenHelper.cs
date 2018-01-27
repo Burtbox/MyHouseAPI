@@ -8,13 +8,15 @@ using RestSharp;
 
 namespace MyHouseIntegrationTests.Helpers {
     public static class TokenHelper {
-        public static string generateToken(string userId)
+        public static string GenerateToken(string userId)
         {
-            string customToken = getCustomToken(userId);
+            string customToken = GetCustomToken(userId);
             //using an undocumented endpoint to turn our custom token into a live user token
             RestClient client = new RestClient("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyA27cRAIaX6NqiLQ4_AHNB91MlHajiTplA");
-            RestRequest request = new RestRequest(Method.POST);
-            request.RequestFormat = DataFormat.Json;
+            RestRequest request = new RestRequest(Method.POST)
+            {
+                RequestFormat = DataFormat.Json
+            };
             request.AddBody(
                 new
                 {
@@ -43,7 +45,7 @@ namespace MyHouseIntegrationTests.Helpers {
             return token;
         }
 
-        private static string getCustomToken(string userId)
+        private static string GetCustomToken(string userId)
         {
             // get the node js index file
             DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
@@ -57,7 +59,7 @@ namespace MyHouseIntegrationTests.Helpers {
                 StartInfo = new ProcessStartInfo
                 {
                     RedirectStandardOutput = true,
-                    FileName = TestSettingsHelper.testSettings.NodeJsExe,
+                    FileName = TestSettingsHelper.TestSettings.NodeJsExe,
                     Arguments = args
                 }
             };

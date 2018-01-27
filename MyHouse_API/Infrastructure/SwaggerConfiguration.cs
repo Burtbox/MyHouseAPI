@@ -1,9 +1,8 @@
-using Serilog;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace MyHouseAPI.Services {
+namespace MyHouseAPI.Services
+{
     public static class SwaggerConfiguration
     {
         public static IServiceCollection AddSwagger(this IServiceCollection services)

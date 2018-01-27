@@ -1,6 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace MyHouseAPI.Model
 {
     public class Household
@@ -16,6 +13,6 @@ namespace MyHouseAPI.Model
 
     public class HouseholdUpdate : Household
     {
-        public DateTime ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

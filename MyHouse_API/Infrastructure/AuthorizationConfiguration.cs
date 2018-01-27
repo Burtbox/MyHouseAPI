@@ -1,4 +1,3 @@
-using MyHouseAPI.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using MyHouseAPI.Authorization.Handlers;
 using MyHouseAPI.Authorization.Policies;

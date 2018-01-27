@@ -15,7 +15,7 @@ namespace MyHouseIntegrationTests.Shared
         }
 
         private FirebaseFixture firebaseFixture;
-        private TestSettings testSettings = TestSettingsHelper.testSettings;
+        private TestSettings testSettings = TestSettingsHelper.TestSettings;
 
         public string serialize(object obj)
         {

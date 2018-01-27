@@ -1,18 +1,16 @@
 using System;
-using System.IO;
 using MyHouseIntegrationTests.Helpers;
 using MyHouseIntegrationTests.Shared;
-using Newtonsoft.Json;
 
 public class FirebaseFixture : IDisposable
 {
     public FirebaseFixture()
     {
-        TestSettings settings = TestSettingsHelper.testSettings;
+        TestSettings settings = TestSettingsHelper.TestSettings;
         this.H1UserId = settings.H1UserId;
-        this.H1Token = TokenHelper.generateToken(settings.H1UserId);
+        this.H1Token = TokenHelper.GenerateToken(settings.H1UserId);
         this.H2UserId = settings.H2UserId;
-        this.H2Token = TokenHelper.generateToken(settings.H2UserId);
+        this.H2Token = TokenHelper.GenerateToken(settings.H2UserId);
 
         // ... initialize data in the test database ...
     }

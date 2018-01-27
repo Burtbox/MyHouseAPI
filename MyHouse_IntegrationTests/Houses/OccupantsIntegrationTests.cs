@@ -1,14 +1,10 @@
-using System;
 using Xunit;
 using FluentAssertions;
 using MyHouseIntegrationTests.Shared;
 using RestSharp;
 using MyHouseAPI.Model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Net;
 using MyHouseUnitTests.Helpers;
-using MyHouseIntegrationTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
@@ -111,29 +107,13 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void DeleteOccupantTest()
         {
-            string currentUserId = "8R3C8etyv31TYKpggafz45WQjg63";
-            string O4DisplayName = StringGenerator.RandomString(100);
-            Occupant occupantToUpdate = new Occupant
-            {
-                OccupantId = 6,
-                UserId = currentUserId,
-                DisplayName = O4DisplayName,
-                HouseholdId = 2
-            };
-
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE, occupantToUpdate);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE);
             IRestResponse response = client.Execute<Occupant>(request);
 
-            string expectedContent = serialize(new Occupant
-            {
-                OccupantId = 6,
-                UserId = currentUserId,
-                DisplayName = O4DisplayName,
-                HouseholdId = 2
-            });
+            string expectedContent = string.Empty;
 
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
@@ -146,7 +126,7 @@ namespace MyHouseIntegrationTests.Houses
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
 
-            string expectedContent = "";
+            string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
@@ -160,7 +140,7 @@ namespace MyHouseIntegrationTests.Houses
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
 
-            string expectedContent = "";
+            string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
@@ -174,7 +154,7 @@ namespace MyHouseIntegrationTests.Houses
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
             IRestResponse response = client.Execute<Occupant>(request);
 
-            string expectedContent = "";
+            string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }

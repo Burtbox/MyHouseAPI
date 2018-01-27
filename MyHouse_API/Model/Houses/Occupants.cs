@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace MyHouseAPI.Model
 {
     public class Occupant : OccupantInsert

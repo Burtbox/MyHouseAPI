@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using MyHouseAPI.Repositories;
 using MyHouseAPI.Model;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using System;
-using Microsoft.AspNetCore.Http;
-using System.Net.Http;
 
 namespace MyHouseAPI.Controllers
 {
