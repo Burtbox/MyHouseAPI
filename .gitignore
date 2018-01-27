@@ -22,3 +22,5 @@ yarn-error.log*
 node_modules
 /MyHouse_FirebaseAdmin/build
 /MyHouse_FirebaseAdmin/privateKey
+.vs
+/MyHouse_API/*.user
