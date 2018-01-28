@@ -3,23 +3,9 @@ using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Validation
 {
-    public class OccupantsValidator : OccupantsValidatorBase
+    public abstract class OccupantsDetailsValidator : AbstractValidator<OccupantDetails>
     {
-
-    }
-    public class OccupantsInsertValidator : OccupantsValidatorBase
-    {
-        public OccupantsInsertValidator()
-        {
-            RuleFor(x => x.OccupantId)
-                .NotEmpty()
-                .GreaterThan(0);
-        }
-    }
-
-    public abstract class OccupantsValidatorBase : AbstractValidator<Occupant>
-    {
-        public OccupantsValidatorBase()
+        public OccupantsDetailsValidator()
         {
             RuleFor(x => x.UserId)
                 .NotEmpty()
@@ -29,10 +15,42 @@ namespace MyHouseAPI.Validation
             RuleFor(x => x.DisplayName)
                 .NotEmpty()
                 .MaximumLength(100);
-                
+
             RuleFor(x => x.HouseholdId)
                 .NotEmpty()
                 .GreaterThan(0);
+        }
+    }
+
+    public class OccupantsValidator : AbstractValidator<Occupant> //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
+    {
+        public OccupantsValidator()
+        {
+            RuleFor(x => x.OccupantId)
+                .NotEmpty()
+                .GreaterThan(0);
+        }
+    }
+
+    public class OccupantsInsertValidator : AbstractValidator<OccupantInsert>
+    {
+        public OccupantsInsertValidator()
+        {
+            RuleFor(x => x.EnteredBy)
+            .NotEmpty()
+            .MinimumLength(28)
+            .MaximumLength(36); //TODO - roll this into a custom "IsFirebaseUserId" function!
+        }
+    }
+
+    public class OccupantsUpdateValidator : AbstractValidator<OccupantUpdate>
+    {
+        public OccupantsUpdateValidator()
+        {
+            RuleFor(x => x.ModifiedBy)
+            .NotEmpty()
+            .MinimumLength(28)
+            .MaximumLength(36); //TODO - roll this into a custom "IsFirebaseUserId" function!
         }
     }
 }

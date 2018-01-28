@@ -7,6 +7,11 @@ namespace MyHouseAPI.Model
         public int HouseholdId { get; set; }
     }
 
+    public class Occupant : OccupantDetails
+    {
+        public int OccupantId { get; set; }
+    }
+
     public class OccupantInsert : OccupantDetails
     {
         public string EnteredBy { get; set; }
@@ -15,11 +20,5 @@ namespace MyHouseAPI.Model
     public class OccupantUpdate : Occupant
     {
         public string ModifiedBy { get; set; }
-    }
-
-    public class Occupant : OccupantDetails
-    {
-        public int OccupantId { get; set; }
-
     }
 }

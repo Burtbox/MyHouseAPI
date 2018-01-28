@@ -8,10 +8,10 @@ using MyHouseUnitTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class HouseholdsIntegrationTests : BaseIntegrationTest
+    public class HouseholdsGetIntegrationTests : BaseIntegrationTest
     {
         private FirebaseFixture firebaseFixture;
-        public HouseholdsIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
+        public HouseholdsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
         {
             this.firebaseFixture = firebaseFixture;
         }
@@ -38,67 +38,6 @@ namespace MyHouseIntegrationTests.Houses
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
-        }
-
-        [Fact]
-        public void InsertHouseholdTest()
-        {
-            string H4HouseholdName = StringGenerator.RandomString(100);
-            HouseholdInsert householdToInsert = new HouseholdInsert
-            {
-                Name = H4HouseholdName,
-            };
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall<HouseholdInsert>(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H2UserId), Method.POST, householdToInsert);
-            IRestResponse response = client.Execute<Household>(request);
-
-            string expectedContent = serialize(new Household
-            {
-                HouseholdId = 4,
-                Name = H4HouseholdName
-            });
-
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
-        }
-
-        [Fact]
-        public void UpdateHouseholdTest()
-        {
-            string H5HouseholdName = StringGenerator.RandomString(100);
-            HouseholdUpdate householdToUpdate = new HouseholdUpdate
-            {
-                HouseholdId = 5,
-                Name = H5HouseholdName,
-                ModifiedBy = firebaseFixture.H2UserId
-            };
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall<HouseholdUpdate>(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H2UserId), Method.PUT, householdToUpdate);
-            IRestResponse response = client.Execute<Household>(request);
-
-            string expectedContent = serialize(new Household
-            {
-                HouseholdId = 5,
-                Name = H5HouseholdName,
-            });
-
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
-        }
-
-        [Fact]
-        public void DeleteHouseholdTest()
-        {
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE);
-            IRestResponse response = client.Execute<Household>(request);
-
-            string expectedContent = string.Empty;
-
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
