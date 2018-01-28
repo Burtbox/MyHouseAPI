@@ -11,50 +11,49 @@ namespace MyHouseAPI.Controllers
     [Route("api/[controller]")]
     [ApiVersion("3.0")]
     [Authorize]
-    public class HouseholdsController : Controller
+    public class HouseholdsController : BaseController
     {
         private readonly HouseholdsRepository householdsRepository;
-        public HouseholdsController(HouseholdsRepository householdsRepository)
+        public HouseholdsController(
+            IAuthorizationService authorizationService,
+            HouseholdsRepository householdsRepository
+            ) : base(authorizationService)
         {
             this.householdsRepository = householdsRepository;
         }
 
         // GET: api/values
         [HttpGet("{userId}")]
-
-        public async Task<IEnumerable<Household>> Get(string userId)
+        public async Task<IActionResult> RequestHouseholdsOfOccupant(string userId)
         {
-            return await householdsRepository.GetAll(userId);
+            return await RequestHandler<IEnumerable<Household>>(HttpVerbs.Get, userId, async () =>
+                await householdsRepository.GetHouseholdsOfOccupant(userId));
         }
 
         // POST api/values
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] HouseholdInsert household)
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> RequestInsertHousehold([FromBody] HouseholdInsert household)
         {
-            IEnumerable<Household> addedHousehold = await householdsRepository.Insert(household);
-            IActionResult response = Ok(addedHousehold);
-
-            return response;
+            return await RequestHandler<Household>(HttpVerbs.Post, household.EnteredBy, async () =>
+                await householdsRepository.InsertHousehold(household));
         }
 
         // PUT api/values/5
         [HttpPut("{household}")]
 
-        public async Task<IActionResult> Put([FromBody] HouseholdUpdate household)
+        public async Task<IActionResult> RequestUpdateHousehold([FromBody] HouseholdUpdate household)
         {
-            await householdsRepository.Update(household);
-            IActionResult response = NoContent();
-
-            return response;
+            return await RequestHandler<Household>(HttpVerbs.Put, household.ModifiedBy, async () =>
+                await householdsRepository.UpdateHousehold(household.ModifiedBy, household));
         }
 
         // DELETE api/values/5
         [HttpDelete("{householdId}")]
 
-        public async Task<IActionResult> Delete(string householdId)
+        public async Task<IActionResult> RequestDeleteHousehold(string userId, int householdId)
         {
-            await householdsRepository.Delete(householdId);
-            return NoContent();
+            return await RequestHandler<int>(HttpVerbs.Delete, userId, async () =>
+                await householdsRepository.DeleteHousehold(userId, householdId));
         }
     }
 }

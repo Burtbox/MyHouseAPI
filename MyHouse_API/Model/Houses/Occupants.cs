@@ -10,5 +10,11 @@ namespace MyHouseAPI.Model
         public string UserId { get; set; }
         public string DisplayName { get; set; }
         public int HouseholdId { get; set; }
+        public string EnteredBy { get; set; }
+    }
+
+    public class OccupantUpdate: Occupant // TODO: ED! split up your models into data and view models! - atm too mungey
+    {
+        public string ModifiedBy { get; set; }
     }
 }

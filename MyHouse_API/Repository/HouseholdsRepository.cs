@@ -12,7 +12,7 @@ namespace MyHouseAPI.Repositories
     {
         public HouseholdsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Household>> GetAll(string userId)
+        public async Task<IEnumerable<Household>> GetHouseholdsOfOccupant(string userId)
         {
             return await asyncConnection(async db =>
             {
@@ -25,15 +25,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<IEnumerable<Household>> Insert(HouseholdInsert household)
+        public async Task<Household> InsertHousehold(HouseholdInsert household)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@Name", household.Name);
-            parameters.Add("@EnteredBy", household.EnteredBy);
-
             return await asyncConnection(async db =>
             {
-                IEnumerable<Household> insertedHousehold = await db.QueryAsync<Household>(
+                Household insertedHousehold = await db.QueryFirstOrDefaultAsync<Household>(
                     sql: "[Houses].[Households_Insert]",
                     param: household,
                     commandType: CommandType.StoredProcedure
@@ -42,29 +38,24 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<int> Update(HouseholdUpdate household)
+        public async Task<Household> UpdateHousehold(string userId, HouseholdUpdate household)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@HouseholdId", household.HouseholdId);
-            parameters.Add("@Name", household.Name);
-            parameters.Add("@ModifiedBy", household.ModifiedBy);
-
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, household.HouseholdId, async db =>
              {
-                 int rowsUpdated = await db.ExecuteAsync(
+                 Household rowsUpdated = await db.QueryFirstOrDefaultAsync<Household>(
                     sql: "[Houses].[Households_Update]",
-                    param: parameters,
+                    param: household,
                     commandType: CommandType.StoredProcedure
                  );
                  return rowsUpdated;
              });
         }
 
-        public async Task<IEnumerable<int>> Delete(string householdId)
+        public async Task<int> DeleteHousehold(string userId, int householdId)
         {
-            return await asyncConnection(async db =>
+            return await asyncConnection(userId, householdId, async db =>
             {
-                IEnumerable<int> rowsDeleted = await db.QueryAsync<int>(
+                int rowsDeleted = await db.ExecuteAsync(
                     sql: "[Houses].[Households_Delete]",
                     param: new { HouseholdId = householdId },
                     commandType: CommandType.StoredProcedure
