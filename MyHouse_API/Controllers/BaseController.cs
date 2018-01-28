@@ -62,16 +62,17 @@ namespace MyHouseAPI.Controllers
                     response = Forbid();
                 }
             }
-            catch (InvalidOccupantException io)
+            catch (InvalidOccupantException)
             {
                 response = Forbid();
             }
-            catch (TimeoutException to)
+            catch (TimeoutException)
             {
                 response = StatusCode(StatusCodes.Status408RequestTimeout, "The request has timed out, please try again");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
+                var ex = exception; //Useful for debugging, avoids warning
                 response = StatusCode(StatusCodes.Status500InternalServerError, "An error has occured.");
             }
 
