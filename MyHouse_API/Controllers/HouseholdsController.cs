@@ -31,25 +31,25 @@ namespace MyHouseAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost("{userId}")]
+        [HttpPost]
         public async Task<IActionResult> RequestInsertHousehold([FromBody] HouseholdInsert household)
         {
-            return await RequestHandler<Household>(HttpVerbs.Post, household.EnteredBy, async () =>
+            string userId = household.EnteredBy;
+            return await RequestHandler<Household>(HttpVerbs.Post, userId, async () =>
                 await householdsRepository.InsertHousehold(household));
         }
 
         // PUT api/values/5
-        [HttpPut("{household}")]
-
+        [HttpPut]
         public async Task<IActionResult> RequestUpdateHousehold([FromBody] HouseholdUpdate household)
         {
-            return await RequestHandler<Household>(HttpVerbs.Put, household.ModifiedBy, async () =>
-                await householdsRepository.UpdateHousehold(household.ModifiedBy, household));
+            string userId = household.ModifiedBy;
+            return await RequestHandler<Household>(HttpVerbs.Put, userId, async () =>
+                await householdsRepository.UpdateHousehold(userId, household));
         }
 
         // DELETE api/values/5
-        [HttpDelete("{householdId}")]
-
+        [HttpDelete("{userId},{householdId}")]
         public async Task<IActionResult> RequestDeleteHousehold(string userId, int householdId)
         {
             return await RequestHandler<int>(HttpVerbs.Delete, userId, async () =>

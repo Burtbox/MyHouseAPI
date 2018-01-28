@@ -7,7 +7,7 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupants_Update]
 AS
 	UPDATE Houses.Occupants 
 	SET DisplayName = @DisplayName
-	, ModifiedBy = @OccupantId
+	, ModifiedBy = @UserId
 	, ModifiedDate = GETUTCDATE()
 	WHERE UserId = @UserId -- This will update their display name for all households
 

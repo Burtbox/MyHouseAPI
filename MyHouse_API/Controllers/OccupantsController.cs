@@ -31,21 +31,19 @@ namespace MyHouseAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost("{userId}")]
+        [HttpPost]
         public async Task<IActionResult> RequestOccupantInsert([FromBody] OccupantInsert occupant)
         {
-            string userId = occupant.EnteredBy;
-            return await RequestHandler<Occupant>(HttpVerbs.Post, userId, async () =>
-                await occupantsRepository.InsertOccupant(userId, occupant));
+            return await RequestHandler<Occupant>(HttpVerbs.Post, occupant.EnteredBy, async () =>
+                await occupantsRepository.InsertOccupant(occupant));
         }
 
         // PUT api/values/5
-        [HttpPut("{userId}")]
-        public async Task<IActionResult> RequestUpdateOccupant([FromBody] Occupant occupant)
+        [HttpPut]
+        public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdate occupant)
         {
-            string userId = occupant.ModifiedBy;
-            return await RequestHandler<Occupant>(HttpVerbs.Put, userId, async () =>
-                await occupantsRepository.UpdateOccupant(userId, occupant));
+            return await RequestHandler<Occupant>(HttpVerbs.Put, occupant.ModifiedBy, async () =>
+                await occupantsRepository.UpdateOccupant(occupant));
         }
 
         // DELETE api/values/5

@@ -28,9 +28,9 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> InsertOccupant(string userId, OccupantInsert occupant)
+        public async Task<Occupant> InsertOccupant(OccupantInsert occupant)
         {
-            return await asyncConnection(userId, occupant.HouseholdId, async db =>
+            return await asyncConnection(occupant.EnteredBy, occupant.HouseholdId, async db =>
             {
                 Occupant insertedOccupant = await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Insert]",
@@ -41,9 +41,9 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> UpdateOccupant(string userId, Occupant occupant)
+        public async Task<Occupant> UpdateOccupant(OccupantUpdate occupant)
         {
-            return await asyncConnection(userId, occupant.HouseholdId, async db =>
+            return await asyncConnection(occupant.ModifiedBy, occupant.HouseholdId, async db =>
              {
                  Occupant updatedOccupant = await db.QueryFirstAsync<Occupant>(
                     sql: "[Houses].[Occupants_Update]",
