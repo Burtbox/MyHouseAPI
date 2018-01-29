@@ -20,7 +20,7 @@ namespace MyHouseIntegrationTests.Houses
         public void UpdateHouseholdTest()
         {
             string H5HouseholdName = StringGenerator.RandomString(100);
-            HouseholdUpdate householdToUpdate = new HouseholdUpdate
+            HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
                 HouseholdId = 5,
                 Name = H5HouseholdName,
@@ -28,10 +28,10 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<HouseholdUpdate>(firebaseFixture.H2Token, "Households/", Method.PUT, householdToUpdate);
-            IRestResponse response = client.Execute<Household>(request);
+            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H2Token, "Households/", Method.PUT, householdToUpdate);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
-            string expectedContent = serialize(new Household
+            string expectedContent = serialize(new HouseholdResponse
             {
                 HouseholdId = 5,
                 Name = H5HouseholdName,
@@ -48,7 +48,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden); //TODO - generically check these three things? - maybe make a method for this. 
@@ -62,7 +62,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
@@ -76,7 +76,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);

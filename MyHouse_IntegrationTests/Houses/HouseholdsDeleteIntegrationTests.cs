@@ -36,7 +36,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", householdId), Method.DELETE);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
@@ -50,7 +50,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.DELETE);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
@@ -64,7 +64,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.DELETE);
-            IRestResponse response = client.Execute<Household>(request);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);

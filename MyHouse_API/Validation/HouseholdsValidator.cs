@@ -3,7 +3,7 @@ using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Validation
 {
-    public class HouseholdsValidator : AbstractValidator<Household>
+    public class HouseholdsValidator : AbstractValidator<HouseholdResponse>
     {
         public HouseholdsValidator()
         {

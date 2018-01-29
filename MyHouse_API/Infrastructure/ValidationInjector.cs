@@ -9,8 +9,8 @@ namespace MyHouseAPI.Services
     {
         public static IServiceCollection AddValidation(this IServiceCollection services)
         {
-            services.AddTransient<IValidator<Household>, HouseholdsValidator>();
-            services.AddTransient<IValidator<Occupant>, OccupantsValidator>();
+            services.AddTransient<IValidator<HouseholdResponse>, HouseholdsValidator>();
+            services.AddTransient<IValidator<OccupantResponse>, OccupantsValidator>();
 
             return services;
         }

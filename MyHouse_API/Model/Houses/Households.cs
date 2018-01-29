@@ -5,17 +5,19 @@ namespace MyHouseAPI.Model
         public string Name { get; set; }
     }
 
-    public class Household : HouseholdDetails
+    public abstract class Household : HouseholdDetails
     {
         public int HouseholdId { get; set; }
     }
 
-    public class HouseholdInsert : HouseholdDetails
+    public class HouseholdResponse : Household { }
+
+    public class HouseholdInsertRequest : HouseholdDetails
     {
         public string EnteredBy { get; set; }
     }
 
-    public class HouseholdUpdate : Household
+    public class HouseholdUpdateRequest : Household
     {
         public string ModifiedBy { get; set; }
     }

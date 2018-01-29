@@ -1,23 +1,24 @@
 namespace MyHouseAPI.Model
 {
-    public class OccupantDetails
+    public abstract class OccupantDetails
     {
         public string UserId { get; set; }
         public string DisplayName { get; set; }
         public int HouseholdId { get; set; }
     }
 
-    public class Occupant : OccupantDetails
+    public class OccupantResponse : Occupant { }
+    public abstract class Occupant : OccupantDetails
     {
         public int OccupantId { get; set; }
     }
 
-    public class OccupantInsert : OccupantDetails
+    public class OccupantInsertRequest : OccupantDetails
     {
         public string EnteredBy { get; set; }
     }
 
-    public class OccupantUpdate : Occupant
+    public class OccupantUpdateRequest : Occupant
     {
         public string ModifiedBy { get; set; }
     }

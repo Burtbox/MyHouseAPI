@@ -26,23 +26,23 @@ namespace MyHouseAPI.Controllers
         [HttpGet("{userId},{householdId}")]
         public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int householdId)
         {
-            return await RequestHandler<IEnumerable<Occupant>>(HttpVerbs.Get, userId, async () =>
+            return await RequestHandler<IEnumerable<OccupantResponse>>(HttpVerbs.Get, userId, async () =>
                 await occupantsRepository.GetOccupantsOfHousehold(userId, householdId));
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> RequestOccupantInsert([FromBody] OccupantInsert occupant)
+        public async Task<IActionResult> RequestOccupantInsert([FromBody] OccupantInsertRequest occupant)
         {
-            return await RequestHandler<Occupant>(HttpVerbs.Post, occupant.EnteredBy, async () =>
+            return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
                 await occupantsRepository.InsertOccupant(occupant));
         }
 
         // PUT api/values/5
         [HttpPut]
-        public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdate occupant)
+        public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdateRequest occupant)
         {
-            return await RequestHandler<Occupant>(HttpVerbs.Put, occupant.ModifiedBy, async () =>
+            return await RequestHandler<OccupantResponse>(HttpVerbs.Put, occupant.ModifiedBy, async () =>
                 await occupantsRepository.UpdateOccupant(occupant));
         }
 

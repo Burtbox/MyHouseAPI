@@ -12,11 +12,11 @@ namespace MyHouseAPI.Repositories
     {
         public HouseholdsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Household>> GetHouseholdsOfOccupant(string userId)
+        public async Task<IEnumerable<HouseholdResponse>> GetHouseholdsOfOccupant(string userId)
         {
             return await asyncConnection(async db =>
             {
-                IEnumerable<Household> usersHouseholds = await db.QueryAsync<Household>(
+                IEnumerable<HouseholdResponse> usersHouseholds = await db.QueryAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Of_Occupant]",
                     param: new { UserId = userId },
                     commandType: CommandType.StoredProcedure
@@ -25,11 +25,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Household> InsertHousehold(HouseholdInsert household)
+        public async Task<HouseholdResponse> InsertHousehold(HouseholdInsertRequest household)
         {
             return await asyncConnection(async db =>
             {
-                Household insertedHousehold = await db.QueryFirstOrDefaultAsync<Household>(
+                HouseholdResponse insertedHousehold = await db.QueryFirstOrDefaultAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Insert]",
                     param: household,
                     commandType: CommandType.StoredProcedure
@@ -38,11 +38,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Household> UpdateHousehold(string userId, HouseholdUpdate household)
+        public async Task<HouseholdResponse> UpdateHousehold(string userId, HouseholdUpdateRequest household)
         {
             return await asyncConnection(userId, household.HouseholdId, async db =>
              {
-                 Household rowsUpdated = await db.QueryFirstOrDefaultAsync<Household>(
+                 HouseholdResponse rowsUpdated = await db.QueryFirstOrDefaultAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Update]",
                     param: household,
                     commandType: CommandType.StoredProcedure

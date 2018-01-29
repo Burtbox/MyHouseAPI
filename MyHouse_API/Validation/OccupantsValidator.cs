@@ -22,7 +22,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantsValidator : AbstractValidator<Occupant> //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
+    public class OccupantsValidator : AbstractValidator<OccupantResponse> //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
     {
         public OccupantsValidator()
         {
@@ -32,7 +32,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantsInsertValidator : AbstractValidator<OccupantInsert>
+    public class OccupantsInsertValidator : AbstractValidator<OccupantInsertRequest>
     {
         public OccupantsInsertValidator()
         {
@@ -43,7 +43,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantsUpdateValidator : AbstractValidator<OccupantUpdate>
+    public class OccupantsUpdateValidator : AbstractValidator<OccupantUpdateRequest>
     {
         public OccupantsUpdateValidator()
         {

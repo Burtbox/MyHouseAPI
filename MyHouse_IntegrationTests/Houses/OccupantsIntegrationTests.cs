@@ -23,18 +23,18 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
-            IRestResponse response = client.Execute<Occupant>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
-            string expectedContent = serialize(new Occupant[]
+            string expectedContent = serialize(new OccupantResponse[]
             {
-                new Occupant
+                new OccupantResponse
                 {
                     OccupantId = 1,
                     UserId = firebaseFixture.H1UserId,
                     DisplayName = "Household 1 owner dickbutt",
                     HouseholdId = 1
                 },
-                new Occupant
+                new OccupantResponse
                 {
                     OccupantId = 2,
                     UserId = "zzrmi1i7nsApSvmeqA9QSIx1zwfs",
@@ -52,7 +52,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             string newUserId = StringGenerator.RandomString(28);
             string O4DisplayName = StringGenerator.RandomString(100);
-            OccupantInsert occupantToInsert = new OccupantInsert
+            OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
@@ -60,10 +60,10 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.POST, occupantToInsert);
-            IRestResponse response = client.Execute<Occupant>(request);
+            RestRequest request = apiCall<OccupantInsertRequest>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.POST, occupantToInsert);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
-            string expectedContent = serialize(new Occupant
+            string expectedContent = serialize(new OccupantResponse
             {
                 OccupantId = 4,
                 UserId = newUserId,
@@ -80,7 +80,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             string currentUserId = "INPZD3OF1O47G19BUL1LwYAEx6JU";
             string O4DisplayName = StringGenerator.RandomString(100);
-            Occupant occupantToUpdate = new Occupant
+            OccupantResponse occupantToUpdate = new OccupantResponse
             {
                 OccupantId = 5,
                 UserId = currentUserId,
@@ -89,10 +89,10 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<OccupantInsert>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.PUT, occupantToUpdate);
-            IRestResponse response = client.Execute<Occupant>(request);
+            RestRequest request = apiCall<OccupantInsertRequest>(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId), Method.PUT, occupantToUpdate);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
-            string expectedContent = serialize(new Occupant
+            string expectedContent = serialize(new OccupantResponse
             {
                 OccupantId = 5,
                 UserId = currentUserId,
@@ -109,7 +109,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE);
-            IRestResponse response = client.Execute<Occupant>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = string.Empty;
 
@@ -124,7 +124,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H2UserId, ",", householdId), Method.GET);
-            IRestResponse response = client.Execute<Occupant>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
@@ -138,7 +138,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
-            IRestResponse response = client.Execute<Occupant>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
@@ -152,7 +152,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Occupants/", firebaseFixture.H1UserId, ",", householdId), Method.GET);
-            IRestResponse response = client.Execute<Occupant>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = string.Empty;
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);

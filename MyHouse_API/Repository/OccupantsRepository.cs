@@ -12,14 +12,14 @@ namespace MyHouseAPI.Repositories
     {
         public OccupantsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<Occupant>> GetOccupantsOfHousehold(string userId, int householdId)
+        public async Task<IEnumerable<OccupantResponse>> GetOccupantsOfHousehold(string userId, int householdId)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@HouseholdId", householdId);
 
             return await asyncConnection(userId, householdId, async db =>
             {
-                IEnumerable<Occupant> occupants = await db.QueryAsync<Occupant>(
+                IEnumerable<OccupantResponse> occupants = await db.QueryAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Of_Household]",
                     param: new { HouseholdId = householdId },
                     commandType: CommandType.StoredProcedure
@@ -28,11 +28,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> InsertOccupant(OccupantInsert occupant)
+        public async Task<OccupantResponse> InsertOccupant(OccupantInsertRequest occupant)
         {
             return await asyncConnection(occupant.EnteredBy, occupant.HouseholdId, async db =>
             {
-                Occupant insertedOccupant = await db.QueryFirstAsync<Occupant>(
+                OccupantResponse insertedOccupant = await db.QueryFirstAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
@@ -41,11 +41,11 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<Occupant> UpdateOccupant(OccupantUpdate occupant)
+        public async Task<OccupantResponse> UpdateOccupant(OccupantUpdateRequest occupant)
         {
             return await asyncConnection(occupant.ModifiedBy, occupant.HouseholdId, async db =>
              {
-                 Occupant updatedOccupant = await db.QueryFirstAsync<Occupant>(
+                 OccupantResponse updatedOccupant = await db.QueryFirstAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Update]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure

@@ -26,25 +26,25 @@ namespace MyHouseAPI.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> RequestHouseholdsOfOccupant(string userId)
         {
-            return await RequestHandler<IEnumerable<Household>>(HttpVerbs.Get, userId, async () =>
+            return await RequestHandler<IEnumerable<HouseholdResponse>>(HttpVerbs.Get, userId, async () =>
                 await householdsRepository.GetHouseholdsOfOccupant(userId));
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> RequestInsertHousehold([FromBody] HouseholdInsert household)
+        public async Task<IActionResult> RequestInsertHousehold([FromBody] HouseholdInsertRequest household)
         {
             string userId = household.EnteredBy;
-            return await RequestHandler<Household>(HttpVerbs.Post, userId, async () =>
+            return await RequestHandler<HouseholdResponse>(HttpVerbs.Post, userId, async () =>
                 await householdsRepository.InsertHousehold(household));
         }
 
         // PUT api/values/5
         [HttpPut]
-        public async Task<IActionResult> RequestUpdateHousehold([FromBody] HouseholdUpdate household)
+        public async Task<IActionResult> RequestUpdateHousehold([FromBody] HouseholdUpdateRequest household)
         {
             string userId = household.ModifiedBy;
-            return await RequestHandler<Household>(HttpVerbs.Put, userId, async () =>
+            return await RequestHandler<HouseholdResponse>(HttpVerbs.Put, userId, async () =>
                 await householdsRepository.UpdateHousehold(userId, household));
         }
 
