@@ -1,16 +1,16 @@
 namespace MyHouseAPI.Model
 {
-    public class HouseholdName
+    public abstract class HouseholdDetails
     {
         public string Name { get; set; }
     }
 
-    public class Household : HouseholdName
+    public class Household : HouseholdDetails
     {
         public int HouseholdId { get; set; }
     }
 
-    public class HouseholdInsert : HouseholdName
+    public class HouseholdInsert : HouseholdDetails
     {
         public string EnteredBy { get; set; }
     }
