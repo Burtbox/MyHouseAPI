@@ -6,12 +6,14 @@ namespace MyHouseAPI.Model
         public string DisplayName { get; set; }
         public int HouseholdId { get; set; }
     }
-
-    public class OccupantResponse : Occupant { }
+    
     public abstract class Occupant : OccupantDetails
     {
         public int OccupantId { get; set; }
     }
+
+    public class OccupantResponse : Occupant { }
+
 
     public class OccupantInsertRequest : OccupantDetails
     {
