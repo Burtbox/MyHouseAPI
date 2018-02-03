@@ -48,7 +48,7 @@ Go to localhost\swagger to view and use the endpoints
 
 ## Running the unit tests
 
-Visual Studio Code .NetCore Test runner (or Ctrl + Shift + B) - run tests
+Visual Studio Code .NetCore Test runner (or Ctrl + R, Ctrl + T) - run tests
 Visual Studio Test Explorer - run tests
 cmd - run
 ```
