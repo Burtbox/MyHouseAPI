@@ -18,8 +18,10 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void DeleteOccupantTest()
         {
+            int householdId = 2;
+            int occupantId = 5;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = string.Empty;
@@ -31,8 +33,10 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidHouseholdIdTest()
         {
+            int householdId = 2;
+            int occupantId = 5;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", 1, ",", 5), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -41,8 +45,10 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidUserIdTest()
         {
+            int householdId = 2;
+            int occupantId = 5;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", 2, ",", 5), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -51,8 +57,10 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidTokenTest()
         {
+            int householdId = 2;
+            int occupantId = 5;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", 2, ",", 5), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
