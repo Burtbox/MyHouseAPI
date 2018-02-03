@@ -18,7 +18,7 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void UpdateHouseholdTest()
         {
-            string H5HouseholdName = StringGenerator.RandomString(100);
+            string H5HouseholdName = StringGenerator.RandomString(50);
             HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
                 HouseholdId = 5,
@@ -43,8 +43,15 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidHouseholdIdTest()
         {
+
+            HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
+            {
+                HouseholdId = 5,
+                Name = StringGenerator.RandomString(50),
+                ModifiedBy = firebaseFixture.H1UserId
+            };
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, string.Concat(firebaseFixture.H1UserId, ",", 2)), sutHttpMethod);
+            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, householdToUpdate);
             IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
@@ -53,10 +60,15 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidUserIdTest()
         {
-            int householdId = 1;
+            HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
+            {
+                HouseholdId = 5,
+                Name = StringGenerator.RandomString(50),
+                ModifiedBy = firebaseFixture.H1UserId
+            };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
+            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToUpdate);
             IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
@@ -65,10 +77,15 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidTokenTest()
         {
-            int householdId = 1;
+            HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
+            {
+                HouseholdId = 5,
+                Name = StringGenerator.RandomString(50),
+                ModifiedBy = firebaseFixture.H2UserId
+            };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
+            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, householdToUpdate);
             IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);

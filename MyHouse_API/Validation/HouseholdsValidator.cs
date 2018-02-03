@@ -9,7 +9,7 @@ namespace MyHouseAPI.Validation
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .MaximumLength(100);
+                .MaximumLength(50);
         }
     }
 
