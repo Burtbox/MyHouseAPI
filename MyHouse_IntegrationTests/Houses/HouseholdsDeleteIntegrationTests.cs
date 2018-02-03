@@ -8,9 +8,12 @@ using MyHouseUnitTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class HouseholdsDeleteIntegrationTests : BaseIntegrationTest
+    public class HouseholdsDeleteIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
+        public string sutEndpoint => "Households/";
+        public Method sutHttpMethod => Method.DELETE;
         private FirebaseFixture firebaseFixture;
+
         public HouseholdsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
         {
             this.firebaseFixture = firebaseFixture;
@@ -20,27 +23,10 @@ namespace MyHouseIntegrationTests.Houses
         public void DeleteHouseholdTest()
         {
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", 2, ",", 5), Method.DELETE);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", 2, ",", 5), sutHttpMethod);
             IRestResponse response = client.Execute<int>(request);
 
-            string expectedContent = string.Empty;
-
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
-        }
-
-        [Fact]
-        public void InvalidHouseholdOfHouseholdTest()
-        {
-            int householdId = 1;
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", householdId), Method.DELETE);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
-
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
+            forbiddenExpectations(response);
         }
 
         [Fact]
@@ -49,12 +35,22 @@ namespace MyHouseIntegrationTests.Houses
             int householdId = 2;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.DELETE);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
+            forbiddenExpectations(response);
+        }
+
+        [Fact]
+        public void InvalidUserIdTest()
+        {
+            int householdId = 1;
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
+
+            forbiddenExpectations(response);
         }
 
         [Fact]
@@ -63,12 +59,10 @@ namespace MyHouseIntegrationTests.Houses
             int householdId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.DELETE);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
+            forbiddenExpectations(response);
         }
     }
 }

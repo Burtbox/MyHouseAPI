@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 using FluentAssertions;
 using MyHouseIntegrationTests.Shared;
 using RestSharp;
@@ -8,34 +8,38 @@ using MyHouseUnitTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class HouseholdsInsertIntegrationTests : BaseIntegrationTest, IIntegrationTest
+    public class OccupantsGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "Households/";
-        public Method sutHttpMethod => Method.POST;
-        private FirebaseFixture firebaseFixture;
+        public string sutEndpoint => "Occupants/";
+        public Method sutHttpMethod => Method.GET;
 
-        public HouseholdsInsertIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
-        {
-            this.firebaseFixture = firebaseFixture;
-        }
+        public OccupantsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
-        public void InsertHouseholdTest()
+        public void GetOccupantsOfHouseholdTest()
         {
-            string H4HouseholdName = StringGenerator.RandomString(100);
-            HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
-            {
-                Name = H4HouseholdName,
-            };
+            int householdId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<HouseholdInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToInsert);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
-            string expectedContent = serialize(new HouseholdResponse
+            string expectedContent = serialize(new OccupantResponse[]
             {
-                HouseholdId = 4,
-                Name = H4HouseholdName
+                new OccupantResponse
+                {
+                    OccupantId = 1,
+                    UserId = firebaseFixture.H1UserId,
+                    DisplayName = "Household 1 owner dickbutt",
+                    HouseholdId = 1
+                },
+                new OccupantResponse
+                {
+                    OccupantId = 2,
+                    UserId = "zzrmi1i7nsApSvmeqA9QSIx1zwfs",
+                    DisplayName = "O2DispName",
+                    HouseholdId = 1
+                }
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -49,7 +53,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
         }
@@ -61,7 +65,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
         }
@@ -73,7 +77,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
         }
