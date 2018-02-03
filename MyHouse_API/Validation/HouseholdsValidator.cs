@@ -3,31 +3,27 @@ using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Validation
 {
-    public class HouseholdDetailsValidator : AbstractValidator<HouseholdDetails>
+    public class HouseholdDetailsValidator<T> : AbstractValidator<T> where T : HouseholdDetails
     {
         public HouseholdDetailsValidator()
         {
-            // RuleFor(x => x.HouseholdId)
-            //     .NotEmpty()
-            //     .GreaterThan(0);
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .MaximumLength(100);
         }
     }
 
-    public class HouseholdValidator : AbstractValidator<Household>
+    public class HouseholdValidator<T> : HouseholdDetailsValidator<T> where T : Household
     {
         public HouseholdValidator()
         {
             RuleFor(x => x.HouseholdId)
                 .NotEmpty()
                 .GreaterThan(0);
-
         }
     }
 
-    public class HouseholdInsertRequestValidator : AbstractValidator<HouseholdInsertRequest>
+    public class HouseholdInsertRequestValidator : HouseholdDetailsValidator<HouseholdInsertRequest>
     {
         public HouseholdInsertRequestValidator()
         {
@@ -35,7 +31,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class HouseholdUpdateRequestValidator : AbstractValidator<HouseholdUpdateRequest>
+    public class HouseholdUpdateRequestValidator : HouseholdValidator<HouseholdUpdateRequest>
     {
         public HouseholdUpdateRequestValidator()
         {

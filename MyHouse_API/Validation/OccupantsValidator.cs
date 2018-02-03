@@ -19,7 +19,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantValidator<T> : OccupantsDetailsValidator<T> where T : Occupant //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
+    public class OccupantValidator<T> : OccupantsDetailsValidator<T> where T : Occupant
     {
         public OccupantValidator()
         {
