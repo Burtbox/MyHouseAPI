@@ -16,7 +16,7 @@ namespace MyHouseIntegrationTests.Houses
         public HouseholdsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
-        public void GetHouseholdsOfHouseholdsTest()
+        public void GetHouseholdsOfOccupantTest()
         {
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);

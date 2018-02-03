@@ -1,9 +1,9 @@
 exec houses.Households_Insert 
-	  @Name = 'Hh1'
+	  @Name = 'Household 1 owner dickbutt'
 	, @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
 
 exec houses.Households_Insert 
-	  @Name = 'Hh2'
+	  @Name = 'Household 2 owner dickbutt2'
 	, @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
 
 exec houses.Occupants_Insert 
