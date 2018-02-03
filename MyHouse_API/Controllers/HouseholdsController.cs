@@ -45,7 +45,7 @@ namespace MyHouseAPI.Controllers
         {
             string userId = household.ModifiedBy;
             return await RequestHandler<HouseholdResponse>(HttpVerbs.Put, userId, async () =>
-                await householdsRepository.UpdateHousehold(userId, household));
+                await householdsRepository.UpdateHousehold(household));
         }
 
         // DELETE api/values/5

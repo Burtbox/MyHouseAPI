@@ -38,9 +38,9 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<HouseholdResponse> UpdateHousehold(string userId, HouseholdUpdateRequest household)
+        public async Task<HouseholdResponse> UpdateHousehold(HouseholdUpdateRequest household)
         {
-            return await asyncConnection(userId, household.HouseholdId, async db =>
+            return await asyncConnection(household.ModifiedBy, household.HouseholdId, async db =>
              {
                  HouseholdResponse rowsUpdated = await db.QueryFirstOrDefaultAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Update]",
