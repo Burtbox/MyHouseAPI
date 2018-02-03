@@ -12,18 +12,16 @@ namespace MyHouseIntegrationTests.Houses
     {
         public string sutEndpoint => "Households/";
         public Method sutHttpMethod => Method.DELETE;
-        private FirebaseFixture firebaseFixture;
 
-        public HouseholdsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
-        {
-            this.firebaseFixture = firebaseFixture;
-        }
+        public HouseholdsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
         public void DeleteHouseholdTest()
         {
+            int householdId = 5;
+            
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", 2, ",", 5), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
             IRestResponse response = client.Execute<int>(request);
 
             forbiddenExpectations(response);

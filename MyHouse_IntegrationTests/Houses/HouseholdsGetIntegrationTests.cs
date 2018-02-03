@@ -12,12 +12,8 @@ namespace MyHouseIntegrationTests.Houses
     {
         public string sutEndpoint => "Households/";
         public Method sutHttpMethod => Method.GET;
-        private FirebaseFixture firebaseFixture;
 
-        public HouseholdsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
-        {
-            this.firebaseFixture = firebaseFixture;
-        }
+        public HouseholdsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
         public void GetHouseholdsOfHouseholdsTest()
