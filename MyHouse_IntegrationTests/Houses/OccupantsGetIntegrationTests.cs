@@ -37,7 +37,7 @@ namespace MyHouseIntegrationTests.Houses
                 {
                     OccupantId = 2,
                     UserId = "zzrmi1i7nsApSvmeqA9QSIx1zwfs",
-                    DisplayName = "O2DispName",
+                    DisplayName = "Household 1 occupant O2DispName",
                     HouseholdId = 1
                 }
             });
