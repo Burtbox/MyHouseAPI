@@ -3,14 +3,11 @@ using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Validation
 {
-    public abstract class OccupantsDetailsValidator : AbstractValidator<OccupantDetails>
+    public abstract class OccupantsDetailsValidator<T> : AbstractValidator<T> where T : OccupantDetails
     {
         public OccupantsDetailsValidator()
         {
-            RuleFor(x => x.UserId)
-                .NotEmpty()
-                .MinimumLength(28) //Firebase userIds are currently 28 but may increase to 36
-                .MaximumLength(36);
+            RuleFor(x => x.UserId).IsFirebaseUserId();
 
             RuleFor(x => x.DisplayName)
                 .NotEmpty()
@@ -22,9 +19,9 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantsValidator : AbstractValidator<OccupantResponse> //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
+    public class OccupantValidator<T> : OccupantsDetailsValidator<T> where T : Occupant //TODO: Ed check that this inherits the userId, DisplayName and HouseholdId!
     {
-        public OccupantsValidator()
+        public OccupantValidator()
         {
             RuleFor(x => x.OccupantId)
                 .NotEmpty()
@@ -32,25 +29,19 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantsInsertValidator : AbstractValidator<OccupantInsertRequest>
+    public class OccupantInsertRequestValidator : OccupantsDetailsValidator<OccupantInsertRequest>
     {
-        public OccupantsInsertValidator()
+        public OccupantInsertRequestValidator()
         {
-            RuleFor(x => x.EnteredBy)
-            .NotEmpty()
-            .MinimumLength(28)
-            .MaximumLength(36); //TODO - roll this into a custom "IsFirebaseUserId" function!
+            RuleFor(x => x.EnteredBy).IsFirebaseUserId();
         }
     }
 
-    public class OccupantsUpdateValidator : AbstractValidator<OccupantUpdateRequest>
+    public class OccupantUpdateRequestValidator : OccupantValidator<OccupantUpdateRequest>
     {
-        public OccupantsUpdateValidator()
+        public OccupantUpdateRequestValidator()
         {
-            RuleFor(x => x.ModifiedBy)
-            .NotEmpty()
-            .MinimumLength(28)
-            .MaximumLength(36); //TODO - roll this into a custom "IsFirebaseUserId" function!
+            RuleFor(x => x.ModifiedBy).IsFirebaseUserId();
         }
     }
 }

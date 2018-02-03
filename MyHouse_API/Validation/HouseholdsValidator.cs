@@ -3,16 +3,43 @@ using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Validation
 {
-    public class HouseholdsValidator : AbstractValidator<HouseholdResponse>
+    public class HouseholdDetailsValidator : AbstractValidator<HouseholdDetails>
     {
-        public HouseholdsValidator()
+        public HouseholdDetailsValidator()
+        {
+            // RuleFor(x => x.HouseholdId)
+            //     .NotEmpty()
+            //     .GreaterThan(0);
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .MaximumLength(100);
+        }
+    }
+
+    public class HouseholdValidator : AbstractValidator<Household>
+    {
+        public HouseholdValidator()
         {
             RuleFor(x => x.HouseholdId)
                 .NotEmpty()
                 .GreaterThan(0);
-            RuleFor(x => x.Name)
-                .NotEmpty()
-                .MaximumLength(100);
+
+        }
+    }
+
+    public class HouseholdInsertRequestValidator : AbstractValidator<HouseholdInsertRequest>
+    {
+        public HouseholdInsertRequestValidator()
+        {
+            RuleFor(x => x.EnteredBy).IsFirebaseUserId();
+        }
+    }
+
+    public class HouseholdUpdateRequestValidator : AbstractValidator<HouseholdUpdateRequest>
+    {
+        public HouseholdUpdateRequestValidator()
+        {
+            RuleFor(x => x.ModifiedBy).IsFirebaseUserId();
         }
     }
 }

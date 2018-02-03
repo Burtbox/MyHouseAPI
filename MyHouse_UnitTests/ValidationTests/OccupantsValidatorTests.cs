@@ -8,25 +8,25 @@ namespace MyHouseUnitTests.ValidationTests
     public class OccupantsValidatorTests
     {
         [Fact]
-        public void OccupantsInsert_ShouldAllow()
+        public void OccupantInsertRequest_ShouldAllow()
         {
-            OccupantsInsertValidator sut = new OccupantsInsertValidator();
-            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 1);
-            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 9999);
+            OccupantInsertRequestValidator sut = new OccupantInsertRequestValidator();
+            sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(28));
+            sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(36));
         }
 
         [Fact]
-        public void OccupantsInsert_ShouldValidate()
+        public void OccupantInsertRequest_ShouldValidate()
         {
-            OccupantsInsertValidator sut = new OccupantsInsertValidator();
-            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, 0);
-            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, -1);
+            OccupantInsertRequestValidator sut = new OccupantInsertRequestValidator();
+            sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(27));
+            sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(37));
         }
 
         [Fact]
-        public void Occupants_ShouldAllow()
+        public void OccupantResponse_ShouldAllow()
         {
-            OccupantsValidator sut = new OccupantsValidator();
+            OccupantResponseValidator sut = new OccupantResponseValidator();
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(36));
             sut.ShouldNotHaveValidationErrorFor(t => t.DisplayName, StringGenerator.RandomString(100));
@@ -35,9 +35,9 @@ namespace MyHouseUnitTests.ValidationTests
         }
 
         [Fact]
-        public void Occupants_ShouldValidate()
+        public void OccupantResponse_ShouldValidate()
         {
-            OccupantsValidator sut = new OccupantsValidator();
+            OccupantResponseValidator sut = new OccupantResponseValidator();
             sut.ShouldHaveValidationErrorFor(t => t.UserId, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.UserId, "");
             sut.ShouldHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(37));

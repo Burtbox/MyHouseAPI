@@ -8,13 +8,15 @@ using MyHouseUnitTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class HouseholdsUpdateIntegrationTests : BaseIntegrationTest
+    public class HouseholdsUpdateIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
         private FirebaseFixture firebaseFixture;
         public HouseholdsUpdateIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture)
         {
             this.firebaseFixture = firebaseFixture;
         }
+
+        private string householdsEndpoint = "Households/";
 
         [Fact]
         public void UpdateHouseholdTest()
@@ -28,7 +30,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H2Token, "Households/", Method.PUT, householdToUpdate);
+            RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H2Token, householdsEndpoint, Method.PUT, householdToUpdate);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = serialize(new HouseholdResponse
@@ -42,45 +44,37 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
-        public void InvalidHouseholdOfHouseholdTest()
-        {
-            int householdId = 1;
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H2UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
-
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden); //TODO - generically check these three things? - maybe make a method for this. 
-            response.Content.ShouldBeEquivalentTo(expectedContent); //Maybe just add these to base integration test ? 
-        }
-
-        [Fact]
-        public void InvalidHouseholdIdTest()
-        {
-            int householdId = 2;
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
-
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
-        }
-
-        [Fact]
         public void InvalidTokenTest()
         {
             int householdId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat("Households/", firebaseFixture.H1UserId, ",", householdId), Method.PUT);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(householdsEndpoint, firebaseFixture.H1UserId, ",", householdId), Method.PUT);
+            IRestResponse response = client.Execute(request);
 
-            string expectedContent = string.Empty;
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Forbidden);
-            response.Content.ShouldBeEquivalentTo(expectedContent);
+            forbiddenExpectations(response);
+        }
+
+        [Fact]
+        public void InvalidUserIdTest()
+        {
+            int householdId = 1;
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(householdsEndpoint, firebaseFixture.H2UserId, ",", householdId), Method.PUT);
+            IRestResponse response = client.Execute(request);
+
+            forbiddenExpectations(response);
+        }
+
+        [Fact]
+        public void InvalidHouseholdIdTest()
+        {
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(householdsEndpoint, string.Concat(firebaseFixture.H1UserId, ",", 2)), Method.PUT);
+            IRestResponse response = client.Execute(request);
+
+            forbiddenExpectations(response);
         }
     }
 }
