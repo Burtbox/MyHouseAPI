@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[Households_Insert]
+CREATE OR ALTER PROCEDURE Houses.Households_Insert
 	@Name AS NVARCHAR(50),
 	@EnteredBy AS NVARCHAR(36),
 	@CreatorDisplayName AS NVARCHAR(100)
@@ -7,7 +7,7 @@ BEGIN
 	DECLARE @NewHouseholdIdTable TABLE (HouseholdId INT, Name NVARCHAR(50))
 
 	--Create the new household
-	INSERT INTO [Houses].Households
+	INSERT INTO Houses.Households
 		(Name, EnteredBy, ModifiedBy)
 	OUTPUT
 	INSERTED.HouseholdId, INSERTED.Name into @NewHouseholdIdTable

@@ -2,101 +2,133 @@ DECLARE @conversionTable table
 
     (
 
-        sqlType varchar(50)
+  sqlType varchar(50)
 
-      , cType   varchar(50)
+      ,
+  cType varchar(50)
 
     );
 
- 
 
-INSERT INTO @conversionTable ( sqlType, cType )
+
+INSERT INTO @conversionTable
+  ( sqlType, cType )
 
 VALUES
 
-    ( 'bigint', 'Int64' )
+  ( 'bigint', 'Int64' )
 
-  , ( 'binary', 'byte[]' )
+  ,
+  ( 'binary', 'byte[]' )
 
-  , ( 'bit', 'bool' )
+  ,
+  ( 'bit', 'bool' )
 
-  , ( 'char', 'string' )
+  ,
+  ( 'char', 'string' )
 
-  , ( 'date', 'DateTime?' ) -- Make the DateTime types optional to prevent the c# default causing sql to error
+  ,
+  ( 'date', 'DateTime?' ) -- Make the DateTime types optional to prevent the c# default causing sql to error
 
-  , ( 'datetime', 'DateTime?' )
+  ,
+  ( 'datetime', 'DateTime?' )
 
-  , ( 'datetime2', 'DateTime?' )
+  ,
+  ( 'datetime2', 'DateTime?' )
 
-  , (
+  ,
+  (
 
-        'datetimeoffset'
+    'datetimeoffset'
 
       , 'DateTimeOffset?'
 
     )
 
-  , ( 'decimal', 'decimal' )
+  ,
+  ( 'decimal', 'decimal' )
 
-  , ( 'float', 'double' )
+  ,
+  ( 'float', 'double' )
 
-  , ( 'image', 'byte[]' )
+  ,
+  ( 'image', 'byte[]' )
 
-  , ( 'int', 'int' )
+  ,
+  ( 'int', 'int' )
 
-  , ( 'money', 'decimal' )
+  ,
+  ( 'money', 'decimal' )
 
-  , ( 'nchar', 'string' )
+  ,
+  ( 'nchar', 'string' )
 
-  , ( 'ntext', 'string' )
+  ,
+  ( 'ntext', 'string' )
 
-  , ( 'numeric', 'decimal' )
+  ,
+  ( 'numeric', 'decimal' )
 
-  , ( 'nvarchar', 'string' )
+  ,
+  ( 'nvarchar', 'string' )
 
-  , ( 'real', 'single' )
+  ,
+  ( 'real', 'single' )
 
-  , ( 'rowversion', 'byte[]' )
+  ,
+  ( 'rowversion', 'byte[]' )
 
-  , ( 'smalldatetime', 'DateTime?' )
+  ,
+  ( 'smalldatetime', 'DateTime?' )
 
-  , ( 'smallint', 'Int16' )
+  ,
+  ( 'smallint', 'Int16' )
 
-  , ( 'smallmoney', 'decimal' )
+  ,
+  ( 'smallmoney', 'decimal' )
 
-  , ( 'sql_variant', 'object' )
+  ,
+  ( 'sql_variant', 'object' )
 
-  , ( 'text', 'string' )
+  ,
+  ( 'text', 'string' )
 
-  , ( 'time', 'TimeSpan' )
+  ,
+  ( 'time', 'TimeSpan' )
 
-  , ( 'timestamp', 'byte[]' )
+  ,
+  ( 'timestamp', 'byte[]' )
 
-  , ( 'tinyint', 'byte' )
+  ,
+  ( 'tinyint', 'byte' )
 
-  , ( 'uniqueidentifier', 'Guid' )
+  ,
+  ( 'uniqueidentifier', 'Guid' )
 
-  , ( 'varbinary', 'byte[]' )
+  ,
+  ( 'varbinary', 'byte[]' )
 
-  , ( 'varchar', 'string' )
+  ,
+  ( 'varchar', 'string' )
 
-  , ( 'xml', 'Xml' );
+  ,
+  ( 'xml', 'Xml' );
 
- 
+
 
 SELECT
 
-    'public'                 AS [Accessor]
+  'public'                 AS [Accessor]
 
   , (
 
         SELECT
 
-            cType
+    cType
 
-         FROM @conversionTable
+  FROM @conversionTable
 
-         WHERE sqlType = Type_Name( user_type_id )
+  WHERE sqlType = Type_Name( user_type_id )
 
     )                        AS [Type]
 
@@ -110,7 +142,7 @@ SELECT
 
 FROM sys.parameters
 
-WHERE object_id = Object_Id( 'datahub.DH_AA_SL_ACCOUNT_INSERT_EDIT_S' );
+WHERE object_id = Object_Id( 'Houses.Households_Insert' );
 
 --  AND is_output = 1;
 
