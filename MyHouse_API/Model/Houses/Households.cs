@@ -15,6 +15,7 @@ namespace MyHouseAPI.Model
     public class HouseholdInsertRequest : HouseholdDetails
     {
         public string EnteredBy { get; set; }
+        public string CreatorDisplayName { get; set; }
     }
 
     public class HouseholdUpdateRequest : Household

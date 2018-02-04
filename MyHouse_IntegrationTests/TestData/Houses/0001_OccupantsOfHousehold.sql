@@ -1,16 +1,12 @@
 exec houses.Households_Insert 
 	  @Name = 'Household 1 owner dickbutt'
 	, @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
+	, @CreatorDisplayName = 'dickbutt'
 
 exec houses.Households_Insert 
 	  @Name = 'Household 2 owner dickbutt2'
 	, @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
-
-exec houses.Occupants_Insert 
-      @UserId = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
-    , @DisplayName = 'Household 1 occupant dickbutt'
-    , @HouseholdId = 1
-	  , @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
+	, @CreatorDisplayName = 'dickbutt2'
 
 exec houses.Occupants_Insert 
       @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
@@ -20,8 +16,8 @@ exec houses.Occupants_Insert
 
 -- Add user outside of queried household
 exec houses.Occupants_Insert 
-	  @UserId = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
-    , @DisplayName = 'Household 2 occupant dickbutt2'
+	  @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
+    , @DisplayName = 'Household 2 occupant O2DispName'
     , @HouseholdId = 2
 	  , @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
                 

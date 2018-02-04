@@ -22,7 +22,8 @@ namespace MyHouseIntegrationTests.Houses
             HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
             {
                 Name = H4HouseholdName,
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                CreatorDisplayName = firebaseFixture.H2DisplayName
             };
 
             RestClient client = GetClient();
@@ -39,9 +40,9 @@ namespace MyHouseIntegrationTests.Houses
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
- 
+
         public void InvalidHouseholdIdTest()
-        { 
+        {
             // NA
         }
 
@@ -51,7 +52,8 @@ namespace MyHouseIntegrationTests.Houses
             HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
             {
                 Name = StringGenerator.RandomString(50),
-                EnteredBy = firebaseFixture.H1UserId
+                EnteredBy = firebaseFixture.H1UserId,
+                CreatorDisplayName = firebaseFixture.H1DisplayName
             };
 
             RestClient client = GetClient();
@@ -67,7 +69,8 @@ namespace MyHouseIntegrationTests.Houses
             HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
             {
                 Name = StringGenerator.RandomString(50),
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                CreatorDisplayName = firebaseFixture.H2DisplayName
             };
 
             RestClient client = GetClient();

@@ -13,6 +13,7 @@ namespace MyHouseUnitTests.ValidationTests
             HouseholdInsertRequestValidator sut = new HouseholdInsertRequestValidator();
             sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(36));
+            sut.ShouldNotHaveValidationErrorFor(t => t.CreatorDisplayName, StringGenerator.RandomString(100));
 
             sut.ShouldNotHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(50));
         }
@@ -23,6 +24,9 @@ namespace MyHouseUnitTests.ValidationTests
             HouseholdInsertRequestValidator sut = new HouseholdInsertRequestValidator();
             sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(27));
             sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(37));
+            sut.ShouldHaveValidationErrorFor(t => t.CreatorDisplayName, null as string);
+            sut.ShouldHaveValidationErrorFor(t => t.CreatorDisplayName, "");
+            sut.ShouldHaveValidationErrorFor(t => t.CreatorDisplayName, StringGenerator.RandomString(101));
 
             sut.ShouldHaveValidationErrorFor(t => t.Name, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(51));

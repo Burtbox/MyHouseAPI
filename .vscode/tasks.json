@@ -20,6 +20,17 @@
             "isTestCommand": true,
             "showOutput": "always",
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "publish",
+            "args": [
+                "-c",
+                "release",
+                "-o",
+                "\"\\edlaptop\\wwwroot\\MyHouseTestAPI\""
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
         }
         // {
         //     "taskName": "test",

@@ -28,6 +28,9 @@ namespace MyHouseAPI.Validation
         public HouseholdInsertRequestValidator()
         {
             RuleFor(x => x.EnteredBy).IsFirebaseUserId();
+            RuleFor(x => x.CreatorDisplayName)
+                .NotEmpty()
+                .MaximumLength(100);
         }
     }
 
