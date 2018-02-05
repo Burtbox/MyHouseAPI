@@ -24,22 +24,24 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 2
+                HouseholdId = 2,
+                EnteredBy = firebaseFixture.H2UserId
             };
 
             RestClient client = GetClient();
             RestRequest request = apiCall<OccupantInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
-            IRestResponse response = client.Execute<OccupantResponse>(request);
+            IRestResponse<OccupantResponse> response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = serialize(new OccupantResponse
             {
-                OccupantId = 4,
+                OccupantId = response.Data.OccupantId,
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
                 HouseholdId = 2
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Data.OccupantId.Should().BePositive();
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
@@ -50,11 +52,12 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1
+                HouseholdId = 1,
+                EnteredBy = firebaseFixture.H2UserId
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -67,7 +70,8 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1
+                HouseholdId = 1,
+                EnteredBy = firebaseFixture.H1UserId
             };
 
             RestClient client = GetClient();
@@ -84,7 +88,8 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 2
+                HouseholdId = 2,
+                EnteredBy = firebaseFixture.H2UserId
             };
 
             RestClient client = GetClient();

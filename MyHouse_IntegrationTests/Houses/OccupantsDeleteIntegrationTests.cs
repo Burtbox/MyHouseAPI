@@ -15,11 +15,30 @@ namespace MyHouseIntegrationTests.Houses
 
         public OccupantsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
+        private int CreateOccupantToDelete()
+        {
+            string newUserId = StringGenerator.RandomString(28);
+            string O4DisplayName = StringGenerator.RandomString(100);
+            OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
+            {
+                UserId = newUserId,
+                DisplayName = O4DisplayName,
+                HouseholdId = 2,
+                EnteredBy = firebaseFixture.H2UserId
+            };
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall<OccupantInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            IRestResponse<OccupantResponse> response = client.Execute<OccupantResponse>(request);
+
+            return response.Data.OccupantId;
+        }
+
         [Fact]
         public void DeleteOccupantTest()
         {
             int householdId = 2;
-            int occupantId = 5;
+            int occupantId = CreateOccupantToDelete();
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
@@ -33,8 +52,8 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidHouseholdIdTest()
         {
-            int householdId = 2;
-            int occupantId = 5;
+            int householdId = 1;
+            int occupantId = 3;
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
@@ -45,8 +64,8 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidUserIdTest()
         {
-            int householdId = 2;
-            int occupantId = 5;
+            int householdId = 1;
+            int occupantId = 3;
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);

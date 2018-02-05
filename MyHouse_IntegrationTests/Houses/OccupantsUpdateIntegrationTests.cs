@@ -23,9 +23,10 @@ namespace MyHouseIntegrationTests.Houses
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
                 OccupantId = 5,
-                UserId = currentUserId,
+                UserId = currentUserId, //TODO: combine this and modified by
                 DisplayName = O4DisplayName,
-                HouseholdId = 2
+                HouseholdId = 2,
+                ModifiedBy = currentUserId
             };
 
             RestClient client = GetClient();
@@ -47,15 +48,17 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidHouseholdIdTest()
         {
-            OccupantUpdateRequest occupantToInsert = new OccupantUpdateRequest
+            OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
+                OccupantId = 5,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1
+                HouseholdId = 1,
+                ModifiedBy = StringGenerator.RandomString(28)
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -64,15 +67,17 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidUserIdTest()
         {
-            OccupantUpdateRequest occupantToInsert = new OccupantUpdateRequest
+            OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
+                OccupantId = 5,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1
+                HouseholdId = 1,
+                ModifiedBy = StringGenerator.RandomString(28)
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -81,15 +86,17 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidTokenTest()
         {
-            OccupantUpdateRequest occupantToInsert = new OccupantUpdateRequest
+            OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
+                OccupantId = 5,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 2
+                HouseholdId = 2,
+                ModifiedBy = StringGenerator.RandomString(28)
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
