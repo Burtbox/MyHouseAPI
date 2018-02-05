@@ -18,25 +18,26 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InsertHouseholdTest()
         {
-            string H4HouseholdName = StringGenerator.RandomString(50);
+            string HouseholdName = StringGenerator.RandomString(50);
             HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
             {
-                Name = H4HouseholdName,
+                Name = HouseholdName,
                 EnteredBy = firebaseFixture.H2UserId,
                 CreatorDisplayName = firebaseFixture.H2DisplayName
             };
 
             RestClient client = GetClient();
             RestRequest request = apiCall<HouseholdInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToInsert);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse<HouseholdResponse> response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = serialize(new HouseholdResponse
             {
-                HouseholdId = 5,
-                Name = H4HouseholdName
+                HouseholdId = response.Data.HouseholdId, //Setting the expected id to match the response as this is an identity column
+                Name = HouseholdName
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Data.HouseholdId.Should().BePositive();
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
@@ -58,7 +59,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToInsert);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }
@@ -75,7 +76,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, householdToInsert);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }

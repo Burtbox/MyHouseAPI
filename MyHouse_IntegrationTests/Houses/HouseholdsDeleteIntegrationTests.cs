@@ -15,11 +15,28 @@ namespace MyHouseIntegrationTests.Houses
 
         public HouseholdsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
+        private int CreateHouseholdToDelete()
+        {
+            string HouseholdName = StringGenerator.RandomString(50);
+            HouseholdInsertRequest householdToInsert = new HouseholdInsertRequest
+            {
+                Name = HouseholdName,
+                EnteredBy = firebaseFixture.H2UserId,
+                CreatorDisplayName = firebaseFixture.H2DisplayName
+            };
+
+            RestClient client = GetClient();
+            RestRequest request = apiCall<HouseholdInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToInsert);
+            IRestResponse<HouseholdResponse> response = client.Execute<HouseholdResponse>(request);
+
+            return response.Data.HouseholdId;
+        }
+
         [Fact]
         public void DeleteHouseholdTest()
         {
-            int householdId = 5;
-            
+            int householdId = CreateHouseholdToDelete();
+
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
             IRestResponse response = client.Execute<int>(request);
