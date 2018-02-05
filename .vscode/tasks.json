@@ -24,10 +24,11 @@
         {
             "taskName": "publish",
             "args": [
+                "${workspaceRoot}/MyHouse_API/MyHouseAPI.csproj",
                 "-c",
                 "release",
                 "-o",
-                "\"\\edlaptop\\wwwroot\\MyHouseTestAPI\""
+                "\\\\edlaptop\\wwwroot\\MyHouseTestAPI\\"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

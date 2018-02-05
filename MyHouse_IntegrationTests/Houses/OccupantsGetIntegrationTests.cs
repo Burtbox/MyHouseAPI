@@ -30,12 +30,12 @@ namespace MyHouseIntegrationTests.Houses
                 {
                     OccupantId = 1,
                     UserId = firebaseFixture.H1UserId,
-                    DisplayName = "Household 1 occupant dickbutt",
+                    DisplayName = "dickbutt",
                     HouseholdId = 1
                 },
                 new OccupantResponse
                 {
-                    OccupantId = 2,
+                    OccupantId = 3,
                     UserId = "zzrmi1i7nsApSvmeqA9QSIx1zwfs",
                     DisplayName = "Household 1 occupant O2DispName",
                     HouseholdId = 1

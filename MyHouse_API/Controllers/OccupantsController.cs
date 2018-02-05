@@ -42,7 +42,7 @@ namespace MyHouseAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdateRequest occupant)
         {
-            return await RequestHandler<OccupantResponse>(HttpVerbs.Put, occupant.ModifiedBy, async () =>
+            return await RequestHandler<OccupantResponse>(HttpVerbs.Put, occupant.UserId, async () =>
                 await occupantsRepository.UpdateOccupant(occupant));
         }
 

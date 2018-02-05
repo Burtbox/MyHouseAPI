@@ -18,15 +18,13 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void UpdateOccupantTest()
         {
-            string currentUserId = "INPZD3OF1O47G19BUL1LwYAEx6JU"; //TODO: check other users can't edit others'
             string O4DisplayName = StringGenerator.RandomString(100);
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 5,
-                UserId = currentUserId, //TODO: combine this and modified by
+                OccupantId = 2,
+                UserId = firebaseFixture.H2UserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 2,
-                ModifiedBy = currentUserId
+                HouseholdId = 2
             };
 
             RestClient client = GetClient();
@@ -35,8 +33,8 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new OccupantResponse
             {
-                OccupantId = 5,
-                UserId = currentUserId,
+                OccupantId = 2,
+                UserId = firebaseFixture.H2UserId,
                 DisplayName = O4DisplayName,
                 HouseholdId = 2
             });
@@ -50,11 +48,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 5,
-                UserId = StringGenerator.RandomString(28),
+                OccupantId = 2,
+                UserId = firebaseFixture.H2UserId,
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1,
-                ModifiedBy = StringGenerator.RandomString(28)
+                HouseholdId = 1
             };
 
             RestClient client = GetClient();
@@ -69,11 +66,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 5,
-                UserId = StringGenerator.RandomString(28),
+                OccupantId = 2,
+                UserId = firebaseFixture.H1UserId,
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1,
-                ModifiedBy = StringGenerator.RandomString(28)
+                HouseholdId = 2
             };
 
             RestClient client = GetClient();
@@ -88,11 +84,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 5,
-                UserId = StringGenerator.RandomString(28),
+                OccupantId = 2,
+                UserId = firebaseFixture.H2UserId,
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 2,
-                ModifiedBy = StringGenerator.RandomString(28)
+                HouseholdId = 2
             };
 
             RestClient client = GetClient();

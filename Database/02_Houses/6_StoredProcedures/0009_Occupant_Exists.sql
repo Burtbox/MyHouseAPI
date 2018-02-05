@@ -3,7 +3,7 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupant_Exists]
 	@OccupantId as INT
 AS
 SELECT
-	  HouseholdId
+	HouseholdId
 FROM Houses.Occupants
 WHERE HouseholdId = @HouseholdId and OccupantId = @OccupantId
 

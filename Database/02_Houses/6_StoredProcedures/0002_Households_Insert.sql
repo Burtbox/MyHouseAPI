@@ -4,7 +4,8 @@ CREATE OR ALTER PROCEDURE Houses.Households_Insert
 	@CreatorDisplayName AS NVARCHAR(100)
 AS
 BEGIN
-	DECLARE @NewHouseholdIdTable TABLE (HouseholdId INT, Name NVARCHAR(50))
+	DECLARE @NewHouseholdIdTable TABLE (HouseholdId INT,
+		Name NVARCHAR(50))
 
 	--Create the new household
 	INSERT INTO Houses.Households
@@ -15,12 +16,15 @@ BEGIN
 		(@Name, @EnteredBy, @EnteredBy)
 
 	--The creator of the household is made an occupant
-	DECLARE @NewHouseholdId INT = (SELECT TOP (1) HouseholdId FROM @NewHouseholdIdTable)
+	DECLARE @NewHouseholdId INT = (SELECT TOP (1)
+		HouseholdId
+	FROM @NewHouseholdIdTable)
 	INSERT INTO Houses.Occupants
-	(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
+		(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
 	VALUES
-	(@EnteredBy, @CreatorDisplayName, @NewHouseholdId, @EnteredBy, @EnteredBy)
+		(@EnteredBy, @CreatorDisplayName, @NewHouseholdId, @EnteredBy, @EnteredBy)
 
-	SELECT HouseholdId, Name FROM @NewHouseholdIdTable
+	SELECT HouseholdId, Name
+	FROM @NewHouseholdIdTable
 END
 GO

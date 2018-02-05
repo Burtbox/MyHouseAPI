@@ -37,11 +37,5 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantUpdateRequestValidator : OccupantValidator<OccupantUpdateRequest>
-    {
-        public OccupantUpdateRequestValidator()
-        {
-            RuleFor(x => x.ModifiedBy).IsFirebaseUserId();
-        }
-    }
+    public class OccupantUpdateRequestValidator : OccupantValidator<OccupantUpdateRequest> { }
 }

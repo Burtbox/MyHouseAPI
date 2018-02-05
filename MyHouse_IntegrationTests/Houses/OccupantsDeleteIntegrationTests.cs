@@ -18,11 +18,11 @@ namespace MyHouseIntegrationTests.Houses
         private int CreateOccupantToDelete()
         {
             string newUserId = StringGenerator.RandomString(28);
-            string O4DisplayName = StringGenerator.RandomString(100);
+            string newDisplayName = StringGenerator.RandomString(100);
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
                 UserId = newUserId,
-                DisplayName = O4DisplayName,
+                DisplayName = newDisplayName,
                 HouseholdId = 2,
                 EnteredBy = firebaseFixture.H2UserId
             };

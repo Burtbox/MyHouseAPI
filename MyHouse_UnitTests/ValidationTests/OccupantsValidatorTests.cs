@@ -43,8 +43,6 @@ namespace MyHouseUnitTests.ValidationTests
         public void OccupantUpdateRequest_ShouldAllow()
         {
             OccupantUpdateRequestValidator sut = new OccupantUpdateRequestValidator();
-            sut.ShouldNotHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(28));
-            sut.ShouldNotHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(36));
 
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(36));
@@ -60,8 +58,6 @@ namespace MyHouseUnitTests.ValidationTests
         public void OccupantUpdateRequest_ShouldValidate()
         {
             OccupantUpdateRequestValidator sut = new OccupantUpdateRequestValidator();
-            sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(27));
-            sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(37));
 
             sut.ShouldHaveValidationErrorFor(t => t.UserId, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.UserId, "");

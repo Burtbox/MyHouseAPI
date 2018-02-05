@@ -43,7 +43,7 @@ namespace MyHouseAPI.Repositories
 
         public async Task<OccupantResponse> UpdateOccupant(OccupantUpdateRequest occupant)
         {
-            return await asyncConnection(occupant.ModifiedBy, occupant.HouseholdId, async db =>
+            return await asyncConnection(occupant.UserId, occupant.HouseholdId, async db =>
              {
                  OccupantResponse updatedOccupant = await db.QueryFirstAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Update]",
@@ -58,7 +58,7 @@ namespace MyHouseAPI.Repositories
         {
             return await asyncConnection(userId, householdId, async db =>
             {
-                int rowsDeleted = await db.QueryFirstAsync<int>(
+                int rowsDeleted = await db.ExecuteAsync(
                     sql: "[Houses].[Occupants_Delete]",
                     param: new { OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
