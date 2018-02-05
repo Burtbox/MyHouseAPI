@@ -7,7 +7,7 @@ namespace MyHouseIntegrationTests.Shared
     {
         string sutEndpoint { get; }
         Method sutHttpMethod { get; }
-        
+
         [Fact]
         void InvalidHouseholdIdTest();
 

@@ -8,7 +8,6 @@ namespace MyHouseIntegrationTests.Shared
         public string idToken;
         public string refreshToken;
         public string expiresIn;
-
         public string isNewUser;
     }
 
