@@ -28,7 +28,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall<HouseholdUpdateRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, householdToUpdate);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse<HouseholdResponse> response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = serialize(new HouseholdResponse
             {

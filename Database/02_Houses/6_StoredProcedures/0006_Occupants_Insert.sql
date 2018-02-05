@@ -13,6 +13,6 @@ INSERTED.UserId,
 INSERTED.DisplayName,
 INSERTED.HouseholdId
 VALUES
-	(@UserId, @DisplayName, @HouseholdId, @EnteredBy, @UserId)
+	(@UserId, @DisplayName, @HouseholdId, @EnteredBy, @EnteredBy)
 
 GO

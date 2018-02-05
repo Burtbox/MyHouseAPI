@@ -37,5 +37,5 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantUpdateRequestValidator : OccupantValidator<OccupantUpdateRequest> { }
+    public class OccupantUpdateRequestValidator : OccupantsDetailsValidator<OccupantUpdateRequest> { }
 }

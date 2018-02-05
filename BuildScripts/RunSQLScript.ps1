@@ -3,7 +3,7 @@
     [string]$server = "EDLAPTOP\EDLAPTOPSQL",
 
     # The database name to run the script on
-    [string]$db = "MyHouse_Dev_Tests", 
+    [string]$db = "MyHouse_Dev", 
     
     # The path (relative or absolute) of the sql file
     [string]$inputFile = ".\build\MyHouseDB.sql"

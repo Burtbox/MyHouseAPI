@@ -59,7 +59,13 @@ dotnet test ./MyHouse_UnitTests/MyHouseUnitTests.csproj
 
 These test End to End functionality and require live data
 
-Clean down the test db:
+A test database already exists on EDLAPTOP, to update this:
+1. Run the update db script
+```
+.\BuildScripts\UpgradeDb.ps1
+```
+
+Locally create a new test db: (drops and creates)
 1. Run the setup command: 
 (this creates a new integration test db on EDLAPTOP\EDLAPTOPSQL as MyHouse_Dev_Tests 
 with the data setup in ./MyHouse_IntegrationTests/TestData)

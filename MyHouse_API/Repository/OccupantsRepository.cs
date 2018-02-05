@@ -60,7 +60,7 @@ namespace MyHouseAPI.Repositories
             {
                 int rowsDeleted = await db.ExecuteAsync(
                     sql: "[Houses].[Occupants_Delete]",
-                    param: new { OccupantId = occupantId },
+                    param: new { OccupantId = occupantId, HouseholdId = householdId },
                     commandType: CommandType.StoredProcedure
                 );
                 return rowsDeleted;

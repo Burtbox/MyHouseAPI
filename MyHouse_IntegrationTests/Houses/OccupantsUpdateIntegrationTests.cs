@@ -21,7 +21,6 @@ namespace MyHouseIntegrationTests.Houses
             string O4DisplayName = StringGenerator.RandomString(100);
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 2,
                 UserId = firebaseFixture.H2UserId,
                 DisplayName = O4DisplayName,
                 HouseholdId = 2
@@ -29,7 +28,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall<OccupantUpdateRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
-            IRestResponse response = client.Execute<OccupantResponse>(request);
+            IRestResponse<OccupantResponse> response = client.Execute<OccupantResponse>(request);
 
             string expectedContent = serialize(new OccupantResponse
             {
@@ -48,15 +47,14 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 2,
                 UserId = firebaseFixture.H2UserId,
                 DisplayName = StringGenerator.RandomString(100),
                 HouseholdId = 1
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
-            IRestResponse response = client.Execute<OccupantResponse>(request);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }
@@ -66,7 +64,6 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 2,
                 UserId = firebaseFixture.H1UserId,
                 DisplayName = StringGenerator.RandomString(100),
                 HouseholdId = 2
@@ -74,7 +71,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
-            IRestResponse response = client.Execute<OccupantResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }
@@ -84,7 +81,6 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest
             {
-                OccupantId = 2,
                 UserId = firebaseFixture.H2UserId,
                 DisplayName = StringGenerator.RandomString(100),
                 HouseholdId = 2
@@ -92,7 +88,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToUpdate);
-            IRestResponse response = client.Execute<OccupantResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }

@@ -20,5 +20,5 @@ namespace MyHouseAPI.Model
         public string EnteredBy { get; set; }
     }
 
-    public class OccupantUpdateRequest : Occupant { }
+    public class OccupantUpdateRequest : OccupantDetails { }
 }

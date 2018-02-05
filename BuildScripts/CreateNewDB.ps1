@@ -3,10 +3,10 @@
     [string]$repoDir = "C:\WebProjects\MyHouseAPI",
 
     # The name of the sql server instance to run the script on
-    [string]$server = "EDLAPTOP\EDLAPTOPSQL",
+    [string]$server = "localhost\SQL2016",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev"
+    [string]$db = "MyHouse_Dev_Local"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"
