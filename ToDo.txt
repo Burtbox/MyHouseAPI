@@ -1,16 +1,13 @@
 V3
 Progress when adding transaction
 Edit user - pickup new user details
-API return better error messages (e.g. user already exists, change password)
 Change return from transaction History (let client format data)
 move to free SQL
-.net core API
+
 Add dateAdded to transaction (current date) 
 Upgrade message (e.g. for Patch notes and website maintenence screen)
 purge store when logout?
-Confirm password for Register!
-set max length on fields to match API
-EDLAPTOPPROD Backups - make script pick up from repo - use MyHouse repo for script??
+Confirm password for Register UI!
 set up static API for dev
 
 Missing Error Messages: 
@@ -19,13 +16,13 @@ change password - confirm doesn't match
 API changes for users: 
 /getUserTransactionHistory?userID=
 
-Finish scripting out DB into sql scripts so can rebuild DB from those alone
+Finish scripting out DB into sql scripts so can rebuild DB from those alone -- house food to go
 C# linter
 
 add modified date and modified by cols everywhere for audit
 add more logging around start up and such 
 
-move rest of models validation to FluentValidation (remember to add to services registry)
+move rest of models validation to FluentValidation (remember to add to services registry) -- Transactions to go
 
 add multitenancy cols for Food tables
 
@@ -33,9 +30,6 @@ look into chrome web store
 
 tweak dark theme on MyHouse and HouseFood to use white and a lighter blue so can be read easier
 
-make correct security restrictions on API for logged in user getting households and users data
 
 Read this and implement: https://docs.microsoft.com/en-gb/aspnet/core/mvc/controllers/testing 
 Look into ts-option - good for optional params?
-
-Integration Tests: Make more realistic (don't drop db) - can then also cover upgrade path - need inserts to ignore Identity cols then should work! (then no cleaning process needed)
