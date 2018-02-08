@@ -34,7 +34,7 @@ namespace MyHouseIntegrationTests.Houses
             return response.Data.OccupantId;
         }
 
-        [Fact]
+        //[Fact]
         public void DeleteOccupantTest()
         {
             int householdId = 2;
@@ -49,7 +49,7 @@ namespace MyHouseIntegrationTests.Houses
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidHouseholdIdTest()
         {
             int householdId = 1;
@@ -61,7 +61,7 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidUserIdTest()
         {
             int householdId = 1;
@@ -73,7 +73,7 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidTokenTest()
         {
             int householdId = 2;

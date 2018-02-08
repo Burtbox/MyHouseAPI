@@ -32,7 +32,7 @@ namespace MyHouseIntegrationTests.Houses
             return response.Data.HouseholdId;
         }
 
-        [Fact]
+        //[Fact]
         public void DeleteHouseholdTest()
         {
             int householdId = CreateHouseholdToDelete();
@@ -44,7 +44,7 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidHouseholdIdTest()
         {
             int householdId = 2;
@@ -56,7 +56,7 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidUserIdTest()
         {
             int householdId = 1;
@@ -68,7 +68,7 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidTokenTest()
         {
             int householdId = 1;

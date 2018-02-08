@@ -47,7 +47,8 @@ namespace MyHouseAPI.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{userId},{householdId},{occupantId}")]
+        //[HttpDelete("{userId},{householdId},{occupantId}")]
+        // Removed delete method as don't want users to have to delete occupants (just to leave households)
         public async Task<IActionResult> DeleteOccupant(string userId, int householdId, int occupantId)
         {
             return await RequestHandler<int>(HttpVerbs.Delete, userId, async () =>
