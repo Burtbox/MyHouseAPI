@@ -33,3 +33,7 @@ tweak dark theme on MyHouse and HouseFood to use white and a lighter blue so can
 
 Read this and implement: https://docs.microsoft.com/en-gb/aspnet/core/mvc/controllers/testing 
 Look into ts-option - good for optional params?
+
+Leave Household / remove occupant buttons
+Hangfire task to clear up households that all users have left 
+Flag a user as removed from household 
