@@ -1,13 +1,16 @@
 using MyHouseAPI.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MyHouseAPI.Services {
+namespace MyHouseAPI.Services
+{
     public static class RepositoriesInjector
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<OccupantsRepository>();
-            services.AddScoped<HouseholdsRepository>();
+            services
+             .AddScoped<OccupantsRepository>()
+             .AddScoped<HouseholdsRepository>()
+             .AddScoped<NewsFeedsRepository>();
 
             return services;
         }
