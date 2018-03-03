@@ -13,7 +13,8 @@ namespace MyHouseAPI.Services
              .AddTransient<IValidator<HouseholdInsertRequest>, HouseholdInsertRequestValidator>()
              .AddTransient<IValidator<HouseholdUpdateRequest>, HouseholdUpdateRequestValidator>()
              .AddTransient<IValidator<OccupantInsertRequest>, OccupantInsertRequestValidator>()
-             .AddTransient<IValidator<OccupantUpdateRequest>, OccupantUpdateRequestValidator>();
+             .AddTransient<IValidator<OccupantUpdateRequest>, OccupantUpdateRequestValidator>()
+             .AddTransient<IValidator<NewsFeedInsertRequest>, NewsFeedInsertRequestValidator>();
         }
     }
 }

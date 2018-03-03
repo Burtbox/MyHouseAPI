@@ -32,6 +32,7 @@ namespace MyHouseAPI
             services.AddSwagger();
             services.AddSerilog(configuration);
             services.AddVersioning();
+            services.AddCorsConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +57,7 @@ namespace MyHouseAPI
             {
                 c.SwaggerEndpoint("/swagger/v3/swagger.json", "House Money API V3");
             });
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowAllHeaders");
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
