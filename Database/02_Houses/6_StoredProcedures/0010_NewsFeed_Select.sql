@@ -1,15 +1,15 @@
 CREATE OR ALTER PROCEDURE [Houses].[NewsFeeds_Get]
-	@UserId AS INT
+	@UserId AS nvarchar(36)
 AS
 SELECT
-	NewsFeed.NewsId
+	NewsFeed.NewsFeedId
 	, NewsFeed.HouseholdId
 	, NewsFeed.Headline
 	, NewsFeed.SubHeadline
 	, NewsFeed.Story
 	, NewsFeed.Author
 FROM Houses.NewsFeed as NewsFeed
-INNER JOIN Houses.Occupants as Occupants ON Occupants.HouseholdId = NewsFeed.HouseholdId
+	INNER JOIN Houses.Occupants as Occupants ON Occupants.HouseholdId = NewsFeed.HouseholdId
 WHERE UserId = @UserId
 
 GO

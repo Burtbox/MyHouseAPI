@@ -10,7 +10,12 @@ BEGIN
 	INSERT INTO Houses.NewsFeed
 		(HouseholdId, Headline, SubHeadline, Story, Author, EnteredBy, ModifiedBy)
 	OUTPUT
-	INSERTED.NewsId, INSERTED.HouseholdId, INSERTED.Headline, INSERTED.SubHeadline, INSERTED.Story, INSERTED.Author
+	INSERTED.NewsFeedId,
+	INSERTED.HouseholdId,
+	INSERTED.Headline,
+	INSERTED.SubHeadline,
+	INSERTED.Story,
+	INSERTED.Author
 	VALUES
 		(@HouseholdId, @Headline, @SubHeadline, @Story, @Author, @EnteredBy, @EnteredBy)
 END

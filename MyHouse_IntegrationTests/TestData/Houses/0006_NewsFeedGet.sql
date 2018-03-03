@@ -1,4 +1,4 @@
-exec Houses.NewsFeed_Insert
+exec Houses.NewsFeeds_Insert
 @HouseholdId = 1,
 @Headline = "Eds Test Headline",
 @SubHeadline = "Eds Test SubHeadline",
@@ -6,7 +6,7 @@ exec Houses.NewsFeed_Insert
 @Author = "Ed",
 @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
 
-exec Houses.NewsFeed_Insert
+exec Houses.NewsFeeds_Insert
 @HouseholdId = 1,
 @Headline = "Eds Test Headline 3",
 @SubHeadline = "Eds Test SubHeadline 3",

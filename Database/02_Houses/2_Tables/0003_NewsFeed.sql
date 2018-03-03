@@ -2,7 +2,7 @@ IF OBJECT_ID(N'[Houses].[NewsFeed]', N'U') IS NULL
 BEGIN
 	CREATE TABLE [Houses].[NewsFeed]
 	(
-		[NewsId] [int] IDENTITY(1,1) NOT NULL,
+		[NewsFeedId] [int] IDENTITY(1,1) NOT NULL,
 		[HouseholdId] [int] NOT NULL,
 		[Headline] [nvarchar](100) NOT NULL,
 		[SubHeadline] [nvarchar](200) NULL,
@@ -14,7 +14,7 @@ BEGIN
 		[ModifiedDate] [datetime] NOT NULL
 			CONSTRAINT [PK__Houses__NewsFeed] PRIMARY KEY CLUSTERED 
 	(
-		[NewsId] ASC
+		[NewsFeedId] ASC
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 END
