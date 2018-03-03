@@ -10,7 +10,7 @@ namespace MyHouseIntegrationTests.Houses
 {
     public class NewsFeedInsertIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "NewsFeeds/";
+        public string sutEndpoint => EndpointsEnum.NewsFeeds;
         public Method sutHttpMethod => Method.POST;
 
         public NewsFeedInsertIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }

@@ -10,7 +10,7 @@ namespace MyHouseIntegrationTests.Houses
 {
     public class HouseholdsDeleteIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "Households/";
+        public string sutEndpoint => EndpointsEnum.Households;
         public Method sutHttpMethod => Method.DELETE;
 
         public HouseholdsDeleteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
