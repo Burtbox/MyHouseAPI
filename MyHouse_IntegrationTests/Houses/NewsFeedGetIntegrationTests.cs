@@ -18,10 +18,8 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void GetNewsFeedsOfHouseholdTest()
         {
-            int householdId = 1;
-
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             string expectedContent = serialize(new NewsFeedResponse[]
@@ -50,25 +48,17 @@ namespace MyHouseIntegrationTests.Houses
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
-        [Fact]
         public void InvalidHouseholdIdTest()
         {
-            int householdId = 2;
-
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<NewsFeedResponse>(request);
-
-            forbiddenExpectations(response);
+            // NA
         }
 
         [Fact]
         public void InvalidUserIdTest()
         {
-            int householdId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId), sutHttpMethod);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             forbiddenExpectations(response);
@@ -77,10 +67,8 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidTokenTest()
         {
-            int householdId = 1;
-
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             forbiddenExpectations(response);

@@ -23,19 +23,19 @@ namespace MyHouseAPI.Controllers
         }
 
         // GET: api/values
-        [HttpGet("{userId},{householdId}")]
-        public async Task<IActionResult> RequestNewsFeed(string userId, int householdId)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> RequestNewsFeed(string userId)
         {
             return await RequestHandler<IEnumerable<NewsFeedResponse>>(HttpVerbs.Get, userId, async () =>
-                await occupantsRepository.GetNewsFeeds(userId, householdId));
+                await occupantsRepository.GetNewsFeeds(userId));
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> RequestNewsFeedInsert([FromBody] NewsFeedInsertRequest occupant)
+        public async Task<IActionResult> RequestNewsFeedInsert([FromBody] NewsFeedInsertRequest newsFeedItem)
         {
-            return await RequestHandler<NewsFeedResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
-                await occupantsRepository.InsertNewsFeed(occupant));
+            return await RequestHandler<NewsFeedResponse>(HttpVerbs.Post, newsFeedItem.EnteredBy, async () =>
+                await occupantsRepository.InsertNewsFeed(newsFeedItem));
         }
     }
 }

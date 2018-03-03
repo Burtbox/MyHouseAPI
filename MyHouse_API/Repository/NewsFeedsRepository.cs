@@ -12,9 +12,9 @@ namespace MyHouseAPI.Repositories
     {
         public NewsFeedsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds(string userId, int householdId)
+        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds(string userId)
         {
-            return await asyncConnection(userId, householdId, async db =>
+            return await asyncConnection(async db =>
             {
                 IEnumerable<NewsFeedResponse> newsItems = await db.QueryAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Get]",

@@ -10,7 +10,7 @@ namespace MyHouseIntegrationTests.Houses
 {
     public class HouseholdsInsertIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "EndpointsEnum.Households";
+        public string sutEndpoint => EndpointsEnum.Households;
         public Method sutHttpMethod => Method.POST;
 
         public HouseholdsInsertIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
@@ -40,7 +40,6 @@ namespace MyHouseIntegrationTests.Houses
             response.Data.HouseholdId.Should().BePositive();
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
-
 
         public void InvalidHouseholdIdTest()
         {

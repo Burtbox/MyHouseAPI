@@ -10,7 +10,7 @@ namespace MyHouseIntegrationTests.Houses
 {
     public class OccupantsGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "EndpointsEnum.Occupants";
+        public string sutEndpoint => EndpointsEnum.Occupants;
         public Method sutHttpMethod => Method.GET;
 
         public OccupantsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
