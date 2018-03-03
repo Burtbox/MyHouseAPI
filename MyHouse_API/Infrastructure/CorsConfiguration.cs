@@ -17,7 +17,9 @@ namespace MyHouseAPI.Services
                         "Accept-Language",
                         "Access-Control-Request-Headers",
                         "Access-Control-Request-Method",
+                        "Authorization",
                         "Connection",
+                        "Content-Type",
                         "Host",
                         "Origin",
                         "Referer",
@@ -26,10 +28,10 @@ namespace MyHouseAPI.Services
                     string[] allowedMethods = new string[] { "GET", "POST", "PUT", "DELETE" };
                     string[] allowedOrigins = new string[]
                     {
-                        "http://localhost:3000/",
-                        "http://myhouse.surge.sh/",
-                        "http://housemoney.surge.sh/",
-                        "http://housefood.surge.sh/",
+                        "http://localhost:3000",
+                        "http://myhouse.surge.sh",
+                        "http://housemoney.surge.sh",
+                        "http://housefood.surge.sh",
                     };
                     builder
                         .WithHeaders(allowedHeaders)
