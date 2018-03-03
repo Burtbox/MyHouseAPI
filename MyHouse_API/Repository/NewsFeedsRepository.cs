@@ -25,13 +25,13 @@ namespace MyHouseAPI.Repositories
             });
         }
 
-        public async Task<NewsFeedResponse> InsertNewsFeed(NewsFeedInsertRequest occupant)
+        public async Task<NewsFeedResponse> InsertNewsFeed(NewsFeedInsertRequest newsItem)
         {
-            return await asyncConnection(occupant.EnteredBy, occupant.HouseholdId, async db =>
+            return await asyncConnection(newsItem.EnteredBy, newsItem.HouseholdId, async db =>
             {
                 NewsFeedResponse insertedNewsFeed = await db.QueryFirstAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Insert]",
-                    param: occupant,
+                    param: newsItem,
                     commandType: CommandType.StoredProcedure
                 );
                 return insertedNewsFeed;

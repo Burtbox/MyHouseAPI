@@ -10,7 +10,7 @@ namespace MyHouseIntegrationTests.Houses
 {
     public class NewsFeedInsertIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => "NewsFeed/";
+        public string sutEndpoint => "NewsFeeds/";
         public Method sutHttpMethod => Method.POST;
 
         public NewsFeedInsertIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
@@ -22,7 +22,7 @@ namespace MyHouseIntegrationTests.Houses
             string newSubHeadline = StringGenerator.RandomString(200);
             string newStory = StringGenerator.RandomString(500);
             string authorDisplayName = StringGenerator.RandomString(100);
-            NewsFeedInsertRequest occupantToInsert = new NewsFeedInsertRequest
+            NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
                 HouseholdId = 2,
                 Headline = newHeadline,
@@ -33,7 +33,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<NewsFeedInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall<NewsFeedInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, newsFeedToInsert);
             IRestResponse<NewsFeedResponse> response = client.Execute<NewsFeedResponse>(request);
 
             string expectedContent = serialize(new NewsFeedResponse
@@ -54,7 +54,7 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidHouseholdIdTest()
         {
-            NewsFeedInsertRequest occupantToInsert = new NewsFeedInsertRequest
+            NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
                 HouseholdId = 1,
                 Headline = StringGenerator.RandomString(100),
@@ -65,7 +65,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, newsFeedToInsert);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             forbiddenExpectations(response);
@@ -74,7 +74,7 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidUserIdTest()
         {
-            NewsFeedInsertRequest occupantToInsert = new NewsFeedInsertRequest
+            NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
                 HouseholdId = 1,
                 Headline = StringGenerator.RandomString(100),
@@ -85,7 +85,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, newsFeedToInsert);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             forbiddenExpectations(response);
@@ -94,7 +94,7 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidTokenTest()
         {
-            NewsFeedInsertRequest occupantToInsert = new NewsFeedInsertRequest
+            NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
                 HouseholdId = 2,
                 Headline = StringGenerator.RandomString(100),
@@ -105,7 +105,7 @@ namespace MyHouseIntegrationTests.Houses
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, occupantToInsert);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod, newsFeedToInsert);
             IRestResponse response = client.Execute<NewsFeedResponse>(request);
 
             forbiddenExpectations(response);
