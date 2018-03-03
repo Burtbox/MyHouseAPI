@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE Houses.NewsFeed_Insert
+CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Insert
 	@HouseholdId int,
 	@Headline nvarchar(100),
 	@SubHeadline nvarchar(200) = NULL,

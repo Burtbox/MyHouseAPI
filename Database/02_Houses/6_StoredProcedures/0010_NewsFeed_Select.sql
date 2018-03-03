@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[NewsFeed_Get]
+CREATE OR ALTER PROCEDURE [Houses].[NewsFeeds_Get]
 	@UserId AS INT
 AS
 SELECT
