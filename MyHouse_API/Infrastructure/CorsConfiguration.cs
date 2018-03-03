@@ -8,11 +8,33 @@ namespace MyHouseAPI.Services
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllHeaders", builder =>
+                options.AddPolicy("AllowExpectedRequests", builder =>
                 {
-                    builder.AllowAnyOrigin() //TODO: Limit cors
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
+                    string[] allowedHeaders = new string[]
+                    {
+                        "Accept",
+                        "Accept-Encoding",
+                        "Accept-Language",
+                        "Access-Control-Request-Headers",
+                        "Access-Control-Request-Method",
+                        "Connection",
+                        "Host",
+                        "Origin",
+                        "Referer",
+                        "User-Agent",
+                    };
+                    string[] allowedMethods = new string[] { "GET", "POST", "PUT", "DELETE" };
+                    string[] allowedOrigins = new string[]
+                    {
+                        "http://localhost:3000/",
+                        "http://myhouse.surge.sh/",
+                        "http://housemoney.surge.sh/",
+                        "http://housefood.surge.sh/",
+                    };
+                    builder
+                        .WithHeaders(allowedHeaders)
+                        .WithMethods(allowedMethods)
+                        .WithOrigins(allowedOrigins);
                 });
             });
 

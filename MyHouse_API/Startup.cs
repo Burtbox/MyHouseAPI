@@ -57,7 +57,7 @@ namespace MyHouseAPI
             {
                 c.SwaggerEndpoint("/swagger/v3/swagger.json", "House Money API V3");
             });
-            app.UseCors("AllowAllHeaders");
+            app.UseCors("AllowExpectedRequests");
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
