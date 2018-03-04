@@ -40,6 +40,7 @@ namespace MyHouseAPI.Repositories
                 throw customCatch(exception);
             }
         }
+
         private async Task<bool> validateHouseholdOccupant(IDbConnection db, string userId, int householdId)
         {
             if (
@@ -81,6 +82,29 @@ namespace MyHouseAPI.Repositories
                 throw customCatch(exception);
             }
         }
+
+        /// <summary>
+        /// An async connection that validates the user belongs to the household
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="householdId"></param>
+        /// <returns></returns>
+        protected async Task<bool> checkHousehold(string userId, int householdId)
+        {
+            try
+            {
+                using (dbConnection)
+                {
+                    await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
+                    return await validateHouseholdOccupant(dbConnection, userId, householdId); // Validate the occupant lives in that household
+                }
+            }
+            catch (Exception exception)
+            {
+                throw customCatch(exception);
+            }
+        }
+
         private Exception customCatch(Exception exception)
         {
             switch (exception.GetType().Name)

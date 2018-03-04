@@ -10,7 +10,8 @@ namespace MyHouseAPI.Services
             services
              .AddScoped<OccupantsRepository>()
              .AddScoped<HouseholdsRepository>()
-             .AddScoped<NewsFeedsRepository>();
+             .AddScoped<NewsFeedsRepository>()
+             .AddScoped<AuthorizationRepository>();
 
             return services;
         }

@@ -12,14 +12,14 @@ namespace MyHouseAPI.Controllers
     [Authorize]
     public class NewsFeedsController : BaseController
     {
-        private readonly NewsFeedsRepository occupantsRepository;
+        private readonly NewsFeedsRepository newsFeedsRepository;
 
         public NewsFeedsController(
             IAuthorizationService authorizationService,
-            NewsFeedsRepository occupantsRepository
+            NewsFeedsRepository newsFeedsRepository
         ) : base(authorizationService)
         {
-            this.occupantsRepository = occupantsRepository;
+            this.newsFeedsRepository = newsFeedsRepository;
         }
 
         // GET: api/values
@@ -27,7 +27,7 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> RequestNewsFeed(string userId)
         {
             return await RequestHandler<IEnumerable<NewsFeedResponse>>(HttpVerbs.Get, userId, async () =>
-                await occupantsRepository.GetNewsFeeds(userId));
+                await newsFeedsRepository.GetNewsFeeds(userId));
         }
 
         // POST api/values
@@ -35,7 +35,7 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> RequestNewsFeedInsert([FromBody] NewsFeedInsertRequest newsFeedItem)
         {
             return await RequestHandler<NewsFeedResponse>(HttpVerbs.Post, newsFeedItem.EnteredBy, async () =>
-                await occupantsRepository.InsertNewsFeed(newsFeedItem));
+                await newsFeedsRepository.InsertNewsFeed(newsFeedItem));
         }
     }
 }
