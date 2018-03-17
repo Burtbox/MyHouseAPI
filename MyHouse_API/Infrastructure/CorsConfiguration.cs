@@ -29,6 +29,8 @@ namespace MyHouseAPI.Services
                     string[] allowedOrigins = new string[]
                     {
                         "http://localhost:3000",
+                        "http://localhost:3001",
+                        "http://localhost:3002",
                         "http://myhouse.surge.sh",
                         "http://housemoney.surge.sh",
                         "http://housefood.surge.sh",

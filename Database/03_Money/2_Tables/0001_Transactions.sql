@@ -10,7 +10,7 @@ BEGIN
 		[Date] [date] NULL,
 		[EnteredBy] [int] NOT NULL,
 		[EnteredDate] [datetime] NOT NULL,
-		[ModifiedBy] [nvarchar](36) NOT NULL,
+		[ModifiedBy] [int] NOT NULL,
 		[ModifiedDate] [datetime] NOT NULL
 			CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
 	(

@@ -15,6 +15,12 @@ namespace MyHouseIntegrationTests.Houses
 
         public AuthorizationHouseholdIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
+        [Fact]
+        public void InvalidOccupantIdTest()
+        {
+            // TODO: Implement!
+        }
+
         public void InvalidHouseholdIdTest()
         {
             int householdId = 2;

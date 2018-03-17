@@ -52,6 +52,12 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
+        public void InvalidOccupantIdTest()
+        {
+            // TODO: Implement!
+        }
+
+        [Fact]
         public void InvalidHouseholdIdTest()
         {
             NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest

@@ -44,6 +44,12 @@ namespace MyHouseIntegrationTests.Houses
             forbiddenExpectations(response);
         }
 
+        [Fact]
+        public void InvalidOccupantIdTest()
+        {
+            // TODO: Implement!
+        }
+
         //[Fact]
         public void InvalidHouseholdIdTest()
         {

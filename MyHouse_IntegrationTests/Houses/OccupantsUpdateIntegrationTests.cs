@@ -43,6 +43,12 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
+        public void InvalidOccupantIdTest()
+        {
+            // TODO: Implement!
+        }
+
+        [Fact]
         public void InvalidHouseholdIdTest()
         {
             OccupantUpdateRequest occupantToUpdate = new OccupantUpdateRequest

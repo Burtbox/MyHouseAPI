@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 using FluentAssertions;
 using MyHouseIntegrationTests.Shared;
 using RestSharp;
@@ -8,31 +8,29 @@ using MyHouseUnitTests.Helpers;
 
 namespace MyHouseIntegrationTests.Houses
 {
-    public class HouseholdsGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
+    public class BalanceGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => EndpointsEnum.Households;
+        public string sutEndpoint => EndpointsEnum.Balance;
         public Method sutHttpMethod => Method.GET;
 
-        public HouseholdsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
+        public BalanceGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
-        public void GetHouseholdsOfOccupantTest()
+        public void GetBalanceOfOccupantTest()
         {
-            RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            int occupantId = 1;
 
-            string expectedContent = serialize(new HouseholdResponse[]
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", occupantId), sutHttpMethod);
+            IRestResponse response = client.Execute<BalanceResponse>(request);
+
+            string expectedContent = serialize(new BalanceResponse[]
             {
-                new HouseholdResponse
+                new BalanceResponse
                 {
-                    OccupantId = 1,
-                    Name = "Household 1 owner dickbutt",
-                },
-                new HouseholdResponse
-                {
-                    OccupantId = 7,
-                    Name = "Household 3 owner dickbutt",
+                    Creditor = "dickbutt",
+                    Debtor = "Household 1 occupant O2DispName",
+                    Gross = new decimal(4.20)
                 }
             });
 
@@ -41,19 +39,19 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
-        public void InvalidOccupantIdTest()
+        public void InvalidHouseholdIdTest()
         {
             // TODO: Implement!
         }
 
         [Fact]
-        public void InvalidHouseholdIdTest()
+        public void InvalidOccupantIdTest()
         {
-            int householdId = 2;
+            int occupantId = 2;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", occupantId), sutHttpMethod);
+            IRestResponse response = client.Execute<BalanceResponse>(request);
 
             forbiddenExpectations(response);
         }
@@ -65,7 +63,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute<BalanceResponse>(request);
 
             forbiddenExpectations(response);
         }
@@ -77,7 +75,7 @@ namespace MyHouseIntegrationTests.Houses
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId), sutHttpMethod);
-            IRestResponse response = client.Execute<HouseholdResponse>(request);
+            IRestResponse response = client.Execute<BalanceResponse>(request);
 
             forbiddenExpectations(response);
         }

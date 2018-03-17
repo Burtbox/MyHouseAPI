@@ -14,7 +14,14 @@ INSERT INTO Transactions
 	, Reference
 	, [Date]
 	, EnteredBy
+	, ModifiedBy
 	)
+OUTPUT inserted.TransactionId
+		, inserted.Creditor
+		, inserted.Debtor
+		, inserted.Gross
+		, inserted.[Date]
+		, inserted.Reference 
 VALUES
 	(
 		@Creditor
@@ -22,6 +29,7 @@ VALUES
 		, @Gross
 		, @Reference
 		, @Date
+		, @EnteredBy
 		, @EnteredBy
 	)
 

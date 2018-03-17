@@ -12,6 +12,9 @@ namespace MyHouseIntegrationTests.Shared
         void InvalidHouseholdIdTest();
 
         [Fact]
+        void InvalidOccupantIdTest();
+
+        [Fact]
         void InvalidUserIdTest();
 
         [Fact]
