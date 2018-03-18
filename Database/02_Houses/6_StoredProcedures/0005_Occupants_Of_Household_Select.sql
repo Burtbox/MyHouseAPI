@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE [Houses].[Occupants_Of_Household]
-	@HouseholdId AS INT
+	@OccupantId AS INT
 AS
 SELECT
 	OccupantId 
@@ -7,6 +7,6 @@ SELECT
 		, DisplayName 
 		, HouseholdId
 FROM Houses.Occupants
-WHERE HouseholdId = @HouseholdId
+WHERE OccupantId = @OccupantId
 
 GO

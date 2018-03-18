@@ -1,7 +1,7 @@
 CREATE OR ALTER PROCEDURE [Houses].[Occupants_Update]
 	@UserId AS NVARCHAR(36),
 	@DisplayName AS VARCHAR(100),
-	@HouseholdId AS INT
+	@OccupantId AS INT
 
 AS
 
@@ -14,6 +14,6 @@ AS
 
 	SELECT OccupantId, UserId, DisplayName, HouseholdId
 	FROM Houses.Occupants
-	WHERE UserId = @UserId AND HouseholdId = @HouseholdId
+	WHERE UserId = @UserId AND OccupantId = @OccupantId
 
 GO

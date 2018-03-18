@@ -5,10 +5,11 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupants_Insert]
 	@EnteredBy AS NVARCHAR(36)
 
 AS
-DECLARE @HouseholdId AS INT
-SELECT @HouseholdId = HouseholdId 
-FROM Houses.Occupants 
-WHERE OccupantId = @OccupantId
+DECLARE @HouseholdId AS INT = 
+	(SELECT HouseholdId 
+	FROM Houses.Occupants 
+	WHERE OccupantId = @OccupantId)
+
 
 INSERT INTO Houses.Occupants
 	(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)

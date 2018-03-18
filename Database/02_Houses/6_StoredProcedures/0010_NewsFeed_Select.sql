@@ -9,7 +9,7 @@ SELECT
 	, NewsFeed.Story
 	, NewsFeed.Author
 FROM Houses.NewsFeed as NewsFeed
-	INNER JOIN Houses.Occupants as Occupants ON Occupants.HouseholdId = NewsFeed.HouseholdId
-WHERE UserId = @UserId
+INNER JOIN Houses.Occupants as Occupants ON Occupants.HouseholdId = NewsFeed.HouseholdId
+	WHERE UserId = @UserId
 
 GO

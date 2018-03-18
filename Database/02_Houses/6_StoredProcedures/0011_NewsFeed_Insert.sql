@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Insert
-	@HouseholdId int,
+	@OccupantId int,
 	@Headline nvarchar(100),
 	@SubHeadline nvarchar(200) = NULL,
 	@Story nvarchar(max) ,
@@ -7,6 +7,12 @@ CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Insert
 	@EnteredBy AS NVARCHAR(36)
 AS
 BEGIN
+
+	DECLARE @HouseholdId as INT = 
+		(SELECT HouseholdId 
+		FROM Houses.Occupants 
+		WHERE OccupantId = @OccupantId)
+
 	INSERT INTO Houses.NewsFeed
 		(HouseholdId, Headline, SubHeadline, Story, Author, EnteredBy, ModifiedBy)
 	OUTPUT
