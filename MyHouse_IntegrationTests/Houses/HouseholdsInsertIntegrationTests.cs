@@ -32,22 +32,16 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new HouseholdResponse
             {
-                HouseholdId = response.Data.HouseholdId, //Setting the expected id to match the response as this is an identity column
+                OccupantId = response.Data.OccupantId, //Setting the expected id to match the response as this is an identity column
                 Name = HouseholdName
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Data.HouseholdId.Should().BePositive();
+            response.Data.OccupantId.Should().BePositive();
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
-        [Fact]
         public void InvalidOccupantIdTest()
-        {
-            // TODO: Implement!
-        }
-
-        public void InvalidHouseholdIdTest()
         {
             // NA
         }

@@ -40,7 +40,7 @@ namespace MyHouseAPI.Repositories
 
         public async Task<HouseholdResponse> UpdateHousehold(HouseholdUpdateRequest household)
         {
-            return await asyncConnection(household.ModifiedBy, household.HouseholdId, async db =>
+            return await asyncConnection(household.ModifiedBy, household.OccupantId, async db =>
              {
                  HouseholdResponse rowsUpdated = await db.QueryFirstOrDefaultAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Update]",
@@ -51,17 +51,18 @@ namespace MyHouseAPI.Repositories
              });
         }
 
-        public async Task<int> DeleteHousehold(string userId, int householdId)
-        {
-            return await asyncConnection(userId, householdId, async db =>
-            {
-                int rowsDeleted = await db.ExecuteAsync(
-                    sql: "[Houses].[Households_Delete]",
-                    param: new { HouseholdId = householdId },
-                    commandType: CommandType.StoredProcedure
-                );
-                return rowsDeleted;
-            });
-        }
+        //ED This will be remove household as a put - deleted flag 
+        // public async Task<int> DeleteHousehold(string userId, int householdId)
+        // {
+        //     return await asyncConnection(userId, householdId, async db =>
+        //     {
+        //         int rowsDeleted = await db.ExecuteAsync(
+        //             sql: "[Houses].[Households_Delete]",
+        //             param: new { HouseholdId = householdId },
+        //             commandType: CommandType.StoredProcedure
+        //         );
+        //         return rowsDeleted;
+        //     });
+        // }
     }
 }

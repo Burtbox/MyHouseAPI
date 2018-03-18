@@ -17,8 +17,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(36));
             sut.ShouldNotHaveValidationErrorFor(t => t.DisplayName, StringGenerator.RandomString(100));
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 1);
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 9999);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 1);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 9999);
         }
 
         [Fact]
@@ -35,8 +35,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, "");
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, StringGenerator.RandomString(101));
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, 0);
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, -1);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, 0);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, -1);
         }
 
         [Fact]
@@ -47,8 +47,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.UserId, StringGenerator.RandomString(36));
             sut.ShouldNotHaveValidationErrorFor(t => t.DisplayName, StringGenerator.RandomString(100));
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 1);
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 9999);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 1);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 9999);
         }
 
         [Fact]
@@ -63,8 +63,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, "");
             sut.ShouldHaveValidationErrorFor(t => t.DisplayName, StringGenerator.RandomString(101));
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, 0);
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, -1);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, 0);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, -1);
         }
     }
 }

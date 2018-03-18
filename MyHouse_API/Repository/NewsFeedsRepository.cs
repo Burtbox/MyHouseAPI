@@ -27,7 +27,7 @@ namespace MyHouseAPI.Repositories
 
         public async Task<NewsFeedResponse> InsertNewsFeed(NewsFeedInsertRequest newsItem)
         {
-            return await asyncConnection(newsItem.EnteredBy, newsItem.HouseholdId, async db =>
+            return await asyncConnection(newsItem.EnteredBy, newsItem.OccupantId, async db =>
             {
                 NewsFeedResponse insertedNewsFeed = await db.QueryFirstAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Insert]",

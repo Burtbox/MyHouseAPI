@@ -7,13 +7,10 @@ namespace MyHouseAPI.Model
 
     public abstract class Household : HouseholdDetails
     {
-        public int HouseholdId { get; set; }
-    }
-
-    public class HouseholdResponse : HouseholdDetails
-    {
         public int OccupantId { get; set; }
     }
+
+    public class HouseholdResponse : Household { }
 
     public class HouseholdInsertRequest : HouseholdDetails
     {

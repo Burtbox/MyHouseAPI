@@ -39,8 +39,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(27));
             sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(37));
 
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 1);
-            sut.ShouldNotHaveValidationErrorFor(t => t.HouseholdId, 9999);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 1);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 9999);
             sut.ShouldNotHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(50));
         }
 
@@ -51,8 +51,8 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(27));
             sut.ShouldHaveValidationErrorFor(t => t.ModifiedBy, StringGenerator.RandomString(37));
 
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, 0);
-            sut.ShouldHaveValidationErrorFor(t => t.HouseholdId, -1);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, 0);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, -1);
             sut.ShouldHaveValidationErrorFor(t => t.Name, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.Name, StringGenerator.RandomString(51));
         }

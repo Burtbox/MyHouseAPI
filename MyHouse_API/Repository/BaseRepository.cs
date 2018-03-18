@@ -41,12 +41,12 @@ namespace MyHouseAPI.Repositories
             }
         }
 
-        private async Task<bool> validateHouseholdOccupant(IDbConnection db, string userId, int householdId)
+        private async Task<bool> validateHouseholdOccupant(IDbConnection db, string userId, int occupantId)
         {
             if (
                 await db.QueryFirstAsync<int>(
-                    sql: "[Houses].[Validate_Household_Occupant]",
-                    param: new { UserId = userId, HouseholdId = householdId },
+                    sql: "[Houses].[Validate_Occupant_In_Household]",
+                    param: new { UserId = userId, OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 ) == 1
             )
@@ -63,17 +63,17 @@ namespace MyHouseAPI.Repositories
         /// An async connection that validates the user belongs to the household
         /// </summary>
         /// <param name="userId"></param>
-        /// <param name="householdId"></param>
+        /// <param name="occupantId"></param>
         /// <param name="getData"></param>
         /// <returns></returns>
-        protected async Task<T> asyncConnection<T>(string userId, int householdId, Func<IDbConnection, Task<T>> getData)
+        protected async Task<T> asyncConnection<T>(string userId, int occupantId, Func<IDbConnection, Task<T>> getData)
         {
             try
             {
                 using (dbConnection)
                 {
                     await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
-                    await validateHouseholdOccupant(dbConnection, userId, householdId); // Validate the occupant lives in that household
+                    await validateHouseholdOccupant(dbConnection, userId, occupantId); // Validate the occupant lives in that household
                     return await getData(dbConnection); // Asynchronously execute getData, which has been passed in as a Func<IDBConnection, Task<T>>
                 }
             }
@@ -87,16 +87,16 @@ namespace MyHouseAPI.Repositories
         /// An async connection that validates the user belongs to the household
         /// </summary>
         /// <param name="userId"></param>
-        /// <param name="householdId"></param>
+        /// <param name="occupantId"></param>
         /// <returns></returns>
-        protected async Task<bool> checkHousehold(string userId, int householdId)
+        protected async Task<bool> checkHousehold(string userId, int occupantId)
         {
             try
             {
                 using (dbConnection)
                 {
                     await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
-                    return await validateHouseholdOccupant(dbConnection, userId, householdId); // Validate the occupant lives in that household
+                    return await validateHouseholdOccupant(dbConnection, userId, occupantId); // Validate the occupant lives in that household
                 }
             }
             catch (Exception exception)

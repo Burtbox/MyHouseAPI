@@ -9,9 +9,6 @@ namespace MyHouseIntegrationTests.Shared
         Method sutHttpMethod { get; }
 
         [Fact]
-        void InvalidHouseholdIdTest();
-
-        [Fact]
         void InvalidOccupantIdTest();
 
         [Fact]

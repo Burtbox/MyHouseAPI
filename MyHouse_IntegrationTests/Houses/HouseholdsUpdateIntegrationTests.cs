@@ -21,7 +21,7 @@ namespace MyHouseIntegrationTests.Houses
             string H5HouseholdName = StringGenerator.RandomString(50);
             HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
-                HouseholdId = 4,
+                OccupantId = 8,
                 Name = H5HouseholdName,
                 ModifiedBy = firebaseFixture.H2UserId
             };
@@ -32,7 +32,7 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new HouseholdResponse
             {
-                HouseholdId = 4,
+                OccupantId = 8,
                 Name = H5HouseholdName,
             });
 
@@ -43,16 +43,10 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidOccupantIdTest()
         {
-            // TODO: Implement!
-        }
-
-        [Fact]
-        public void InvalidHouseholdIdTest()
-        {
 
             HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
-                HouseholdId = 4,
+                OccupantId = 8,
                 Name = StringGenerator.RandomString(50),
                 ModifiedBy = firebaseFixture.H1UserId
             };
@@ -68,7 +62,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
-                HouseholdId = 4,
+                OccupantId = 8,
                 Name = StringGenerator.RandomString(50),
                 ModifiedBy = firebaseFixture.H1UserId
             };
@@ -85,7 +79,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             HouseholdUpdateRequest householdToUpdate = new HouseholdUpdateRequest
             {
-                HouseholdId = 4,
+                OccupantId = 8,
                 Name = StringGenerator.RandomString(50),
                 ModifiedBy = firebaseFixture.H2UserId
             };

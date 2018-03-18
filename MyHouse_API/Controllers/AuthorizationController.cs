@@ -30,11 +30,11 @@ namespace MyHouseAPI.Controllers
         }
 
         // GET: api/values
-        [HttpGet("{userId},{householdId}")]
-        public async Task<IActionResult> CheckHouseholdAuthorization(string userId, int householdId)
+        [HttpGet("{userId},{occupantId}")]
+        public async Task<IActionResult> CheckHouseholdAuthorization(string userId, int occupantId)
         {
             return await RequestHandler<AuthorizationResponse>(HttpVerbs.Get, userId, async () =>
-                await authorizationRepository.IsHouseholdAuthorized(userId, householdId));
+                await authorizationRepository.IsHouseholdAuthorized(userId, occupantId));
         }
     }
 }

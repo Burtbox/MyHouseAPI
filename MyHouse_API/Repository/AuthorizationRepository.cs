@@ -21,11 +21,11 @@ namespace MyHouseAPI.Repositories
             return authorizationResponse;
         }
 
-        public async Task<AuthorizationResponse> IsHouseholdAuthorized(string userId, int householdId)
+        public async Task<AuthorizationResponse> IsHouseholdAuthorized(string userId, int occupantId)
         {
             AuthorizationResponse authorizationResponse = new AuthorizationResponse
             {
-                IsAuthorized = await checkHousehold(userId, householdId)
+                IsAuthorized = await checkHousehold(userId, occupantId)
             };
             return authorizationResponse;
         }

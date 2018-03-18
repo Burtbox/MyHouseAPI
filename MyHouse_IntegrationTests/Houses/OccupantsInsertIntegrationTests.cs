@@ -24,7 +24,7 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 2,
+                OccupantId = 2,
                 EnteredBy = firebaseFixture.H2UserId
             };
 
@@ -37,7 +37,6 @@ namespace MyHouseIntegrationTests.Houses
                 OccupantId = response.Data.OccupantId,
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                HouseholdId = 2
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -48,17 +47,11 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidOccupantIdTest()
         {
-            // TODO: Implement!
-        }
-
-        [Fact]
-        public void InvalidHouseholdIdTest()
-        {
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1,
+                OccupantId = 1,
                 EnteredBy = firebaseFixture.H2UserId
             };
 
@@ -76,7 +69,7 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 1,
+                OccupantId = 1,
                 EnteredBy = firebaseFixture.H1UserId
             };
 
@@ -94,7 +87,7 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                HouseholdId = 2,
+                OccupantId = 2,
                 EnteredBy = firebaseFixture.H2UserId
             };
 

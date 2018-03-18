@@ -12,10 +12,6 @@ namespace MyHouseAPI.Validation
             RuleFor(x => x.DisplayName)
                 .NotEmpty()
                 .MaximumLength(100);
-
-            RuleFor(x => x.HouseholdId)
-                .NotEmpty()
-                .GreaterThan(0);
         }
     }
 
@@ -29,7 +25,7 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantInsertRequestValidator : OccupantsDetailsValidator<OccupantInsertRequest>
+    public class OccupantInsertRequestValidator : OccupantValidator<OccupantInsertRequest>
     {
         public OccupantInsertRequestValidator()
         {
@@ -37,5 +33,5 @@ namespace MyHouseAPI.Validation
         }
     }
 
-    public class OccupantUpdateRequestValidator : OccupantsDetailsValidator<OccupantUpdateRequest> { }
+    public class OccupantUpdateRequestValidator : OccupantValidator<OccupantUpdateRequest> { }
 }

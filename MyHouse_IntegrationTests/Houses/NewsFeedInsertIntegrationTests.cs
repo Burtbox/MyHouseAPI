@@ -24,7 +24,7 @@ namespace MyHouseIntegrationTests.Houses
             string authorDisplayName = StringGenerator.RandomString(100);
             NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
-                HouseholdId = 2,
+                OccupantId = 2,
                 Headline = newHeadline,
                 SubHeadline = newSubHeadline,
                 Story = newStory,
@@ -39,7 +39,7 @@ namespace MyHouseIntegrationTests.Houses
             string expectedContent = serialize(new NewsFeedResponse
             {
                 NewsFeedId = response.Data.NewsFeedId,
-                HouseholdId = 2,
+                OccupantId = 2,
                 Headline = newHeadline,
                 SubHeadline = newSubHeadline,
                 Story = newStory,
@@ -54,15 +54,9 @@ namespace MyHouseIntegrationTests.Houses
         [Fact]
         public void InvalidOccupantIdTest()
         {
-            // TODO: Implement!
-        }
-
-        [Fact]
-        public void InvalidHouseholdIdTest()
-        {
             NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
-                HouseholdId = 1,
+                OccupantId = 1,
                 Headline = StringGenerator.RandomString(100),
                 SubHeadline = StringGenerator.RandomString(200),
                 Story = StringGenerator.RandomString(500),
@@ -82,7 +76,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
-                HouseholdId = 1,
+                OccupantId = 1,
                 Headline = StringGenerator.RandomString(100),
                 SubHeadline = StringGenerator.RandomString(200),
                 Story = StringGenerator.RandomString(500),
@@ -102,7 +96,7 @@ namespace MyHouseIntegrationTests.Houses
         {
             NewsFeedInsertRequest newsFeedToInsert = new NewsFeedInsertRequest
             {
-                HouseholdId = 2,
+                OccupantId = 2,
                 Headline = StringGenerator.RandomString(100),
                 SubHeadline = StringGenerator.RandomString(200),
                 Story = StringGenerator.RandomString(500),

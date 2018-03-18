@@ -4,7 +4,6 @@ namespace MyHouseAPI.Model
     {
         public string UserId { get; set; }
         public string DisplayName { get; set; }
-        public int HouseholdId { get; set; }
     }
 
     public abstract class Occupant : OccupantDetails
@@ -15,10 +14,10 @@ namespace MyHouseAPI.Model
     public class OccupantResponse : Occupant { }
 
 
-    public class OccupantInsertRequest : OccupantDetails
+    public class OccupantInsertRequest : Occupant
     {
         public string EnteredBy { get; set; }
     }
 
-    public class OccupantUpdateRequest : OccupantDetails { }
+    public class OccupantUpdateRequest : Occupant { }
 }

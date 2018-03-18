@@ -23,7 +23,7 @@ namespace MyHouseIntegrationTests.Houses
             {
                 UserId = newUserId,
                 DisplayName = newDisplayName,
-                HouseholdId = 2,
+                OccupantId = 2,
                 EnteredBy = firebaseFixture.H2UserId
             };
 
@@ -49,19 +49,12 @@ namespace MyHouseIntegrationTests.Houses
             response.Content.ShouldBeEquivalentTo(expectedContent);
         }
 
-        [Fact]
+        //[Fact]
         public void InvalidOccupantIdTest()
         {
-            // TODO: Implement!
-        }
-
-        //[Fact]
-        public void InvalidHouseholdIdTest()
-        {
-            int householdId = 1;
             int occupantId = 3;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -70,10 +63,9 @@ namespace MyHouseIntegrationTests.Houses
         //[Fact]
         public void InvalidUserIdTest()
         {
-            int householdId = 1;
             int occupantId = 3;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", householdId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
@@ -82,10 +74,9 @@ namespace MyHouseIntegrationTests.Houses
         //[Fact]
         public void InvalidTokenTest()
         {
-            int householdId = 2;
             int occupantId = 5;
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", householdId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<OccupantResponse>(request);
 
             forbiddenExpectations(response);
