@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE [Houses].[Occupants_Update]
 	@OccupantId AS INT
 
 AS
-
+BEGIN
 	UPDATE Houses.Occupants 
 	SET DisplayName = @DisplayName
 	, ModifiedBy = @UserId
@@ -15,5 +15,5 @@ AS
 	SELECT OccupantId, UserId, DisplayName, HouseholdId
 	FROM Houses.Occupants
 	WHERE UserId = @UserId AND OccupantId = @OccupantId
-
+END
 GO

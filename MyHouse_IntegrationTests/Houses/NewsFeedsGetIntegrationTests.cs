@@ -27,7 +27,6 @@ namespace MyHouseIntegrationTests.Houses
                 new NewsFeedResponse
                 {
                     NewsFeedId = 1,
-                    OccupantId = 1,
                     Headline = "Eds Test Headline",
                     SubHeadline = "Eds Test SubHeadline",
                     Story = "Eds Test Story, this can be long",
@@ -36,7 +35,6 @@ namespace MyHouseIntegrationTests.Houses
                 new NewsFeedResponse
                 {
                     NewsFeedId = 3,
-                    OccupantId = 1,
                     Headline = "Eds Test Headline 3",
                     SubHeadline = "Eds Test SubHeadline 3",
                     Story = "Eds Test Story, this can be long 3",

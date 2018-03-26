@@ -7,10 +7,6 @@ namespace MyHouseAPI.Validation
     {
         public NewsFeedsDetailsValidator()
         {
-            RuleFor(x => x.OccupantId)
-                .NotEmpty()
-                .GreaterThan(0);
-
             RuleFor(x => x.Headline)
                 .NotEmpty()
                 .MaximumLength(100);

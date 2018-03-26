@@ -4,7 +4,8 @@ CREATE OR ALTER PROCEDURE [Houses].[Households_Update]
 	@ModifiedBy AS NVARCHAR(36)
 
 AS
-UPDATE Houses.Households 
+BEGIN
+	UPDATE Houses.Households 
 	SET Name = @Name 
 	, ModifiedBy = @ModifiedBy
 	, ModifiedDate = GETUTCDATE()
@@ -12,6 +13,7 @@ UPDATE Houses.Households
 	Occ.OccupantId
 	, INSERTED.Name
 	FROM Houses.Households  as Hh
-	INNER JOIN Houses.Occupants as Occ ON Hh.HouseholdId = Occ.HouseholdId
+		INNER JOIN Houses.Occupants as Occ ON Hh.HouseholdId = Occ.HouseholdId
 	WHERE OccupantId = @OccupantId
+END 
 GO

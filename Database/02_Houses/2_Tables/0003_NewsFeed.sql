@@ -3,7 +3,6 @@ BEGIN
 	CREATE TABLE [Houses].[NewsFeed]
 	(
 		[NewsFeedId] [int] IDENTITY(1,1) NOT NULL,
-		[HouseholdId] [int] NOT NULL,
 		[Headline] [nvarchar](100) NOT NULL,
 		[SubHeadline] [nvarchar](200) NULL,
 		[Story] [nvarchar](max) NOT NULL,

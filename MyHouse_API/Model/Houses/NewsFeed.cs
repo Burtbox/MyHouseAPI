@@ -2,7 +2,6 @@ namespace MyHouseAPI.Model
 {
     public abstract class NewsFeedDetails
     {
-        public int OccupantId { get; set; }
         public string Headline { get; set; }
         public string SubHeadline { get; set; }
         public string Story { get; set; }

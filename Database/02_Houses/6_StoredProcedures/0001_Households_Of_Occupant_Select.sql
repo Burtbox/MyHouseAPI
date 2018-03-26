@@ -1,11 +1,12 @@
-CREATE OR ALTER PROCEDURE [Houses].[Households_Of_Occupant]
+CREATE OR ALTER PROCEDURE [Houses].[Households_Of_Occupant_Select]
 	@UserId AS VARCHAR(36)
 AS
-SELECT
-	Households.HouseholdId
-		, Households.Name
-FROM Houses.Occupants
-	INNER JOIN Houses.Households ON Houses.Occupants.HouseholdId = Houses.Households.HouseholdId
-WHERE UserId = @UserId
-
+BEGIN
+	SELECT
+		Occ.OccupantId
+		, Hh.Name
+	FROM Houses.Occupants as Occ
+		INNER JOIN Houses.Households as Hh ON Occ.HouseholdId = Hh.HouseholdId
+	WHERE UserId = @UserId
+END
 GO

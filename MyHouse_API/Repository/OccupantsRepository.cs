@@ -17,7 +17,7 @@ namespace MyHouseAPI.Repositories
             return await asyncConnection(userId, occupantId, async db =>
             {
                 IEnumerable<OccupantResponse> occupants = await db.QueryAsync<OccupantResponse>(
-                    sql: "[Houses].[Occupants_Of_Household]",
+                    sql: "[Houses].[Occupants_Of_Household_Select]",
                     param: new { OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );

@@ -1,12 +1,19 @@
-CREATE OR ALTER PROCEDURE [Houses].[Occupants_Of_Household]
+CREATE OR ALTER PROCEDURE [Houses].[Occupants_Of_Household_Select]
 	@OccupantId AS INT
 AS
-SELECT
-	OccupantId 
-		, UserId
-		, DisplayName 
-		, HouseholdId
-FROM Houses.Occupants
-WHERE OccupantId = @OccupantId
+BEGIN
+	Declare @HouseholdId AS INT = (
+	SELECT HouseholdId
+	FROM Houses.Occupants as Me
+	WHERE Me.OccupantId = @OccupantId
+	)
 
+	SELECT
+		Occs.OccupantId 
+		, Occs.UserId
+		, Occs.DisplayName 
+		, Occs.HouseholdId
+	FROM Houses.Occupants as Occs
+	WHERE Occs.HouseholdId = @HouseholdId
+END
 GO
