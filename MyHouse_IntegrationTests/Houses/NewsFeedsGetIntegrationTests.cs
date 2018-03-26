@@ -16,7 +16,7 @@ namespace MyHouseIntegrationTests.Houses
         public NewsFeedsGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
         [Fact]
-        public void GetNewsFeedsOfHouseholdTest()
+        public void GetNewsFeedsTest()
         {
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);
@@ -34,11 +34,11 @@ namespace MyHouseIntegrationTests.Houses
                 },
                 new NewsFeedResponse
                 {
-                    NewsFeedId = 3,
-                    Headline = "Eds Test Headline 3",
-                    SubHeadline = "Eds Test SubHeadline 3",
-                    Story = "Eds Test Story, this can be long 3",
-                    Author = "Ed 3"
+                    NewsFeedId = 2,
+                    Headline = "Eds Test Headline 2",
+                    SubHeadline = "Eds Test SubHeadline 2",
+                    Story = "Eds Test Story, this can be long 2",
+                    Author = "Ed 2"
                 }
             });
 

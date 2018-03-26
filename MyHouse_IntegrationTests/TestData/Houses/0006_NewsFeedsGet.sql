@@ -6,8 +6,8 @@ exec Houses.NewsFeeds_Insert
 @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
 
 exec Houses.NewsFeeds_Insert
-@Headline = "Eds Test Headline 3",
-@SubHeadline = "Eds Test SubHeadline 3",
-@Story = "Eds Test Story, this can be long 3",
-@Author = "Ed 3",
+@Headline = "Eds Test Headline 2",
+@SubHeadline = "Eds Test SubHeadline 2",
+@Story = "Eds Test Story, this can be long 2",
+@Author = "Ed 2",
 @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
