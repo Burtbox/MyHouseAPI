@@ -25,7 +25,7 @@ BEGIN
 		(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
 	OUTPUT
 	INSERTED.OccupantId,
-	@Name
+	@Name As Name
 	VALUES
 		(@EnteredBy, @CreatorDisplayName, @NewHouseholdId, @EnteredBy, @EnteredBy)
 

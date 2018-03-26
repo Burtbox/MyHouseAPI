@@ -27,7 +27,7 @@ namespace MyHouseAPI.Controllers
         public async Task<IActionResult> RequestNewsFeed(string userId)
         {
             return await RequestHandler<IEnumerable<NewsFeedResponse>>(HttpVerbs.Get, userId, async () =>
-                await newsFeedsRepository.GetNewsFeeds(userId));
+                await newsFeedsRepository.GetNewsFeeds());
         }
     }
 }

@@ -12,13 +12,12 @@ namespace MyHouseAPI.Repositories
     {
         public NewsFeedsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds(string userId)
+        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds()
         {
             return await asyncConnection(async db =>
             {
                 IEnumerable<NewsFeedResponse> newsItems = await db.QueryAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Select]",
-                    param: new { UserId = userId },
                     commandType: CommandType.StoredProcedure
                 );
                 return newsItems;
