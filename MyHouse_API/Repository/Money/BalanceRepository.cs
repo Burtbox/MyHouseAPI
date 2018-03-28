@@ -16,12 +16,12 @@ namespace MyHouseAPI.Repositories.Money
         {
             return await asyncConnection(userId, occupantId, async db =>
             {
-                IEnumerable<BalanceResponse> newsItems = await db.QueryAsync<BalanceResponse>(
+                IEnumerable<BalanceResponse> balanceItems = await db.QueryAsync<BalanceResponse>(
                     sql: "[Money].[Balance_Get]",
                     param: new { occupantId },
                     commandType: CommandType.StoredProcedure
                 );
-                return newsItems;
+                return balanceItems;
             });
         }
     }

@@ -1,13 +1,14 @@
 CREATE OR ALTER PROCEDURE [Money].[Balance_Get]
 	@OccupantId as INT
 AS
-	SELECT Creditor
-		, Debtor
-		, Gross
-	FROM [Money].[TransactionSummary] 
-	INNER JOIN Houses.Occupants ON OccupantId = @OccupantId
-	WHERE CreditorOccupantId = @OccupantId 
-		and CreditorHouseholdId = HouseholdId 
-		and DebtorHouseholdId = HouseholdId
+	SELECT Ts.Creditor
+		, Ts.Debtor
+		, Ts.Gross
+	FROM [Money].[TransactionSummary] as Ts
+	INNER JOIN Houses.Occupants as Occ ON Occ.OccupantId = @OccupantId
+	WHERE Ts.CreditorOccupantId = @OccupantId 
+		and Ts.CreditorHouseholdId = Occ.HouseholdId 
+		and Ts.DebtorHouseholdId = Occ.HouseholdId
+		and Ts.Creditor <> Ts.Debtor
 
 GO

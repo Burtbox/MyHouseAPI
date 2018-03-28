@@ -12,14 +12,14 @@ namespace MyHouseAPI.Controllers.Money
     [Authorize]
     public class BalanceController : BaseController
     {
-        private readonly BalanceRepository newsFeedsRepository;
+        private readonly BalanceRepository balanceRepository;
 
         public BalanceController(
             IAuthorizationService authorizationService,
-            BalanceRepository newsFeedsRepository
+            BalanceRepository balanceRepository
         ) : base(authorizationService)
         {
-            this.newsFeedsRepository = newsFeedsRepository;
+            this.balanceRepository = balanceRepository;
         }
 
         // GET: api/values
@@ -27,7 +27,7 @@ namespace MyHouseAPI.Controllers.Money
         public async Task<IActionResult> RequestBalance(string userId, int occupantId)
         {
             return await RequestHandler<IEnumerable<BalanceResponse>>(HttpVerbs.Get, userId, async () =>
-                await newsFeedsRepository.GetBalance(userId, occupantId));
+                await balanceRepository.GetBalance(userId, occupantId));
         }
     }
 }
