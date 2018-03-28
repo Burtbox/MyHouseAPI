@@ -1,4 +1,4 @@
-namespace MyHouseAPI.Model
+namespace MyHouseAPI.Model.Money
 {
     public class BalanceResponse
     {

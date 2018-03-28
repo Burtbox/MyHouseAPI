@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
-using Dapper;
 using MyHouseAPI.Handlers;
-using MyHouseAPI.Model;
+using MyHouseAPI.Model.Authorization;
 using Serilog;
 
-namespace MyHouseAPI.Repositories
+namespace MyHouseAPI.Repositories.Authorization
 {
     public class AuthorizationRepository : BaseRepository
     {

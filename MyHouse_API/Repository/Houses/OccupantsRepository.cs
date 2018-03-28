@@ -3,10 +3,10 @@ using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using MyHouseAPI.Handlers;
-using MyHouseAPI.Model;
+using MyHouseAPI.Model.Houses;
 using Serilog;
 
-namespace MyHouseAPI.Repositories
+namespace MyHouseAPI.Repositories.Houses
 {
     public class OccupantsRepository : BaseRepository
     {

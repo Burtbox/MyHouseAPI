@@ -2,6 +2,7 @@ using Xunit;
 using MyHouseAPI.Validation;
 using FluentValidation.TestHelper;
 using MyHouseUnitTests.Helpers;
+using MyHouseAPI.Validation.Houses;
 
 namespace MyHouseUnitTests.ValidationTests
 {

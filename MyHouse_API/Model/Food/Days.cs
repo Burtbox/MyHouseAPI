@@ -1,13 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyHouseAPI.Model {
-    public class Days {
+namespace MyHouseAPI.Model.Food
+{
+    public class Days
+    {
         [Key]
-        [Required (ErrorMessage = "Date is required.")]
+        [Required(ErrorMessage = "Date is required.")]
         public string Date { get; set; }
 
-        [Required (ErrorMessage = "Meal id is required.")]
+        [Required(ErrorMessage = "Meal id is required.")]
         public int MealId { get; set; }
 
         public Byte NumberOfPeople { get; set; }

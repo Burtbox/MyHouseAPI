@@ -1,7 +1,6 @@
 using FluentValidation;
-using MyHouseAPI.Model;
 
-namespace MyHouseAPI.Validation
+namespace MyHouseAPI.Validation.Authorization
 {
     public static class FirebaseValidator
     {

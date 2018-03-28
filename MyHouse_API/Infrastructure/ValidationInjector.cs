@@ -1,7 +1,7 @@
 using FluentValidation;
-using MyHouseAPI.Model;
-using MyHouseAPI.Validation;
 using Microsoft.Extensions.DependencyInjection;
+using MyHouseAPI.Model.Houses;
+using MyHouseAPI.Validation.Houses;
 
 namespace MyHouseAPI.Services
 {

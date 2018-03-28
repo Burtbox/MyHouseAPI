@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using MyHouseAPI.Repositories;
-using MyHouseAPI.Model;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using MyHouseAPI.Repositories.Authorization;
+using MyHouseAPI.Model.Authorization;
 
-namespace MyHouseAPI.Controllers
+namespace MyHouseAPI.Controllers.Authorization
 {
     [Route("api/[controller]")]
     [ApiVersion("3.0")]

@@ -1,19 +1,20 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MyHouseAPI.Model
+namespace MyHouseAPI.Model.Food
 {
-    public class MealIngredients {
+    public class MealIngredients
+    {
         [Key]
-        [Required (ErrorMessage = "Meal ingredient id is required.")]
+        [Required(ErrorMessage = "Meal ingredient id is required.")]
         public int MealIngredientId { get; set; }
 
-        [Required (ErrorMessage = "Meal id is required.")]
+        [Required(ErrorMessage = "Meal id is required.")]
         public int MealId { get; set; }
 
-        [Required (ErrorMessage = "Ingredient id is required.")]
+        [Required(ErrorMessage = "Ingredient id is required.")]
         public int IngredientId { get; set; }
 
-        [Required (ErrorMessage = "Amount is required.")]
+        [Required(ErrorMessage = "Amount is required.")]
         public decimal Amount { get; set; }
     }
 }

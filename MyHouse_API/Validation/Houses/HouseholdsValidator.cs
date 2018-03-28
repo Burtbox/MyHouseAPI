@@ -1,7 +1,8 @@
 using FluentValidation;
-using MyHouseAPI.Model;
+using MyHouseAPI.Model.Houses;
+using MyHouseAPI.Validation.Authorization;
 
-namespace MyHouseAPI.Validation
+namespace MyHouseAPI.Validation.Houses
 {
     public class HouseholdDetailsValidator<T> : AbstractValidator<T> where T : HouseholdDetails
     {

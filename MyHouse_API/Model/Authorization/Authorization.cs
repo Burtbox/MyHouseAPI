@@ -1,4 +1,4 @@
-namespace MyHouseAPI.Model
+namespace MyHouseAPI.Model.Authorization
 {
     public class AuthorizationResponse
     {

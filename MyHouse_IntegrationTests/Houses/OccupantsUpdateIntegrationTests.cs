@@ -1,6 +1,6 @@
 using System.Net;
 using FluentAssertions;
-using MyHouseAPI.Model;
+using MyHouseAPI.Model.Houses;
 using MyHouseIntegrationTests.Shared;
 using MyHouseUnitTests.Helpers;
 using RestSharp;

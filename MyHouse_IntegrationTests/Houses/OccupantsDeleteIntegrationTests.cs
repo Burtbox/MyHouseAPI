@@ -1,10 +1,9 @@
-using Xunit;
 using FluentAssertions;
 using MyHouseIntegrationTests.Shared;
 using RestSharp;
-using MyHouseAPI.Model;
 using System.Net;
 using MyHouseUnitTests.Helpers;
+using MyHouseAPI.Model.Houses;
 
 namespace MyHouseIntegrationTests.Houses
 {

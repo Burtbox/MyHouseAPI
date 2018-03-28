@@ -1,5 +1,7 @@
 using MyHouseAPI.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using MyHouseAPI.Repositories.Houses;
+using MyHouseAPI.Repositories.Authorization;
 
 namespace MyHouseAPI.Services
 {
