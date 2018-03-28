@@ -7,7 +7,7 @@ using MyHouseAPI.Model.Houses;
 
 namespace MyHouseAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Houses/[controller]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class OccupantsController : BaseController

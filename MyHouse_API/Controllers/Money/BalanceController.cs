@@ -7,7 +7,7 @@ using MyHouseAPI.Model.Money;
 
 namespace MyHouseAPI.Controllers.Money
 {
-    [Route("api/[controller]")]
+    [Route("api/Money/[controller]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class BalanceController : BaseController
