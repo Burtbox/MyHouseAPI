@@ -23,7 +23,8 @@ namespace MyHouseIntegrationTests.Shared
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                FloatParseHandling = new FloatParseHandling()
             };
 
             string serializedObject = JsonConvert.SerializeObject(obj, settings);

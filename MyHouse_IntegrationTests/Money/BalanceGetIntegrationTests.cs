@@ -29,7 +29,7 @@ namespace MyHouseIntegrationTests.Money
                 {
                     Creditor = "dickbutt",
                     Debtor = "Household 1 occupant O2DispName",
-                    Gross = new decimal(4.20)
+                    Gross = decimal.Parse("4.20")
                 }
             });
 
