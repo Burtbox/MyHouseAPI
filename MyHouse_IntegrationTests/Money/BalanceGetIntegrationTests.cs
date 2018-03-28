@@ -5,7 +5,7 @@ using RestSharp;
 using System.Net;
 using MyHouseAPI.Model.Money;
 
-namespace MyHouseIntegrationTests.Houses
+namespace MyHouseIntegrationTests.Money
 {
     public class BalanceGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
