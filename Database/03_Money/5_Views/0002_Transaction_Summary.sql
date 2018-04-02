@@ -1,14 +1,8 @@
-IF OBJECT_ID(N'[Money].[TransactionSummary]', N'V') IS NOT NULL 
-BEGIN
-    DROP VIEW [Money].[TransactionSummary]
-END
-GO
-
-CREATE VIEW [Money].[TransactionSummary]
+CREATE OR ALTER VIEW [Money].[TransactionSummary]
 AS
 
-    SELECT Positive.DisplayName AS Creditor 
-     , Negative.DisplayName AS Debtor 
+    SELECT Positive.DisplayName AS CreditorDisplayName 
+     , Negative.DisplayName AS DebtorDisplayName  
 	 , TotalPositive.Total - TotalNegative.Total AS Gross
 	 , Positive.OccupantId AS CreditorOccupantId
 	 , Negative.OccupantId AS DebtorOccupantId

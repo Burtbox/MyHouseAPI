@@ -2,8 +2,10 @@ namespace MyHouseAPI.Model.Money
 {
     public class BalanceResponse
     {
-        public string Creditor { get; set; }
-        public string Debtor { get; set; }
+        public int CreditorOccupantId { get; set; }
+        public string CreditorDisplayName { get; set; }
+        public int DebtorOccupantId { get; set; }
+        public string DebtorDisplayName { get; set; }
         public decimal Gross { get; set; }
     }
 }

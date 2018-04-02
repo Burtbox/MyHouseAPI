@@ -27,8 +27,10 @@ namespace MyHouseIntegrationTests.Money
             {
                 new BalanceResponse
                 {
-                    Creditor = "dickbutt",
-                    Debtor = "Household 1 occupant O2DispName",
+                    CreditorDisplayName = "dickbutt",
+                    CreditorOccupantId = 1,
+                    DebtorDisplayName = "Household 1 occupant O2DispName",
+                    DebtorOccupantId = 3,
                     Gross = decimal.Parse("4.20")
                 }
             });
