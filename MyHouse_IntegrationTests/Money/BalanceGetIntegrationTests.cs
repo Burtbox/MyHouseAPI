@@ -17,11 +17,11 @@ namespace MyHouseIntegrationTests.Money
         [Fact]
         public void GetBalanceOfOccupantTest()
         {
-            int occupantId = firebaseFixture.H2OccupantId;
-            string displayName = firebaseFixture.H2DisplayName;
+            int occupantId = firebaseFixture.H3OccupantId;
+            string displayName = firebaseFixture.H3DisplayName;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", occupantId), sutHttpMethod);
             IRestResponse response = client.Execute<BalanceResponse>(request);
 
             string expectedContent = serialize(new BalanceResponse[]
@@ -30,24 +30,24 @@ namespace MyHouseIntegrationTests.Money
                 {
                     CreditorDisplayName = displayName,
                     CreditorOccupantId = occupantId,
-                    DebtorDisplayName = "Household 2 occupant O2DispName",
-                    DebtorOccupantId = 4,
+                    DebtorDisplayName = "Household 3 Bal Test 1",
+                    DebtorOccupantId = 10,
                     Gross = decimal.Parse("-0.04")
                 },
                 new BalanceResponse
                 {
                     CreditorDisplayName = displayName,
                     CreditorOccupantId = occupantId,
-                    DebtorDisplayName = "Household 2 occupant put",
-                    DebtorOccupantId = 5,
+                    DebtorDisplayName = "Household 3 Bal Test 2",
+                    DebtorOccupantId = 11,
                     Gross = decimal.Parse("4.22")
                 },
                 new BalanceResponse
                 {
                     CreditorDisplayName = displayName,
                     CreditorOccupantId = occupantId,
-                    DebtorDisplayName = "Household 2 occupant delete",
-                    DebtorOccupantId = 6,
+                    DebtorDisplayName = "Household 3 Bal Test 3",
+                    DebtorOccupantId = 12,
                     Gross = decimal.Parse("0.00")
                 }
             });

@@ -30,7 +30,7 @@ namespace MyHouseIntegrationTests.Houses
                 },
                 new HouseholdResponse
                 {
-                    OccupantId = 7,
+                    OccupantId = 8,
                     Name = "Household 3 owner dickbutt",
                 }
             });

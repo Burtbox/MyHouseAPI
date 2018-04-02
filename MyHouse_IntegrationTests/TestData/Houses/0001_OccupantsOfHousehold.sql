@@ -8,6 +8,11 @@ exec houses.Households_Insert
 	, @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
 	, @CreatorDisplayName = 'dickbutt2'
 
+exec houses.Households_Insert 
+	  @Name = 'Household 3 owner dickbutt3'
+	, @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+	, @CreatorDisplayName = 'dickbutt3'
+
 exec houses.Occupants_Insert 
       @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
     , @DisplayName = 'Household 1 occupant O2DispName'
