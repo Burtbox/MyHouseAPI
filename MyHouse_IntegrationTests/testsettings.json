@@ -1,11 +1,14 @@
 ﻿{
-  //"BaseURL": "http://localhost:5000/api/",
-  "BaseURL": "http://82.25.191.210/MyHouseTestAPI/api",
+  "BaseURL": "http://localhost:5000/api/",
+  //"BaseURL": "http://82.25.191.210/MyHouseTestAPI/api",
+  "NodeJsExe": "C:\\Program Files\\nodejs\\node.exe",
   "H1UserId": "70ajxWmrS6XIU53GL6bj1VcjCsm1",
   "H1DisplayName": "dickbutt",
   "H1OccupantId": 1,
   "H2UserId": "SbYFUv0fO8VLzotVFcTUn9uzhB02",
   "H2DisplayName": "dickbutt2",
   "H2OccupantId": 2,
-  "NodeJsExe": "C:\\Program Files\\nodejs\\node.exe"
+  "H3UserId": "jp9ZAlmz7gV9b74kzniROTSRZxz1",
+  "H3DisplayName": "dickbutt3",
+  "H3OccupantId": 3
 }

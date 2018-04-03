@@ -7,5 +7,6 @@ namespace MyHouseIntegrationTests.Shared
         public const string NewsFeeds = "Houses/NewsFeeds/";
         public const string Authorization = "Authorization/";
         public const string Balance = "Money/Balance/";
+        public const string Transactions = "Money/Transactions/";
     }
 }

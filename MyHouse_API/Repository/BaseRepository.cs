@@ -107,6 +107,7 @@ namespace MyHouseAPI.Repositories
 
         private Exception customCatch(Exception exception)
         {
+            // TODO: Utilise c# 7s new pattern matching ability here! 
             switch (exception.GetType().Name)
             {
                 case "TimeoutException":
