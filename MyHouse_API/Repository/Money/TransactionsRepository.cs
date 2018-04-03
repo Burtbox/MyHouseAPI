@@ -12,11 +12,11 @@ namespace MyHouseAPI.Repositories.Money
     {
         public TransactionsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<TransactionResponse>> InsertTransaction(string userId, TransactionInsertRequest transaction)
+        public async Task<TransactionResponse> InsertTransaction(string userId, TransactionInsertRequest transaction)
         {
             return await asyncConnection(userId, transaction.EnteredBy, async db =>
             {
-                IEnumerable<TransactionResponse> transactionItems = await db.QueryAsync<TransactionResponse>(
+                TransactionResponse transactionItems = await db.QueryFirstOrDefaultAsync<TransactionResponse>(
                     sql: "[Money].[Transaction_Insert]",
                     param: transaction,
                     commandType: CommandType.StoredProcedure
