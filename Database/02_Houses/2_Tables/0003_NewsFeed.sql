@@ -8,9 +8,9 @@ BEGIN
 		[Story] [nvarchar](max) NOT NULL,
 		[Author] [nvarchar](100) NOT NULL,
 		[EnteredBy] [nvarchar](36) NOT NULL,
-		[EnteredDate] [datetime] NOT NULL,
+		[EnteredDate] [DATETIME2(3)] NOT NULL,
 		[ModifiedBy] [nvarchar](36) NOT NULL,
-		[ModifiedDate] [datetime] NOT NULL
+		[ModifiedDate] [DATETIME2(3)] NOT NULL
 			CONSTRAINT [PK__Houses__NewsFeed] PRIMARY KEY CLUSTERED 
 	(
 		[NewsFeedId] ASC

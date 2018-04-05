@@ -5,6 +5,7 @@ using Xunit;
 using MyHouseIntegrationTests.Helpers;
 using FluentAssertions;
 using System.Net;
+using System;
 
 namespace MyHouseIntegrationTests.Shared
 {
@@ -24,7 +25,8 @@ namespace MyHouseIntegrationTests.Shared
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                FloatParseHandling = new FloatParseHandling()
+                FloatParseHandling = FloatParseHandling.Decimal,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc
             };
 
             string serializedObject = JsonConvert.SerializeObject(obj, settings);

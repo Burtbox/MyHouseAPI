@@ -28,20 +28,20 @@ VALUES
   ( 'char', 'string' )
 
   ,
-  ( 'date', 'DateTime?' ) -- Make the DateTime types optional to prevent the c# default causing sql to error
+  ( 'date', 'DATETIME2(3)?' ) -- Make the DATETIME2(3) types optional to prevent the c# default causing sql to error
 
   ,
-  ( 'datetime', 'DateTime?' )
+  ( 'DATETIME2(3)', 'DATETIME2(3)?' )
 
   ,
-  ( 'datetime2', 'DateTime?' )
+  ( 'DATETIME2(3)2', 'DATETIME2(3)?' )
 
   ,
   (
 
-    'datetimeoffset'
+    'DATETIME2(3)offset'
 
-      , 'DateTimeOffset?'
+      , 'DATETIME2(3)Offset?'
 
     )
 
@@ -79,7 +79,7 @@ VALUES
   ( 'rowversion', 'byte[]' )
 
   ,
-  ( 'smalldatetime', 'DateTime?' )
+  ( 'smallDATETIME2(3)', 'DATETIME2(3)?' )
 
   ,
   ( 'smallint', 'Int16' )

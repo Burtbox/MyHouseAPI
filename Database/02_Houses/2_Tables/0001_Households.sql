@@ -5,9 +5,9 @@ BEGIN
 		[HouseholdId] [int] IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](50) NOT NULL,
 		[EnteredBy] [nvarchar](36) NOT NULL,
-		[EnteredDate] [datetime] NOT NULL,
+		[EnteredDate] [DATETIME2(3)] NOT NULL,
 		[ModifiedBy] [nvarchar](36) NOT NULL,
-		[ModifiedDate] [datetime] NOT NULL
+		[ModifiedDate] [DATETIME2(3)] NOT NULL
 			CONSTRAINT [PK__Houses__Households] PRIMARY KEY CLUSTERED 
 	(
 		[HouseholdId] ASC

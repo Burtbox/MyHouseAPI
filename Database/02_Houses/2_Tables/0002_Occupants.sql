@@ -7,9 +7,9 @@ BEGIN
 		[DisplayName] [varchar](100) NOT NULL,
 		[HouseholdId] [int] NOT NULL,
 		[EnteredBy] [nvarchar](36) NOT NULL,
-		[EnteredDate] [datetime] NOT NULL,
+		[EnteredDate] [DATETIME2(3)] NOT NULL,
 		[ModifiedBy] [nvarchar](36) NOT NULL,
-		[ModifiedDate] [datetime] NOT NULL
+		[ModifiedDate] [DATETIME2(3)] NOT NULL
 			CONSTRAINT [PK__Houses__Occupants] PRIMARY KEY CLUSTERED 
 	(
 		[OccupantId] ASC

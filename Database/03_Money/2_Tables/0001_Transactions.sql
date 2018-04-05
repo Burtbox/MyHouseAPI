@@ -2,16 +2,16 @@ IF OBJECT_ID(N'[Money].[Transactions]', N'U') IS NULL
 BEGIN
 	CREATE TABLE [Money].[Transactions]
 	(
-		[TransactionId] [int] IDENTITY(1,1) NOT NULL,
-		[Creditor] [int] NOT NULL,
-		[Debtor] [int] NOT NULL,
-		[Gross] [decimal](18, 2) NOT NULL,
-		[Reference] [nvarchar](200) NULL,
-		[Date] [date] NULL,
-		[EnteredBy] [int] NOT NULL,
-		[EnteredDate] [datetime] NOT NULL,
-		[ModifiedBy] [int] NOT NULL,
-		[ModifiedDate] [datetime] NOT NULL
+		[TransactionId] int IDENTITY(1,1) NOT NULL,
+		[Creditor] int NOT NULL,
+		[Debtor] int NOT NULL,
+		[Gross] decimal(18, 2) NOT NULL,
+		[Reference] nvarchar(200) NULL,
+		[Date] DATE NULL,
+		[EnteredBy] int NOT NULL,
+		[EnteredDate] DATETIME2(3) NOT NULL,
+		[ModifiedBy] int NOT NULL,
+		[ModifiedDate] DATETIME2(3) NOT NULL
 			CONSTRAINT [PK__Money__Transactions] PRIMARY KEY CLUSTERED 
 	(
 		[TransactionId] ASC

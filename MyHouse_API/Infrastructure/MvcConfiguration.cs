@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using FluentValidation.AspNetCore;
 using MyHouseAPI.FilterAttributes;
+using Newtonsoft.Json;
 
 namespace MyHouseAPI.Services
 {
@@ -16,7 +17,11 @@ namespace MyHouseAPI.Services
                 configuration.Filters.Add(new AuthorizeFilter(policy));
                 configuration.Filters.Add(typeof(ModelStateValidationActionFilterAttribute));
             })
-            .AddFluentValidation();
+            .AddFluentValidation()
+            .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                });
 
             return services;
         }

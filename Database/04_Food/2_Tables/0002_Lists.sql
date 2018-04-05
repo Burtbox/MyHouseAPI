@@ -4,9 +4,9 @@ BEGIN
 	(
 		[ListId] [int] IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](200) NOT NULL,
-		[DateCreated] [datetime] NULL,
+		[DateCreated] [DATETIME2(3)] NULL,
 		[Complete] [bit] NOT NULL,
-		[DateCompleted] [datetime] NULL,
+		[DateCompleted] [DATETIME2(3)] NULL,
 		CONSTRAINT [PK__Food__Lists] PRIMARY KEY CLUSTERED 
 	(
 		[ListId] ASC

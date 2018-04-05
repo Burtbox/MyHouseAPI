@@ -21,7 +21,7 @@ namespace MyHouseIntegrationTests.Money
         {
             decimal gross = NumberGenerator.RandomDecimal(16, 2);
             string reference = StringGenerator.RandomString(200);
-            DateTime date = DateTime.Now;
+            DateTime date = DateTime.UtcNow.Date;
             TransactionInsertRequest transactionToInsert = new TransactionInsertRequest
             {
                 Creditor = 1,
@@ -43,7 +43,7 @@ namespace MyHouseIntegrationTests.Money
                 Debtor = 3,
                 Gross = gross,
                 Reference = reference,
-                Date = date.Date,
+                Date = date,
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -60,7 +60,7 @@ namespace MyHouseIntegrationTests.Money
                 Debtor = 3,
                 Gross = NumberGenerator.RandomDecimal(16, 2),
                 Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now,
+                Date = DateTime.Now.Date,
                 EnteredBy = 2
             };
 
@@ -80,7 +80,7 @@ namespace MyHouseIntegrationTests.Money
                 Debtor = 3,
                 Gross = NumberGenerator.RandomDecimal(16, 2),
                 Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now,
+                Date = DateTime.Now.Date,
                 EnteredBy = 1
             };
 
@@ -100,7 +100,7 @@ namespace MyHouseIntegrationTests.Money
                 Debtor = 3,
                 Gross = NumberGenerator.RandomDecimal(16, 2),
                 Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now,
+                Date = DateTime.Now.Date,
                 EnteredBy = 1
             };
 
