@@ -5,6 +5,8 @@ using Dapper;
 using MyHouseAPI.Handlers;
 using MyHouseAPI.Model.Money;
 using Serilog;
+using System.Linq;
+using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Repositories.Money
 {
@@ -12,13 +14,20 @@ namespace MyHouseAPI.Repositories.Money
     {
         public TransactionsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<TransactionResponse> InsertTransaction(string userId, TransactionInsertRequest transaction)
+        public async Task<TransactionResponse> InsertTransaction(string userId, IEnumerable<TransactionInsertRequest> transactionList)
         {
-            return await asyncConnection(userId, transaction.EnteredBy, async db =>
+            int enteredBy = transactionList.FirstOrDefault().EnteredBy;
+
+            if (transactionList != transactionList.Where(transaction => transaction.EnteredBy == enteredBy))
+            {
+                throw new InvalidOccupantException();
+            }
+
+            return await asyncConnection(userId, enteredBy, async db =>
             {
                 TransactionResponse transactionItems = await db.QueryFirstOrDefaultAsync<TransactionResponse>(
                     sql: "[Money].[Transaction_Insert]",
-                    param: transaction,
+                    param: transactionList,
                     commandType: CommandType.StoredProcedure
                 );
                 return transactionItems;

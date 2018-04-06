@@ -6,6 +6,7 @@ using System.Net;
 using MyHouseAPI.Model.Money;
 using MyHouseUnitTests.Helpers;
 using System;
+using System.Collections.Generic;
 
 namespace MyHouseIntegrationTests.Money
 {
@@ -20,31 +21,59 @@ namespace MyHouseIntegrationTests.Money
         public void AddTransactionTest()
         {
             decimal gross = NumberGenerator.RandomDecimal(16, 2);
+            decimal gross2 = NumberGenerator.RandomDecimal(16, 2);
             string reference = StringGenerator.RandomString(200);
             DateTime date = DateTime.UtcNow.Date;
-            TransactionInsertRequest transactionToInsert = new TransactionInsertRequest
+
+            IEnumerable<TransactionInsertRequest> transactionArrayToInsert = new TransactionInsertRequest[]
             {
-                Creditor = 1,
-                Debtor = 3,
-                Gross = gross,
-                Reference = reference,
-                Date = date,
-                EnteredBy = 1
+                new TransactionInsertRequest
+                {
+                    Creditor = 1,
+                    Debtor = 3,
+                    Gross = gross,
+                    Reference = reference,
+                    Date = date,
+                    EnteredBy = 1
+                },
+                new TransactionInsertRequest
+                {
+                    Creditor = 1,
+                    Debtor = 3,
+                    Gross = gross2,
+                    Reference = reference,
+                    Date = date,
+                    EnteredBy = 1
+                }
             };
 
             RestClient client = GetClient();
-            RestRequest request = apiCall<TransactionInsertRequest>(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod, transactionToInsert);
-            IRestResponse<TransactionResponse> response = client.Execute<TransactionResponse>(request);
+            RestRequest request = apiCall<IEnumerable<TransactionInsertRequest>>(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod, transactionArrayToInsert);
+            IRestResponse<List<TransactionResponse>> response = client.Execute<List<TransactionResponse>>(request);
 
-            string expectedContent = serialize(new TransactionResponse
-            {
-                TransactionId = response.Data.TransactionId,
-                Creditor = 1,
-                Debtor = 3,
-                Gross = gross,
-                Reference = reference,
-                Date = date,
-            });
+            string expectedContent = serialize(
+                new TransactionResponse[]
+                {
+                    new TransactionResponse
+                    {
+                        TransactionId = response.Data[0].TransactionId,
+                        Creditor = 1,
+                        Debtor = 3,
+                        Gross = gross,
+                        Reference = reference,
+                        Date = date,
+                    },
+                    new TransactionResponse
+                    {
+                        TransactionId = response.Data[1].TransactionId,
+                        Creditor = 1,
+                        Debtor = 3,
+                        Gross = gross2,
+                        Reference = reference,
+                        Date = date,
+                    }
+                }
+            );
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
@@ -54,19 +83,22 @@ namespace MyHouseIntegrationTests.Money
         public void InvalidOccupantIdTest()
         {
 
-            TransactionInsertRequest transactionToInsert = new TransactionInsertRequest
+            IEnumerable<TransactionInsertRequest> transactionToInsert = new TransactionInsertRequest[]
             {
-                Creditor = 1,
-                Debtor = 3,
-                Gross = NumberGenerator.RandomDecimal(16, 2),
-                Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now.Date,
-                EnteredBy = 2
+                new TransactionInsertRequest
+                {
+                    Creditor = 1,
+                    Debtor = 3,
+                    Gross = NumberGenerator.RandomDecimal(16, 2),
+                    Reference = StringGenerator.RandomString(200),
+                    Date = DateTime.Now.Date,
+                    EnteredBy = 2
+                }
             };
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod, transactionToInsert);
-            IRestResponse response = client.Execute<BalanceResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }
@@ -74,19 +106,22 @@ namespace MyHouseIntegrationTests.Money
         [Fact]
         public void InvalidUserIdTest()
         {
-            TransactionInsertRequest transactionToInsert = new TransactionInsertRequest
+            IEnumerable<TransactionInsertRequest> transactionToInsert = new TransactionInsertRequest[]
             {
-                Creditor = 1,
-                Debtor = 3,
-                Gross = NumberGenerator.RandomDecimal(16, 2),
-                Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now.Date,
-                EnteredBy = 1
+                new TransactionInsertRequest
+                {
+                    Creditor = 1,
+                    Debtor = 3,
+                    Gross = NumberGenerator.RandomDecimal(16, 2),
+                    Reference = StringGenerator.RandomString(200),
+                    Date = DateTime.Now.Date,
+                    EnteredBy = 1
+                }
             };
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId), sutHttpMethod, transactionToInsert);
-            IRestResponse response = client.Execute<BalanceResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }
@@ -94,19 +129,22 @@ namespace MyHouseIntegrationTests.Money
         [Fact]
         public void InvalidTokenTest()
         {
-            TransactionInsertRequest transactionToInsert = new TransactionInsertRequest
+            IEnumerable<TransactionInsertRequest> transactionToInsert = new TransactionInsertRequest[]
             {
-                Creditor = 1,
-                Debtor = 3,
-                Gross = NumberGenerator.RandomDecimal(16, 2),
-                Reference = StringGenerator.RandomString(200),
-                Date = DateTime.Now.Date,
-                EnteredBy = 1
+                new TransactionInsertRequest
+                {
+                    Creditor = 1,
+                    Debtor = 3,
+                    Gross = NumberGenerator.RandomDecimal(16, 2),
+                    Reference = StringGenerator.RandomString(200),
+                    Date = DateTime.Now.Date,
+                    EnteredBy = 1
+                }
             };
 
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod, transactionToInsert);
-            IRestResponse response = client.Execute<BalanceResponse>(request);
+            IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);
         }

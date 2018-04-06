@@ -23,8 +23,8 @@ namespace MyHouseAPI.Controllers.Money
         }
 
         // Post: api/values
-        [HttpPost("{userId}")]
-        public async Task<IActionResult> RequestInsertTransaction(string userId, [FromBody]TransactionInsertRequest transaction)
+        [HttpPost("{userId},{enteredBy}")]
+        public async Task<IActionResult> RequestInsertTransaction(string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
         {
             return await RequestHandler<TransactionResponse>(HttpVerbs.Post, userId, async () =>
                 await transactionsRepository.InsertTransaction(userId, transaction));
