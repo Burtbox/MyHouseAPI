@@ -6,6 +6,7 @@ using MyHouseAPI.Handlers;
 using Serilog;
 using Dapper;
 using MyHouseAPI.Model;
+using System.Data.SqlClient;
 
 namespace MyHouseAPI.Repositories
 {
@@ -107,24 +108,28 @@ namespace MyHouseAPI.Repositories
 
         private Exception customCatch(Exception exception)
         {
-            // TODO: Utilise c# 7s new pattern matching ability here! 
-            switch (exception.GetType().Name)
+            string formattedErrorMessage;
+            switch (exception)
             {
-                case "TimeoutException":
-                    this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Timeout), exception.Message);
-                    return new Exception(formattedErrorMessage(ExceptionTypes.Timeout), exception);
-                case "SqlException":
-                    this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.SQLError), exception.Message);
-                    return new Exception(formattedErrorMessage(ExceptionTypes.SQLError), exception);
-                case "InvalidOccupantException":
-                    this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.SQLError), exception.Message);
-                    return new InvalidOccupantException(formattedErrorMessage(ExceptionTypes.SQLError), exception);
+                case TimeoutException timeoutException:
+                    formattedErrorMessage = formatErrorMessage(ExceptionTypes.Timeout);
+                    this.logger.Error(timeoutException, formattedErrorMessage, timeoutException.Message);
+                    return new Exception(formattedErrorMessage, timeoutException);
+                case SqlException sqlException:
+                    formattedErrorMessage = formatErrorMessage(ExceptionTypes.SQLError);
+                    this.logger.Error(sqlException, formattedErrorMessage, sqlException.Message);
+                    return new Exception(formattedErrorMessage, sqlException);
+                case InvalidOccupantException invalidOccupant:
+                    formattedErrorMessage = formatErrorMessage(ExceptionTypes.InvalidOccupant);
+                    this.logger.Error(invalidOccupant, formattedErrorMessage, invalidOccupant.Message);
+                    return new InvalidOccupantException(formattedErrorMessage, invalidOccupant);
                 default:
-                    this.logger.Error(exception, formattedErrorMessage(ExceptionTypes.Unknown), exception.Message);
-                    return new Exception(formattedErrorMessage(ExceptionTypes.Unknown), exception);
+                    formattedErrorMessage = formatErrorMessage(ExceptionTypes.Unknown);
+                    this.logger.Error(exception, formattedErrorMessage, exception.Message);
+                    return new Exception(formattedErrorMessage, exception);
             }
         }
-        private string formattedErrorMessage(ExceptionTypes origin)
+        private string formatErrorMessage(ExceptionTypes origin)
         {
             Dictionary<ExceptionTypes, string> APICallErrors = new Dictionary<ExceptionTypes, string>();
             APICallErrors.Add(ExceptionTypes.Timeout, "experienced a SQL timeout: Details {0}");
