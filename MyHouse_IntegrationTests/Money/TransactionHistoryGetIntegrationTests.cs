@@ -20,74 +20,74 @@ namespace MyHouseIntegrationTests.Money
         public void GetTransactionHistoryTest()
         {
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", firebaseFixture.H2OccupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13), sutHttpMethod);
             IRestResponse<List<TransactionHistoryResponse>> response = client.Execute<List<TransactionHistoryResponse>>(request);
 
             string expectedContent = serialize(new TransactionHistoryResponse[]
                 {
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[0].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H2OccupantId,
-                        CreditorDisplayName = firebaseFixture.H2DisplayName,
-                        DebtorOccupantId = 5,
-                        DebtorDisplayName = "Household 2 occupant O2DispName",
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 15,
+                        DebtorDisplayName = "Transaction History DU1",
                         Gross = decimal.Parse("1.11"),
                         Date = DateTime.Parse("2018-04-07"),
-                        Reference = "Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)",
-                        EnteredByOccupantId = firebaseFixture.H2OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H2DisplayName,
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[0].EnteredDate
                     },
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[1].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H2OccupantId,
-                        CreditorDisplayName = firebaseFixture.H2DisplayName,
-                        DebtorOccupantId = 5,
-                        DebtorDisplayName = "Household 2 occupant O2DispName",
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 15,
+                        DebtorDisplayName = "Transaction History DU1",
                         Gross = decimal.Parse("-15.76"),
                         Date = DateTime.Parse("2018-04-09"),
-                        Reference = "Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)",
-                        EnteredByOccupantId = firebaseFixture.H2OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H2DisplayName,
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[1].EnteredDate
                     },
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[2].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H2OccupantId,
-                        CreditorDisplayName = firebaseFixture.H2DisplayName,
-                        DebtorOccupantId = 7,
-                        DebtorDisplayName = "Household 2 occupant delete",
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 16,
+                        DebtorDisplayName = "Transaction History DU2",
                         Gross = decimal.Parse("166.59"),
                         Date = DateTime.Parse("2018-04-11"),
-                        Reference = "Test Tran Between dickbutt2(2) and Household 2 occupant delete(7)",
-                        EnteredByOccupantId = firebaseFixture.H2OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H2DisplayName,
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU2(16)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[2].EnteredDate
                     },
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[3].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H2OccupantId,
-                        CreditorDisplayName = firebaseFixture.H2DisplayName,
-                        DebtorOccupantId = 5,
-                        DebtorDisplayName = "Household 2 occupant O2DispName",
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 15,
+                        DebtorDisplayName = "Transaction History DU1",
                         Gross = decimal.Parse("2.00"),
                         Date = DateTime.Parse("2018-04-21"),
-                        Reference = "Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)",
-                        EnteredByOccupantId = firebaseFixture.H2OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H2DisplayName,
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[3].EnteredDate
                     },
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[4].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H2OccupantId,
-                        CreditorDisplayName = firebaseFixture.H2DisplayName,
-                        DebtorOccupantId = firebaseFixture.H3OccupantId,
-                        DebtorDisplayName = firebaseFixture.H3DisplayName,
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 14,
+                        DebtorDisplayName = firebaseFixture.H1DisplayName,
                         Gross = decimal.Parse("-3.40"),
                         Date = DateTime.Parse("2018-12-10"),
-                        Reference = "Test Tran Between dickbutt3(3) and dickbutt2(2)",
-                        EnteredByOccupantId = firebaseFixture.H3OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
+                        Reference = "Test Tran Between dickbutt(1) and dickbutt3(3)",
+                        EnteredByOccupantId = 14,
+                        EnteredByDisplayName = firebaseFixture.H1DisplayName,
                         EnteredDate = response.Data[4].EnteredDate
                     }
                 }
@@ -102,7 +102,7 @@ namespace MyHouseIntegrationTests.Money
         public void InvalidOccupantIdTest()
         {
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", firebaseFixture.H2OccupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", firebaseFixture.H3OccupantId), sutHttpMethod);
             IRestResponse response = client.Execute(request);
 
             forbiddenExpectations(response);

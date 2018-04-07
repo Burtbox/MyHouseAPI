@@ -1,42 +1,60 @@
--- Setup balance occupants
+-- Setup transaction history household
+exec Houses.Households_Insert
+@Name = 'Household 6 owner dickbutt3',
+@CreatorDisplayName = 'dickbutt3',
+@EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+
+-- Setup transaction history occupants
 exec Houses.Occupants_Insert 
-@DisplayName = 'dickbutt3',
-@UserId = 'jp9ZAlmz7gV9b74kzniROTSRZxz1',
-@OccupantId = 2,
-@EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
+@DisplayName = 'dickbutt',
+@UserId = '70ajxWmrS6XIU53GL6bj1VcjCsm1',
+@OccupantId = 13,
+@EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+
+exec Houses.Occupants_Insert 
+@DisplayName = 'Transaction History DU1',
+@UserId = 'n502RYQixi1UH7N75CXFe5aGSzjb',
+@OccupantId = 13,
+@EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+
+exec Houses.Occupants_Insert 
+@DisplayName = 'Transaction History DU2',
+@UserId = 'wblrtCG19vP9iMEixa4Tr9vQM6L9',
+@OccupantId = 13,
+@EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 -- Add transactions to balance occupants 
 exec Money.Transaction_Insert
-@CreditorOccupantId = 2,
-@DebtorOccupantId = 5,
+@CreditorOccupantId = 13,
+@DebtorOccupantId = 15,
 @Gross ='1.11',
-@Reference ='Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)',
+@Reference ='Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)',
 @Date = '2018-04-07'
 
 exec Money.Transaction_Insert
-@CreditorOccupantId = 2,
-@DebtorOccupantId = 5,
+@CreditorOccupantId = 13,
+@DebtorOccupantId = 15,
 @Gross ='-15.76',
-@Reference ='Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)',
+@Reference ='Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)',
 @Date = '2018-04-09'
 
 exec Money.Transaction_Insert
-@CreditorOccupantId = 2,
-@DebtorOccupantId = 7,
+@CreditorOccupantId = 13,
+@DebtorOccupantId = 16,
 @Gross ='166.59',
-@Reference ='Test Tran Between dickbutt2(2) and Household 2 occupant delete(7)',
+@Reference ='Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU2(16)',
 @Date = '2018-04-11'
 
 exec Money.Transaction_Insert
-@CreditorOccupantId = 2,
-@DebtorOccupantId = 5,
+@CreditorOccupantId = 13,
+@DebtorOccupantId = 15,
 @Gross ='2.00',
-@Reference ='Test Tran Between dickbutt2(2) and Household 2 occupant O2DispName(5)',
+@Reference ='Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)',
 @Date = '2018-04-21'
 
 exec Money.Transaction_Insert
-@CreditorOccupantId = 3,
-@DebtorOccupantId = 2,
+@CreditorOccupantId = 14,
+@DebtorOccupantId = 13,
 @Gross ='3.40',
-@Reference ='Test Tran Between dickbutt3(3) and dickbutt2(2)',
+@Reference ='Test Tran Between dickbutt(1) and dickbutt3(3)',
 @Date = '2018-12-10'
