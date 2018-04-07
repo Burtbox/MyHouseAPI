@@ -10,11 +10,11 @@ namespace MyHouseAPI.Validation.Money
     {
         public TransactionDetailsValidator()
         {
-            RuleFor(x => x.Creditor)
+            RuleFor(x => x.CreditorOccupantId)
                 .NotEmpty()
                 .GreaterThan(0);
 
-            RuleFor(x => x.Debtor)
+            RuleFor(x => x.DebtorOccupantId)
                 .NotEmpty()
                 .GreaterThan(0);
 
@@ -45,7 +45,7 @@ namespace MyHouseAPI.Validation.Money
     {
         public TransactionInsertRequestValidator()
         {
-            RuleFor(x => x.EnteredBy)
+            RuleFor(x => x.EnteredByOccupantId)
                 .NotEmpty()
                 .GreaterThan(0);
         }

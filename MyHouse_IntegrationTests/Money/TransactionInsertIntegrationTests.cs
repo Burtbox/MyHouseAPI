@@ -29,21 +29,21 @@ namespace MyHouseIntegrationTests.Money
             {
                 new TransactionInsertRequest
                 {
-                    Creditor = 1,
-                    Debtor = 3,
+                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    DebtorOccupantId = 3,
                     Gross = gross,
                     Reference = reference,
                     Date = date,
-                    EnteredBy = 1
+                    EnteredByOccupantId = firebaseFixture.H1OccupantId
                 },
                 new TransactionInsertRequest
                 {
-                    Creditor = 1,
-                    Debtor = 3,
+                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    DebtorOccupantId = 3,
                     Gross = gross2,
                     Reference = reference,
                     Date = date,
-                    EnteredBy = 1
+                    EnteredByOccupantId = firebaseFixture.H1OccupantId
                 }
             };
 
@@ -62,17 +62,16 @@ namespace MyHouseIntegrationTests.Money
         [Fact]
         public void InvalidOccupantIdTest()
         {
-
             IEnumerable<TransactionInsertRequest> transactionToInsert = new TransactionInsertRequest[]
             {
                 new TransactionInsertRequest
                 {
-                    Creditor = 1,
-                    Debtor = 3,
+                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
                     Date = DateTime.Now.Date,
-                    EnteredBy = 2
+                    EnteredByOccupantId = firebaseFixture.H2OccupantId
                 }
             };
 
@@ -90,12 +89,12 @@ namespace MyHouseIntegrationTests.Money
             {
                 new TransactionInsertRequest
                 {
-                    Creditor = 1,
-                    Debtor = 3,
+                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
                     Date = DateTime.Now.Date,
-                    EnteredBy = 1
+                    EnteredByOccupantId = firebaseFixture.H1OccupantId
                 }
             };
 
@@ -113,12 +112,12 @@ namespace MyHouseIntegrationTests.Money
             {
                 new TransactionInsertRequest
                 {
-                    Creditor = 1,
-                    Debtor = 3,
+                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
                     Date = DateTime.Now.Date,
-                    EnteredBy = 1
+                    EnteredByOccupantId = firebaseFixture.H1OccupantId
                 }
             };
 

@@ -14,11 +14,24 @@ namespace MyHouseAPI.Repositories.Money
     {
         public TransactionsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
+        public async Task<IEnumerable<TransactionHistoryResponse>> GetTransactionHistory(string userId, int occupantId)
+        {
+            return await asyncConnection(userId, occupantId, async db =>
+            {
+                IEnumerable<TransactionHistoryResponse> transactionHistory = await db.QueryAsync<TransactionHistoryResponse>(
+                    sql: "[Money].[Transaction_History_Get]",
+                    param: new { UserId = userId, OccupantId = occupantId },
+                    commandType: CommandType.StoredProcedure
+                );
+                return transactionHistory;
+            });
+        }
+
         public async Task<int> InsertTransaction(string userId, IEnumerable<TransactionInsertRequest> transactionList)
         {
-            int enteredBy = transactionList.FirstOrDefault().EnteredBy;
+            int enteredBy = transactionList.FirstOrDefault().EnteredByOccupantId;
 
-            if (transactionList.Count() != transactionList.Where(transaction => transaction.EnteredBy == enteredBy).Count())
+            if (transactionList.Count() != transactionList.Where(transaction => transaction.EnteredByOccupantId == enteredBy).Count())
             {
                 throw new InvalidOccupantException();
             }

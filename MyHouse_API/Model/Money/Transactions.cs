@@ -5,8 +5,8 @@ namespace MyHouseAPI.Model.Money
 {
     public abstract class TransactionDetails
     {
-        public int Creditor { get; set; }
-        public int Debtor { get; set; }
+        public int CreditorOccupantId { get; set; }
+        public int DebtorOccupantId { get; set; }
         public decimal Gross { get; set; }
         public string Reference { get; set; }
         public DateTime Date { get; set; }
@@ -19,8 +19,15 @@ namespace MyHouseAPI.Model.Money
 
     public class TransactionInsertRequest : TransactionDetails
     {
-        public int EnteredBy { get; set; }
+        public int EnteredByOccupantId { get; set; }
     }
 
     public class TransactionResponse : Transaction { }
+
+    public class TransactionHistoryResponse : TransactionResponse
+    {
+        public string CreditorDisplayName { get; set; }
+        public string DebtorDisplayName { get; set; }
+        public string EnteredByDisplayName { get; set; }
+    }
 }

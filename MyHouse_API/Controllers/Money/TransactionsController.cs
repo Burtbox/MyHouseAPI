@@ -22,6 +22,14 @@ namespace MyHouseAPI.Controllers.Money
             this.transactionsRepository = transactionsRepository;
         }
 
+        // Get: api/values
+        [HttpGet("{userId},{occupantId}")]
+        public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId)
+        {
+            return await RequestHandler<IEnumerable<TransactionResponse>>(HttpVerbs.Post, userId, async () =>
+                await transactionsRepository.GetTransactionHistory(userId, occupantId));
+        }
+
         // Post: api/values
         [HttpPost("{userId}")]
         public async Task<IActionResult> RequestInsertTransaction(string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
