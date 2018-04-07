@@ -4,6 +4,7 @@ AS
 BEGIN
 	SELECT 
 	 PRIMARYKEY 
+	 , TransactionId
      , CreditorOccupantId 
 	 , CreditorDisplayName
 	 , DebtorOccupantId 

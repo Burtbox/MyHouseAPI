@@ -22,8 +22,6 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldNotHaveValidationErrorFor(t => t.Gross, NumberGenerator.RandomDecimal(2, 2));
             sut.ShouldNotHaveValidationErrorFor(t => t.Reference, StringGenerator.RandomString(200));
             sut.ShouldNotHaveValidationErrorFor(t => t.Date, DateTime.Now);
-            sut.ShouldNotHaveValidationErrorFor(t => t.EnteredByOccupantId, 1);
-            sut.ShouldNotHaveValidationErrorFor(t => t.EnteredByOccupantId, 9999);
         }
 
         [Fact]
@@ -39,8 +37,6 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldHaveValidationErrorFor(t => t.Gross, -1 * NumberGenerator.RandomDecimal(19, 2));
             sut.ShouldHaveValidationErrorFor(t => t.Reference, StringGenerator.RandomString(201));
             sut.ShouldHaveValidationErrorFor(t => t.Date, DateTime.MinValue);
-            sut.ShouldHaveValidationErrorFor(t => t.EnteredByOccupantId, 0);
-            sut.ShouldHaveValidationErrorFor(t => t.EnteredByOccupantId, -1);
         }
     }
 }

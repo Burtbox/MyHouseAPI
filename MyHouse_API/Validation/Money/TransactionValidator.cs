@@ -43,11 +43,6 @@ namespace MyHouseAPI.Validation.Money
 
     public class TransactionInsertRequestValidator : TransactionDetailsValidator<TransactionInsertRequest>
     {
-        public TransactionInsertRequestValidator()
-        {
-            RuleFor(x => x.EnteredByOccupantId)
-                .NotEmpty()
-                .GreaterThan(0);
-        }
+        public TransactionInsertRequestValidator() { }
     }
 }
