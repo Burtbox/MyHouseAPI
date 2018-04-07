@@ -20,7 +20,7 @@ namespace MyHouseAPI.Repositories.Money
             {
                 IEnumerable<TransactionHistoryResponse> transactionHistory = await db.QueryAsync<TransactionHistoryResponse>(
                     sql: "[Money].[Transaction_History_Get]",
-                    param: new { UserId = userId, OccupantId = occupantId },
+                    param: new { OccupantId = occupantId },
                     commandType: CommandType.StoredProcedure
                 );
                 return transactionHistory;
@@ -29,9 +29,9 @@ namespace MyHouseAPI.Repositories.Money
 
         public async Task<int> InsertTransaction(string userId, IEnumerable<TransactionInsertRequest> transactionList)
         {
-            int enteredBy = transactionList.FirstOrDefault().EnteredByOccupantId;
+            int enteredBy = transactionList.FirstOrDefault().CreditorOccupantId;
 
-            if (transactionList.Count() != transactionList.Where(transaction => transaction.EnteredByOccupantId == enteredBy).Count())
+            if (transactionList.Count() != transactionList.Where(transaction => transaction.CreditorOccupantId == enteredBy).Count())
             {
                 throw new InvalidOccupantException();
             }

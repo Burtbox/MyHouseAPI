@@ -1,10 +1,9 @@
 CREATE OR ALTER PROCEDURE Money.Transaction_Insert
-	@Creditor AS INT,
-	@Debtor AS INT,
+	@CreditorOccupantId AS INT,
+	@DebtorOccupantId AS INT,
 	@Gross AS DECIMAL(18,2),
 	@Reference AS VARCHAR(200),
-	@Date AS DATE,
-	@EnteredBy AS INT
+	@Date AS DATE
 AS
 BEGIN
 	INSERT INTO Transactions
@@ -31,13 +30,13 @@ BEGIN
 	inserted.Reference
 	VALUES
 		(
-			@Creditor
-		, @Debtor
+			@CreditorOccupantId
+		, @DebtorOccupantId
 		, @Gross
 		, @Reference
 		, @Date
-		, @EnteredBy
-		, @EnteredBy
+		, @CreditorOccupantId
+		, @CreditorOccupantId
 	)
 END
 GO

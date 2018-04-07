@@ -17,10 +17,7 @@ namespace MyHouseAPI.Model.Money
         public int TransactionId { get; set; }
     }
 
-    public class TransactionInsertRequest : TransactionDetails
-    {
-        public int EnteredByOccupantId { get; set; }
-    }
+    public class TransactionInsertRequest : TransactionDetails { }
 
     public class TransactionResponse : Transaction { }
 

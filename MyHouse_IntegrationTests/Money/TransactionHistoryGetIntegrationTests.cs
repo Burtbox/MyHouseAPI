@@ -79,15 +79,15 @@ namespace MyHouseIntegrationTests.Money
                     },
                     new TransactionHistoryResponse {
                         TransactionId = response.Data[4].TransactionId,
-                        CreditorOccupantId = firebaseFixture.H3OccupantId,
-                        CreditorDisplayName = firebaseFixture.H3DisplayName,
-                        DebtorOccupantId = firebaseFixture.H2OccupantId,
-                        DebtorDisplayName = firebaseFixture.H2DisplayName,
-                        Gross = decimal.Parse("3.40"),
+                        CreditorOccupantId = firebaseFixture.H2OccupantId,
+                        CreditorDisplayName = firebaseFixture.H2DisplayName,
+                        DebtorOccupantId = firebaseFixture.H3OccupantId,
+                        DebtorDisplayName = firebaseFixture.H3DisplayName,
+                        Gross = decimal.Parse("-3.40"),
                         Date = DateTime.Parse("2018-12-10"),
                         Reference = "Test Tran Between dickbutt3(3) and dickbutt2(2)",
-                        EnteredByOccupantId = firebaseFixture.H2OccupantId,
-                        EnteredByDisplayName = firebaseFixture.H2DisplayName,
+                        EnteredByOccupantId = firebaseFixture.H3OccupantId,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[4].EnteredDate
                     }
                 }

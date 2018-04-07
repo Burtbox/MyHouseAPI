@@ -16,6 +16,5 @@ BEGIN
 	 , EnteredDate 
 	 FROM Money.TransactionHistory
 	 WHERE CreditorOccupantId = @OccupantId
-	 OR DebtorOccupantId = @OccupantId
 END
 GO

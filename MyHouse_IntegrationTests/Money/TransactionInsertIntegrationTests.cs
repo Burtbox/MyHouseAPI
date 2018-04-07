@@ -33,8 +33,7 @@ namespace MyHouseIntegrationTests.Money
                     DebtorOccupantId = 3,
                     Gross = gross,
                     Reference = reference,
-                    Date = date,
-                    EnteredByOccupantId = firebaseFixture.H1OccupantId
+                    Date = date
                 },
                 new TransactionInsertRequest
                 {
@@ -42,8 +41,7 @@ namespace MyHouseIntegrationTests.Money
                     DebtorOccupantId = 3,
                     Gross = gross2,
                     Reference = reference,
-                    Date = date,
-                    EnteredByOccupantId = firebaseFixture.H1OccupantId
+                    Date = date
                 }
             };
 
@@ -66,12 +64,11 @@ namespace MyHouseIntegrationTests.Money
             {
                 new TransactionInsertRequest
                 {
-                    CreditorOccupantId = firebaseFixture.H1OccupantId,
+                    CreditorOccupantId = firebaseFixture.H2OccupantId,
                     DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
-                    Date = DateTime.Now.Date,
-                    EnteredByOccupantId = firebaseFixture.H2OccupantId
+                    Date = DateTime.Now.Date
                 }
             };
 
@@ -93,8 +90,7 @@ namespace MyHouseIntegrationTests.Money
                     DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
-                    Date = DateTime.Now.Date,
-                    EnteredByOccupantId = firebaseFixture.H1OccupantId
+                    Date = DateTime.Now.Date
                 }
             };
 
@@ -116,8 +112,7 @@ namespace MyHouseIntegrationTests.Money
                     DebtorOccupantId = 3,
                     Gross = NumberGenerator.RandomDecimal(16, 2),
                     Reference = StringGenerator.RandomString(200),
-                    Date = DateTime.Now.Date,
-                    EnteredByOccupantId = firebaseFixture.H1OccupantId
+                    Date = DateTime.Now.Date
                 }
             };
 
