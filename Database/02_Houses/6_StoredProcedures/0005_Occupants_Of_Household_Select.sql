@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[Occupants_Of_Household_Select]
+CREATE OR ALTER PROCEDURE Houses.Occupants_Of_Household_Select
 	@OccupantId AS INT
 AS
 BEGIN

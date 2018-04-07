@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[Households_Delete]
+CREATE OR ALTER PROCEDURE Houses.Households_Delete
 	@HouseholdId AS INT
 
 AS

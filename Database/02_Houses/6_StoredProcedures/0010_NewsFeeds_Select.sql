@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[NewsFeeds_Select]
+CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Select
 AS
 BEGIN
 	SELECT

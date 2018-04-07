@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[Households_Update]
+CREATE OR ALTER PROCEDURE Houses.Households_Update
 	@OccupantId AS INT,
 	@Name AS NVARCHAR(50),
 	@ModifiedBy AS NVARCHAR(36)

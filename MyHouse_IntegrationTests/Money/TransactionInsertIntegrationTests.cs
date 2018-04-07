@@ -49,30 +49,10 @@ namespace MyHouseIntegrationTests.Money
 
             RestClient client = GetClient();
             RestRequest request = apiCall<IEnumerable<TransactionInsertRequest>>(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod, transactionArrayToInsert);
-            IRestResponse<List<TransactionResponse>> response = client.Execute<List<TransactionResponse>>(request);
+            IRestResponse<int> response = client.Execute<int>(request);
 
             string expectedContent = serialize(
-                new TransactionResponse[]
-                {
-                    new TransactionResponse
-                    {
-                        TransactionId = response.Data[0].TransactionId,
-                        Creditor = 1,
-                        Debtor = 3,
-                        Gross = gross,
-                        Reference = reference,
-                        Date = date,
-                    },
-                    new TransactionResponse
-                    {
-                        TransactionId = response.Data[1].TransactionId,
-                        Creditor = 1,
-                        Debtor = 3,
-                        Gross = gross2,
-                        Reference = reference,
-                        Date = date,
-                    }
-                }
+                2
             );
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);

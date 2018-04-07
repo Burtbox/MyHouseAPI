@@ -19,7 +19,7 @@ VALUES
   ( 'bigint', 'Int64' )
 
   ,
-  ( 'binary', 'byte[]' )
+  ( 'binary', 'byte' )
 
   ,
   ( 'bit', 'bool' )
@@ -52,7 +52,7 @@ VALUES
   ( 'float', 'double' )
 
   ,
-  ( 'image', 'byte[]' )
+  ( 'image', 'byte' )
 
   ,
   ( 'int', 'int' )
@@ -76,7 +76,7 @@ VALUES
   ( 'real', 'single' )
 
   ,
-  ( 'rowversion', 'byte[]' )
+  ( 'rowversion', 'byte' )
 
   ,
   ( 'smallDATETIME2(3)', 'DATETIME2(3)?' )
@@ -97,7 +97,7 @@ VALUES
   ( 'time', 'TimeSpan' )
 
   ,
-  ( 'timestamp', 'byte[]' )
+  ( 'timestamp', 'byte' )
 
   ,
   ( 'tinyint', 'byte' )
@@ -106,7 +106,7 @@ VALUES
   ( 'uniqueidentifier', 'Guid' )
 
   ,
-  ( 'varbinary', 'byte[]' )
+  ( 'varbinary', 'byte' )
 
   ,
   ( 'varchar', 'string' )
@@ -118,7 +118,7 @@ VALUES
 
 SELECT
 
-  'public'                 AS [Accessor]
+  'public'                 AS Accessor
 
   , (
 
@@ -130,13 +130,13 @@ SELECT
 
   WHERE sqlType = Type_Name( user_type_id )
 
-    )                        AS [Type]
+    )                        AS Type
 
-  , Replace( name, '@', '' ) AS [Parameter_name]
+  , Replace( name, '@', '' ) AS Parameter_name
 
-  , '{ get; set; }'          AS [GetSet]
+  , '{ get; set; }'          AS GetSet
 
--- TYPE_NAME(user_type_id) AS [SQLType],
+-- TYPE_NAME(user_type_id) AS SQLType,
 
 -- is_output
 

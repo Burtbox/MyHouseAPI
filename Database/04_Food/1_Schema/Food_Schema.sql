@@ -1,5 +1,5 @@
 IF SCHEMA_ID(N'Food') IS NULL
 BEGIN
-	EXEC sys.sp_executesql N'CREATE SCHEMA [Food]'
+	EXEC sys.sp_executesql N'CREATE SCHEMA Food'
 END
 GO

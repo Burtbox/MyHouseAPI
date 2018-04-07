@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Money].[Transaction_Insert]
+CREATE OR ALTER PROCEDURE Money.Transaction_Insert
 	@Creditor AS INT,
 	@Debtor AS INT,
 	@Gross AS DECIMAL(18,2),
@@ -13,7 +13,7 @@ BEGIN
 		, Debtor
 		, Gross
 		, Reference
-		, [Date]
+		, Date
 		, EnteredBy
 		, ModifiedBy
 		)
@@ -26,7 +26,7 @@ BEGIN
 	,
 	inserted.Gross
 	,
-	inserted.[Date]
+	inserted.Date
 	,
 	inserted.Reference
 	VALUES

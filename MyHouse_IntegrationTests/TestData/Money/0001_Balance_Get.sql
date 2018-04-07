@@ -1,4 +1,4 @@
-exec [Money].[Transaction_Insert]
+exec Money.Transaction_Insert
 @Creditor = 1,
 @Debtor = 4,
 @Gross ='4.20',
@@ -26,7 +26,7 @@ exec Houses.Occupants_Insert
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 -- Add transactions to balance occupants 
-exec [Money].[Transaction_Insert]
+exec Money.Transaction_Insert
 @Creditor = 3,
 @Debtor = 10,
 @Gross ='2.40',
@@ -34,7 +34,7 @@ exec [Money].[Transaction_Insert]
 @Date = '2018-03-18 15:19:08.537',
 @EnteredBy = 3
 
-exec [Money].[Transaction_Insert]
+exec Money.Transaction_Insert
 @Creditor = 3,
 @Debtor = 11,
 @Gross ='4.22',
@@ -42,7 +42,7 @@ exec [Money].[Transaction_Insert]
 @Date = '2018-03-19 15:19:08.537',
 @EnteredBy = 3
 
-exec [Money].[Transaction_Insert]
+exec Money.Transaction_Insert
 @Creditor = 12,
 @Debtor = 11,
 @Gross ='6.55',
@@ -50,7 +50,7 @@ exec [Money].[Transaction_Insert]
 @Date = '2018-03-20 21:19:07.500',
 @EnteredBy = 12
 
-exec [Money].[Transaction_Insert]
+exec Money.Transaction_Insert
 @Creditor = 10,
 @Debtor = 3,
 @Gross ='2.44',

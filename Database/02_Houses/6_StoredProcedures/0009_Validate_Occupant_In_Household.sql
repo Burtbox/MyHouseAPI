@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [Houses].[Validate_Occupant_In_Household]
+CREATE OR ALTER PROCEDURE Houses.Validate_Occupant_In_Household
 	@OccupantId AS INT,
 	@UserId as NVARCHAR(36)
 AS
