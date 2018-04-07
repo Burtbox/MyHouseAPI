@@ -32,6 +32,11 @@ namespace MyHouseIntegrationTests.Houses
                 {
                     OccupantId = 8,
                     Name = "Household 3 owner dickbutt",
+                },
+                new HouseholdResponse
+                {
+                    OccupantId = 14,
+                    Name = "Household 6 owner dickbutt3"
                 }
             });
 
