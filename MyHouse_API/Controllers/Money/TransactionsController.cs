@@ -23,11 +23,11 @@ namespace MyHouseAPI.Controllers.Money
         }
 
         // Get: api/values
-        [HttpGet("{userId},{occupantId}")]
-        public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId)
+        [HttpGet("{userId},{occupantId},{pageSize},{pageNumber}")]
+        public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId, int pageSize, int pageNumber)
         {
             return await RequestHandler<IEnumerable<TransactionHistoryResponse>>(HttpVerbs.Get, userId, async () =>
-                await transactionsRepository.GetTransactionHistory(userId, occupantId));
+                await transactionsRepository.GetTransactionHistory(userId, occupantId, pageSize, pageNumber));
         }
 
         // Post: api/values

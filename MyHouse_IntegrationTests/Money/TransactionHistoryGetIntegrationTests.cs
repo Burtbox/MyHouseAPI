@@ -20,7 +20,7 @@ namespace MyHouseIntegrationTests.Money
         public void GetTransactionHistoryTest()
         {
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13, ",", 6, ",", 1), sutHttpMethod);
             IRestResponse<List<TransactionHistoryResponse>> response = client.Execute<List<TransactionHistoryResponse>>(request);
 
             string expectedContent = serialize(new TransactionHistoryResponse[]
@@ -99,6 +99,117 @@ namespace MyHouseIntegrationTests.Money
                         EnteredByOccupantId = 14,
                         EnteredByDisplayName = firebaseFixture.H1DisplayName,
                         EnteredDate = response.Data[4].EnteredDate
+                    }
+                }
+            );
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
+        }
+
+        [Fact]
+        public void GetTransactionHistoryPage1Test()
+        {
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13, ",", 1, ",", 1), sutHttpMethod);
+            IRestResponse<List<TransactionHistoryResponse>> response = client.Execute<List<TransactionHistoryResponse>>(request);
+
+            string expectedContent = serialize(new TransactionHistoryResponse[]
+                {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[0].TransactionId.ToString(),
+                        TransactionId = response.Data[0].TransactionId,
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 15,
+                        DebtorDisplayName = "Transaction History DU1",
+                        Gross = decimal.Parse("1.11"),
+                        Date = DateTime.Parse("2018-04-07"),
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
+                        EnteredDate = response.Data[0].EnteredDate
+                    },
+                }
+            );
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
+        }
+
+        [Fact]
+        public void GetTransactionHistoryPage2Test()
+        {
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13, ",", 3, ",", 2), sutHttpMethod);
+            IRestResponse<List<TransactionHistoryResponse>> response = client.Execute<List<TransactionHistoryResponse>>(request);
+
+            string expectedContent = serialize(new TransactionHistoryResponse[]
+                {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[0].TransactionId.ToString(),
+                        TransactionId = response.Data[0].TransactionId,
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 15,
+                        DebtorDisplayName = "Transaction History DU1",
+                        Gross = decimal.Parse("2.00"),
+                        Date = DateTime.Parse("2018-04-21"),
+                        Reference = "Test Tran Between dickbutt3(3) and Household 6 occupant Transaction History DU1(15)",
+                        EnteredByOccupantId = 13,
+                        EnteredByDisplayName = firebaseFixture.H3DisplayName,
+                        EnteredDate = response.Data[0].EnteredDate
+                    },
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Debt_" + response.Data[1].TransactionId.ToString(),
+                        TransactionId = response.Data[1].TransactionId,
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 14,
+                        DebtorDisplayName = firebaseFixture.H1DisplayName,
+                        Gross = decimal.Parse("-3.40"),
+                        Date = DateTime.Parse("2018-12-10"),
+                        Reference = "Test Tran Between dickbutt(1) and dickbutt3(3)",
+                        EnteredByOccupantId = 14,
+                        EnteredByDisplayName = firebaseFixture.H1DisplayName,
+                        EnteredDate = response.Data[1].EnteredDate
+                    }
+                }
+            );
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
+        }
+
+        [Fact]
+        public void GetTransactionHistoryPage3Test()
+        {
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H3Token, string.Concat(sutEndpoint, firebaseFixture.H3UserId, ",", 13, ",", 2, ",", 3), sutHttpMethod);
+            IRestResponse<List<TransactionHistoryResponse>> response = client.Execute<List<TransactionHistoryResponse>>(request);
+
+            string expectedContent = serialize(new TransactionHistoryResponse[]
+                {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Debt_" + response.Data[0].TransactionId.ToString(),
+                        TransactionId = response.Data[0].TransactionId,
+                        CreditorOccupantId = 13,
+                        CreditorDisplayName = firebaseFixture.H3DisplayName,
+                        DebtorOccupantId = 14,
+                        DebtorDisplayName = firebaseFixture.H1DisplayName,
+                        Gross = decimal.Parse("-3.40"),
+                        Date = DateTime.Parse("2018-12-10"),
+                        Reference = "Test Tran Between dickbutt(1) and dickbutt3(3)",
+                        EnteredByOccupantId = 14,
+                        EnteredByDisplayName = firebaseFixture.H1DisplayName,
+                        EnteredDate = response.Data[0].EnteredDate
                     }
                 }
             );
