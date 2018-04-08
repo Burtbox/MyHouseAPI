@@ -26,7 +26,7 @@ namespace MyHouseAPI.Controllers.Money
         [HttpGet("{userId},{occupantId}")]
         public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId)
         {
-            return await RequestHandler<IEnumerable<TransactionResponse>>(HttpVerbs.Get, userId, async () =>
+            return await RequestHandler<IEnumerable<TransactionHistoryResponse>>(HttpVerbs.Get, userId, async () =>
                 await transactionsRepository.GetTransactionHistory(userId, occupantId));
         }
 

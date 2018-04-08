@@ -25,7 +25,9 @@ namespace MyHouseIntegrationTests.Money
 
             string expectedContent = serialize(new TransactionHistoryResponse[]
                 {
-                    new TransactionHistoryResponse {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[0].TransactionId.ToString(),
                         TransactionId = response.Data[0].TransactionId,
                         CreditorOccupantId = 13,
                         CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -38,7 +40,9 @@ namespace MyHouseIntegrationTests.Money
                         EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[0].EnteredDate
                     },
-                    new TransactionHistoryResponse {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[1].TransactionId.ToString(),
                         TransactionId = response.Data[1].TransactionId,
                         CreditorOccupantId = 13,
                         CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -51,7 +55,9 @@ namespace MyHouseIntegrationTests.Money
                         EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[1].EnteredDate
                     },
-                    new TransactionHistoryResponse {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[2].TransactionId.ToString(),
                         TransactionId = response.Data[2].TransactionId,
                         CreditorOccupantId = 13,
                         CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -64,7 +70,9 @@ namespace MyHouseIntegrationTests.Money
                         EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[2].EnteredDate
                     },
-                    new TransactionHistoryResponse {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Credit_" + response.Data[3].TransactionId.ToString(),
                         TransactionId = response.Data[3].TransactionId,
                         CreditorOccupantId = 13,
                         CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -77,7 +85,9 @@ namespace MyHouseIntegrationTests.Money
                         EnteredByDisplayName = firebaseFixture.H3DisplayName,
                         EnteredDate = response.Data[3].EnteredDate
                     },
-                    new TransactionHistoryResponse {
+                    new TransactionHistoryResponse
+                    {
+                        PrimaryKey = "Debt_" + response.Data[4].TransactionId.ToString(),
                         TransactionId = response.Data[4].TransactionId,
                         CreditorOccupantId = 13,
                         CreditorDisplayName = firebaseFixture.H3DisplayName,

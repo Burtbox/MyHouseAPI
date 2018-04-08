@@ -1,6 +1,7 @@
 CREATE OR ALTER VIEW Money.TransactionHistory
 AS
-	SELECT 'credit' + CAST(ROW_NUMBER() OVER (ORDER BY DATE) AS NVARCHAR(1000)) AS PRIMARYKEY
+	SELECT 'Credit_' + CAST(ROW_NUMBER() OVER (ORDER BY DATE) AS NVARCHAR(1000)) AS PrimaryKey
+	 , 'Credit' AS CreditOrDebt
 	 , Credits.TransactionId AS TransactionId
      , Credits.Creditor AS CreditorOccupantId
 	 , CreditorOccupant.DisplayName AS CreditorDisplayName
@@ -19,7 +20,8 @@ AS
 
 	UNION ALL
 
-	SELECT 'debt' + CAST(ROW_NUMBER() OVER (ORDER BY DATE) AS NVARCHAR(1000)) AS PRIMARYKEY 
+	SELECT 'Debt_' + CAST(ROW_NUMBER() OVER (ORDER BY DATE) AS NVARCHAR(1000)) AS PrimaryKey 
+	 , 'Debt' AS CreditOrDebt
 	 , Debts.TransactionId AS TransactionId
      , Debts.Debtor  AS CreditorOccupantId
 	 , CreditorOccupant.DisplayName AS CreditorDisplayName
