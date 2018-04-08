@@ -26,6 +26,22 @@ namespace MyHouseAPI.Controllers.Money
         [HttpGet("{userId},{occupantId},{pageSize},{pageNumber}")]
         public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId, int pageSize, int pageNumber)
         {
+            if (pageSize < 1)
+            {
+                ModelState.AddModelError("Error", "Page Size must be greater than 1");
+            }
+            if (pageNumber < 1)
+            {
+                ModelState.AddModelError("Error", "Page Number must be greater than 1");
+            }
+            if (occupantId < 1)
+            {
+                ModelState.AddModelError("Error", "Occupant Id must be greater than 1");
+            }
+            if (userId.Length < 28 || userId.Length > 36)
+            {
+                ModelState.AddModelError("Error", "Invalid User Id");
+            }
             return await RequestHandler<IEnumerable<TransactionHistoryResponse>>(HttpVerbs.Get, userId, async () =>
                 await transactionsRepository.GetTransactionHistory(userId, occupantId, pageSize, pageNumber));
         }

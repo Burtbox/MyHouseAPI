@@ -16,12 +16,11 @@ namespace MyHouseAPI.Repositories.Money
 
         public async Task<IEnumerable<TransactionHistoryResponse>> GetTransactionHistory(string userId, int occupantId, int pageSize, int pageNumber)
         {
-            // TODO: Validate Page Size and Page Number greater than 0 
             return await asyncConnection(userId, occupantId, async db =>
             {
                 IEnumerable<TransactionHistoryResponse> transactionHistory = await db.QueryAsync<TransactionHistoryResponse>(
                     sql: "[Money].[Transaction_History_Get]",
-                    param: new { occupantId, pageSize, pageNumber },
+                    param: new { OccupantId = occupantId, PageSize = pageSize, PageNumber = pageNumber },
                     commandType: CommandType.StoredProcedure
                 );
                 return transactionHistory;
