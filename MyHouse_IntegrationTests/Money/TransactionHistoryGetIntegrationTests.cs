@@ -35,7 +35,6 @@ namespace MyHouseIntegrationTests.Money
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
-            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
         }
 
         [Fact]
@@ -53,7 +52,6 @@ namespace MyHouseIntegrationTests.Money
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
-            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
         }
 
         [Fact]
@@ -72,7 +70,6 @@ namespace MyHouseIntegrationTests.Money
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
-            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
         }
 
         [Fact]
@@ -90,7 +87,6 @@ namespace MyHouseIntegrationTests.Money
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ShouldBeEquivalentTo(expectedContent);
-            // TODO: Add separate check for entered date about right - will need some tolerance built in, write a helper for this!
         }
 
         [Fact]
