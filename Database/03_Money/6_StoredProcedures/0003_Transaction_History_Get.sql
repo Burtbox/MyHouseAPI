@@ -5,8 +5,7 @@ CREATE OR ALTER PROCEDURE Money.Transaction_History_Get
 AS
 BEGIN
 	SELECT
-	 PrimaryKey 
-	 , TransactionId
+	 TransactionId
      , CreditorOccupantId 
 	 , CreditorDisplayName
 	 , DebtorOccupantId 

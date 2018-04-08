@@ -127,7 +127,6 @@ namespace MyHouseIntegrationTests.Money
         {
             return new TransactionHistoryResponse
             {
-                PrimaryKey = "Debt_" + response.Data[rowNumber].TransactionId.ToString(),
                 TransactionId = response.Data[rowNumber].TransactionId,
                 CreditorOccupantId = 13,
                 CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -146,7 +145,6 @@ namespace MyHouseIntegrationTests.Money
         {
             return new TransactionHistoryResponse
             {
-                PrimaryKey = "Credit_" + response.Data[rowNumber].TransactionId.ToString(),
                 TransactionId = response.Data[rowNumber].TransactionId,
                 CreditorOccupantId = 13,
                 CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -165,7 +163,6 @@ namespace MyHouseIntegrationTests.Money
         {
             return new TransactionHistoryResponse
             {
-                PrimaryKey = "Credit_" + response.Data[rowNumber].TransactionId.ToString(),
                 TransactionId = response.Data[rowNumber].TransactionId,
                 CreditorOccupantId = 13,
                 CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -184,7 +181,6 @@ namespace MyHouseIntegrationTests.Money
         {
             return new TransactionHistoryResponse
             {
-                PrimaryKey = "Credit_" + response.Data[rowNumber].TransactionId.ToString(),
                 TransactionId = response.Data[rowNumber].TransactionId,
                 CreditorOccupantId = 13,
                 CreditorDisplayName = firebaseFixture.H3DisplayName,
@@ -203,7 +199,6 @@ namespace MyHouseIntegrationTests.Money
         {
             return new TransactionHistoryResponse
             {
-                PrimaryKey = "Credit_" + response.Data[rowNumber].TransactionId.ToString(),
                 TransactionId = response.Data[rowNumber].TransactionId,
                 CreditorOccupantId = 13,
                 CreditorDisplayName = firebaseFixture.H3DisplayName,

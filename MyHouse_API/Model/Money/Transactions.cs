@@ -23,7 +23,6 @@ namespace MyHouseAPI.Model.Money
 
     public class TransactionHistoryResponse : TransactionResponse
     {
-        public string PrimaryKey { get; set; }
         public int EnteredByOccupantId { get; set; }
         public string CreditorDisplayName { get; set; }
         public string DebtorDisplayName { get; set; }
