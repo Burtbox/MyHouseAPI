@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+    }
 
     stages {
         stage('Build') {
@@ -29,7 +32,7 @@ pipeline {
                     Restart-WebAppPool \$pool
                 """
                 echo 'Publishing Integration Test API'
-                powershell "dotnet publish \".\\MyHouse_API\\MyHouseAPI.csproj\" -o \"\\EDLAPTOP\\wwwroot\\MyHouseTestAPI_${env.BRANCH_NAME}\""
+                powershell "dotnet publish \".\\MyHouse_API\\MyHouseAPI.csproj\" -o \"C:\\wwwroot\\MyHouseTestAPI_${env.BRANCH_NAME}\""
             }
         }
         stage('Integration Test') {
