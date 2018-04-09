@@ -22,21 +22,21 @@ pipeline {
                     # Load IIS module:
                     Import-Module WebAdministration
                     # Set a name of the site we want to recycle the pool for:
-                    \$site = "Default Web Site/MyHouseTestAPI_${env.GIT_BRANCH}"
+                    \$site = "Default Web Site/MyHouseTestAPI_${env.BRANCH_NAME}"
                     # Get pool name by the site name:
                     \$pool = (Get-Item "IIS:\\Sites\\\$site"| Select-Object applicationPool).applicationPool
                     # Recycle the application pool:
                     Restart-WebAppPool \$pool
                 """
                 echo 'Publishing Integration Test API'
-                powershell "dotnet \".\\MyHouseApi\\MyHouseAPI.csproj\" -c publish -o \"\\EDLAPTOP\\wwwroot\\MyHouseTestAPI_${env.GIT_BRANCH}\""
+                powershell "dotnet \".\\MyHouseApi\\MyHouseAPI.csproj\" -c publish -o \"\\EDLAPTOP\\wwwroot\\MyHouseTestAPI_${env.BRANCH_NAME}\""
             }
         }
         stage('Integration Test') {
             steps {
                 echo 'Integration Testing MyHouseApi'
                 echo 'Setting up integration testing database'
-                powershell ".\\BuildScripts\\SetupUnitTestDb.ps1 -repoDir \"${env.WORKSPACE}\" -server \"EDLAPTOP\\EDLAPTOPSQL\" -db \"MyHouse_Dev_Tests_${env.GIT_BRANCH}\""
+                powershell ".\\BuildScripts\\SetupUnitTestDb.ps1 -repoDir \"${env.WORKSPACE}\" -server \"EDLAPTOP\\EDLAPTOPSQL\" -db \"MyHouse_Dev_Tests_${env.BRANCH_NAME}\""
                 echo 'Running integration tests'
                 powershell 'dotnet test ".\\MyHouse_IntegrationTests\\MyHouseIntegrationTests.csproj"'
             }
