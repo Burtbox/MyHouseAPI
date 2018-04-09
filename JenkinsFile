@@ -33,11 +33,13 @@ pipeline {
             }
         }
         stage('Integration Test') {
-            echo 'Integration Testing MyHouseApi'
-            echo 'Setting up integration testing database'
-            powershell ".\\BuildScripts\\SetupUnitTestDb.ps1 -repoDir \"${env.WORKSPACE}\" -server \"EDLAPTOP\\EDLAPTOPSQL\" -db \"MyHouse_Dev_Tests_${env.BRANCH_NAME}\""
-            echo 'Running integration tests'
-            powershell 'dotnet test ".\\MyHouse_IntegrationTests\\MyHouseIntegrationTests.csproj"'
+            steps {
+                echo 'Integration Testing MyHouseApi'
+                echo 'Setting up integration testing database'
+                powershell ".\\BuildScripts\\SetupUnitTestDb.ps1 -repoDir \"${env.WORKSPACE}\" -server \"EDLAPTOP\\EDLAPTOPSQL\" -db \"MyHouse_Dev_Tests_${env.BRANCH_NAME}\""
+                echo 'Running integration tests'
+                powershell 'dotnet test ".\\MyHouse_IntegrationTests\\MyHouseIntegrationTests.csproj"'
+            }
         }
     }
 }
