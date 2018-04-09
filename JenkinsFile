@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building MyHouseApi'
+                powershell 'dotnet build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Unit Testing MyHouseApi'
+                powershell 'dotnet ".\\MyHouse_UnitTests\\MyHouseUnitTests.csproj" test'
+                echo 'Integration Testing MyHouseApi'
+                powershell '.\\BuildScripts\\SetupUnitTestDb.ps1 -repoDir "C:\\WebProjects\\MyHouseAPI" -server "EDLAPTOP\\EDLAPTOPSQL" -db "MyHouse_Dev_Tests"'
+                powershell 'dotnet ".\\MyHouse_IntegrationTests\\MyHouseIntegrationTests.csproj" test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying MyHouseApi'
+                powershell 'dotnet ".\\MyHouseApi\\MyHouseAPI.csproj" -c publish -o "\\EDLAPTOP\\wwwroot\\MyHouseTestAPI"'
+            }
+        }
+    }
+}
