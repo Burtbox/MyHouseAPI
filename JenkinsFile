@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('EDS DEBUGGING') {
-            steps {
-                echo "${env.BRANCH_NAME}"
-                powershell "Write-Host ${env.BRANCH_NAME}"
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Building MyHouseApi'
@@ -25,13 +19,13 @@ pipeline {
                 echo 'Deploying Integration Test MyHouseApi'
                 echo 'Restarting app pool for test api'
                 powershell """
-                    # Load IIS module:
+                    Write-Host "Load IIS module:"
                     Import-Module WebAdministration
-                    # Set a name of the site we want to recycle the pool for:
+                    Write-Host "Set a name of the site we want to recycle the pool for:"
                     \$site = "Default Web Site/MyHouseTestAPI_${env.BRANCH_NAME}"
-                    # Get pool name by the site name:
+                    Write-Host "Get pool name by the site name:"
                     \$pool = (Get-Item "IIS:\\Sites\\\$site"| Select-Object applicationPool).applicationPool
-                    # Recycle the application pool:
+                    Write-Host "Recycle the application pool:"
                     Restart-WebAppPool \$pool
                 """
                 echo 'Publishing Integration Test API'
