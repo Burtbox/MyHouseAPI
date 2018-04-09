@@ -1,0 +1,26 @@
+html, body, #select, .topbar {
+    font-family: 'Roboto', sans-serif !important;
+    color: #1565C0 !important;
+    background-color: #1b1a1a !important;
+}
+
+#title {
+    size: 15px
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #212121 inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #212121 inset !important;
+    -webkit-text-fill-color: #bdbdbd !important;
+}
+
+.scheme-container {
+    height: 80px;
+}
+
+.modal-ux, input, .scheme-container, .content-type-wrapper,
+.execute-content-type, .select, .opblock-section-header
+{
+    background-color: inherit !important;
+    color: inherit !important;
+}
