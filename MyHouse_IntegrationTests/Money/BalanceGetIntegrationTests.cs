@@ -31,7 +31,7 @@ namespace MyHouseIntegrationTests.Money
                     CreditorDisplayName = displayName,
                     CreditorOccupantId = occupantId,
                     DebtorDisplayName = "Household 3 Bal Test 1",
-                    DebtorOccupantId = 10,
+                    DebtorOccupantId = 12,
                     Gross = decimal.Parse("-0.04")
                 },
                 new BalanceResponse
