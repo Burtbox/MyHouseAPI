@@ -19,7 +19,7 @@ input:-webkit-autofill {
 }
 
 .modal-ux, input, .scheme-container, .content-type-wrapper,
-.execute-content-type, .select, .opblock-section-header
+.execute-content-type, .select, .opblock-section-header, .content-type
 {
     background-color: inherit !important;
     color: inherit !important;
