@@ -22,8 +22,7 @@ namespace MyHouseAPI.Controllers.Money
             this.transactionsRepository = transactionsRepository;
         }
 
-        // Get: api/values
-        [HttpGet("{userId},{occupantId},{pageSize},{pageNumber}")]
+        [HttpGet("History/{userId},{occupantId},{pageSize},{pageNumber}")]
         public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId, int pageSize, int pageNumber)
         {
             if (pageSize < 1)
@@ -46,7 +45,21 @@ namespace MyHouseAPI.Controllers.Money
                 await transactionsRepository.GetTransactionHistory(userId, occupantId, pageSize, pageNumber));
         }
 
-        // Post: api/values
+        [HttpGet("Summary/{userId},{occupantId}")]
+        public async Task<IActionResult> RequestGetTransactionSummary(string userId, int occupantId)
+        {
+            if (occupantId < 1)
+            {
+                ModelState.AddModelError("Error", "Occupant Id must be greater than 1"); // TODO: Move this to a common file
+            }
+            if (userId.Length < 28 || userId.Length > 36)
+            {
+                ModelState.AddModelError("Error", "Invalid User Id");
+            }
+            return await RequestHandler<IEnumerable<TransactionSummaryResponse>>(HttpVerbs.Get, userId, async () =>
+                await transactionsRepository.GetTransactionSummary(userId, occupantId));
+        }
+
         [HttpPost("{userId}")]
         public async Task<IActionResult> RequestInsertTransaction(string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
         {

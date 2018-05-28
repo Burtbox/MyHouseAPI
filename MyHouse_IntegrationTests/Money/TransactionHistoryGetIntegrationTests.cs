@@ -11,7 +11,7 @@ namespace MyHouseIntegrationTests.Money
 {
     public class TransactionHistoryGetIntegrationTests : BaseIntegrationTest, IIntegrationTest
     {
-        public string sutEndpoint => EndpointsEnum.Transactions;
+        public string sutEndpoint => EndpointsEnum.TransactionHistory;
         public Method sutHttpMethod => Method.GET;
 
         public TransactionHistoryGetIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }

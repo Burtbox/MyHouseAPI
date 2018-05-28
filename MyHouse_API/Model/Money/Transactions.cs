@@ -24,9 +24,24 @@ namespace MyHouseAPI.Model.Money
     public class TransactionHistoryResponse : TransactionResponse
     {
         public int EnteredByOccupantId { get; set; }
-        public string CreditorDisplayName { get; set; }
-        public string DebtorDisplayName { get; set; }
         public string EnteredByDisplayName { get; set; }
         public DateTime EnteredDate { get; set; }
+        public string CreditorDisplayName { get; set; } // TODO: Refactor this inheritance properly! 
+        public string DebtorDisplayName { get; set; }
+    }
+
+    public abstract class TransactionOccupantsDetails
+    {
+        public string CreditorDisplayName { get; set; }
+        public string DebtorDisplayName { get; set; }
+    }
+
+    public class TransactionSummaryResponse : TransactionOccupantsDetails
+    {
+        public decimal Gross { get; set; }
+        public int CreditorOccupantId { get; set; }
+        public int DebtorOccupantId { get; set; }
+        public int CreditorHouseholdId { get; set; }
+        public int DebtorHouseholdId { get; set; }
     }
 }

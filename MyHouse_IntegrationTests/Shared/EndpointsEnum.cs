@@ -8,5 +8,7 @@ namespace MyHouseIntegrationTests.Shared
         public const string Authorization = "Authorization/";
         public const string Balance = "Money/Balance/";
         public const string Transactions = "Money/Transactions/";
+        public const string TransactionHistory = "Money/Transactions/History/";
+        public const string TransactionSummary = "Money/Transactions/Summary/";
     }
 }

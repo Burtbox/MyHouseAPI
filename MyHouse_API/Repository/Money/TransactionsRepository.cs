@@ -27,6 +27,19 @@ namespace MyHouseAPI.Repositories.Money
             });
         }
 
+        public async Task<IEnumerable<TransactionSummaryResponse>> GetTransactionSummary(string userId, int occupantId)
+        {
+            return await asyncConnection(userId, occupantId, async db =>
+            {
+                IEnumerable<TransactionSummaryResponse> transactionSummary = await db.QueryAsync<TransactionSummaryResponse>(
+                    sql: "[Money].[Transaction_Summary_Get]",
+                    param: new { OccupantId = occupantId },
+                    commandType: CommandType.StoredProcedure
+                );
+                return transactionSummary;
+            });
+        }
+
         public async Task<int> InsertTransaction(string userId, IEnumerable<TransactionInsertRequest> transactionList)
         {
             int enteredBy = transactionList.FirstOrDefault().CreditorOccupantId;

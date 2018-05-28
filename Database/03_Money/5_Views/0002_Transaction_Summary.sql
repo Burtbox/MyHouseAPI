@@ -1,6 +1,5 @@
 CREATE OR ALTER VIEW Money.TransactionSummary
 AS
-
 	SELECT Positive.DisplayName AS CreditorDisplayName 
      , Negative.DisplayName AS DebtorDisplayName  
 	 , TotalPositive.Total - TotalNegative.Total AS Gross
@@ -18,5 +17,5 @@ AS
 		FROM Money.Transactions
 		WHERE Creditor = Negative.OccupantId AND Debtor = Positive.OccupantId
 				) AS TotalNegative
-
+	WHERE Positive.HouseholdId = Negative.HouseholdId
 GO
