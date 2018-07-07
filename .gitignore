@@ -13,7 +13,6 @@ obj
 bin
 .vs
 .vscode
-log.txt
 
 npm-debug.log*
 yarn-debug.log*
@@ -25,3 +24,4 @@ node_modules
 /MyHouse_FirebaseAdmin/privateKey
 .vs
 /MyHouse_API/*.user
+MyHouse_FirebaseAdmin/log.txt
