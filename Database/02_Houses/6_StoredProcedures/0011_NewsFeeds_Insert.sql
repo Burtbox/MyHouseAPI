@@ -4,7 +4,8 @@ CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Insert
 	@Story nvarchar(max) ,
 	@Author nvarchar(100),
 	@Recipient AS NVARCHAR(36) = NULL,
-	@EnteredBy AS NVARCHAR(36)
+	@EnteredBy AS NVARCHAR(36),
+	@OccupantId as int
 AS
 BEGIN
 	INSERT INTO Houses.NewsFeed
