@@ -1,28 +1,17 @@
 
-import chalk from "chalk";
 import * as program from "commander";
-import FirebaseSdk from "./firebaseSdk";
-import log from './logger';
+import { generateCustomToken } from "./actions/generateCustomToken";
+import { handleOutput } from "./common/handleOutput";
+// import { getFirebaseUserByEmail } from "./actions/getFirebaseUserByEmail";
+import log from './common/logger';
+import FirebaseSdk from "./firebaseSdk/FirebaseSdk";
 
-log.info("Firebase admin console app initialised");
 
-const generateCustomToken = (userId: string) => {
-    log.info("Generating custom token");
-    const firebaseSdk: FirebaseSdk = new FirebaseSdk();
-    const ret: Promise<void> = firebaseSdk.generateCustomToken(userId)
-        .then((customToken: string) => {
-            log.info("Token returned from firebase");
-            handleOutput();
-            log.info("Token done");
-            // Returns the token as the standard output
-            process.stdout.write(customToken);
-        });
-}
 
-const checkEmailExists = (email: string) => {
+export const getFirebaseUserByEmail = (email: string) => {
     log.info("Checking user email exists")
     const firebaseSdk: FirebaseSdk = new FirebaseSdk();
-    const ret = firebaseSdk.checkEmailExists(email)
+    const ret = firebaseSdk.getFirebaseUserByEmail(email)
         .then((user) => {
             log.info("user returned from firebase");
             handleOutput();
@@ -32,24 +21,24 @@ const checkEmailExists = (email: string) => {
         });
 }
 
-const handleOutput = () => {
-    let output: any = (error: Error, stdout: string, stderr: Error) => {
-        if (error) {
-            log.error(chalk.red.bold.underline("exec error:") + error);
-        }
-        if (stderr) {
-            log.error(chalk.red("Error: ") + stderr);
-        }
-    };
-}
+log.info("Firebase admin console app initialised");
 
 //console app
 program
-    .version("1.0")
+    .version('1.0.0')
+    .description('MyHouse_FirebaseAdmin')
+
+program
     .command('generateCustomToken [userId]')
+    .alias('g')
+    .description('Generate a custom firebase jwt')
     .action(generateCustomToken)
-    .command('checkEmailExists [email]')
-    .action(checkEmailExists);
+
+program
+    .command('getFirebaseUserByEmail [email]')
+    .alias('e')
+    .description('Gets the firebase auth users details by their email address')
+    .action(getFirebaseUserByEmail);
 
 program.parse(process.argv);
 
@@ -58,3 +47,4 @@ if (program.args.length === 0) {
     log.info("program was called with no arguments")
     program.help();
 }
+

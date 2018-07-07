@@ -1,6 +1,6 @@
 import * as bunyan from 'bunyan';
 
-const logLevel = 'error';
+const logLevel = 'info';
 const logFilePath = process.cwd() + '\\log.txt'
 const loggerStreams: bunyan.Stream[] = [
     {
@@ -16,6 +16,7 @@ const loggerStreams: bunyan.Stream[] = [
 const loggerOptions: bunyan.LoggerOptions = {
     name: "MyHouse_FirebaseAdmin",
     streams: loggerStreams,
+    level: logLevel,
 }
 
 const log = bunyan.createLogger(loggerOptions);

@@ -11,7 +11,6 @@ class FirebaseSDK {
 
     generateCustomToken(userId: string): Promise<string> {
         const customToken: Promise<string> = admin.auth().createCustomToken(userId);
-
         return customToken;
     }
 
@@ -20,9 +19,9 @@ class FirebaseSDK {
         return ver;
     }
 
-    checkEmailExists(email: string): Promise<admin.auth.UserRecord> {
-        const emailExists: Promise<admin.auth.UserRecord> = admin.auth().getUserByEmail(email)
-        return emailExists;
+    getFirebaseUserByEmail(email: string): Promise<admin.auth.UserRecord> {
+        const userDetails: Promise<admin.auth.UserRecord> = admin.auth().getUserByEmail(email)
+        return userDetails;
     }
 }
 

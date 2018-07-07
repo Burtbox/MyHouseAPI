@@ -1,0 +1,6 @@
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":18044,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:18:14.231Z","v":0}
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":8136,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:18:52.500Z","v":0}
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":11736,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:19:53.178Z","v":0}
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":18756,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:20:18.624Z","v":0}
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":11468,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:21:52.949Z","v":0}
+{"name":"MyHouse_FirebaseAdmin","hostname":"Eds-Desktop-Windows","pid":3312,"level":30,"msg":"Firebase admin console app initialised","time":"2018-07-07T16:24:13.032Z","v":0}
