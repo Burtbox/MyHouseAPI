@@ -22,7 +22,6 @@ namespace MyHouseAPI.Controllers
             this.newsFeedsRepository = newsFeedsRepository;
         }
 
-        // GET: api/values
         [HttpGet("{userId}")]
         public async Task<IActionResult> RequestNewsFeed(string userId)
         {
@@ -30,7 +29,6 @@ namespace MyHouseAPI.Controllers
                 await newsFeedsRepository.GetNewsFeeds(userId));
         }
 
-        // POST: api/values
         [HttpPost]
         public async Task<IActionResult> RequestNewsFeedInsert([FromBody] NewsFeedInsertRequest newsFeed)
         {

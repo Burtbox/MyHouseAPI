@@ -21,7 +21,6 @@ namespace MyHouseAPI.Controllers
             this.householdsRepository = householdsRepository;
         }
 
-        // GET: api/values
         [HttpGet("{userId}")]
         public async Task<IActionResult> RequestHouseholdsOfOccupant(string userId)
         {
@@ -29,7 +28,6 @@ namespace MyHouseAPI.Controllers
                 await householdsRepository.GetHouseholdsOfOccupant(userId));
         }
 
-        // POST api/values
         [HttpPost]
         public async Task<IActionResult> RequestInsertHousehold([FromBody] HouseholdInsertRequest household)
         {
@@ -38,7 +36,6 @@ namespace MyHouseAPI.Controllers
                 await householdsRepository.InsertHousehold(household));
         }
 
-        // PUT api/values/5
         [HttpPut]
         public async Task<IActionResult> RequestUpdateHousehold([FromBody] HouseholdUpdateRequest household)
         {
@@ -47,7 +44,6 @@ namespace MyHouseAPI.Controllers
                 await householdsRepository.UpdateHousehold(household));
         }
 
-        // DELETE api/values/5
         //[HttpDelete("{userId},{householdId}")]
         // Removed delete method as don't want users to have to delete households (just to leave them)
         // public async Task<IActionResult> RequestDeleteHousehold(string userId, int householdId)

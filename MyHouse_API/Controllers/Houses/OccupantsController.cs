@@ -9,7 +9,7 @@ using System;
 
 namespace MyHouseAPI.Controllers
 {
-    [Route("api/Houses/[controller]")]
+    [Route("api/Houses/[controller]/[action]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class OccupantsController : BaseController
@@ -27,7 +27,6 @@ namespace MyHouseAPI.Controllers
             this.nodeServices = nodeServices;
         }
 
-        // GET: api/values
         [HttpGet("{userId},{occupantId}")]
         public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int occupantId)
         {
@@ -35,15 +34,14 @@ namespace MyHouseAPI.Controllers
                 await occupantsRepository.GetOccupantsOfHousehold(userId, occupantId));
         }
 
-        // POST api/values
         [HttpPost]
+        [ActionName("InsertOccupant")]
         public async Task<IActionResult> RequestInsertOccupant([FromBody] OccupantInsertRequest occupant)
         {
             return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
                 await occupantsRepository.InsertOccupant(occupant));
         }
 
-        // PUT api/values/5
         [HttpPut]
         public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdateRequest occupant)
         {
@@ -52,6 +50,7 @@ namespace MyHouseAPI.Controllers
         }
 
         [HttpPost]
+        [ActionName("InviteOccupant")]
         public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
         {
             // TODO: Auth this! 
@@ -61,7 +60,6 @@ namespace MyHouseAPI.Controllers
             return Ok(msg);
         }
 
-        // DELETE api/values/5
         //[HttpDelete("{userId},{householdId},{occupantId}")]
         // Removed delete method as don't want users to have to delete occupants (just to leave households)
         // public async Task<IActionResult> DeleteOccupant(string userId, int householdId, int occupantId)
