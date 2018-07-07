@@ -30,6 +30,7 @@ namespace MyHouseAPI.Controllers
                 await occupantsRepository.GetOccupantsOfHousehold(userId, occupantId));
         }
 
+        // TODO: Change to invite occupant!
         // POST api/values
         [HttpPost]
         public async Task<IActionResult> RequestOccupantInsert([FromBody] OccupantInsertRequest occupant)
