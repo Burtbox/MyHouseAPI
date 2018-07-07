@@ -32,7 +32,7 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new HouseholdResponse
             {
-                OccupantId = response.Data.OccupantId, //Setting the expected id to match the response as this is an identity column
+                OccupantId = response.Data != null ? response.Data.OccupantId : 0, //Setting the expected id to match the response as this is an identity column
                 Name = HouseholdName
             });
 

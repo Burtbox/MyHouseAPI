@@ -1,4 +1,5 @@
 CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Select
+	@userId NVARCHAR(36)
 AS
 BEGIN
 	SELECT
@@ -8,5 +9,6 @@ BEGIN
 		, NewsFeed.Story
 		, NewsFeed.Author
 	FROM Houses.NewsFeed as NewsFeed
+	Where NewsFeed.Recipient = @userId
 END
 GO

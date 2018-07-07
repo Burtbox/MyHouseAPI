@@ -6,6 +6,7 @@ namespace MyHouseAPI.Model.Houses
         public string SubHeadline { get; set; }
         public string Story { get; set; }
         public string Author { get; set; }
+        public string Recipient { get; set; }
     }
 
     public abstract class NewsFeed : NewsFeedDetails
@@ -19,6 +20,8 @@ namespace MyHouseAPI.Model.Houses
     public class NewsFeedInsertRequest : NewsFeedDetails
     {
         public string EnteredBy { get; set; }
+
+        public int OccupantId { get; set; }
     }
 
     public class NewsFeedUpdateRequest : NewsFeedDetails { }

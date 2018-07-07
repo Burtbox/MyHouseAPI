@@ -3,18 +3,20 @@ CREATE OR ALTER PROCEDURE Houses.NewsFeeds_Insert
 	@SubHeadline nvarchar(200) = NULL,
 	@Story nvarchar(max) ,
 	@Author nvarchar(100),
+	@Recipient AS NVARCHAR(36) = NULL,
 	@EnteredBy AS NVARCHAR(36)
 AS
 BEGIN
 	INSERT INTO Houses.NewsFeed
-		(Headline, SubHeadline, Story, Author, EnteredBy, ModifiedBy)
+		(Headline, SubHeadline, Story, Author, Recipient, EnteredBy, ModifiedBy)
 	OUTPUT
 	INSERTED.NewsFeedId,
 	INSERTED.Headline,
 	INSERTED.SubHeadline,
 	INSERTED.Story,
-	INSERTED.Author
+	INSERTED.Author,
+	INSERTED.Recipient
 	VALUES
-		(@Headline, @SubHeadline, @Story, @Author, @EnteredBy, @EnteredBy)
+		(@Headline, @SubHeadline, @Story, @Author, @Recipient, @EnteredBy, @EnteredBy)
 END
 GO

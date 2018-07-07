@@ -10,7 +10,8 @@ BEGIN
 		EnteredBy nvarchar(36) NOT NULL,
 		EnteredDate DATETIME2(3) NOT NULL,
 		ModifiedBy nvarchar(36) NOT NULL,
-		ModifiedDate DATETIME2(3) NOT NULL
+		ModifiedDate DATETIME2(3) NOT NULL,
+		Recipient nvarchar(36) NULL
 			CONSTRAINT PK__Houses__NewsFeed PRIMARY KEY CLUSTERED 
 	(
 		NewsFeedId ASC

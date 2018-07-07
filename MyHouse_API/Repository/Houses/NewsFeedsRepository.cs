@@ -12,15 +12,29 @@ namespace MyHouseAPI.Repositories.Houses
     {
         public NewsFeedsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds()
+        public async Task<IEnumerable<NewsFeedResponse>> GetNewsFeeds(string userId)
         {
             return await asyncConnection(async db =>
             {
                 IEnumerable<NewsFeedResponse> newsItems = await db.QueryAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Select]",
-                    commandType: CommandType.StoredProcedure
+                    commandType: CommandType.StoredProcedure,
+                    param: new { UserId = userId }
                 );
                 return newsItems;
+            });
+        }
+
+        public async Task<NewsFeedResponse> InsertNewsFeed(NewsFeedInsertRequest newsFeed)
+        {
+            return await asyncConnection(newsFeed.EnteredBy, newsFeed.OccupantId, async db =>
+            {
+                NewsFeedResponse newsFeedItem = await db.QueryFirstOrDefaultAsync<NewsFeedResponse>(
+                    sql: "[Houses].[NewsFeeds_Insert]",
+                    commandType: CommandType.StoredProcedure,
+                    param: newsFeed
+                );
+                return newsFeedItem;
             });
         }
     }

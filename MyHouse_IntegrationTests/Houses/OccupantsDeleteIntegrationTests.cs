@@ -30,7 +30,7 @@ namespace MyHouseIntegrationTests.Houses
             RestRequest request = apiCall<OccupantInsertRequest>(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod, occupantToInsert);
             IRestResponse<OccupantResponse> response = client.Execute<OccupantResponse>(request);
 
-            return response.Data.OccupantId;
+            return response.Data != null ? response.Data.OccupantId : 0;
         }
 
         //[Fact]

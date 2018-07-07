@@ -34,7 +34,7 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new OccupantResponse
             {
-                OccupantId = response.Data.OccupantId,
+                OccupantId = response.Data != null ? response.Data.OccupantId : 0,
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
             });
