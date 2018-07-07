@@ -6,6 +6,7 @@ BEGIN
 		UserId nvarchar(36) NOT NULL,
 		DisplayName varchar(100) NOT NULL,
 		HouseholdId int NOT NULL,
+		InviteStatus bit NOT NULL, -- 0 = Pending, 1 = Accepted
 		EnteredBy nvarchar(36) NOT NULL,
 		EnteredDate DATETIME2(3) NOT NULL,
 		ModifiedBy nvarchar(36) NOT NULL,
@@ -18,20 +19,29 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID(N'Houses.DF__Money__Occupants__EnteredDate', N'D') IS NULL
+IF OBJECT_ID(N'Houses.DF__Houses__Occupants__EnteredDate', N'D') IS NULL
 BEGIN
 	ALTER TABLE Houses.Occupants  
-	ADD CONSTRAINT DF__Money__Occupants__EnteredDate 
+	ADD CONSTRAINT DF__Houses__Occupants__EnteredDate 
 	DEFAULT GETUTCDATE() 
 	FOR EnteredDate
 END
 GO
 
-IF OBJECT_ID(N'Houses.DF__Money__Occupants__ModifiedDate', N'D') IS NULL
+IF OBJECT_ID(N'Houses.DF__Houses__Occupants__ModifiedDate', N'D') IS NULL
 BEGIN
 	ALTER TABLE Houses.Occupants  
-	ADD CONSTRAINT DF__Money__Occupants__ModifiedDate 
+	ADD CONSTRAINT DF__Houses__Occupants__ModifiedDate 
 	DEFAULT GETUTCDATE() 
 	FOR ModifiedDate
+END
+GO
+
+IF OBJECT_ID(N'Houses.DF__Houses__Occupants__InviteStatus', N'D') IS NULL
+BEGIN
+	ALTER TABLE Houses.Occupants  
+	ADD CONSTRAINT DF__Houses__Occupants__InviteStatus
+	DEFAULT 0
+	FOR InviteStatus
 END
 GO

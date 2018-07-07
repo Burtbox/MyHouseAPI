@@ -30,11 +30,11 @@ namespace MyHouseAPI.Controllers
                 await occupantsRepository.GetOccupantsOfHousehold(userId, occupantId));
         }
 
-        // TODO: Change to invite occupant!
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> RequestOccupantInsert([FromBody] OccupantInsertRequest occupant)
+        public async Task<IActionResult> RequestOccupantInvite([FromBody] OccupantInsertRequest occupant)
         {
+            // TODO: Call firebase app here and check email requested exists, send to email, then insert pending occ
             return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
                 await occupantsRepository.InsertOccupant(occupant));
         }

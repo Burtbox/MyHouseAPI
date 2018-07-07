@@ -1,6 +1,4 @@
 import * as admin from "firebase-admin";
-import { ServiceAccount } from "firebase-admin";
-import * as privateKey from "../privateKey/MyHouse-b9ec08fa574f.json";
 
 class FirebaseSDK {
     constructor() {
@@ -20,6 +18,11 @@ class FirebaseSDK {
     verifyUserToken(idToken: string): Promise<admin.auth.DecodedIdToken> {
         const ver = admin.auth().verifyIdToken(idToken)
         return ver;
+    }
+
+    checkEmailExists(email: string): Promise<admin.auth.UserRecord> {
+        const emailExists: Promise<admin.auth.UserRecord> = admin.auth().getUserByEmail(email)
+        return emailExists;
     }
 }
 

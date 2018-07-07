@@ -3,7 +3,6 @@ CREATE OR ALTER PROCEDURE Houses.Occupants_Insert
 	@DisplayName AS VARCHAR(100),
 	@OccupantId AS int,
 	@EnteredBy AS NVARCHAR(36)
-
 AS
 BEGIN
 	DECLARE @HouseholdId AS INT = 

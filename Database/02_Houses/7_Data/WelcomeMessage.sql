@@ -10,4 +10,5 @@ With love,
 myHouse 
 ',
 @Author = 'myHouse',
-@EnteredBy = 'Ed'
+@EnteredBy = 'Ed',
+@Recipient = 'All'
