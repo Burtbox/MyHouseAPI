@@ -9,6 +9,7 @@ BEGIN
 		, NewsFeed.Story
 		, NewsFeed.Author
 	FROM Houses.NewsFeed as NewsFeed
-	Where NewsFeed.Recipient = @userId
+	Where NewsFeed.Recipient = @userId 
+		OR NewsFeed.Recipient = 'All'
 END
 GO

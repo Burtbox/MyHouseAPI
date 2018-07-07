@@ -21,6 +21,8 @@ namespace MyHouseAPI.Validation.Houses
             RuleFor(x => x.Author)
                 .NotEmpty()
                 .MaximumLength(100);
+
+            RuleFor(x => x.Recipient).IsFirebaseUserId();
         }
     }
 
@@ -39,6 +41,10 @@ namespace MyHouseAPI.Validation.Houses
         public NewsFeedInsertRequestValidator()
         {
             RuleFor(x => x.EnteredBy).IsFirebaseUserId();
+
+            RuleFor(x => x.OccupantId)
+                .NotEmpty()
+                .GreaterThan(0);
         }
     }
 

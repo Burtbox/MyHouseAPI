@@ -29,7 +29,9 @@ namespace MyHouseIntegrationTests.Houses
                 SubHeadline = subheadline,
                 Author = author,
                 Story = story,
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                OccupantId = firebaseFixture.H2OccupantId,
+                Recipient = firebaseFixture.H1UserId,
             };
 
             RestClient client = GetClient();
@@ -43,6 +45,7 @@ namespace MyHouseIntegrationTests.Houses
                 SubHeadline = subheadline,
                 Author = author,
                 Story = story,
+                Recipient = firebaseFixture.H1UserId,
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -59,7 +62,9 @@ namespace MyHouseIntegrationTests.Houses
                 SubHeadline = StringGenerator.RandomString(200),
                 Author = StringGenerator.RandomString(100),
                 Story = StringGenerator.RandomString(500),
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                OccupantId = firebaseFixture.H2OccupantId,
+                Recipient = firebaseFixture.H1UserId,
             };
 
             RestClient client = GetClient();
@@ -78,7 +83,9 @@ namespace MyHouseIntegrationTests.Houses
                 SubHeadline = StringGenerator.RandomString(200),
                 Author = StringGenerator.RandomString(100),
                 Story = StringGenerator.RandomString(500),
-                EnteredBy = firebaseFixture.H1UserId
+                EnteredBy = firebaseFixture.H1UserId,
+                OccupantId = firebaseFixture.H2OccupantId,
+                Recipient = firebaseFixture.H2UserId,
             };
 
             RestClient client = GetClient();
@@ -97,7 +104,9 @@ namespace MyHouseIntegrationTests.Houses
                 SubHeadline = StringGenerator.RandomString(200),
                 Author = StringGenerator.RandomString(100),
                 Story = StringGenerator.RandomString(500),
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                OccupantId = firebaseFixture.H2OccupantId,
+                Recipient = firebaseFixture.H1UserId,
             };
 
             RestClient client = GetClient();

@@ -14,6 +14,11 @@ namespace MyHouseUnitTests.ValidationTests
             sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(28));
             sut.ShouldNotHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(36));
 
+            sut.ShouldNotHaveValidationErrorFor(t => t.Recipient, StringGenerator.RandomString(28));
+            sut.ShouldNotHaveValidationErrorFor(t => t.Recipient, StringGenerator.RandomString(36));
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 1);
+            sut.ShouldNotHaveValidationErrorFor(t => t.OccupantId, 9999);
+
             sut.ShouldNotHaveValidationErrorFor(t => t.Headline, StringGenerator.RandomString(100));
             sut.ShouldNotHaveValidationErrorFor(t => t.SubHeadline, null as string);
             sut.ShouldNotHaveValidationErrorFor(t => t.SubHeadline, "");
@@ -27,6 +32,11 @@ namespace MyHouseUnitTests.ValidationTests
             NewsFeedInsertRequestValidator sut = new NewsFeedInsertRequestValidator();
             sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(27));
             sut.ShouldHaveValidationErrorFor(t => t.EnteredBy, StringGenerator.RandomString(37));
+
+            sut.ShouldHaveValidationErrorFor(t => t.Recipient, StringGenerator.RandomString(27));
+            sut.ShouldHaveValidationErrorFor(t => t.Recipient, StringGenerator.RandomString(37));
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, 0);
+            sut.ShouldHaveValidationErrorFor(t => t.OccupantId, -1);
 
             sut.ShouldHaveValidationErrorFor(t => t.Headline, null as string);
             sut.ShouldHaveValidationErrorFor(t => t.Headline, "");
