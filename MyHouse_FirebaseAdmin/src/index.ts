@@ -1,8 +1,6 @@
 
-import * as program from "commander";
 import chalk from "chalk";
-import * as childprocess from "child_process";
-import * as pkg from "../package.json";
+import * as program from "commander";
 import FirebaseSdk from "./firebaseSdk";
 //console.log("Firebase admin console app initialised");
 
