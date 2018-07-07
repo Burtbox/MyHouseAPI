@@ -1,12 +1,18 @@
 import * as admin from "firebase-admin";
+import log from '../common/logger';
 
 class FirebaseSDK {
     constructor() {
-        const serviceAccount: any = require("../privateKey/MyHouse-b9ec08fa574f.json");
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://myhouse-a01c7.firebaseio.com"
-        });
+        const serviceAccountDetailsPath = "../../privateKey/MyHouse-b9ec08fa574f.json";
+        const serviceAccount: any = require(serviceAccountDetailsPath);
+        if (serviceAccount) {
+            admin.initializeApp({
+                credential: admin.credential.cert(serviceAccount),
+                databaseURL: "https://myhouse-a01c7.firebaseio.com"
+            });
+        } else {
+            log.error(`service accound details not found at: ${serviceAccountDetailsPath}`);
+        }
     }
 
     generateCustomToken(userId: string): Promise<string> {
