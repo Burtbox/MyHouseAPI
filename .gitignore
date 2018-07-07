@@ -13,6 +13,7 @@ obj
 bin
 .vs
 .vscode
+log.txt
 
 npm-debug.log*
 yarn-debug.log*
