@@ -4,6 +4,8 @@ using MyHouseAPI.Repositories.Houses;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using MyHouseAPI.Model.Houses;
+using Microsoft.AspNetCore.NodeServices;
+using System;
 
 namespace MyHouseAPI.Controllers
 {
@@ -12,14 +14,17 @@ namespace MyHouseAPI.Controllers
     [Authorize]
     public class OccupantsController : BaseController
     {
+        private readonly INodeServices nodeServices;
         private readonly OccupantsRepository occupantsRepository;
 
         public OccupantsController(
             IAuthorizationService authorizationService,
-            OccupantsRepository occupantsRepository
+            OccupantsRepository occupantsRepository,
+            INodeServices nodeServices
         ) : base(authorizationService)
         {
             this.occupantsRepository = occupantsRepository;
+            this.nodeServices = nodeServices;
         }
 
         // GET: api/values
@@ -32,9 +37,8 @@ namespace MyHouseAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> RequestOccupantInvite([FromBody] OccupantInsertRequest occupant)
+        public async Task<IActionResult> RequestInsertOccupant([FromBody] OccupantInsertRequest occupant)
         {
-            // TODO: Call firebase app here and check email requested exists, send to email, then insert pending occ
             return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
                 await occupantsRepository.InsertOccupant(occupant));
         }
@@ -45,6 +49,16 @@ namespace MyHouseAPI.Controllers
         {
             return await RequestHandler<OccupantResponse>(HttpVerbs.Put, occupant.UserId, async () =>
                 await occupantsRepository.UpdateOccupant(occupant));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
+        {
+            // TODO: Auth this! 
+            // TODO: Something less dumb with path - maybe host index.js in api? build it there from node js build! Also want to bundle this better
+            var msg = await nodeServices.InvokeAsync<OccupantInviteResponse>(String.Format("../../../MyHouse_FirebaseAdmin/build/index.js", "getFirebaseUserByEmail \"{0}\"", invitee.Email));
+
+            return Ok(msg);
         }
 
         // DELETE api/values/5

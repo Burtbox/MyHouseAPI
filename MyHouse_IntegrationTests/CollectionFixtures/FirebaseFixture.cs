@@ -8,6 +8,7 @@ public class FirebaseFixture : IDisposable
     public string H1DisplayName { get; private set; }
     public string H1Token { get; private set; }
     public int H1OccupantId { get; private set; }
+    public string H1Email { get; private set; }
 
     public string H2UserId { get; private set; }
     public string H2DisplayName { get; private set; }
@@ -26,6 +27,7 @@ public class FirebaseFixture : IDisposable
         this.H1DisplayName = settings.H1DisplayName;
         this.H1Token = TokenHelper.GenerateToken(settings.H1UserId);
         this.H1OccupantId = settings.H1OccupantId;
+        this.H1Email = settings.H1Email;
 
         this.H2UserId = settings.H2UserId;
         this.H2DisplayName = settings.H2DisplayName;

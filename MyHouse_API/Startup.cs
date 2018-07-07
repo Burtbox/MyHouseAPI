@@ -24,6 +24,7 @@ namespace MyHouseAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcConfiguration();
+            services.AddNodeServices();
             services.AddAuthenticationConfiguration(configuration);
             services.AddAuthorizationPolicies();
             services.AddRepositories();
