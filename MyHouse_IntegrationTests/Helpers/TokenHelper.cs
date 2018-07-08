@@ -2,15 +2,21 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using MyHouseAPI.Repositories.Authorization;
 using MyHouseIntegrationTests.Shared;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.NodeServices;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MyHouseIntegrationTests.Helpers {
-    public static class TokenHelper {
-        public static string GenerateToken(string userId)
+namespace MyHouseIntegrationTests.Helpers
+{
+    public class TokenHelper
+    {
+        public async Task<string> GenerateTokenAsync(string userId)
         {
-            string customToken = GetCustomToken(userId);
+            string customToken = await GetCustomTokenAsync(userId);
             //using an undocumented endpoint to turn our custom token into a live user token
             RestClient client = new RestClient("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyA27cRAIaX6NqiLQ4_AHNB91MlHajiTplA");
             RestRequest request = new RestRequest(Method.POST)
@@ -45,27 +51,14 @@ namespace MyHouseIntegrationTests.Helpers {
             return token;
         }
 
-        private static string GetCustomToken(string userId)
+        private async Task<string> GetCustomTokenAsync(string userId)
         {
-            // get the node js index file
-            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
-            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
-            string commandName = "generateCustomToken";
-            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
+            string customToken = string.Empty;
 
-            //Run the command
-            Process process = new Process()
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    RedirectStandardOutput = true,
-                    FileName = TestSettingsHelper.TestSettings.NodeJsExe,
-                    Arguments = args
-                }
-            };
-
-            process.Start();
-            string customToken = process.StandardOutput.ReadToEnd();
+            INodeServices nodeServices = new INodeServices();
+            ILogger logger = new ILogger();
+            FirebaseRepository firebaseRepository = new FirebaseRepository(nodeServices, logger);
+            customToken = await firebaseRepository.GenerateCustomToken(userId);
 
             return customToken;
         }

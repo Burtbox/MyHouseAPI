@@ -1,7 +1,7 @@
 CREATE OR ALTER PROCEDURE Houses.Occupants_Update
 	@UserId AS NVARCHAR(36),
 	@DisplayName AS VARCHAR(100),
-	@InviteStatus AS BIT,
+	@InviteAccepted AS BIT,
 	@OccupantId AS INT
 
 AS
@@ -14,7 +14,7 @@ BEGIN
 	WHERE UserId = @UserId
 
 	UPDATE Households.Occupants 
-	SET InviteStatus = @InviteStatus
+	SET InviteAccepted = @InviteAccepted
 	WHERE UserId = @UserId AND OccupantId = @OccupantId
 
 	SELECT OccupantId, UserId, DisplayName, HouseholdId

@@ -1,6 +1,6 @@
 ﻿param(
     # The directory of the MyHouseAPI repo (no backslash at the end)
-    [string]$repoDir = "C:\WebProjects\MyHouseAPI",
+    [string]$repoDir = "C:\inetpub\wwwroot\MyHouseAPI",
 
     # The name of the sql server instance to run the script on
     [string]$server = "localhost\sql2016",

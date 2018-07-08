@@ -6,20 +6,19 @@ import log from './common/logger';
 
 log.info("Firebase admin console app initialised");
 
-// console app 
-// TODO: If we need this - need to split into .net style of console part and common functions
+//console app
 program
     .version('1.0.0')
     .description('MyHouse_FirebaseAdmin')
 
 program
-    .command('generateCustomToken [callback] [userId]')
+    .command('generateCustomToken [userId]')
     .alias('g')
     .description('Generate a custom firebase jwt')
     .action(generateCustomToken)
 
 program
-    .command('getFirebaseUserByEmail [callback] [email]')
+    .command('getFirebaseUserByEmail [email]')
     .alias('e')
     .description('Gets the firebase auth users details by their email address')
     .action(getFirebaseUserByEmail);

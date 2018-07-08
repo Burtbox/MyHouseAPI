@@ -2,7 +2,8 @@ CREATE OR ALTER PROCEDURE Houses.Occupants_Insert
 	@UserId AS NVARCHAR(36),
 	@DisplayName AS VARCHAR(100),
 	@OccupantId AS int,
-	@EnteredBy AS NVARCHAR(36)
+	@EnteredBy AS NVARCHAR(36),
+	@InviteAccepted as BIT = 0
 AS
 BEGIN
 	DECLARE @HouseholdId AS INT = 
@@ -12,13 +13,14 @@ BEGIN
 
 
 	INSERT INTO Houses.Occupants
-		(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
+		(UserId, DisplayName, HouseholdId, InviteAccepted, EnteredBy, ModifiedBy)
 	OUTPUT
 	INSERTED.OccupantId,
 	INSERTED.UserId,
 	INSERTED.DisplayName,
-	INSERTED.HouseholdId
+	INSERTED.HouseholdId,
+	INSERTED.InviteAccepted
 	VALUES
-		(@UserId, @DisplayName, @HouseholdId, @EnteredBy, @EnteredBy)
+		(@UserId, @DisplayName, @HouseholdId, @InviteAccepted, @EnteredBy, @EnteredBy)
 END
 GO

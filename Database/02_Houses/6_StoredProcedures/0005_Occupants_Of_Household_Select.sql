@@ -13,7 +13,7 @@ BEGIN
 		, Occs.UserId
 		, Occs.DisplayName 
 		, Occs.HouseholdId
-		, Occs.InviteStatus
+		, Occs.InviteAccepted
 	FROM Houses.Occupants as Occs
 	WHERE Occs.HouseholdId = @HouseholdId
 END

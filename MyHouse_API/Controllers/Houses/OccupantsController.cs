@@ -55,7 +55,17 @@ namespace MyHouseAPI.Controllers
         {
             // TODO: Auth this! 
             // TODO: Something less dumb with path - maybe host index.js in api? build it there from node js build! Also want to bundle this better
-            var msg = await nodeServices.InvokeAsync<OccupantInviteResponse>(String.Format("../../../MyHouse_FirebaseAdmin/build/index.js", "getFirebaseUserByEmail \"{0}\"", invitee.Email));
+            // var msg = await nodeServices.InvokeAsync<OccupantInviteResponse>(String.Format("index.js", "getFirebaseUserByEmail \"{0}\"", invitee.Email));
+            OccupantInviteResponse msg = new OccupantInviteResponse();
+            try
+            {
+                // msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("node_services/myHouseFirebaseAdmin.js", $"getFirebaseUserByEmail \"{invitee.Email}\"");
+                msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("build/actions/getFirebaseUserByEmail.js", $"{invitee.Email}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             return Ok(msg);
         }

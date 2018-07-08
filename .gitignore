@@ -25,3 +25,4 @@ node_modules
 .vs
 /MyHouse_API/*.user
 MyHouse_FirebaseAdmin/log.txt
+MyHouse_API/node_services

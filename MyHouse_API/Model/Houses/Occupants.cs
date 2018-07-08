@@ -4,7 +4,7 @@ namespace MyHouseAPI.Model.Houses
     {
         public string UserId { get; set; }
         public string DisplayName { get; set; }
-        public bool InviteStatus { get; set; }
+        public bool InviteAccepted { get; set; }
     }
 
     public abstract class Occupant : OccupantDetails

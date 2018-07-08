@@ -15,9 +15,11 @@ namespace MyHouseIntegrationTests.Shared
         public string H2UserId;
         public string H2DisplayName;
         public int H2OccupantId;
+        public string H2Email;
 
         public string H3UserId;
         public string H3DisplayName;
         public int H3OccupantId;
+        public string H3Email;
     }
 }

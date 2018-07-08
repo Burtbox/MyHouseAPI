@@ -6,7 +6,7 @@ BEGIN
 		UserId nvarchar(36) NOT NULL,
 		DisplayName varchar(100) NOT NULL,
 		HouseholdId int NOT NULL,
-		InviteStatus bit NOT NULL, -- 0 = Pending, 1 = Accepted
+		InviteAccepted bit NOT NULL, -- 0 = Pending, 1 = Accepted
 		EnteredBy nvarchar(36) NOT NULL,
 		EnteredDate DATETIME2(3) NOT NULL,
 		ModifiedBy nvarchar(36) NOT NULL,
@@ -37,11 +37,11 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID(N'Houses.DF__Houses__Occupants__InviteStatus', N'D') IS NULL
+IF OBJECT_ID(N'Houses.DF__Houses__Occupants__InviteAccepted', N'D') IS NULL
 BEGIN
 	ALTER TABLE Houses.Occupants  
-	ADD CONSTRAINT DF__Houses__Occupants__InviteStatus
+	ADD CONSTRAINT DF__Houses__Occupants__InviteAccepted
 	DEFAULT 0
-	FOR InviteStatus
+	FOR InviteAccepted
 END
 GO
