@@ -18,6 +18,7 @@ namespace MyHouseIntegrationTests.Houses
             // TODO: Implement!
         }
 
+        [Fact]
         public void InvalidHouseholdIdTest()
         {
             int householdId = 2;
