@@ -1,14 +1,8 @@
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-import path from 'path';
 import webpack from 'webpack';
 
-const outputPath = 'dist';
 const config: webpack.Configuration = {
-    entry: './index.js',
+    entry: './actions/index.ts',
     devtool: 'inline-source-map',
-    plugins: [
-        new CleanWebpackPlugin([outputPath]),
-    ],
     module: {
         rules: [
             {
@@ -21,10 +15,6 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    output: {
-        path: path.resolve(__dirname, outputPath),
-        filename: 'index.bundle.js'
-    }
 };
 
 export default config;

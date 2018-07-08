@@ -2,7 +2,7 @@ using Xunit;
 using Xunit.FixtureInjection;
 
 [CollectionDefinition(Name)]
-public class FirebaseCollectionWithInjectionSupportDefinition : ICollectionFixture<FirebaseFixtureWithInjectionSupport>
+public class FirebaseCollectionWithInjectionSupportDefinition : ICollectionFixture<FirebaseFixture>
 {
     public const string Name = "FirebaseCollection";
     // This class has no code, and is never created. Its purpose is simply

@@ -15,13 +15,13 @@ namespace MyHouseIntegrationTests.Helpers
 {
     public class TokenHelper
     {
-        private readonly INodeServices nodeServices;
-        private readonly ILogger logger;
-        public TokenHelper(INodeServices nodeServices, ILogger logger)
-        {
-            this.nodeServices = nodeServices;
-            this.logger = logger;
-        }
+        // private readonly INodeServices nodeServices;
+        // private readonly ILogger logger;
+        // public TokenHelper(INodeServices nodeServices, ILogger logger)
+        // {
+        //     this.nodeServices = nodeServices;
+        //     this.logger = logger;
+        // }
         public async Task<string> GenerateTokenAsync(string userId)
         {
             string customToken = await GetCustomTokenAsync(userId);
@@ -59,10 +59,36 @@ namespace MyHouseIntegrationTests.Helpers
             return token;
         }
 
+        // private async Task<string> GetCustomTokenAsync(string userId)
+        // {
+        //     FirebaseRepository firebaseRepository = new FirebaseRepository(nodeServices, logger);
+        //     string customToken = await firebaseRepository.GenerateCustomToken(userId);
+
+        //     return customToken;
+        // }
+
         private async Task<string> GetCustomTokenAsync(string userId)
         {
-            FirebaseRepository firebaseRepository = new FirebaseRepository(nodeServices, logger);
-            string customToken = await firebaseRepository.GenerateCustomToken(userId);
+            // get the node js index file
+            // Couldn't get DI Working! 
+            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
+            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
+            string commandName = "generateCustomToken";
+            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
+
+            //Run the command
+            Process process = new Process()
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    RedirectStandardOutput = true,
+                    FileName = TestSettingsHelper.TestSettings.NodeJsExe,
+                    Arguments = args
+                }
+            };
+
+            process.Start();
+            string customToken = process.StandardOutput.ReadToEnd();
 
             return customToken;
         }

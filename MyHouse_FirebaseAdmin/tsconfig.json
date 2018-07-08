@@ -8,13 +8,12 @@
       "es6"
     ],
     "module": "commonjs",
-    "outDir": "./build",
     "sourceMap": true,
     "strict": true
   },
   "include": [
-    "./src/**.ts",
-    "./src/**.json"
+    "src/**.ts",
+    "src/**.json"
   ],
   "exclude": [
     "node_modules",

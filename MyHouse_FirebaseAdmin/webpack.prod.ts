@@ -9,6 +9,7 @@ const config: webpack.Configuration = {
         new CleanWebpackPlugin([outputPath]),
     ],
     output: {
+        libraryTarget: 'commonjs',
         path: path.resolve(__dirname, outputPath),
         filename: 'myHouseFirebaseAdmin.js'
     }

@@ -2,7 +2,7 @@ import { handleOutput } from "../common/handleOutput";
 import log from '../common/logger';
 import FirebaseSdk from "../firebaseSdk/FirebaseSdk";
 
-export const generateCustomToken = (callback: Function, userId: string) => {
+export const generateCustomToken = (userId: string) => {
     log.info("Generating custom token");
 
     const firebaseSdk: FirebaseSdk = new FirebaseSdk();
@@ -16,6 +16,6 @@ export const generateCustomToken = (callback: Function, userId: string) => {
             process.stdout.write(customToken);
 
             // For .netcore node services
-            callback(null, customToken);
+            // callback(null, customToken);
         });
 }

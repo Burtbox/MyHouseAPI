@@ -61,7 +61,7 @@ namespace MyHouseAPI.Controllers
             try
             {
                 // msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("node_services/myHouseFirebaseAdmin.js", $"getFirebaseUserByEmail \"{invitee.Email}\"");
-                msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("build/actions/getFirebaseUserByEmail.js", $"{invitee.Email}");
+                msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("UserByEmail.js", $"{invitee.Email}");
             }
             catch (Exception ex)
             {
