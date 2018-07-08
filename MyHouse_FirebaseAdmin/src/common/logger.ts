@@ -1,12 +1,12 @@
 import * as bunyan from 'bunyan';
 
-const logLevel = 'info';
+const logLevel = 'error';
 const logFilePath = process.cwd() + '\\log.txt'
 const loggerStreams: bunyan.Stream[] = [
-    {
-        level: logLevel,
-        stream: process.stdout  // log to stdout
-    },
+    // {
+    //     level: logLevel,
+    //     stream: process.stdout  // log to stdout - only use this if debugging locally!
+    // },
     {
         level: logLevel,
         path: logFilePath  // log a file

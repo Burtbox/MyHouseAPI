@@ -35,7 +35,7 @@ namespace MyHouseAPI.Controllers
         }
 
         [HttpPost]
-        [ActionName("InsertOccupant")]
+        [ActionName("Insert")]
         public async Task<IActionResult> RequestInsertOccupant([FromBody] OccupantInsertRequest occupant)
         {
             return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
@@ -50,7 +50,7 @@ namespace MyHouseAPI.Controllers
         }
 
         [HttpPost]
-        [ActionName("InviteOccupant")]
+        [ActionName("Invite")]
         public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
         {
             // TODO: Auth this! 
