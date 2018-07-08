@@ -9,11 +9,19 @@ using RestSharp;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace MyHouseIntegrationTests.Helpers
 {
     public class TokenHelper
     {
+        private readonly INodeServices nodeServices;
+        private readonly ILogger logger;
+        public TokenHelper(INodeServices nodeServices, ILogger logger)
+        {
+            this.nodeServices = nodeServices;
+            this.logger = logger;
+        }
         public async Task<string> GenerateTokenAsync(string userId)
         {
             string customToken = await GetCustomTokenAsync(userId);
@@ -53,12 +61,8 @@ namespace MyHouseIntegrationTests.Helpers
 
         private async Task<string> GetCustomTokenAsync(string userId)
         {
-            string customToken = string.Empty;
-
-            INodeServices nodeServices = new INodeServices();
-            ILogger logger = new ILogger();
             FirebaseRepository firebaseRepository = new FirebaseRepository(nodeServices, logger);
-            customToken = await firebaseRepository.GenerateCustomToken(userId);
+            string customToken = await firebaseRepository.GenerateCustomToken(userId);
 
             return customToken;
         }

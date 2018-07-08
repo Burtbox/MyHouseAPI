@@ -1,11 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.NodeServices;
 using MyHouseIntegrationTests.Helpers;
 using MyHouseIntegrationTests.Shared;
+using Serilog;
 using Xunit;
 
 public class FirebaseFixture : IAsyncLifetime
 {
+    private INodeServices nodeServices;
+    private readonly ILogger logger;
+
     public string H1UserId { get; private set; }
     public string H1DisplayName { get; private set; }
     public string H1Token { get; private set; }
@@ -24,8 +29,10 @@ public class FirebaseFixture : IAsyncLifetime
     public int H3OccupantId { get; private set; }
     public string H3Email { get; private set; }
 
-    public FirebaseFixture()
+    public FirebaseFixture(INodeServices nodeServices, ILogger logger)
     {
+        this.nodeServices = nodeServices;
+        this.logger = logger;
         TestSettings settings = TestSettingsHelper.TestSettings;
 
         this.H1UserId = settings.H1UserId;
@@ -47,7 +54,7 @@ public class FirebaseFixture : IAsyncLifetime
     public async Task InitializeAsync()
     {
         TestSettings settings = TestSettingsHelper.TestSettings;
-        TokenHelper tokenHelper = new TokenHelper();
+        TokenHelper tokenHelper = new TokenHelper(nodeServices, logger);
         var tokens = await Task.WhenAll(
             tokenHelper.GenerateTokenAsync(settings.H1UserId),
             tokenHelper.GenerateTokenAsync(settings.H2UserId),

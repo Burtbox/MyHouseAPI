@@ -56,6 +56,7 @@ namespace MyHouseAPI.Controllers
             // TODO: Auth this! 
             // TODO: Something less dumb with path - maybe host index.js in api? build it there from node js build! Also want to bundle this better
             // var msg = await nodeServices.InvokeAsync<OccupantInviteResponse>(String.Format("index.js", "getFirebaseUserByEmail \"{0}\"", invitee.Email));
+            // TODO: Move to using FirebaseRepository.GetFirebaseUserByEmail
             OccupantInviteResponse msg = new OccupantInviteResponse();
             try
             {
