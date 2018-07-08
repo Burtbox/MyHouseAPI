@@ -1,9 +1,17 @@
+using System;
+using Microsoft.AspNetCore.NodeServices;
+using Serilog;
 using Xunit.FixtureInjection;
 
 public class FirebaseFixtureWithInjectionSupport : ICreateClassFixtures
 {
-    FirebaseFixture ICreateClassFixtures.CreateClassFixture<FirebaseFixture>()
+    TFirebaseFixture ICreateClassFixtures.CreateClassFixture<TFirebaseFixture>()
     {
-        return null; //TODO: This is probably wrong but wtf is it???
+        var nodeServices = services.GetRequiredService<INodeServices>();
+        var logger = services.GetRequiredService<ILogger>();
+        if (typeof(TFirebaseFixture) != typeof(FirebaseFixture))
+            throw new ArgumentException($"Stub Collection Fixture is not intended to create class fixtures of type {typeof(TFirebaseFixture)}");
+
+        return (TFirebaseFixture)(object)new FirebaseFixture(nodeServices, logger);
     }
 }

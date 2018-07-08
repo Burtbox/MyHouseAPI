@@ -9,7 +9,7 @@ using System;
 
 namespace MyHouseIntegrationTests.Shared
 {
-    [Collection("Firebase Collection")]
+    [Collection(FirebaseCollectionWithInjectionSupportDefinition.Name)]
     public abstract class BaseIntegrationTest
     {
         public BaseIntegrationTest(FirebaseFixture firebaseFixture)
