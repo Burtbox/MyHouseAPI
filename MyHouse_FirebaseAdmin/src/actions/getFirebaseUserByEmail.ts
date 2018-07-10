@@ -14,6 +14,7 @@ export const getFirebaseUserByEmail = (email: string) => {
 
             // Returns the token as the standard output
             process.stdout.write(JSON.stringify(user));
+            process.exit(0);
 
             // For .netcore node services
             // callback(null, user)

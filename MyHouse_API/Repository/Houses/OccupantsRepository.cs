@@ -81,6 +81,7 @@ namespace MyHouseAPI.Repositories.Houses
                     Arguments = args
                 }
             };
+            process.Start();
 
             string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
             OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);

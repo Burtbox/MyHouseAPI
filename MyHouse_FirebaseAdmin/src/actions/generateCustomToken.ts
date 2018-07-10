@@ -14,6 +14,7 @@ export const generateCustomToken = (userId: string) => {
 
             // Returns the token as the standard output
             process.stdout.write(customToken);
+            process.exit(0);
 
             // For .netcore node services
             // callback(null, customToken);
