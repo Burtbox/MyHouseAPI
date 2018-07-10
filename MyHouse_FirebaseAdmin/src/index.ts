@@ -1,7 +1,6 @@
 
 import * as program from "commander";
-import { generateCustomToken } from "./actions/generateCustomToken";
-import { getFirebaseUserByEmail } from "./actions/getFirebaseUserByEmail";
+import { generateCustomToken, getFirebaseUserByEmail } from './actions';
 import log from './common/logger';
 
 log.info("Firebase admin console app initialised");
@@ -13,13 +12,13 @@ program
     .description('MyHouse_FirebaseAdmin')
 
 program
-    .command('generateCustomToken [callback] [userId]')
+    .command('generateCustomToken [userId]')
     .alias('g')
     .description('Generate a custom firebase jwt')
     .action(generateCustomToken)
 
 program
-    .command('getFirebaseUserByEmail [callback] [email]')
+    .command('getFirebaseUserByEmail [email]')
     .alias('e')
     .description('Gets the firebase auth users details by their email address')
     .action(getFirebaseUserByEmail);

@@ -14,17 +14,14 @@ namespace MyHouseAPI.Controllers
     [Authorize]
     public class OccupantsController : BaseController
     {
-        private readonly INodeServices nodeServices;
         private readonly OccupantsRepository occupantsRepository;
 
         public OccupantsController(
             IAuthorizationService authorizationService,
-            OccupantsRepository occupantsRepository,
-            INodeServices nodeServices
+            OccupantsRepository occupantsRepository
         ) : base(authorizationService)
         {
             this.occupantsRepository = occupantsRepository;
-            this.nodeServices = nodeServices;
         }
 
         [HttpGet("{userId},{occupantId}")]
@@ -53,22 +50,8 @@ namespace MyHouseAPI.Controllers
         [ActionName("Invite")]
         public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
         {
-            // TODO: Auth this! 
-            // TODO: Something less dumb with path - maybe host index.js in api? build it there from node js build! Also want to bundle this better
-            // var msg = await nodeServices.InvokeAsync<OccupantInviteResponse>(String.Format("index.js", "getFirebaseUserByEmail \"{0}\"", invitee.Email));
-            // TODO: Move to using FirebaseRepository.GetFirebaseUserByEmail
-            OccupantInviteResponse msg = new OccupantInviteResponse();
-            try
-            {
-                // msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("node_services/myHouseFirebaseAdmin.js", $"getFirebaseUserByEmail \"{invitee.Email}\"");
-                msg = await nodeServices.InvokeAsync<OccupantInviteResponse>("UserByEmail.js", $"{invitee.Email}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-            return Ok(msg);
+            return await RequestHandler<OccupantInviteResponse>(HttpVerbs.Put, invitee.InvitedByUserId, async () =>
+                await occupantsRepository.InviteOccupant(invitee));
         }
 
         //[HttpDelete("{userId},{householdId},{occupantId}")]

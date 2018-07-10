@@ -2,7 +2,7 @@ import { handleOutput } from "../common/handleOutput";
 import log from '../common/logger';
 import FirebaseSdk from "../firebaseSdk/FirebaseSdk";
 
-export const getFirebaseUserByEmail = (callback: Function, email: string) => {
+export const getFirebaseUserByEmail = (email: string) => {
     log.info("Checking user email exists")
 
     const firebaseSdk: FirebaseSdk = new FirebaseSdk();
@@ -16,6 +16,6 @@ export const getFirebaseUserByEmail = (callback: Function, email: string) => {
             process.stdout.write(JSON.stringify(user));
 
             // For .netcore node services
-            callback(null, user)
+            // callback(null, user)
         });
 }

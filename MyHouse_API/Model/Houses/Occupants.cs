@@ -28,6 +28,8 @@ namespace MyHouseAPI.Model.Houses
     public class OccupantInviteRequest
     {
         public string Email { get; set; }
+        public string InvitedByUserId { get; set; }
+        public int InvitedByOccupantId { get; set; }
     }
 
     public class OccupantInviteResponse

@@ -37,3 +37,4 @@ Look into ts-option - good for optional params?
 Leave Household / remove occupant buttons
 Hangfire task to clear up households that all users have left 
 Flag a user as removed from household 
+!! REFRESH API KEY !! (accidently committed again!)

@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Dapper;
 using MyHouseAPI.Handlers;
 using MyHouseAPI.Model.Houses;
 using Serilog;
+using Newtonsoft.Json;
 
 namespace MyHouseAPI.Repositories.Houses
 {
@@ -37,7 +41,6 @@ namespace MyHouseAPI.Repositories.Houses
                 return insertedOccupant;
             });
         }
-
         public async Task<OccupantResponse> UpdateOccupant(OccupantUpdateRequest occupant)
         {
             return await asyncConnection(occupant.UserId, occupant.OccupantId, async db =>
@@ -49,6 +52,40 @@ namespace MyHouseAPI.Repositories.Houses
                  );
                  return updatedOccupant;
              });
+        }
+
+        public async Task<OccupantInviteResponse> InviteOccupant(OccupantInviteRequest invite)
+        {
+            return await asyncConnection(invite.InvitedByUserId, invite.InvitedByOccupantId, async db =>
+            {
+                OccupantInviteResponse occupant = GetFirebaseUserByEmail(invite.Email);
+                return occupant;
+            });
+        }
+
+        private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
+        {
+            // get the node js index file
+            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
+            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
+            string commandName = "getFirebaseUserByEmail";
+            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
+
+            //Run the command
+            Process process = new Process()
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    RedirectStandardOutput = true,
+                    FileName = "node.exe",
+                    Arguments = args
+                }
+            };
+
+            string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
+            OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);
+
+            return occupant;
         }
 
         // ED! This will be replaced with a leave household button
