@@ -20,7 +20,9 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInviteRequest occupantToInsert = new OccupantInviteRequest
             {
-                Email = firebaseFixture.H1Email
+                Email = firebaseFixture.H3Email,
+                InvitedByUserId = firebaseFixture.H2UserId,
+                InvitedByOccupantId = firebaseFixture.H2OccupantId,
             };
 
             RestClient client = GetClient();

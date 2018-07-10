@@ -66,7 +66,7 @@ namespace MyHouseAPI.Repositories.Houses
         private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
         {
             // get the node js index file
-            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
+            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory());
             string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
             string commandName = "getFirebaseUserByEmail";
             string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
@@ -77,7 +77,7 @@ namespace MyHouseAPI.Repositories.Houses
                 StartInfo = new ProcessStartInfo
                 {
                     RedirectStandardOutput = true,
-                    FileName = "node.exe",
+                    FileName = "C:\\Program Files\\nodejs\\node.exe",
                     Arguments = args
                 }
             };
