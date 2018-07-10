@@ -31,10 +31,10 @@ namespace MyHouseIntegrationTests.Houses
 
             string expectedContent = serialize(new OccupantInviteResponse
             {
-                Email = firebaseFixture.H1Email,
+                Email = firebaseFixture.H3Email,
                 EmailVerified = false,
-                Uid = firebaseFixture.H1UserId,
-                DisplayName = firebaseFixture.H1DisplayName
+                Uid = firebaseFixture.H3UserId,
+                DisplayName = firebaseFixture.H3DisplayName
             });
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -46,7 +46,9 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInviteRequest occupantToInsert = new OccupantInviteRequest
             {
-                Email = firebaseFixture.H1Email
+                Email = firebaseFixture.H1Email,
+                InvitedByUserId = firebaseFixture.H2UserId,
+                InvitedByOccupantId = firebaseFixture.H1OccupantId,
             };
 
             RestClient client = GetClient();
@@ -61,7 +63,9 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInviteRequest occupantToInsert = new OccupantInviteRequest
             {
-                Email = firebaseFixture.H1Email
+                Email = firebaseFixture.H1Email,
+                InvitedByUserId = firebaseFixture.H1UserId,
+                InvitedByOccupantId = firebaseFixture.H2OccupantId,
             };
 
             RestClient client = GetClient();
@@ -76,7 +80,9 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInviteRequest occupantToInsert = new OccupantInviteRequest
             {
-                Email = firebaseFixture.H1Email
+                Email = firebaseFixture.H1Email,
+                InvitedByUserId = firebaseFixture.H2UserId,
+                InvitedByOccupantId = firebaseFixture.H2OccupantId,
             };
 
             RestClient client = GetClient();
