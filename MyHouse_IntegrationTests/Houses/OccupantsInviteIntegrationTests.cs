@@ -15,6 +15,7 @@ namespace MyHouseIntegrationTests.Houses
 
         public OccupantsInviteIntegrationTests(FirebaseFixture firebaseFixture) : base(firebaseFixture) { }
 
+        // TODO: Split into existing user and new user tests
         [Fact]
         public void InviteOccupantTest()
         {
