@@ -22,14 +22,20 @@ pipeline {
                 echo 'Deploying Integration Test MyHouseApi'
                 echo 'Restarting app pool for test api'
                 powershell """
-                    Write-Host "Load IIS module:"
-                    Import-Module WebAdministration
-                    Write-Host "Set a name of the site we want to recycle the pool for:"
-                    \$site = "Default Web Site/MyHouseTestAPI_${env.BRANCH_NAME}"
-                    Write-Host "Get pool name by the site name:"
-                    \$pool = (Get-Item "IIS:\\Sites\\\$site"| Select-Object applicationPool).applicationPool
-                    Write-Host "Recycle the application pool:"
-                    Restart-WebAppPool \$pool
+                    Try {
+                        Write-Host "Load IIS module:"
+                        Import-Module WebAdministration
+                        Write-Host "Set a name of the site we want to recycle the pool for:"
+                        \$site = "Default Web Site/MyHouseTestAPI_${env.BRANCH_NAME}"
+                        Write-Host "Get pool name by the site name:"
+                        \$pool = (Get-Item "IIS:\\Sites\\\$site"| Select-Object applicationPool).applicationPool
+                        Write-Host "Recycle the application pool:"
+                        Restart-WebAppPool \$pool
+                    }
+                    Catch {
+                        write-host \$error[0]
+                        throw \$LASTEXITCODE
+                    }
                 """
                 echo 'Publishing Integration Test API'
                 powershell "dotnet publish \".\\MyHouse_API\\MyHouseAPI.csproj\" -o \"C:\\wwwroot\\MyHouseTestAPI_${env.BRANCH_NAME}\""
