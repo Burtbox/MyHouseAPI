@@ -1,7 +1,7 @@
 CREATE OR ALTER PROCEDURE Houses.Occupants_Insert
 	@UserId AS NVARCHAR(36),
 	@DisplayName AS VARCHAR(100),
-	@OccupantId AS int,
+	@InvitedByOccupantId AS int,
 	@EnteredBy AS NVARCHAR(36),
 	@InviteAccepted as BIT = 0
 AS
@@ -9,7 +9,7 @@ BEGIN
 	DECLARE @HouseholdId AS INT = 
 	(SELECT HouseholdId
 	FROM Houses.Occupants
-	WHERE OccupantId = @OccupantId)
+	WHERE OccupantId = @InvitedByOccupantId)
 
 
 	INSERT INTO Houses.Occupants

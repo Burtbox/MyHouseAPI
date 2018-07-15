@@ -31,7 +31,7 @@ namespace MyHouseAPI.Repositories.Houses
 
         public async Task<OccupantResponse> InsertOccupant(OccupantInsertRequest occupant)
         {
-            return await asyncConnection(occupant.EnteredBy, occupant.OccupantId, async db =>
+            return await asyncConnection(occupant.EnteredBy, occupant.InvitedByOccupantId, async db =>
             {
                 OccupantResponse insertedOccupant = await db.QueryFirstAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Insert]",
@@ -41,6 +41,7 @@ namespace MyHouseAPI.Repositories.Houses
                 return insertedOccupant;
             });
         }
+
         public async Task<OccupantResponse> UpdateOccupant(OccupantUpdateRequest occupant)
         {
             return await asyncConnection(occupant.UserId, occupant.OccupantId, async db =>
@@ -54,12 +55,35 @@ namespace MyHouseAPI.Repositories.Houses
              });
         }
 
-        public async Task<OccupantInviteResponse> InviteOccupant(OccupantInviteRequest invite)
+        public async Task<bool> InviteOccupant(OccupantInviteRequest invite)
         {
             return await asyncConnection(invite.InvitedByUserId, invite.InvitedByOccupantId, async db =>
             {
-                OccupantInviteResponse occupant = GetFirebaseUserByEmail(invite.Email);
-                return occupant;
+                bool occupantInvited = false;
+                // TODO: Send invite email!
+
+                OccupantInviteResponse existingOccupant = GetFirebaseUserByEmail(invite.Email);
+                if (existingOccupant != null)
+                {
+                    OccupantInsertRequest createOccupant = new OccupantInsertRequest
+                    {
+                        InviteAccepted = false,
+                        UserId = existingOccupant.Uid,
+                        DisplayName = existingOccupant.DisplayName,
+                        EnteredBy = invite.InvitedByUserId,
+                        InvitedByOccupantId = invite.InvitedByOccupantId
+                    };
+                    OccupantResponse newOccupant = await this.InsertOccupant(createOccupant);
+
+                    occupantInvited = true;
+                }
+                else
+                {
+                    // TODO: Improve functionality here!
+                    throw new Exception($"The email address {invite.Email} must sign up to myHouse first");
+                }
+
+                return occupantInvited;
             });
         }
 
@@ -89,7 +113,7 @@ namespace MyHouseAPI.Repositories.Houses
             return occupant;
         }
 
-        // ED! This will be replaced with a leave household button
+        // This can be used for deleting unaccpeted invites!
         // public async Task<int> DeleteOccupant(string userId, int householdId, int occupantId)
         // {
         //     return await asyncConnection(userId, occupantId, async db =>
@@ -102,5 +126,7 @@ namespace MyHouseAPI.Repositories.Houses
         //         return rowsDeleted;
         //     });
         // }
+
+        // TODO:  Create a leave household flow
     }
 }

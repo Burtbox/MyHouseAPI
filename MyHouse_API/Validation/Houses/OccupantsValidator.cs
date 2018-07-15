@@ -20,17 +20,16 @@ namespace MyHouseAPI.Validation.Houses
     {
         public OccupantValidator()
         {
-            RuleFor(x => x.OccupantId)
-                .NotEmpty()
-                .GreaterThan(0);
+            RuleFor(x => x.OccupantId).IsOccupantId();
         }
     }
 
-    public class OccupantInsertRequestValidator : OccupantValidator<OccupantInsertRequest>
+    public class OccupantInsertRequestValidator : OccupantsDetailsValidator<OccupantInsertRequest>
     {
         public OccupantInsertRequestValidator()
         {
             RuleFor(x => x.EnteredBy).IsFirebaseUserId();
+            RuleFor(x => x.InvitedByOccupantId).IsOccupantId();
         }
     }
 

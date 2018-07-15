@@ -22,10 +22,11 @@ namespace MyHouseIntegrationTests.Houses
             string O4DisplayName = StringGenerator.RandomString(100);
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
+                InviteAccepted = false,
                 UserId = newUserId,
                 DisplayName = O4DisplayName,
-                OccupantId = 2,
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                InvitedByOccupantId = 2,
             };
 
             RestClient client = GetClient();
@@ -49,9 +50,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
+                InviteAccepted = false,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                OccupantId = 1,
+                InvitedByOccupantId = 1,
                 EnteredBy = firebaseFixture.H2UserId
             };
 
@@ -67,9 +69,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
+                InviteAccepted = false,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                OccupantId = 1,
+                InvitedByOccupantId = 1,
                 EnteredBy = firebaseFixture.H1UserId
             };
 
@@ -85,9 +88,10 @@ namespace MyHouseIntegrationTests.Houses
         {
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
+                InviteAccepted = false,
                 UserId = StringGenerator.RandomString(28),
                 DisplayName = StringGenerator.RandomString(100),
-                OccupantId = 2,
+                InvitedByOccupantId = 2,
                 EnteredBy = firebaseFixture.H2UserId
             };
 

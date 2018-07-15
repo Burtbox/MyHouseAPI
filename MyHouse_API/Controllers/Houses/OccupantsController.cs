@@ -31,14 +31,6 @@ namespace MyHouseAPI.Controllers
                 await occupantsRepository.GetOccupantsOfHousehold(userId, occupantId));
         }
 
-        [HttpPost]
-        [ActionName("Insert")]
-        public async Task<IActionResult> RequestInsertOccupant([FromBody] OccupantInsertRequest occupant)
-        {
-            return await RequestHandler<OccupantResponse>(HttpVerbs.Post, occupant.EnteredBy, async () =>
-                await occupantsRepository.InsertOccupant(occupant));
-        }
-
         [HttpPut]
         public async Task<IActionResult> RequestUpdateOccupant([FromBody] OccupantUpdateRequest occupant)
         {
@@ -50,7 +42,7 @@ namespace MyHouseAPI.Controllers
         [ActionName("Invite")]
         public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
         {
-            return await RequestHandler<OccupantInviteResponse>(HttpVerbs.Put, invitee.InvitedByUserId, async () =>
+            return await RequestHandler<bool>(HttpVerbs.Put, invitee.InvitedByUserId, async () =>
                 await occupantsRepository.InviteOccupant(invitee));
         }
 

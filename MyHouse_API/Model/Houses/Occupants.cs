@@ -1,3 +1,5 @@
+using System;
+
 namespace MyHouseAPI.Model.Houses
 {
     public abstract class OccupantDetails
@@ -12,12 +14,15 @@ namespace MyHouseAPI.Model.Houses
         public int OccupantId { get; set; }
     }
 
-    public class OccupantResponse : Occupant { }
+    public class OccupantResponse : Occupant
+    {
 
+    }
 
-    public class OccupantInsertRequest : Occupant
+    public class OccupantInsertRequest : OccupantDetails
     {
         public string EnteredBy { get; set; }
+        public int InvitedByOccupantId { get; set; }
     }
 
     public class OccupantUpdateRequest : Occupant
@@ -31,6 +36,8 @@ namespace MyHouseAPI.Model.Houses
         public string InvitedByUserId { get; set; }
         public int InvitedByOccupantId { get; set; }
     }
+
+    public class OccupantInviteRequestDetails { }
 
     public class OccupantInviteResponse
     {

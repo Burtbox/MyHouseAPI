@@ -20,10 +20,11 @@ namespace MyHouseIntegrationTests.Houses
             string newDisplayName = StringGenerator.RandomString(100);
             OccupantInsertRequest occupantToInsert = new OccupantInsertRequest
             {
+                InviteAccepted = false,
                 UserId = newUserId,
                 DisplayName = newDisplayName,
-                OccupantId = 2,
-                EnteredBy = firebaseFixture.H2UserId
+                EnteredBy = firebaseFixture.H2UserId,
+                InvitedByOccupantId = 2,
             };
 
             RestClient client = GetClient();
