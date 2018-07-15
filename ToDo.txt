@@ -37,4 +37,7 @@ Look into ts-option - good for optional params?
 Leave Household / remove occupant buttons
 Hangfire task to clear up households that all users have left 
 Flag a user as removed from household 
-!! REFRESH API KEY !! (accidently committed again!)
+
+Functionality for accepting household invite! - Show a household in a different color to signify unaccepted households 
+- future Functionality around rejecting that invite
+

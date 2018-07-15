@@ -14,7 +14,13 @@ namespace MyHouseAPI.Repositories.Houses
 {
     public class OccupantsRepository : BaseRepository
     {
-        public OccupantsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
+        private readonly ConnectionHandler dbConnection;
+        private readonly ILogger logger;
+        public OccupantsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger)
+        {
+            this.dbConnection = connection;
+            this.logger = logger;
+        }
 
         public async Task<IEnumerable<OccupantResponse>> GetOccupantsOfHousehold(string userId, int occupantId)
         {
@@ -75,6 +81,19 @@ namespace MyHouseAPI.Repositories.Houses
                     };
                     OccupantResponse newOccupant = await this.InsertOccupant(createOccupant);
 
+                    NewsFeedsRepository newsFeeds = new NewsFeedsRepository(this.dbConnection, this.logger);
+                    NewsFeedInsertRequest householdInviteNewsItem = new NewsFeedInsertRequest
+                    {
+                        EnteredBy = invite.InvitedByUserId,
+                        OccupantId = invite.InvitedByOccupantId,
+                        Headline = "Invited to a new household",
+                        SubHeadline = "Congrats",
+                        Story = "You have been invited to a new household! Go to households to accept the invite.",
+                        Author = invite.InvitedByUserId,
+                        Recipient = newOccupant.UserId,
+                    };
+
+                    await newsFeeds.InsertNewsFeed(householdInviteNewsItem);
                     occupantInvited = true;
                 }
                 else
