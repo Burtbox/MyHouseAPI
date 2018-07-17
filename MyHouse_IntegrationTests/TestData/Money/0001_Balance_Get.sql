@@ -9,19 +9,19 @@ exec Money.Transaction_Insert
 exec Houses.Occupants_Insert 
 @DisplayName = 'Household 3 Bal Test 1',
 @UserId = 'tl4CZ3hAwyb4YGN473H2oSFcI6gU',
-@OccupantId = 3,
+@InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Household 3 Bal Test 2',
 @UserId = 'TfAbO1d90cBtwxm2mm9g5ZO92J3p',
-@OccupantId = 3,
+@InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Household 3 Bal Test 3',
 @UserId = 'jig0CWXvwL6Hj9S3pVGF6H6R68P4',
-@OccupantId = 3,
+@InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 -- Add transactions to balance occupants 

@@ -29,13 +29,18 @@ namespace MyHouseAPI.Repositories.Houses
         {
             return await asyncConnection(newsFeed.EnteredBy, newsFeed.OccupantId, async db =>
             {
-                NewsFeedResponse newsFeedItem = await db.QueryFirstOrDefaultAsync<NewsFeedResponse>(
+                return await InsertNewsFeedQuery(db, newsFeed);
+            });
+        }
+
+        public async Task<NewsFeedResponse> InsertNewsFeedQuery(IDbConnection db, NewsFeedInsertRequest newsFeed)
+        {
+            NewsFeedResponse newsFeedItem = await db.QueryFirstOrDefaultAsync<NewsFeedResponse>(
                     sql: "[Houses].[NewsFeeds_Insert]",
                     commandType: CommandType.StoredProcedure,
                     param: newsFeed
                 );
-                return newsFeedItem;
-            });
+            return newsFeedItem;
         }
     }
 }

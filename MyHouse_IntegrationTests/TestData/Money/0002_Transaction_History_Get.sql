@@ -8,19 +8,19 @@ exec Houses.Households_Insert
 exec Houses.Occupants_Insert 
 @DisplayName = 'dickbutt',
 @UserId = '70ajxWmrS6XIU53GL6bj1VcjCsm1',
-@OccupantId = 13,
+@InvitedByOccupantId = 13,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Transaction History DU1',
 @UserId = 'n502RYQixi1UH7N75CXFe5aGSzjb',
-@OccupantId = 13,
+@InvitedByOccupantId = 13,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Transaction History DU2',
 @UserId = 'wblrtCG19vP9iMEixa4Tr9vQM6L9',
-@OccupantId = 13,
+@InvitedByOccupantId = 13,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
 
 -- Add transactions to balance occupants 

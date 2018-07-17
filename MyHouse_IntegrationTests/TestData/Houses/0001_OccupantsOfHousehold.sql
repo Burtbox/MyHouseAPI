@@ -16,13 +16,13 @@ exec houses.Households_Insert
 exec houses.Occupants_Insert 
       @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
     , @DisplayName = 'Household 1 occupant O2DispName'
-    , @OccupantId = 1
+    , @InvitedByOccupantId = 1
 	  , @EnteredBy = '70ajxWmrS6XIU53GL6bj1VcjCsm1'
 
 -- Add user outside of queried household
 exec houses.Occupants_Insert 
 	  @UserId = 'zzrmi1i7nsApSvmeqA9QSIx1zwfs'
     , @DisplayName = 'Household 2 occupant O2DispName'
-    , @OccupantId = 2
+    , @InvitedByOccupantId = 2
 	  , @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
                 

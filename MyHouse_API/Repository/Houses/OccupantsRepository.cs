@@ -14,12 +14,10 @@ namespace MyHouseAPI.Repositories.Houses
 {
     public class OccupantsRepository : BaseRepository
     {
-        private readonly ConnectionHandler dbConnection;
-        private readonly ILogger logger;
-        public OccupantsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger)
+        private readonly NewsFeedsRepository newsFeedsRepository;
+        public OccupantsRepository(ConnectionHandler connection, ILogger logger, NewsFeedsRepository newsFeedsRepository) : base(connection, logger)
         {
-            this.dbConnection = connection;
-            this.logger = logger;
+            this.newsFeedsRepository = newsFeedsRepository;
         }
 
         public async Task<IEnumerable<OccupantResponse>> GetOccupantsOfHousehold(string userId, int occupantId)
@@ -39,13 +37,18 @@ namespace MyHouseAPI.Repositories.Houses
         {
             return await asyncConnection(occupant.EnteredBy, occupant.InvitedByOccupantId, async db =>
             {
-                OccupantResponse insertedOccupant = await db.QueryFirstAsync<OccupantResponse>(
+                return await InsertOccupantQuery(db, occupant);
+            });
+        }
+
+        public async Task<OccupantResponse> InsertOccupantQuery(IDbConnection db, OccupantInsertRequest occupant)
+        {
+            OccupantResponse insertedOccupant = await db.QueryFirstAsync<OccupantResponse>(
                     sql: "[Houses].[Occupants_Insert]",
                     param: occupant,
                     commandType: CommandType.StoredProcedure
                 );
-                return insertedOccupant;
-            });
+            return insertedOccupant;
         }
 
         public async Task<OccupantResponse> UpdateOccupant(OccupantUpdateRequest occupant)
@@ -63,11 +66,10 @@ namespace MyHouseAPI.Repositories.Houses
 
         public async Task<bool> InviteOccupant(OccupantInviteRequest invite)
         {
+            // TODO: Send invite email!
             return await asyncConnection(invite.InvitedByUserId, invite.InvitedByOccupantId, async db =>
             {
                 bool occupantInvited = false;
-                // TODO: Send invite email!
-
                 OccupantInviteResponse existingOccupant = GetFirebaseUserByEmail(invite.Email);
                 if (existingOccupant != null)
                 {
@@ -79,9 +81,8 @@ namespace MyHouseAPI.Repositories.Houses
                         EnteredBy = invite.InvitedByUserId,
                         InvitedByOccupantId = invite.InvitedByOccupantId
                     };
-                    OccupantResponse newOccupant = await this.InsertOccupant(createOccupant);
+                    OccupantResponse newOccupant = await this.InsertOccupantQuery(db, createOccupant);
 
-                    NewsFeedsRepository newsFeeds = new NewsFeedsRepository(this.dbConnection, this.logger);
                     NewsFeedInsertRequest householdInviteNewsItem = new NewsFeedInsertRequest
                     {
                         EnteredBy = invite.InvitedByUserId,
@@ -93,7 +94,7 @@ namespace MyHouseAPI.Repositories.Houses
                         Recipient = newOccupant.UserId,
                     };
 
-                    await newsFeeds.InsertNewsFeed(householdInviteNewsItem);
+                    await newsFeedsRepository.InsertNewsFeedQuery(db, householdInviteNewsItem);
                     occupantInvited = true;
                 }
                 else
