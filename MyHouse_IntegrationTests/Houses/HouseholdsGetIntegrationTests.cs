@@ -18,7 +18,8 @@ namespace MyHouseIntegrationTests.Houses
         public void GetHouseholdsOfOccupantTest()
         {
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod);
+            request.AddParameter("userId", firebaseFixture.H1UserId);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = serialize(new HouseholdResponse[]
@@ -45,12 +46,51 @@ namespace MyHouseIntegrationTests.Houses
         }
 
         [Fact]
+        public void GetHouseholdsOfOccupantIncludingInvitesTest()
+        {
+            RestClient client = GetClient();
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod);
+            request.AddParameter("userId", firebaseFixture.H1UserId);
+            request.AddParameter("includeInvites", firebaseFixture.H1UserId);
+            IRestResponse response = client.Execute<HouseholdResponse>(request);
+
+            string expectedContent = serialize(new HouseholdResponse[]
+            {
+                new HouseholdResponse
+                {
+                    OccupantId = 1,
+                    Name = "Household 1 owner dickbutt",
+                },
+                new HouseholdResponse
+                {
+                    OccupantId = 8,
+                    Name = "Household 3 owner dickbutt",
+                },
+                new HouseholdResponse
+                {
+                    OccupantId = 14,
+                    Name = "Household 6 owner dickbutt3"
+                },
+                new HouseholdResponse
+                {
+                    OccupantId = 18,
+                    Name = "TEST PENDING INVITE HERE ED"
+                }
+            });
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.Content.ShouldBeEquivalentTo(expectedContent);
+        }
+
+        [Fact]
         public void InvalidOccupantIdTest()
         {
             int occupantId = 2;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod);
+            request.AddParameter("userId", firebaseFixture.H1UserId);
+            request.AddParameter("occupantId", occupantId);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             forbiddenExpectations(response);
@@ -62,7 +102,9 @@ namespace MyHouseIntegrationTests.Houses
             int occupantId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H1Token, string.Concat(sutEndpoint, firebaseFixture.H2UserId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod);
+            request.AddParameter("userId", firebaseFixture.H2UserId);
+            request.AddParameter("occupantId", occupantId);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             forbiddenExpectations(response);
@@ -74,7 +116,9 @@ namespace MyHouseIntegrationTests.Houses
             int occupantId = 1;
 
             RestClient client = GetClient();
-            RestRequest request = apiCall(firebaseFixture.H2Token, string.Concat(sutEndpoint, firebaseFixture.H1UserId, ",", occupantId), sutHttpMethod);
+            RestRequest request = apiCall(firebaseFixture.H2Token, sutEndpoint, sutHttpMethod);
+            request.AddParameter("userId", firebaseFixture.H1UserId);
+            request.AddParameter("occupantId", occupantId);
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             forbiddenExpectations(response);

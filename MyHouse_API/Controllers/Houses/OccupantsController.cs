@@ -24,7 +24,7 @@ namespace MyHouseAPI.Controllers
             this.occupantsRepository = occupantsRepository;
         }
 
-        [HttpGet("{userId},{occupantId}")]
+        [HttpGet("{userId}&{occupantId}")]
         public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int occupantId)
         {
             return await RequestHandler<IEnumerable<OccupantResponse>>(HttpVerbs.Get, userId, async () =>

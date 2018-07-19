@@ -11,18 +11,22 @@ exec Houses.Occupants_Insert
 @UserId = 'tl4CZ3hAwyb4YGN473H2oSFcI6gU',
 @InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+, @InviteAccepted = 1
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Household 3 Bal Test 2',
 @UserId = 'TfAbO1d90cBtwxm2mm9g5ZO92J3p',
 @InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+, @InviteAccepted = 1
+
 
 exec Houses.Occupants_Insert 
 @DisplayName = 'Household 3 Bal Test 3',
 @UserId = 'jig0CWXvwL6Hj9S3pVGF6H6R68P4',
 @InvitedByOccupantId = 3,
 @EnteredBy = 'jp9ZAlmz7gV9b74kzniROTSRZxz1'
+, @InviteAccepted = 1
 
 -- Add transactions to balance occupants 
 exec Money.Transaction_Insert

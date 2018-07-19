@@ -12,13 +12,13 @@ namespace MyHouseAPI.Repositories.Houses
     {
         public HouseholdsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<HouseholdResponse>> GetHouseholdsOfOccupant(string userId)
+        public async Task<IEnumerable<HouseholdResponse>> GetHouseholdsOfOccupant(string userId, bool includeInvites)
         {
             return await asyncConnection(async db =>
             {
                 IEnumerable<HouseholdResponse> usersHouseholds = await db.QueryAsync<HouseholdResponse>(
                     sql: "[Houses].[Households_Of_Occupant_Select]",
-                    param: new { UserId = userId },
+                    param: new { UserId = userId, IncludeInvites = includeInvites },
                     commandType: CommandType.StoredProcedure
                 );
                 return usersHouseholds;

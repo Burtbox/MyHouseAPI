@@ -21,13 +21,14 @@ BEGIN
 	DECLARE @NewHouseholdId INT = (SELECT TOP (1)
 		HouseholdId
 	FROM @NewHouseholdIdTable)
+
 	INSERT INTO Houses.Occupants
-		(UserId, DisplayName, HouseholdId, EnteredBy, ModifiedBy)
+		(UserId, DisplayName, HouseholdId, InviteAccepted, EnteredBy, ModifiedBy)
 	OUTPUT
 	INSERTED.OccupantId,
 	@Name As Name
 	VALUES
-		(@EnteredBy, @CreatorDisplayName, @NewHouseholdId, @EnteredBy, @EnteredBy)
+		(@EnteredBy, @CreatorDisplayName, @NewHouseholdId, 1, @EnteredBy, @EnteredBy)
 
 END
 GO

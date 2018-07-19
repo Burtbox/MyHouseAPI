@@ -41,3 +41,4 @@ Flag a user as removed from household
 Functionality for accepting household invite! - Show a household in a different color to signify unaccepted households 
 - future Functionality around rejecting that invite
 
+Add indexes to tables!!!!

@@ -3,3 +3,4 @@ exec houses.Occupants_Insert
     , @DisplayName = 'Household 2 occupant put'
     , @InvitedByOccupantId = 2
     , @EnteredBy = 'SbYFUv0fO8VLzotVFcTUn9uzhB02'
+    , @InviteAccepted = 1

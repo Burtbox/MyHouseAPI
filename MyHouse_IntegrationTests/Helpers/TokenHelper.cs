@@ -24,7 +24,7 @@ namespace MyHouseIntegrationTests.Helpers
         // }
         public async Task<string> GenerateTokenAsync(string userId)
         {
-            string customToken = await GetCustomTokenAsync(userId);
+            string customToken = GetCustomToken(userId);
             //using an undocumented endpoint to turn our custom token into a live user token
             RestClient client = new RestClient("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyA27cRAIaX6NqiLQ4_AHNB91MlHajiTplA");
             RestRequest request = new RestRequest(Method.POST)
@@ -67,7 +67,7 @@ namespace MyHouseIntegrationTests.Helpers
         //     return customToken;
         // }
 
-        private async Task<string> GetCustomTokenAsync(string userId)
+        private string GetCustomToken(string userId)
         {
             // get the node js index file
             // Couldn't get DI Working! 

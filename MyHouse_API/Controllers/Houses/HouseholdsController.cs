@@ -7,7 +7,7 @@ using MyHouseAPI.Model.Houses;
 
 namespace MyHouseAPI.Controllers
 {
-    [Route("api/Houses/[controller]")]
+    [Route("api/Houses/[controller]/[action]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class HouseholdsController : BaseController
@@ -21,11 +21,15 @@ namespace MyHouseAPI.Controllers
             this.householdsRepository = householdsRepository;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> RequestHouseholdsOfOccupant(string userId)
+        [HttpGet()]
+        [ActionName("OfUser")]
+        public async Task<IActionResult> RequestHouseholdsOfOccupant(
+            [FromQuery(Name = "userId")] string userId,
+            [FromQuery(Name = "includeInvites")] bool includeInvites = false
+        )
         {
             return await RequestHandler<IEnumerable<HouseholdResponse>>(HttpVerbs.Get, userId, async () =>
-                await householdsRepository.GetHouseholdsOfOccupant(userId));
+                await householdsRepository.GetHouseholdsOfOccupant(userId, includeInvites));
         }
 
         [HttpPost]
