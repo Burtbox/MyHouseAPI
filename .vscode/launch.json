@@ -43,7 +43,8 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/MyHouse_API/Views"
-            }
+            },
+            "requireExactSource": false
         },
         {
             "name": ".NET Core Attach",

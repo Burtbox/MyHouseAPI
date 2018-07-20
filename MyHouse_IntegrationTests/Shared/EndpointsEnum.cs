@@ -2,7 +2,7 @@ namespace MyHouseIntegrationTests.Shared
 {
     public static class EndpointsEnum
     {
-        public const string Households = "Houses/Households/";
+        public const string Households = "Houses/Households";
         public const string Occupants = "Houses/Occupants/";
         public const string OccupantsInsert = "Houses/Occupants/Insert/";
         public const string OccupantsInvite = "Houses/Occupants/Invite/";

@@ -50,8 +50,8 @@ namespace MyHouseIntegrationTests.Houses
         {
             RestClient client = GetClient();
             RestRequest request = apiCall(firebaseFixture.H1Token, sutEndpoint, sutHttpMethod);
-            request.AddParameter("userId", firebaseFixture.H1UserId);
-            request.AddParameter("includeInvites", firebaseFixture.H1UserId);
+            request.AddQueryParameter("userId", firebaseFixture.H1UserId);
+            request.AddQueryParameter("includeInvites", "True");
             IRestResponse response = client.Execute<HouseholdResponse>(request);
 
             string expectedContent = serialize(new HouseholdResponse[]

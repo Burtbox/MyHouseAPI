@@ -12,7 +12,7 @@ namespace MyHouseAPI.Repositories.Houses
     {
         public HouseholdsRepository(ConnectionHandler connection, ILogger logger) : base(connection, logger) { }
 
-        public async Task<IEnumerable<HouseholdResponse>> GetHouseholdsOfOccupant(string userId, bool includeInvites)
+        public async Task<IEnumerable<HouseholdResponse>> GetHouseholdsOfOccupant(string userId, bool includeInvites = false)
         {
             return await asyncConnection(async db =>
             {
