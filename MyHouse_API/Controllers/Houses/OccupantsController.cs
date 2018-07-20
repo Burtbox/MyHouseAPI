@@ -9,7 +9,7 @@ using System;
 
 namespace MyHouseAPI.Controllers
 {
-    [Route("api/Houses/[controller]/[action]")]
+    [Route("api/Houses/[controller]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class OccupantsController : BaseController
@@ -24,11 +24,18 @@ namespace MyHouseAPI.Controllers
             this.occupantsRepository = occupantsRepository;
         }
 
-        [HttpGet("{userId}&{occupantId}")]
-        public async Task<IActionResult> RequestOccupantsOfHousehold(string userId, int occupantId)
+        [HttpGet]
+        public async Task<IActionResult> RequestOccupantsOfHousehold([FromQuery] string userId, [FromQuery] int occupantId)
         {
             return await RequestHandler<IEnumerable<OccupantResponse>>(HttpVerbs.Get, userId, async () =>
                 await occupantsRepository.GetOccupantsOfHousehold(userId, occupantId));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
+        {
+            return await RequestHandler<bool>(HttpVerbs.Put, invitee.InvitedByUserId, async () =>
+                await occupantsRepository.InviteOccupant(invitee));
         }
 
         [HttpPut]
@@ -36,14 +43,6 @@ namespace MyHouseAPI.Controllers
         {
             return await RequestHandler<OccupantResponse>(HttpVerbs.Put, occupant.UserId, async () =>
                 await occupantsRepository.UpdateOccupant(occupant));
-        }
-
-        [HttpPost]
-        [ActionName("Invite")]
-        public async Task<IActionResult> RequestInviteOccupant([FromBody] OccupantInviteRequest invitee)
-        {
-            return await RequestHandler<bool>(HttpVerbs.Put, invitee.InvitedByUserId, async () =>
-                await occupantsRepository.InviteOccupant(invitee));
         }
 
         //[HttpDelete("{userId},{householdId},{occupantId}")]

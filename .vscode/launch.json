@@ -19,7 +19,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/MyHouse_API/bin/Debug/netcoreapp2.0/MyHouseAPI.dll",
+            "program": "${workspaceRoot}/MyHouse_API/bin/Debug/netcoreapp2.1/MyHouseAPI.dll",
             "args": [],
             "cwd": "${workspaceRoot}/MyHouse_API",
             "stopAtEntry": false,
@@ -43,8 +43,7 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/MyHouse_API/Views"
-            },
-            "requireExactSource": false
+            }
         },
         {
             "name": ".NET Core Attach",

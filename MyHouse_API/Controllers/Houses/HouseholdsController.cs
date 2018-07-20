@@ -21,11 +21,11 @@ namespace MyHouseAPI.Controllers
             this.householdsRepository = householdsRepository;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> RequestHouseholdsOfOccupant(string userId)
+        [HttpGet]
+        public async Task<IActionResult> RequestHouseholdsOfOccupant([FromQuery] string userId, [FromQuery] bool includeInvites)
         {
             return await RequestHandler<IEnumerable<HouseholdResponse>>(HttpVerbs.Get, userId, async () =>
-                await householdsRepository.GetHouseholdsOfOccupant(userId));
+                await householdsRepository.GetHouseholdsOfOccupant(userId, includeInvites));
         }
 
         [HttpPost]

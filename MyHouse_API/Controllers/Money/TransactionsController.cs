@@ -7,7 +7,7 @@ using MyHouseAPI.Model.Money;
 
 namespace MyHouseAPI.Controllers.Money
 {
-    [Route("api/Money/[controller]")]
+    [Route("api/Money/[controller]/[action]")]
     [ApiVersion("3.0")]
     [Authorize]
     public class TransactionsController : BaseController
@@ -22,8 +22,9 @@ namespace MyHouseAPI.Controllers.Money
             this.transactionsRepository = transactionsRepository;
         }
 
-        [HttpGet("History/{userId},{occupantId},{pageSize},{pageNumber}")]
-        public async Task<IActionResult> RequestGetTransactionHistory(string userId, int occupantId, int pageSize, int pageNumber)
+        [HttpGet]
+        [ActionName("History")]
+        public async Task<IActionResult> RequestGetTransactionHistory([FromQuery] string userId, [FromQuery]  int occupantId, [FromQuery]  int pageSize, [FromQuery] int pageNumber)
         {
             if (pageSize < 1)
             {
@@ -45,8 +46,9 @@ namespace MyHouseAPI.Controllers.Money
                 await transactionsRepository.GetTransactionHistory(userId, occupantId, pageSize, pageNumber));
         }
 
-        [HttpGet("Summary/{userId},{occupantId}")]
-        public async Task<IActionResult> RequestGetTransactionSummary(string userId, int occupantId)
+        [HttpGet]
+        [ActionName("Summary")]
+        public async Task<IActionResult> RequestGetTransactionSummary([FromQuery] string userId, [FromQuery] int occupantId)
         {
             if (occupantId < 1)
             {
@@ -60,8 +62,8 @@ namespace MyHouseAPI.Controllers.Money
                 await transactionsRepository.GetTransactionSummary(userId, occupantId));
         }
 
-        [HttpPost("{userId}")]
-        public async Task<IActionResult> RequestInsertTransaction(string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
+        [HttpPost]
+        public async Task<IActionResult> RequestInsertTransaction([FromQuery] string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
         {
             return await RequestHandler<int>(HttpVerbs.Post, userId, async () =>
                 await transactionsRepository.InsertTransaction(userId, transaction));

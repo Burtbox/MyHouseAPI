@@ -22,8 +22,8 @@ namespace MyHouseAPI.Controllers
             this.newsFeedsRepository = newsFeedsRepository;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> RequestNewsFeed(string userId)
+        [HttpGet]
+        public async Task<IActionResult> RequestNewsFeed([FromQuery] string userId)
         {
             return await RequestHandler<IEnumerable<NewsFeedResponse>>(HttpVerbs.Get, userId, async () =>
                 await newsFeedsRepository.GetNewsFeeds(userId));

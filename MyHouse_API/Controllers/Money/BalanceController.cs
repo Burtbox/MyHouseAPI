@@ -23,8 +23,8 @@ namespace MyHouseAPI.Controllers.Money
         }
 
         // GET: api/values
-        [HttpGet("{userId},{occupantId}")]
-        public async Task<IActionResult> RequestBalance(string userId, int occupantId)
+        [HttpGet]
+        public async Task<IActionResult> RequestBalance([FromQuery] string userId, [FromQuery] int occupantId)
         {
             return await RequestHandler<IEnumerable<BalanceResponse>>(HttpVerbs.Get, userId, async () =>
                 await balanceRepository.GetBalance(userId, occupantId));

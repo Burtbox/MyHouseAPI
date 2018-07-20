@@ -10,7 +10,10 @@ namespace MyHouseAPI.Model.Houses
         public int OccupantId { get; set; }
     }
 
-    public class HouseholdResponse : Household { }
+    public class HouseholdResponse : Household
+    {
+        public bool InviteAccepted { get; set; }
+    }
 
     public class HouseholdInsertRequest : HouseholdDetails
     {
