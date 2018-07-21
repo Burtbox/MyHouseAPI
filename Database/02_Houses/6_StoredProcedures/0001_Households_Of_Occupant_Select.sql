@@ -12,5 +12,6 @@ BEGIN
 	WHERE UserId = @UserId
 		AND (InviteAccepted = 1
 		OR (@IncludeInvites = 1 AND InviteAccepted = 0))
+	ORDER BY Occ.InviteAccepted desc, Hh.Name
 END
 GO

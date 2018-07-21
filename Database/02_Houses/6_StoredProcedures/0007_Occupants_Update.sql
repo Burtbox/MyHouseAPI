@@ -3,7 +3,6 @@ CREATE OR ALTER PROCEDURE Houses.Occupants_Update
 	@DisplayName AS VARCHAR(100),
 	@InviteAccepted AS BIT,
 	@OccupantId AS INT
-
 AS
 BEGIN
 	-- This will update their display name for all households
@@ -13,7 +12,7 @@ BEGIN
 	, ModifiedDate = GETUTCDATE()
 	WHERE UserId = @UserId
 
-	UPDATE Households.Occupants 
+	UPDATE Houses.Occupants 
 	SET InviteAccepted = @InviteAccepted
 	WHERE UserId = @UserId AND OccupantId = @OccupantId
 
