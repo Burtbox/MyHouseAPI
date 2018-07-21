@@ -16,7 +16,7 @@ BEGIN
 	SET InviteAccepted = @InviteAccepted
 	WHERE UserId = @UserId AND OccupantId = @OccupantId
 
-	SELECT OccupantId, UserId, DisplayName, HouseholdId
+	SELECT OccupantId, UserId, DisplayName, HouseholdId, InviteAccepted
 	FROM Houses.Occupants
 	WHERE UserId = @UserId AND OccupantId = @OccupantId
 END
