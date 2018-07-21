@@ -63,6 +63,7 @@ namespace MyHouseAPI.Controllers.Money
         }
 
         [HttpPost]
+        [ActionName("Add")]
         public async Task<IActionResult> RequestInsertTransaction([FromQuery] string userId, [FromBody]IEnumerable<TransactionInsertRequest> transaction)
         {
             return await RequestHandler<int>(HttpVerbs.Post, userId, async () =>
