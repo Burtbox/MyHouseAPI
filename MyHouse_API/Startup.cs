@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyHouseAPI.Model;
 
 namespace MyHouseAPI
 {
@@ -34,6 +35,7 @@ namespace MyHouseAPI
             services.AddSerilog(configuration);
             services.AddVersioning();
             services.AddCorsConfiguration();
+            services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

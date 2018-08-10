@@ -42,3 +42,5 @@ Functionality for accepting household invite! - Show a household in a different 
 - future Functionality around rejecting that invite
 
 Add indexes to tables!!!!
+
+Fix build process - one click deploy - puts files in sensible places - esp pvk

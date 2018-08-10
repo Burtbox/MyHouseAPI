@@ -1,12 +1,12 @@
 ﻿param(
     # The directory of the MyHouseAPI repo (no backslash at the end)
-    [string]$repoDir = "C:\WebProjects\MyHouseAPI",
+    [string]$repoDir = "C:\inetpub\wwwroot\MyHouseAPI",
 
     # The name of the sql server instance to run the script on
-    [string]$server = "localhost\SQL2016",
+    [string]$server = "EDLAPTOP\EDLAPTOPSQL",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev_Local"
+    [string]$db = "MyHouse_Test"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"

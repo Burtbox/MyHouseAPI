@@ -4,11 +4,19 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MyHouseAPI.Repositories;
+using Microsoft.Extensions.Options;
+using MyHouseAPI.Model;
 
 namespace MyHouseAPI.Authorization.Handlers
 {
     public class OwnUserIdHandler : AuthorizationHandler<OwnUserIdRequirement, string>
     {
+        private readonly IOptions<AppSettings> appSettings;
+        public OwnUserIdHandler(IOptions<AppSettings> appSettings)
+        {
+            this.appSettings = appSettings;
+        }
+
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             OwnUserIdRequirement requirement,
@@ -17,7 +25,7 @@ namespace MyHouseAPI.Authorization.Handlers
         {
             if (!context.User.HasClaim(c =>
                 c.Type == "user_id" &&
-                c.Issuer == "https://securetoken.google.com/myhouse-a01c7" //TODO move this into config
+                c.Issuer == appSettings.Value.Firebase.Issuer
             ))
             {
                 return Task.CompletedTask;
@@ -26,7 +34,7 @@ namespace MyHouseAPI.Authorization.Handlers
             string claimsUserId =
                 context.User.FindFirst(c =>
                     c.Type == "user_id" &&
-                    c.Issuer == "https://securetoken.google.com/myhouse-a01c7"
+                    c.Issuer == appSettings.Value.Firebase.Issuer
                 ).Value;
 
             if (claimsUserId == userId)
