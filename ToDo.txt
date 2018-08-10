@@ -44,3 +44,7 @@ Functionality for accepting household invite! - Show a household in a different 
 Add indexes to tables!!!!
 
 Fix build process - one click deploy - puts files in sensible places - esp pvk
+
+-- private key no working
+-- move to myHouse live
+-- then deploy housemoney! 
