@@ -1,28 +1,46 @@
 {
-    "version": "0.1.0",
-    "command": "dotnet",
-    "isShellCommand": true,
-    "args": [],
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build API",
+            "command": "dotnet",
             "args": [
                 "${workspaceRoot}/MyHouse_API/MyHouseAPI.csproj"
             ],
-            "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "test",
+            "label": "build Firebase Admin",
+            "type": "npm",
+            "script": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "dependsOn": [
+                "build API",
+                "build Firebase Admin"
+            ],
+        },
+        {
+            "label": "test unit",
+            "command": "dotnet",
             "args": [
                 "${workspaceRoot}/MyHouse_UnitTests/MyHouseUnitTests.csproj"
             ],
-            "isTestCommand": true,
-            "showOutput": "always",
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "publish",
+            "label": "test integration",
+            "command": "dotnet",
+            "args": [
+                "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish API",
+            "command": "dotnet",
             "args": [
                 "${workspaceRoot}/MyHouse_API/MyHouseAPI.csproj",
                 "-c",
@@ -30,17 +48,20 @@
                 "-o",
                 "\\\\edlaptop\\wwwroot\\MyHouseTestAPI\\"
             ],
-            "isBuildCommand": true,
             "problemMatcher": "$msCompile"
-        }
-        // {
-        //     "taskName": "test",
-        //     "args": [
-        //         "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
-        //     ],
-        //     "isTestCommand": true,
-        //     "showOutput": "always",
-        //     "problemMatcher": "$msCompile"
-        // }
+        },
+        {
+            "label": "publish Firebase Admin",
+            "type": "npm",
+            "script": "publish",
+            "problemMatcher": []
+        },
+        {
+            "label": "publish",
+            "dependsOn": [
+                "publish API",
+                "publish Firebase Admin"
+            ],
+        },
     ]
 }
