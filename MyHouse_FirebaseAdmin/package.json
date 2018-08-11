@@ -14,7 +14,7 @@
     "build": "tsc",
     "start": "nodemon --exec ts-node -- src/index.ts getFirebaseUserByEmail \"dickbutt@gmail.com\"",
     "watch": "tsc -w",
-    "publish": "tsc" // TODO: MUST WEBPACK THIS TO MAKE IT WORK!
+    "publish": "tsc"
   },
   "author": "Ed Burt",
   "license": "ISC",

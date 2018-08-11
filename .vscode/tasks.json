@@ -5,15 +5,20 @@
             "label": "build API",
             "command": "dotnet",
             "args": [
+                "build",
                 "${workspaceRoot}/MyHouse_API/MyHouseAPI.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "build Firebase Admin",
-            "type": "npm",
-            "script": "build",
-            "problemMatcher": []
+            "command": "npm",
+            "args": [
+                "run build",
+                "--prefix",
+                "${workspaceRoot}/MyHouse_FirebaseAdmin"
+            ],
+            "problemMatcher": "$tsc"
         },
         {
             "label": "build",
@@ -24,7 +29,7 @@
         },
         {
             "label": "test unit",
-            "command": "dotnet",
+            "command": "dotnet ",
             "args": [
                 "${workspaceRoot}/MyHouse_UnitTests/MyHouseUnitTests.csproj"
             ],
@@ -32,7 +37,7 @@
         },
         {
             "label": "test integration",
-            "command": "dotnet",
+            "command": "dotnet ",
             "args": [
                 "${workspaceRoot}/MyHouse_IntegrationTests/MyHouseIntegrationTests.csproj"
             ],
@@ -42,6 +47,7 @@
             "label": "publish API",
             "command": "dotnet",
             "args": [
+                "publish",
                 "${workspaceRoot}/MyHouse_API/MyHouseAPI.csproj",
                 "-c",
                 "release",
@@ -52,9 +58,12 @@
         },
         {
             "label": "publish Firebase Admin",
-            "type": "npm",
-            "script": "publish",
-            "problemMatcher": []
+            "command": "npm",
+            "args": [
+                "run build",
+                "--prefix",
+                "${workspaceRoot}/MyHouse_FirebaseAdmin"
+            ],
         },
         {
             "label": "publish",
