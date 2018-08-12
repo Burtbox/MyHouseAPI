@@ -9,8 +9,11 @@
     ],
     "module": "commonjs",
     "outDir": "./build",
+    "noImplicitAny": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": [
     "./src/**.ts",
