@@ -1,4 +1,2 @@
 https://stackoverflow.com/questions/42927643/firebase-rest-auth-when-creating-token-with-node-js-admin-sdk
 
-
-// TODO: MUST WEBPACK THIS TO MAKE IT WORK!

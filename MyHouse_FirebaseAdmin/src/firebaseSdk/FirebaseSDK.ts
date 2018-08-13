@@ -3,7 +3,7 @@ import log from '../common/logger';
 
 class FirebaseSDK {
     constructor() {
-        const serviceAccountDetailsPath = "../../privateKey/myhouse-live-e046c67d3781.json";
+        const serviceAccountDetailsPath = "../../privateKey/myhouse-live.json";
         const serviceAccount: any = require(serviceAccountDetailsPath);
         if (serviceAccount) {
             admin.initializeApp({
