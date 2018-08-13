@@ -8,7 +8,7 @@ class FirebaseSDK {
         if (serviceAccount) {
             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount),
-                databaseURL: "https://myhouse-a01c7.firebaseio.com"
+                databaseURL: "https://myhouse-live.firebaseio.com"
             });
         } else {
             log.error(`service accound details not found at: ${serviceAccountDetailsPath}`);
