@@ -44,6 +44,6 @@ Functionality for accepting household invite! - Show a household in a different 
 Add indexes to tables!!!!
 
 Fix build process - one click deploy - puts files in sensible places - esp pvk
--- need to weback the FirebaseAdmin stuff and put into api on build / pub so api can consistently ref
+-- weback FirebaseAdmin - needs to ref via import! Currently being a pain!
 -- move to myHouse live
 -- then deploy housemoney! 
