@@ -14,7 +14,7 @@ const baseConfig: webpack.Configuration = {
         ]
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".json"]
+        extensions: [".tsx", ".ts", ".js", ".json"],
     },
 };
 

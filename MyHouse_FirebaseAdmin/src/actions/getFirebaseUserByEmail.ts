@@ -1,6 +1,6 @@
 import { handleOutput } from "../common/handleOutput";
 import log from '../common/logger';
-import FirebaseSdk from "../firebaseSdk/FirebaseSdk";
+import FirebaseSdk from "../firebase/FirebaseSdk";
 
 export const getFirebaseUserByEmail = (email: string) => {
     log.info("Checking user email exists")

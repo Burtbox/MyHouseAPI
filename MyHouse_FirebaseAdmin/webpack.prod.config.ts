@@ -10,6 +10,11 @@ const prodConfig: webpack.Configuration = {
     output: {
         filename: "firebaseAdmin.js",
         path: path.resolve(__dirname, prodOutputDir)
+    },
+    resolve: {
+        alias: {
+            "firebasePvk.json": path.join(__dirname, 'privateKey/myhouse-live.json'),
+        }
     }
 };
 

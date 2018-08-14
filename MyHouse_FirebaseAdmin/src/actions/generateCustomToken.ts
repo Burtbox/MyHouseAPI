@@ -1,6 +1,6 @@
 import { handleOutput } from "../common/handleOutput";
 import log from '../common/logger';
-import FirebaseSdk from "../firebaseSdk/FirebaseSdk";
+import FirebaseSdk from "../firebase/FirebaseSdk";
 
 export const generateCustomToken = (userId: string) => {
     log.info("Generating custom token");

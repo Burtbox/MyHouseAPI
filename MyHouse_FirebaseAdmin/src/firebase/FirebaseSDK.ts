@@ -1,12 +1,12 @@
 import * as admin from "firebase-admin";
-import log from '../common/logger';
+import privateKey from "firebasePvk.json";
 
 class FirebaseSDK {
-          constructor() {
-            admin.initializeApp({
-            credential: admin.credential.cert("../privateKey/myhouse-live.json"),
-        	databaseURL: "https://myhouse-live.firebaseio.com"
-		});
+    constructor() {
+        admin.initializeApp({
+            credential: admin.credential.cert(privateKey),
+            databaseURL: "https://myhouse-live.firebaseio.com"
+        });
     }
 
     generateCustomToken(userId: string): Promise<string> {
