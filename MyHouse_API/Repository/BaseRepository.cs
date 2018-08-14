@@ -30,9 +30,11 @@ namespace MyHouseAPI.Repositories
         {
             try
             {
+                this.logger.Information("Attempting asyncConnection without userId or OccupantId");
                 using (dbConnection)
                 {
                     await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
+                    this.logger.Information("Established asyncConnection without userId or OccupantId");
                     return await getData(dbConnection); // Asynchronously execute getData, which has been passed in as a Func<IDBConnection, Task<T>>
                 }
             }
@@ -52,10 +54,12 @@ namespace MyHouseAPI.Repositories
                 ) == 1
             )
             {
+                this.logger.Information($"Valid Occupant with UserId: {userId} and OccupantId: {occupantId}");
                 return true;
             }
             else
             {
+                this.logger.Warning($"Invalid Occupant with UserId: {userId} and OccupantId: {occupantId}");
                 throw new InvalidOccupantException();
             }
         }
@@ -71,10 +75,12 @@ namespace MyHouseAPI.Repositories
         {
             try
             {
+                this.logger.Information($"Attempting asyncConnection with userId {userId} and OccupantId: {occupantId}");
                 using (dbConnection)
                 {
                     await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
                     await validateHouseholdOccupant(dbConnection, userId, occupantId); // Validate the occupant lives in that household
+                    this.logger.Information($"Established asyncConnection with userId {userId} and OccupantId: {occupantId}");
                     return await getData(dbConnection); // Asynchronously execute getData, which has been passed in as a Func<IDBConnection, Task<T>>
                 }
             }
@@ -94,9 +100,11 @@ namespace MyHouseAPI.Repositories
         {
             try
             {
+                this.logger.Information($"Running checkHousehold for userId {userId} and OccupantId: {occupantId}");
                 using (dbConnection)
                 {
                     await dbConnection.OpenAsync(); // Asynchronously open a connection to the database
+                    this.logger.Information($"Established checkHousehold connection for userId {userId} and OccupantId: {occupantId}");
                     return await validateHouseholdOccupant(dbConnection, userId, occupantId); // Validate the occupant lives in that household
                 }
             }

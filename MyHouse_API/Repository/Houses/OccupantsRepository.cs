@@ -76,6 +76,7 @@ namespace MyHouseAPI.Repositories.Houses
                 OccupantInviteResponse existingOccupant = GetFirebaseUserByEmail(invite.Email);
                 if (existingOccupant != null)
                 {
+                    this.logger.Information($"Creating Occupant from invite: {invite.ToString()}");
                     OccupantInsertRequest createOccupant = new OccupantInsertRequest
                     {
                         InviteAccepted = false,
@@ -84,7 +85,10 @@ namespace MyHouseAPI.Repositories.Houses
                         EnteredBy = invite.InvitedByUserId,
                         InvitedByOccupantId = invite.InvitedByOccupantId
                     };
+                    this.logger.Information($"Creating Occupant: {createOccupant.ToString()}");
                     OccupantResponse newOccupant = await this.InsertOccupantQuery(db, createOccupant);
+
+                    this.logger.Information($"Created Occupant: {newOccupant.ToString()}");
 
                     NewsFeedInsertRequest householdInviteNewsItem = new NewsFeedInsertRequest
                     {
@@ -96,7 +100,7 @@ namespace MyHouseAPI.Repositories.Houses
                         Author = invite.InvitedByUserId,
                         Recipient = newOccupant.UserId,
                     };
-
+                    this.logger.Information($"Creating News Feed Invite: {invite.ToString()}");
                     await newsFeedsRepository.InsertNewsFeedQuery(db, householdInviteNewsItem);
                     occupantInvited = true;
                 }
