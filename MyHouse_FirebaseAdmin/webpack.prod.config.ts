@@ -8,7 +8,7 @@ const prodOutputDir: string = "../MyHouse_API/bin/release/netcoreapp2.1/Firebase
 const prodConfig: webpack.Configuration = {
     mode: "production",
     output: {
-        filename: "firebaseAdmin.js",
+        filename: "firebaseAdminBundle.js",
         path: path.resolve(__dirname, prodOutputDir)
     },
     resolve: {

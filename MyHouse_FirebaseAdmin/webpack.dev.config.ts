@@ -8,7 +8,7 @@ const devOutputDir: string = "../MyHouse_API/bin/debug/netcoreapp2.1/FirebaseAdm
 const devConfig: webpack.Configuration = {
     mode: "development",
     output: {
-        filename: "firebaseAdmin.js",
+        filename: "firebaseAdminBundle.js",
         path: path.resolve(__dirname, devOutputDir)
     },
     resolve: {

@@ -9,6 +9,7 @@ using MyHouseAPI.Handlers;
 using MyHouseAPI.Model.Houses;
 using Serilog;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace MyHouseAPI.Repositories.Houses
 {
@@ -110,8 +111,8 @@ namespace MyHouseAPI.Repositories.Houses
         private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
         {
             // get the node js index file
-            DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory());
-            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_FirebaseAdmin\\build\\index.js");
+            var apiDirectory = Assembly.GetEntryAssembly().Location;
+            string firebaseAdminConsole = String.Concat(apiDirectory, "\\FirebaseAdmin\\firebaseAdminBundle.js");
             string commandName = "getFirebaseUserByEmail";
             string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 
