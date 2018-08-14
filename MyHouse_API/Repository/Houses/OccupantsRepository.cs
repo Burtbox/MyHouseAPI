@@ -16,9 +16,11 @@ namespace MyHouseAPI.Repositories.Houses
     public class OccupantsRepository : BaseRepository
     {
         private readonly NewsFeedsRepository newsFeedsRepository;
+        private readonly ILogger logger;
         public OccupantsRepository(ConnectionHandler connection, ILogger logger, NewsFeedsRepository newsFeedsRepository) : base(connection, logger)
         {
             this.newsFeedsRepository = newsFeedsRepository;
+            this.logger = logger;
         }
 
         public async Task<IEnumerable<OccupantResponse>> GetOccupantsOfHousehold(string userId, int occupantId)
@@ -110,9 +112,18 @@ namespace MyHouseAPI.Repositories.Houses
 
         private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
         {
+            //TODO: Loads of logging around here! Check that the thing can actually run 
             // get the node js index file
             var apiDirectory = Assembly.GetEntryAssembly().Location;
             string firebaseAdminConsole = String.Concat(apiDirectory, "\\FirebaseAdmin\\firebaseAdminBundle.js");
+            this.logger.Information($"Firebase Admin console looking for at path: {firebaseAdminConsole}");
+
+            if (!File.Exists(firebaseAdminConsole))
+            {
+                this.logger.Error($"Firebase Admin console not found at path: {firebaseAdminConsole}");
+                throw new Exception($"Firebase Admin console not found at path: {firebaseAdminConsole}");
+            }
+
             string commandName = "getFirebaseUserByEmail";
             string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 

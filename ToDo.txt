@@ -43,10 +43,8 @@ Functionality for accepting household invite! - Show a household in a different 
 
 Add indexes to tables!!!!
 
-Fix build process - one click deploy - puts files in sensible places - esp pvk
--- weback FirebaseAdmin - needs to ref via import! Currently being a pain!
--- move to myHouse live
--- then deploy housemoney! 
+Fix bug of not returning error messages to client properly e.g. MyHouseAPI.Repositories.Houses.OccupantsRepository experienced exception (not a timeout or SQL): Details "The email address dickbutt7@gmail.com must sign up to myHouse first"
+-- then deploy housemoney V3! 
 
 Add watch task
 
