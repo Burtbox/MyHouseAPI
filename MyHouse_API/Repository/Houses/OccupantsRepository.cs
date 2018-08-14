@@ -116,10 +116,9 @@ namespace MyHouseAPI.Repositories.Houses
 
         private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
         {
-            //TODO: Loads of logging around here! Check that the thing can actually run 
-            // get the node js index file
-            var apiDirectory = Assembly.GetEntryAssembly().Location;
-            string firebaseAdminConsole = String.Concat(apiDirectory, "\\FirebaseAdmin\\firebaseAdminBundle.js");
+            this.logger.Information("get the node js firebase admin Bundle");
+            var apiDirectory = Directory.GetParent(Assembly.GetEntryAssembly().Location);
+            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\FirebaseAdmin\\firebaseAdminBundle.js");
             this.logger.Information($"Firebase Admin console looking for at path: {firebaseAdminConsole}");
 
             if (!File.Exists(firebaseAdminConsole))
