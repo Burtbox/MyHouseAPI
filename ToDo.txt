@@ -47,3 +47,5 @@ Fix build process - one click deploy - puts files in sensible places - esp pvk
 -- weback FirebaseAdmin - needs to ref via import! Currently being a pain!
 -- move to myHouse live
 -- then deploy housemoney! 
+
+Add watch task
