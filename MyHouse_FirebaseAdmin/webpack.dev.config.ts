@@ -14,6 +14,7 @@ const devConfig: webpack.Configuration = {
     resolve: {
         alias: {
             "firebasePvk.json": path.join(__dirname, 'privateKey/myhouse-test.json'),
+            "config/appSettings": path.join(__dirname, 'src/config/appSettings.dev.ts'),
         }
     }
 

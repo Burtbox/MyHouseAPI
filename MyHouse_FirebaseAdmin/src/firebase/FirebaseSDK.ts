@@ -1,3 +1,4 @@
+import appSettings from "config/appSettings";
 import * as admin from "firebase-admin";
 import privateKey from "firebasePvk.json";
 
@@ -5,7 +6,7 @@ class FirebaseSDK {
     constructor() {
         admin.initializeApp({
             credential: admin.credential.cert(privateKey),
-            databaseURL: "https://myhouse-live.firebaseio.com"
+            databaseURL: appSettings.firebaseDbUrl
         });
     }
 
