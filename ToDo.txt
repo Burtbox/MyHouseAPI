@@ -49,3 +49,5 @@ Fix build process - one click deploy - puts files in sensible places - esp pvk
 -- then deploy housemoney! 
 
 Add watch task
+
+ED! Beware that publish may take old firebaseAdmin as build time for that is slower than dotnet publish
