@@ -1,6 +1,7 @@
 import * as bunyan from 'bunyan';
+import appSettings from "config/appSettings";
 
-const logLevel = 'error';
+const logLevel = appSettings.logLevel;
 const logFilePath = process.cwd() + '\\log.txt'
 const loggerStreams: bunyan.Stream[] = [
     // {

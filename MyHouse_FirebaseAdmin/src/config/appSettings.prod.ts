@@ -1,5 +1,8 @@
-const appSettings = {
-    firebaseDbUrl: "https://myhouse-live.firebaseio.com"
+import { IAppSettings } from "./appSettingsInterfaces";
+
+const appSettings: IAppSettings = {
+    firebaseDbUrl: "https://myhouse-live.firebaseio.com",
+    logLevel: "error",
 }
 
 export default appSettings;
