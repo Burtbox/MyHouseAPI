@@ -49,3 +49,5 @@ Fix bug of not returning error messages to client properly e.g. MyHouseAPI.Repos
 Add watch task
 
 ED! Beware that publish may take old firebaseAdmin as build time for that is slower than dotnet publish
+
+ED! FirebaseAdminConsole not getting privateKey.json - check what the webpack is going wrong!
