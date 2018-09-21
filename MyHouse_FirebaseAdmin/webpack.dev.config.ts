@@ -17,7 +17,6 @@ const devConfig: webpack.Configuration = {
             "config/appSettings": path.join(__dirname, 'src/config/appSettings.dev.ts'),
         }
     }
-
 };
 
 const config: webpack.Configuration = merge(baseConfig, devConfig);

@@ -11,7 +11,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack --config webpack.dev.config.ts -d",
-        "publish": "webpack --config webpack.prod.config.ts -p"
+        "publish": "webpack --config webpack.prod.config.ts -p",
+        "start": "webpack --config webpack.dev.config.ts -w"
     },
     "author": "Ed Burt",
     "license": "ISC",
