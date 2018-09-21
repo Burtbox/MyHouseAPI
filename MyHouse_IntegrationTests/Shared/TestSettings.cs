@@ -21,5 +21,7 @@ namespace MyHouseIntegrationTests.Shared
         public string H3DisplayName;
         public int H3OccupantId;
         public string H3Email;
+
+        public string FirebaseAdminConsolePath;
     }
 }

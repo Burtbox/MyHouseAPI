@@ -15,13 +15,6 @@ namespace MyHouseIntegrationTests.Helpers
 {
     public class TokenHelper
     {
-        // private readonly INodeServices nodeServices;
-        // private readonly ILogger logger;
-        // public TokenHelper(INodeServices nodeServices, ILogger logger)
-        // {
-        //     this.nodeServices = nodeServices;
-        //     this.logger = logger;
-        // }
         public async Task<string> GenerateTokenAsync(string userId)
         {
             string customToken = GetCustomToken(userId);
@@ -59,24 +52,15 @@ namespace MyHouseIntegrationTests.Helpers
             return token;
         }
 
-        // private async Task<string> GetCustomTokenAsync(string userId)
-        // {
-        //     FirebaseRepository firebaseRepository = new FirebaseRepository(nodeServices, logger);
-        //     string customToken = await firebaseRepository.GenerateCustomToken(userId);
-
-        //     return customToken;
-        // }
-
         private string GetCustomToken(string userId)
         {
             string customToken = string.Empty;
             try
             {
                 // get the node js index file
-                // Couldn't get DI Working! 
-                // TODO: ref appsetting
+                TestSettings settings = TestSettingsHelper.TestSettings;
                 DirectoryInfo apiDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
-                string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\MyHouse_API\\bin\\Debug\\netcoreapp2.1\\FirebaseAdmin\\firebaseAdminBundle.js");
+                string firebaseAdminConsole = String.Concat(apiDirectory.FullName, settings.FirebaseAdminConsolePath);
                 string commandName = "generateCustomToken";
                 string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 
