@@ -11,9 +11,10 @@ BEGIN
 			THEN AuthorDetails.DisplayName 
 			ELSE NewsFeed.Author 
 		END AS Author
-	FROM Houses.NewsFeed as NewsFeed
-		LEFT JOIN Houses.Occupants as AuthorDetails ON AuthorDetails.UserId = NewsFeed.Author
+	FROM Houses.NewsFeed AS NewsFeed
+		LEFT JOIN Houses.Occupants AS AuthorDetails ON AuthorDetails.UserId = NewsFeed.Author
 	Where NewsFeed.Recipient = @userId
 		OR NewsFeed.Recipient = 'All'
+	ORDER BY NewsFeed.ModifiedDate desc
 END
 GO
