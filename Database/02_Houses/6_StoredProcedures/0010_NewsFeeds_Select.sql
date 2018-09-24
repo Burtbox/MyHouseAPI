@@ -7,9 +7,12 @@ BEGIN
 		, NewsFeed.Headline
 		, NewsFeed.SubHeadline
 		, NewsFeed.Story
-		, NewsFeed.Author
+		, CASE WHEN AuthorDetails.DisplayName IS NOT NULL 
+			THEN AuthorDetails.DisplayName 
+			ELSE NewsFeed.Author END
 	FROM Houses.NewsFeed as NewsFeed
-	Where NewsFeed.Recipient = @userId 
+		LEFT JOIN Houses.Occupants as AuthorDetails ON AuthorDetails.UserId = NewsFeed.Author
+	Where NewsFeed.Recipient = @userId
 		OR NewsFeed.Recipient = 'All'
 END
 GO
