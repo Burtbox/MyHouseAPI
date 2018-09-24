@@ -1,12 +1,12 @@
 ﻿param(
     # The directory of the MyHouseAPI repo (no backslash at the end)
-    [string]$repoDir = "C:\WebProjects\MyHouseAPI",
+    [string]$repoDir = "C:\inetpub\wwwroot\MyHouseAPI",
 
     # The name of the sql server instance to run the script on
     [string]$server = "EDLAPTOP\EDLAPTOPSQL",
 
     # The database name to create
-    [string]$db = "MyHouse_Dev_Tests_master"
+    [string]$db = "MyHouse_Dev_Tests"
 )
 ## Set up local variables
 Write-Host "Beginning set up of local vars"
@@ -30,14 +30,12 @@ Write-Host "Completed set up of local vars"
 ## Create New Database
 Write-Host "Beginning creating new database from $($repoDir) on $($server) as $($db)"
 
-try 
-{
+try {
     Invoke-Sqlcmd -ServerInstance $server -Database "master" -Query $dropAndCreateDbQuery -Verbose -Username "HMApp" -Password "dickbutt11!"
 } 
-catch 
-{
-  "error when creating database"
-  Write-Host($error)
+catch {
+    "error when creating database"
+    Write-Host($error)
 }
 
 Write-Host "Creating database complete"
