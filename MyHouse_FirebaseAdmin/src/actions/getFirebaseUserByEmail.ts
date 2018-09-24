@@ -18,5 +18,8 @@ export const getFirebaseUserByEmail = (email: string) => {
 
             // For .netcore node services
             // callback(null, user)
+        }).catch((error: Error) => {
+            process.stdout.write(error.message);
+            process.exit(1)
         });
 }

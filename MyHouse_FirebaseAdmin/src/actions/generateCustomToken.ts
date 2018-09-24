@@ -18,5 +18,8 @@ export const generateCustomToken = (userId: string) => {
 
             // For .netcore node services
             // callback(null, customToken);
+        }).catch((error: Error) => {
+            process.stdout.write(error.message);
+            process.exit(1)
         });
 }
