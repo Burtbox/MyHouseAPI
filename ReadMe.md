@@ -94,12 +94,13 @@ Not implemented
 ## Deployment
 
 Integration Test API: 
-    1. Stop the app pool MyHouseTestAPI on edLaptop
+    1. Stop the app pool MyHouseAPI on livingroompc
     2. Run the command 
 
     ```
-    dotnet publish ./MyHouse_API -c Release -o "\\edlaptop\wwwroot\MyHouseTestAPI" 
+    dotnet publish ./MyHouse_API -c Release -o "C:\inetpub\wwwroot\MyHouseAPI\MyHouse_API\bin\Release\" 
     ```
+    copy to living room pc
 ## Built With
 
 * [dotnet/core](https://github.com/dotnet/core)

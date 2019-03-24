@@ -1,5 +1,6 @@
 ﻿{
-  "BaseURL": "http://localhost:5000/api/",
+  // "BaseURL": "http://localhost:5000/api/",
+  "BaseURL": "http://localhost/MyHouseTestAPI/api/",
   //"BaseURL": "http://82.25.191.210/MyHouseTestAPI/api",
   //"BaseURL": "http://82.25.191.210/MyHouseTestAPI_master/api",
   "NodeJsExe": "C:\\Program Files\\nodejs\\node.exe",
@@ -7,12 +8,13 @@
   "H1DisplayName": "DickButt",
   "H1OccupantId": 1,
   "H1Email": "dickbutt@gmail.com",
-  "H2UserId": "SbYFUv0fO8VLzotVFcTUn9uzhB02",
+  "H2UserId": "qlOadEWJ80YoCAVTEDfWTwzIl2t2",
   "H2DisplayName": "dickbutt2",
   "H2OccupantId": 2,
   "H2Email": "dickbutt2@gmail.com",
-  "H3UserId": "jp9ZAlmz7gV9b74kzniROTSRZxz1",
+  "H3UserId": "OlarTcF6ECRvyeLd9J8n2mIDQ3k2",
   "H3DisplayName": "dickbutt3",
   "H3OccupantId": 3,
-  "H3Email": "dickbutt3@gmail.com"
+  "H3Email": "dickbutt3@gmail.com",
+  "FirebaseAdminConsolePath": "\\MyHouse_API\\bin\\Debug\\netcoreapp2.1\\FirebaseAdmin\\firebaseAdminBundle.js"
 }
