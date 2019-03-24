@@ -2,7 +2,7 @@ import * as bunyan from 'bunyan';
 import appSettings from "config/appSettings";
 
 const logLevel = appSettings.logLevel;
-const logFilePath = process.cwd() + '/app.log'
+const logFilePath = process.cwd() + '/firebaseAdminApp.log'
 const loggerStreams: bunyan.Stream[] = [
     // {
     //     level: logLevel,
