@@ -34,6 +34,6 @@
         "bunyan": "^1.8.12",
         "chalk": "^2.4.1",
         "commander": "^2.17.1",
-        "firebase-admin": "^6.0.0"
+        "firebase-admin": "^6.5.1"
     }
 }

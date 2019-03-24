@@ -107,6 +107,7 @@ namespace MyHouseAPI.Repositories.Houses
                 else
                 {
                     // TODO: Improve functionality here!
+                    this.logger.Error("Existing occupant: {existingOccupant}, not found for email {invite}", existingOccupant, invite.Email);
                     throw new Exception($"The email address {invite.Email} must sign up to myHouse first");
                 }
 
@@ -130,6 +131,8 @@ namespace MyHouseAPI.Repositories.Houses
             string commandName = "getFirebaseUserByEmail";
             string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 
+            this.logger.Information("Firebase Admin console args: {args}", args);
+
             //Run the command
             Process process = new Process()
             {
@@ -143,6 +146,7 @@ namespace MyHouseAPI.Repositories.Houses
             process.Start();
 
             string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
+            this.logger.Information("Firebase Admin console response: {response}", jsonOccupantInviteResponse);
             OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);
 
             return occupant;

@@ -2,7 +2,7 @@ import { IAppSettings } from "./appSettingsInterfaces";
 
 const appSettings: IAppSettings = {
     firebaseDbUrl: "https://myhouse-live.firebaseio.com",
-    logLevel: "error",
+    logLevel: "info",
 }
 
 export default appSettings;
