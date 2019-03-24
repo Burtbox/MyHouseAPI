@@ -117,39 +117,47 @@ namespace MyHouseAPI.Repositories.Houses
 
         private OccupantInviteResponse GetFirebaseUserByEmail(string userId)
         {
-            this.logger.Information("get the node js firebase admin Bundle");
-            var apiDirectory = Directory.GetParent(Assembly.GetEntryAssembly().Location);
-            string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\FirebaseAdmin\\firebaseAdminBundle.js");
-            this.logger.Information($"Firebase Admin console looking for at path: {firebaseAdminConsole}");
-
-            if (!File.Exists(firebaseAdminConsole))
+            try
             {
-                this.logger.Error($"Firebase Admin console not found at path: {firebaseAdminConsole}");
-                throw new Exception($"Firebase Admin console not found at path: {firebaseAdminConsole}");
-            }
+                this.logger.Information("get the node js firebase admin Bundle");
+                var apiDirectory = Directory.GetParent(Assembly.GetEntryAssembly().Location);
+                string firebaseAdminConsole = String.Concat(apiDirectory.FullName, "\\FirebaseAdmin\\firebaseAdminBundle.js");
+                this.logger.Information($"Firebase Admin console looking for at path: {firebaseAdminConsole}");
 
-            string commandName = "getFirebaseUserByEmail";
-            string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
-
-            this.logger.Information("Firebase Admin console args: {args}", args);
-
-            //Run the command
-            Process process = new Process()
-            {
-                StartInfo = new ProcessStartInfo
+                if (!File.Exists(firebaseAdminConsole))
                 {
-                    RedirectStandardOutput = true,
-                    FileName = "C:\\Program Files\\nodejs\\node.exe",
-                    Arguments = args
+                    this.logger.Error($"Firebase Admin console not found at path: {firebaseAdminConsole}");
+                    throw new Exception($"Firebase Admin console not found at path: {firebaseAdminConsole}");
                 }
-            };
-            process.Start();
 
-            string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
-            this.logger.Information("Firebase Admin console response: {response}", jsonOccupantInviteResponse);
-            OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);
+                string commandName = "getFirebaseUserByEmail";
+                string args = string.Concat(firebaseAdminConsole, " ", commandName, " ", userId);
 
-            return occupant;
+                this.logger.Information("Firebase Admin console args: {args}", args);
+
+                //Run the command
+                Process process = new Process()
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        RedirectStandardOutput = true,
+                        FileName = "C:\\Program Files\\nodejs\\node.exe",
+                        Arguments = args
+                    }
+                };
+                process.Start();
+
+                string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
+                this.logger.Information("Firebase Admin console response: {response}", jsonOccupantInviteResponse);
+                OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);
+
+                return occupant;
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error("Firebase Admin console error: {ex}", ex.Message);
+                throw ex;
+            }
         }
 
         // This can be used for deleting unaccpeted invites!
