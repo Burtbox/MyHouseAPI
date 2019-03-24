@@ -141,6 +141,7 @@ namespace MyHouseAPI.Repositories.Houses
                     StartInfo = new ProcessStartInfo
                     {
                         RedirectStandardOutput = true,
+                        RedirectStandardError = true,
                         FileName = "C:\\Program Files\\nodejs\\node.exe",
                         Arguments = args
                     }
@@ -148,6 +149,12 @@ namespace MyHouseAPI.Repositories.Houses
                 process.Start();
 
                 string jsonOccupantInviteResponse = process.StandardOutput.ReadToEnd();
+                string err = process.StandardError.ReadToEnd();
+                if (err != null)
+                {
+                    this.logger.Error("Firebase Admin console error: {err}", err);
+                }
+                process.WaitForExit();
                 this.logger.Information("Firebase Admin console response: {response}", jsonOccupantInviteResponse);
                 OccupantInviteResponse occupant = JsonConvert.DeserializeObject<OccupantInviteResponse>(jsonOccupantInviteResponse);
 
@@ -155,7 +162,7 @@ namespace MyHouseAPI.Repositories.Houses
             }
             catch (Exception ex)
             {
-                this.logger.Error("Firebase Admin console error: {ex}", ex.Message);
+                this.logger.Error("Exception calling firebase admin console: {ex}", ex.Message);
                 throw ex;
             }
         }
