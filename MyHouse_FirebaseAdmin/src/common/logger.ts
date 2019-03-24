@@ -2,7 +2,7 @@ import * as bunyan from 'bunyan';
 import appSettings from "config/appSettings";
 
 const logLevel = appSettings.logLevel;
-const logFilePath = process.cwd() + '\\log.json'
+const logFilePath = '/bunyan.log'
 const loggerStreams: bunyan.Stream[] = [
     // {
     //     level: logLevel,
@@ -21,5 +21,6 @@ const loggerOptions: bunyan.LoggerOptions = {
 }
 
 const log = bunyan.createLogger(loggerOptions);
+log.info("Logging initialised");
 
 export default log;
